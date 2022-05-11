@@ -8,8 +8,6 @@
 - Crie um arquivo README com instruções para executar seu projeto;
 - Crie a collection do Insomnia ou Postman, salve com o nome "collection".
 
-<br/>
-
 ## Contexto
 
 Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu desenvolver um aplicativo para lhe ajudar nessa missão. Após um estudo de caso ele mapeou as seguintes funcionalidades:
@@ -20,8 +18,6 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 - Listagem de movimentações;
 - Exibição do saldo.
 
-<br/>
-
 ## Requisitos
 
 ### Desenvolvedor Júnior
@@ -29,16 +25,12 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 - Filtro na listagem de movimentações por data (data inicial e data final);
 - Paginação na listagem de movimentações.
 
-<br/>
-
 ### Desenvolvedor Pleno
 
 - Todos os requisitos do Júnior;
 - API Rest semântica (se escolheu desenvolver uma API Rest);
 - Arquitetura minimamente escalável;
 - Cobertura mínima de testes automatizados.
-
-<br/>
 
 ### Desenvolvedor Sênior
 
@@ -50,15 +42,11 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 - Dockerizar a aplicação;
 - Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
 
-<br/>
-
 ### Diferenciais
 
 - Cache;
 - Segurança da aplicação;
 - Deploy.
-
-<br/>
 
 ## Dicas
 
@@ -67,13 +55,9 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 - Clean Code: o código deve ser fácil de entender;
 - Atente-se a boas práticas de versionamento.
 
-<br/>
-
 ## Observação
 
 O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
-
-<br/>
 
 ## Processo de submissão
 
@@ -82,12 +66,8 @@ O cumprimento dos requisitos solicitados para uma vaga em determinado nível nã
 3. Suba as alterações para o seu fork;
 4. Submeta uma PR para este repositório.
 
-<br/>
 <hr/>
-<br/>
 
 Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
 
-<br/>
-
-## Boa sorte! 🍀
+### Boa sorte! 🍀
