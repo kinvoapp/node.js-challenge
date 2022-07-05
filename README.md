@@ -65,8 +65,6 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 3. Suba as alterações para o seu fork;
 4. Submeta uma PR para este repositório.
 
-<hr/>
-
 ## Observações:
 
 * O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
