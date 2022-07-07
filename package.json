@@ -4,7 +4,7 @@
   "description": "> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/app.ts"
   },
   "repository": {
@@ -22,9 +22,19 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.4",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.2",
     "nodemon": "^2.0.19",
+    "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.0.0",
