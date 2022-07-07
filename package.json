@@ -1,0 +1,20 @@
+{
+  "name": "node.js-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:adrianomonteiroweb/node.js-challenge.git",
+  "author": "Adriano monteiro <adrianomonteiroweb@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "typescript": "^4.7.4"
+  }
+}
