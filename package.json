@@ -2,12 +2,12 @@
   "name": "node.js-challenge",
   "version": "1.0.0",
   "description": "> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)",
-  "main": "./src/index.ts",
+  "main": "./server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node ./server.ts",
+    "dev": "nodemon ./server.ts",
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "ts-node ./server.ts"
   },
   "repository": {
     "type": "git",
