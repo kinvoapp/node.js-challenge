@@ -1,0 +1,5 @@
+dist
+/data
+.vscode
+coverage
+node_modules
