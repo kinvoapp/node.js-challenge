@@ -1,0 +1,23 @@
+{
+  "name": "node.js-challenge",
+  "version": "1.0.0",
+  "description": "> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrobuenoxs/node.js-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrobuenoxs/node.js-challenge/issues"
+  },
+  "homepage": "https://github.com/pedrobuenoxs/node.js-challenge#readme"
+}
