@@ -15,23 +15,25 @@ describe('PgUserAccountRepository', () => {
     pgUserRepo = getRepository(User)
   })
 
-  afterAll(async () => {
-    await getConnection().close()
-  })
+  describe('load', () => {
+    afterAll(async () => {
+      await getConnection().close()
+    })
 
-  beforeEach(() => {
-    backup.restore()
-    sut = new PgUserAccountRepository()
-  })
+    beforeEach(() => {
+      backup.restore()
+      sut = new PgUserAccountRepository()
+    })
 
-  it('should return an account if email exists', async () => {
-    await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
-    const account = await sut.load({ email: 'any_existing_email' })
-    expect(account?.id).toEqual('1')
-  })
+    it('should return an account if email exists', async () => {
+      await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
+      const account = await sut.load({ email: 'any_existing_email' })
+      expect(account?.id).toEqual('1')
+    })
 
-  it('should return  undefined if email does not exists', async () => {
-    const account = await sut.load({ email: 'any_email' })
-    expect(account?.id).toBeUndefined()
+    it('should return  undefined if email does not exists', async () => {
+      const account = await sut.load({ email: 'any_email' })
+      expect(account?.id).toBeUndefined()
+    })
   })
 })
