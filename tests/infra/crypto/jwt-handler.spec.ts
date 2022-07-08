@@ -40,5 +40,11 @@ describe('JwtTokenHandler', () => {
       const generatedToken = await sut.generate({ key })
       expect(generatedToken).toBe('any_token')
     })
+
+    it('should rethrow if sing throws', async () => {
+      fakeJwt.sign.mockImplementationOnce(() => { throw new Error('token_error') })
+      const promise = sut.generate({ key })
+      await expect(promise).rejects.toThrow(new Error('token_error'))
+    })
   })
 })
