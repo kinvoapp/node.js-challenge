@@ -25,7 +25,7 @@ describe('BcryptHandler', () => {
 
   it('should return a passwordHashed on success', async () => {
     const passwordHashed = await sut.encrypt({ value: 'any_value' })
-    expect(passwordHashed).toBe(hashedPassword)
+    expect(passwordHashed).toEqual({ key: hashedPassword })
   })
 
   it('should rethrow if hash throws', async () => {
