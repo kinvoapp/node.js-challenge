@@ -1,6 +1,6 @@
-import { getRepository } from 'typeorm'
-import { User } from '@/infra/postgres/entities'
 import { LoadUserAccountRepository } from '@/domain/contracts/repos'
+import { User } from '@/infra/postgres/entities'
+import { getRepository } from 'typeorm'
 
 type Input = LoadUserAccountRepository.Input
 type Output = LoadUserAccountRepository.Output
