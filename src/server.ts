@@ -1,8 +1,9 @@
+import * as dotenv from "dotenv";
 import app from './index'
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT 
 
-const HOSTNAME = process.env.HOSTNAME || 'http://localhost'
+const HOSTNAME = process.env.HOSTNAME 
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`)
