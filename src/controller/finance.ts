@@ -40,9 +40,10 @@ import {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount} fro
     }
     
      const loadTransaction = (req: Request, res: Response, next: NextFunction) => {
+    
 
-        loadRecord()
-        .then(result =>{
+        loadRecord(req)
+        .then(result => {
             return res.status(200).json({
                 record: result
             })
@@ -57,7 +58,9 @@ import {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount} fro
         balanceAmount()
         .then(result =>{
             return res.status(200).json({
-                record: result
+                record: result.reduce((value, acc) => {
+                    return value + acc.value
+                }, 0)
             })
         })
         .catch((err) => {
