@@ -1,5 +1,5 @@
 import { ICreateStudentResponse } from "../../../requestDto";
 
 export interface IFindStudentByDocumentRepository {
-  findByDocument(name: string): Promise<ICreateStudentResponse | null>;
+  findByDocument(document: string): Promise<ICreateStudentResponse | null>;
 }

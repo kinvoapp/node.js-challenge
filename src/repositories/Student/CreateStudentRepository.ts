@@ -19,6 +19,7 @@ export class CreateStudentRepository implements ICreateStudentRepository {
     return this.prismaClient.student.create({
       data: {
         ...data,
+
         accounts: {
           create: {
             id: randomUUID(),

@@ -1,4 +1,5 @@
 import { TransactionType } from "@prisma/client";
+import { Request } from "express";
 
 export interface ICreateTransactionRequest {
   description: string;
@@ -18,6 +19,7 @@ export interface ICreateStudentResponse {
   document: string;
   created_at: Date;
   updated_at: Date;
+  password?: string;
 }
 
 export interface ICreateAccountRequest {
@@ -29,4 +31,17 @@ export interface ICreateAccountResponse {
   studentId: string;
   created_at: Date;
   updated_at: Date;
+}
+
+export interface IPayload {
+  sub: string;
+}
+
+export interface RequestWithStudentId extends Request {
+  student_id: string;
+}
+
+export interface IAuthenticateStudentRequest {
+  document: string;
+  password: string;
 }
