@@ -13,6 +13,13 @@ export class RequiredField extends Error {
   }
 }
 
+export class CompraredFieldError extends Error {
+  constructor () {
+    super('The password don\'t match')
+    this.name = 'CompraredFieldError'
+  }
+}
+
 export class UnauthorizedError extends Error {
   constructor () {
     super('unauthorized')
