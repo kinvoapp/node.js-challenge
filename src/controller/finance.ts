@@ -1,33 +1,34 @@
 import { Request, Response, NextFunction } from 'express';
 import transaction from '../models/transaction'
+import recordModel from '../repository/recordModel';
 
-
-const addTransaction = async (req: Request, res: Response, next: NextFunction) => {
-
-};
-
-const updateTransaction = async (req: Request, res: Response, next: NextFunction) => {
-
-};
-
-const deleteTransaction = async (req: Request, res: Response, next: NextFunction) => {
-
-};
-
-const loadTransaction = async (req: Request, res: Response, next: NextFunction) => {
-    const item: transaction = {
-            id: 1,
-            Date: new Date(),
-            value: 150,
-            type: "add"
+export class financeController{
+    async addTransaction(req: Request, res: Response, next: NextFunction): Promise<Response> {
+      const a = await recordModel.create(req.body)
+      return res.json(a)
     }
-    res.json(item)
-};
 
-const loadBalance = async (req: Request, res: Response, next: NextFunction) => {
+    async updateTransaction(req: Request, res: Response, next: NextFunction) : Promise<Response> {
+        const a = await recordModel.findByIdAndUpdate(req.params.id, req.body)
+        return res.json(a)
+    }
+    
+    async deleteTransaction(req: Request, res: Response, next: NextFunction) : Promise<Response> {
+        const a = await recordModel.findByIdAndDelete(req.params.id)
+        return res.json(a)
+    
+    }
+    
+     async loadTransaction(req: Request, res: Response, next: NextFunction) : Promise<Response> {
+        const a = await recordModel.find()
+        return res.json(a)
+    }
+    
+     async loadBalance(req: Request, res: Response, next: NextFunction) : Promise<Response> {
+        const a = await recordModel.find()
+        return res.json(a)
+    }
+}
 
-};
 
 
-
-export { addTransaction, updateTransaction, deleteTransaction, loadTransaction, loadBalance };
