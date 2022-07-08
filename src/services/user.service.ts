@@ -1,11 +1,13 @@
 import { User, users } from "../interfaces/user";
+import { modelUserCreate } from "../models/users.models";
 
-export const userCreateService = async (user: User): Promise<number> => {
+export const userCreateService = async (user: User): Promise<object> => {
   const id = users.length + 1;
 
-  users.push({ ...user, id });
+  const userId = await modelUserCreate({ ...user, id });
+  // users.push({ ...user, id });
 
-  return users.length;
+  return userId;
 };
 
 export const getUsersService = async (): Promise<User[]> => {
