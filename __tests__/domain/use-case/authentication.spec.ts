@@ -1,5 +1,13 @@
 import { mock, MockProxy } from 'jest-mock-extended'
 
+export namespace Encrypter {
+  export type Input = { password: string }
+  export type Output = { key: string }
+}
+export interface Encrypter {
+  encrypt: (params: Encrypter.Input) => Promise<Encrypter.Output>
+}
+
 export class EmailInUseError extends Error {
   constructor () {
     super('This email is already taken')
@@ -35,7 +43,7 @@ export interface SaveUserAccountRepository {
   saveUser: (params: SaveUserAccountRepository.Input) => Promise<SaveUserAccountRepository.Output>
 }
 
-type Setup = (userAccountRepo: LoadUserAccountRepository & SaveUserAccountRepository) => Authentication
+type Setup = (userAccountRepo: LoadUserAccountRepository & SaveUserAccountRepository, crypto: Encrypter) => Authentication
 export type Authentication = (name: string, email: string, password: string) => Promise<undefined | {
   id: string
   name: string
@@ -43,17 +51,18 @@ export type Authentication = (name: string, email: string, password: string) => 
   password: string
 }>
 
-export const setupAuthentication: Setup = (userAccountRepo) => async (name, email, password) => {
+export const setupAuthentication: Setup = (userAccountRepo, crypto) => async (name, email, password) => {
   const accountData = await userAccountRepo.loadByEmail({ email })
   if (accountData !== undefined) throw new EmailInUseError()
-  return await userAccountRepo.saveUser({ name, email, password })
+  const passwordHashed = await crypto.encrypt({ password })
+  return await userAccountRepo.saveUser({ name, email, password: passwordHashed.key })
 }
 
 describe('Authentication', () => {
   let name: string
   let email: string
   let password: string
-
+  let crypto: MockProxy<Encrypter>
   let sut: Authentication
   let userAccountRepo: MockProxy<LoadUserAccountRepository & SaveUserAccountRepository>
 
@@ -69,10 +78,12 @@ describe('Authentication', () => {
       email: 'any_user_emal',
       password: 'any_user_password'
     })
+    crypto = mock()
+    crypto.encrypt.mockResolvedValue({ key: 'any_encrypted_key' })
   })
 
   beforeEach(() => {
-    sut = setupAuthentication(userAccountRepo)
+    sut = setupAuthentication(userAccountRepo, crypto)
   })
 
   it('should  call loadByEmail with correct input', async () => {
@@ -99,13 +110,25 @@ describe('Authentication', () => {
     await expect(promise).rejects.toThrow(new Error('load_by_email_error'))
   })
 
+  it('should  call encrypter with correct input', async () => {
+    await sut(name, email, password)
+    expect(crypto.encrypt).toHaveBeenCalledWith({ password })
+    expect(crypto.encrypt).toHaveBeenCalledTimes(1)
+  })
+
+  it('should  rethrow if encrypter throws', async () => {
+    crypto.encrypt.mockRejectedValueOnce(new Error('load_by_email_error'))
+    const promise = sut(name, email, password)
+    await expect(promise).rejects.toThrow(new Error('load_by_email_error'))
+  })
+
   it('should  call saveUser with correct input', async () => {
     await sut(name, email, password)
-    expect(userAccountRepo.saveUser).toHaveBeenCalledWith({ name, email, password })
+    expect(userAccountRepo.saveUser).toHaveBeenCalledWith({ name, email, password: 'any_encrypted_key' })
     expect(userAccountRepo.saveUser).toHaveBeenCalledTimes(1)
   })
 
-  it('should return an user account on success', async () => {
+  it('should return an user account on save success', async () => {
     const userAccount = await sut(name, email, password)
     expect(userAccount).toEqual({
       id: 'any_user_id',
