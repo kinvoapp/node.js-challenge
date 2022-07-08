@@ -14,7 +14,9 @@ const { HOST } = process.env;
 const development = process.env.DEVELOPMENT === "true";
 
 app.listen(PORT, () => {
-  const URL = development ? `Server running on http://${HOST}:${PORT}` : "";
+  const URL = development
+    ? `Server running on http://${HOST}:${PORT}`
+    : "https://node-challenge-backend.herokuapp.com/";
 
   return URL;
 });
