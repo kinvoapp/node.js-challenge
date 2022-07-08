@@ -1,8 +1,12 @@
 const frisby = require("frisby");
 require("dotenv").config();
 
-const URL_Deploy = "";
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 
+const URL_Deploy =
+  process.env.DEVELOPMENT === "true" ? `http://${HOST}:${PORT}` : "";
+console.log(URL_Deploy);
 describe("Deploy verify.", () => {
   it("Must return application title in root route.", async () => {
     await frisby
@@ -11,7 +15,7 @@ describe("Deploy verify.", () => {
       .then((response) => {
         const { body } = response;
 
-        expect({ APP: "Cada centavo" }).toEqual(JSON.parse(body));
+        expect({ app: "Cada centavo" }).toEqual(JSON.parse(body));
       });
   });
 });
