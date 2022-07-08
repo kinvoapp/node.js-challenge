@@ -26,7 +26,7 @@ describe('Singup', () => {
     crypto = mock()
     crypto.encrypt.mockResolvedValue({ key: 'any_encrypted_key' })
     token = mock()
-    token.generate.mockResolvedValue({ accessToken: 'any_token' })
+    token.generate.mockResolvedValue('any_token')
   })
 
   beforeEach(() => {

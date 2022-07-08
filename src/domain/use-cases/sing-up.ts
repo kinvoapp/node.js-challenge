@@ -12,7 +12,7 @@ export const setupSingup: Setup = (userAccountRepo, crypto, token) => async (par
   if (accountData === undefined) {
     const { key } = await crypto.encrypt({ value: params.password })
     const { id } = await userAccountRepo.save({ name: params.name, email: params.email, password: key })
-    const { accessToken } = await token.generate({ key: id })
+    const accessToken = await token.generate({ key: id })
     return { accessToken }
   }
   throw new EmailInUseError()

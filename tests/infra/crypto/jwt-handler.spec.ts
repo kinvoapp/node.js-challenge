@@ -5,8 +5,8 @@ jest.mock('jsonwebtoken')
 
 export class JwtTokenHandler {
   constructor (private readonly secret: string) { }
-  async generate ({ key }: TokenGenerator.Input): Promise<void> {
-    sign({ key }, this.secret)
+  async generate ({ key }: TokenGenerator.Input): Promise<TokenGenerator.Output> {
+    return sign({ key }, this.secret)
   }
 }
 
@@ -34,6 +34,11 @@ describe('JwtTokenHandler', () => {
       await sut.generate({ key })
       expect(fakeJwt.sign).toHaveBeenCalledWith({ key }, secret)
       expect(fakeJwt.sign).toHaveBeenCalledTimes(1)
+    })
+
+    it('should returna accessToken on success', async () => {
+      const generatedToken = await sut.generate({ key })
+      expect(generatedToken).toBe('any_token')
     })
   })
 })
