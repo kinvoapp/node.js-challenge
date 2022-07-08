@@ -1,0 +1,34 @@
+{
+  "name": "node.js-challenge",
+  "version": "1.0.0",
+  "description": "> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliaarapiraca/node.js-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliaarapiraca/node.js-challenge/issues"
+  },
+  "homepage": "https://github.com/juliaarapiraca/node.js-challenge#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.1.0",
+    "pg": "^8.7.3",
+    "secure-password": "^4.0.0",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
