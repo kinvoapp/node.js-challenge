@@ -6,8 +6,8 @@ export class App {
 
   constructor() {
     this.express = express();
-    this.listen();
     this.routes();
+    this.listen();
   }
 
   public getApp(): express.Application {
@@ -21,7 +21,7 @@ export class App {
   }
 
   private listen(): void {
-    this.express.listen(3000, () => console.log('Servidor rodando na porta 3000...'));
+    this.express.listen(this.PORT, () => console.log('Servidor rodando na porta 3000...'));
   }
   
 }
