@@ -3,10 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // const routes = require("./src/routes");
-// const connectToDataBase = require("./src/database");
+import connectToDataBase from "./database";
 // const cors = require("cors");
 // const product = require("./api/product");
-
+connectToDataBase();
 // app.use(cors());
 // app.use("/api/product", product);
 // app.use(routes);
