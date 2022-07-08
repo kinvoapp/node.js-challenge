@@ -5,6 +5,7 @@
   "repository": "git@github.com:adrianomonteiroweb/node.js-challenge.git",
   "author": "Adriano monteiro <adrianomonteiroweb@gmail.com>",
   "license": "MIT",
+  "private": true,
   "engines": {
     "node": "18.2.0",
     "npm": "8.12.0"
@@ -16,7 +17,7 @@
   "scripts": {
     "start": "tsc ; nodemon dist/server.js",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
-    "build": "tsc -p",
+    "build": "tsc",
     "test": "jest --runInBand  --detectOpenHandles --forceExit",
     "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
