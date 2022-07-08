@@ -9,8 +9,8 @@ class App {
     constructor() {
         this.PORT = process.env.PORT || 3000;
         this.express = (0, express_1.default)();
-        this.listen();
         this.routes();
+        this.listen();
     }
     getApp() {
         return this.express;
@@ -21,7 +21,7 @@ class App {
         });
     }
     listen() {
-        this.express.listen(3000, () => console.log('Servidor rodando na porta 3000...'));
+        this.express.listen(this.PORT, () => console.log('Servidor rodando na porta 3000...'));
     }
 }
 exports.App = App;
