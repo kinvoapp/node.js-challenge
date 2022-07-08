@@ -30,3 +30,17 @@ export const updateUserService = async (
 
   return response;
 };
+
+export const deleteUserService = async (id: string): Promise<object> => {
+  const indexUser = users.findIndex((user) => user.id === Number(id));
+
+  let response = {};
+
+  if (indexUser >= 0) {
+    users.splice(indexUser, 1);
+
+    response = { deleted: `Usuário de id ${id} deletado com sucesso.` };
+  }
+
+  return response;
+};

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  deleteUserService,
   getUsersService,
   updateUserService,
   userCreateService,
@@ -34,6 +35,20 @@ export const updateUser = async (req: Request, res: Response): Promise<any> => {
     const update = await updateUserService(id, req.body);
 
     return res.status(200).json(update);
+  } catch (error) {
+    return res.status(500);
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response): Promise<any> => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const deleted = await deleteUserService(id);
+
+    return res.status(200).json(deleted);
   } catch (error) {
     return res.status(500);
   }
