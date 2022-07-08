@@ -4,11 +4,18 @@ import { IBackup } from 'pg-mem'
 import { getConnection, getRepository, Repository } from 'typeorm'
 
 type Input = { email: string }
+type Output = undefined | {
+  id: number
+  name: string
+  email: string
+  password: string
+}
+
 export class PgUserAccountRepository {
-  async load ({ email }: Input): Promise<any> {
+  async load ({ email }: Input): Promise<Output> {
     const pgUserRepo = getRepository(User)
     const pgUser = await pgUserRepo.findOne({ email })
-    return pgUser
+    return pgUser !== undefined ? pgUser : undefined
   }
 }
 
@@ -35,11 +42,6 @@ describe('PgUserAccountRepository', () => {
   it('should return an account if email exists', async () => {
     await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
     const account = await sut.load({ email: 'any_existing_email' })
-    expect(account.id).toEqual(1)
-  })
-
-  it('should return undefined if email doest not  exists', async () => {
-    const account = await sut.load({ email: 'any_existing_email' })
-    expect(account).toBeUndefined()
+    expect(account?.id).toEqual(1)
   })
 })
