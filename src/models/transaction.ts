@@ -1,24 +1,18 @@
 import mongoose from "mongoose";
 
-const transactionSchema = new mongoose.Schema(
-  {
-    _id: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    value: {
-      type: Number,
-      required: true,
-    },
-    created_datetime: {
-      type: Date,
-    },
+export const transactionSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: "Enter a title",
   },
-  { timestamps: true }
-);
+  value: {
+    type: Number,
+    required: "Enter a value",
+  },
+  created_date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 export default mongoose.model("Transaction", transactionSchema);
