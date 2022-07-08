@@ -1,5 +1,5 @@
 export namespace Encrypter {
-  export type Input = { password: string }
+  export type Input = { value: string }
   export type Output = { key: string }
 }
 export interface Encrypter {

@@ -58,7 +58,7 @@ describe('Singup', () => {
 
   it('should  call encrypter with correct input', async () => {
     await sut({ name, email, password })
-    expect(crypto.encrypt).toHaveBeenCalledWith({ password })
+    expect(crypto.encrypt).toHaveBeenCalledWith({ value: password })
     expect(crypto.encrypt).toHaveBeenCalledTimes(1)
   })
 
