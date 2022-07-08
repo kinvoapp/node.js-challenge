@@ -1,21 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import Record from '../models/recordModel'
-
+import {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount} from '../repository/index'
 
 
     const addTransaction = (req: Request, res: Response, next: NextFunction) => {
-        let {desc, type, value, note} = req.body
-
-        const record = new Record({
-            _id: new mongoose.Types.ObjectId(),
-            desc,
-            type,
-            value,
-            note
-        })
-        return record.save()
-        .then(result =>{
+        createRecord(req).then(result =>{
             return res.status(201).json({
                 record: result
             })
@@ -26,9 +14,8 @@ import Record from '../models/recordModel'
     }
 
     const updateTransaction = (req: Request, res: Response, next: NextFunction) => {
-        let {id} = req.params
 
-        Record.findByIdAndUpdate(id, req.body)
+        updateRecord(req)
         .then(result =>{
             return res.status(201).json({
                 record: result
@@ -40,9 +27,8 @@ import Record from '../models/recordModel'
     }
     
     const deleteTransaction = (req: Request, res: Response, next: NextFunction) =>  {
-        let {id} = req.params
 
-        Record.findByIdAndDelete(id)
+        deleteRecord(req)
         .then(result =>{
             return res.status(200).json({
                 record: result
@@ -53,9 +39,9 @@ import Record from '../models/recordModel'
         })
     }
     
-     const  loadTransaction = (req: Request, res: Response, next: NextFunction) => {
+     const loadTransaction = (req: Request, res: Response, next: NextFunction) => {
 
-        Record.find()
+        loadRecord()
         .then(result =>{
             return res.status(200).json({
                 record: result
@@ -67,11 +53,9 @@ import Record from '../models/recordModel'
     }
     
      const loadBalance = (req: Request, res: Response, next: NextFunction) => {
-        Record.find()
+        
+        balanceAmount()
         .then(result =>{
-            result.forEach((el) => {
-                console.log(el.type)
-            })
             return res.status(200).json({
                 record: result
             })
