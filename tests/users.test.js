@@ -1,4 +1,4 @@
-import frisby from "frisby";
+const frisby = require("frisby");
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -12,8 +12,9 @@ const URL_Deploy =
 describe("Users tests.", () => {
   it("It must be possible to enter a user.", async () => {
     await frisby
-      .post(URL_Deploy, {
-        email: "aluno@email.com",
+      .post(`${URL_Deploy}/user`, {
+        name: "Neto Noronha",
+        email: "aluno@gmail.com",
         password: "alunopassword",
       })
       .expect("status", 201);

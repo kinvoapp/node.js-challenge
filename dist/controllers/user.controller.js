@@ -13,13 +13,22 @@ exports.getUsers = exports.userCreate = void 0;
 const user_service_1 = require("../services/user.service");
 const userCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, user_service_1.userCreateService)(req.body);
+        const id = yield (0, user_service_1.userCreateService)(req.body);
+        return res.status(201).json({ id });
     }
     catch (error) {
         return res.status(500);
     }
-    return res.status(201);
 });
 exports.userCreate = userCreate;
-const getUsers = () => __awaiter(void 0, void 0, void 0, function* () { });
+const getUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let users;
+    try {
+        users = yield (0, user_service_1.getUsersService)();
+    }
+    catch (error) {
+        return res.status(500);
+    }
+    return res.status(200).json(users);
+});
 exports.getUsers = getUsers;
