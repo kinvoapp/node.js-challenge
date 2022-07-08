@@ -1,5 +1,5 @@
 apps:
-  - name: nodejs-challenge-backend
+  - name: node-challenge-backend
     script: ./dist/server.js
     exec_mode: cluster
     instances: 2
