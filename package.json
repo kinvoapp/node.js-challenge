@@ -5,6 +5,10 @@
   "repository": "git@github.com:adrianomonteiroweb/node.js-challenge.git",
   "author": "Adriano monteiro <adrianomonteiroweb@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "18.2.0",
+    "npm": "8.12.0"
+  },
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1"
