@@ -1,5 +1,9 @@
 import { Router, Request, Response } from "express";
-import { getUsers, userCreate } from "./controllers/user.controller";
+import {
+  getUsers,
+  updateUser,
+  userCreate,
+} from "./controllers/user.controller";
 
 const route = Router();
 
@@ -10,5 +14,7 @@ route.get("/", (_req: Request, res: Response) => {
 route.post("/user", userCreate);
 
 route.get("/user", getUsers);
+
+route.put("/user/:id", updateUser);
 
 export default route;

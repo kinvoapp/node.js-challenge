@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { getUsersService, userCreateService } from "../services/user.service";
+import {
+  getUsersService,
+  updateUserService,
+  userCreateService,
+} from "../services/user.service";
 
 export const userCreate = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -20,4 +24,17 @@ export const getUsers = async (_req: Request, res: Response): Promise<any> => {
   }
 
   return res.status(200).json(users);
+};
+
+export const updateUser = async (req: Request, res: Response): Promise<any> => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const update = await updateUserService(id, req.body);
+
+    return res.status(200).json(update);
+  } catch (error) {
+    return res.status(500);
+  }
 };
