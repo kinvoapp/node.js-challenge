@@ -4,15 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const routes_1 = __importDefault(require("./routes"));
 require("dotenv").config();
-const routes = require("./routes.ts");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use(routes);
+app.use(routes_1.default);
 const { PORT } = process.env;
 const { HOST } = process.env;
 const development = process.env.DEVELOPMENT === "true";
 app.listen(PORT, () => {
-    const URL = development ? `Server running on http://${HOST}:${PORT}` : "";
+    const URL = development
+        ? `Server running on http://${HOST}:${PORT}`
+        : "https://node-challenge-backend.herokuapp.com/";
     return URL;
 });

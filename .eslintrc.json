@@ -9,7 +9,7 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "plugin:import/recommended"],
   "rules": {
     "quotes": [
       2,
