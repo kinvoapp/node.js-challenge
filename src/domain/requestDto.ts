@@ -19,3 +19,14 @@ export interface ICreateStudentResponse {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface ICreateAccountRequest {
+  studentId: string;
+}
+
+export interface ICreateAccountResponse {
+  id: string;
+  studentId: string;
+  created_at: Date;
+  updated_at: Date;
+}

@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import {
   ICreateStudentRequest,
   ICreateStudentResponse,
-} from "../domain/requestDto";
-import { CreateStudentRepository } from "../repositories/Student/CreateStudentRepository";
-import { FindStudentByDocumentRepository } from "../repositories/Student/FindStudentByDocumentRepository";
-import { CreateStudentService } from "../services/Student/CreateStudentService";
+} from "../../domain/requestDto";
+import { CreateStudentRepository } from "../../repositories/Student/CreateStudentRepository";
+import { FindStudentByDocumentRepository } from "../../repositories/Student/FindStudentByDocumentRepository";
+import { CreateStudentService } from "../../services/Student/CreateStudentService";
 
 export class CreateStudentController {
   async handle(request: Request, response: Response) {

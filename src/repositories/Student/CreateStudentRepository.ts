@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { randomUUID } from "crypto";
 import { prismaClient } from "../../database/prismaClient";
 import { ICreateStudentRepository } from "../../domain/interface/repositories/Student/ICreateStudentRepository";
 import {
@@ -15,9 +16,14 @@ export class CreateStudentRepository implements ICreateStudentRepository {
   async createStudent(
     data: ICreateStudentRequest
   ): Promise<ICreateStudentResponse> {
-    const student = await this.prismaClient.student.create({
+    return this.prismaClient.student.create({
       data: {
         ...data,
+        accounts: {
+          create: {
+            id: randomUUID(),
+          },
+        },
       },
       select: {
         id: true,
@@ -27,6 +33,5 @@ export class CreateStudentRepository implements ICreateStudentRepository {
         updated_at: true,
       },
     });
-    return student;
   }
 }
