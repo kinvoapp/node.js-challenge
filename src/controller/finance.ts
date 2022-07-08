@@ -69,6 +69,9 @@ import Record from '../models/recordModel'
      const loadBalance = (req: Request, res: Response, next: NextFunction) => {
         Record.find()
         .then(result =>{
+            result.forEach((el) => {
+                console.log(el.type)
+            })
             return res.status(200).json({
                 record: result
             })
