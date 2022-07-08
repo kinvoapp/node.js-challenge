@@ -21,5 +21,5 @@ export namespace SaveUserAccountRepository {
 }
 
 export interface SaveUserAccountRepository {
-  saveUser: (params: SaveUserAccountRepository.Input) => Promise<SaveUserAccountRepository.Output>
+  save: (params: SaveUserAccountRepository.Input) => Promise<SaveUserAccountRepository.Output>
 }

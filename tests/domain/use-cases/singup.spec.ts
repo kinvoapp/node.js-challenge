@@ -18,7 +18,7 @@ describe('Singup', () => {
     password = 'any_password'
     userAccountRepo = mock()
     userAccountRepo.load.mockResolvedValue(undefined)
-    userAccountRepo.saveUser.mockResolvedValue({
+    userAccountRepo.save.mockResolvedValue({
       id: 'any_user_id',
       name: 'any_user_name',
       email: 'any_user_emal'
@@ -70,12 +70,12 @@ describe('Singup', () => {
 
   it('should  call saveUser with correct input', async () => {
     await sut({ name, email, password })
-    expect(userAccountRepo.saveUser).toHaveBeenCalledWith({ name, email, password: 'any_encrypted_key' })
-    expect(userAccountRepo.saveUser).toHaveBeenCalledTimes(1)
+    expect(userAccountRepo.save).toHaveBeenCalledWith({ name, email, password: 'any_encrypted_key' })
+    expect(userAccountRepo.save).toHaveBeenCalledTimes(1)
   })
 
   it('should  rethrow if Saveuser throws', async () => {
-    userAccountRepo.saveUser.mockRejectedValueOnce(new Error('save_user_error'))
+    userAccountRepo.save.mockRejectedValueOnce(new Error('save_user_error'))
     const promise = sut({ name, email, password })
     await expect(promise).rejects.toThrow(new Error('save_user_error'))
   })

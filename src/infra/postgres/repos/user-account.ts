@@ -1,7 +1,7 @@
 import { LoadUserAccountRepository, SaveUserAccountRepository } from '@/domain/contracts/repos'
 import { User } from '@/infra/postgres/entities'
 import { getRepository } from 'typeorm'
-export class PgUserAccountRepository implements LoadUserAccountRepository {
+export class PgUserAccountRepository implements LoadUserAccountRepository, SaveUserAccountRepository {
   async load ({ email }: LoadUserAccountRepository.Input): Promise<LoadUserAccountRepository.Output> {
     const pgUserRepo = getRepository(User)
     const pgUser = await pgUserRepo.findOne({ email })
