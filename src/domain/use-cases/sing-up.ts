@@ -12,7 +12,7 @@ type Setup = (
 ) => Singup
 
 export const setupSingup: Setup = (userAccountRepo, crypto, token) => async (params) => {
-  const accountData = await userAccountRepo.loadByEmail({ email: params.email })
+  const accountData = await userAccountRepo.load({ email: params.email })
   if (accountData === undefined) {
     const { key } = await crypto.encrypt({ password: params.password })
     const { id } = await userAccountRepo.saveUser({ name: params.name, email: params.email, password: key })

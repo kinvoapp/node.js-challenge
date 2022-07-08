@@ -4,12 +4,11 @@ export namespace LoadUserAccountRepository {
     id: string
     name: string
     email: string
-    password: string
   }
 }
 
 export interface LoadUserAccountRepository {
-  loadByEmail: (params: LoadUserAccountRepository.Input) => Promise<LoadUserAccountRepository.Output>
+  load: (params: LoadUserAccountRepository.Input) => Promise<LoadUserAccountRepository.Output>
 }
 
 export namespace SaveUserAccountRepository {

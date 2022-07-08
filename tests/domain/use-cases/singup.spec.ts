@@ -17,7 +17,7 @@ describe('Singup', () => {
     email = 'any_emal'
     password = 'any_password'
     userAccountRepo = mock()
-    userAccountRepo.loadByEmail.mockResolvedValue(undefined)
+    userAccountRepo.load.mockResolvedValue(undefined)
     userAccountRepo.saveUser.mockResolvedValue({
       id: 'any_user_id',
       name: 'any_user_name',
@@ -33,26 +33,25 @@ describe('Singup', () => {
     sut = setupSingup(userAccountRepo, crypto, token)
   })
 
-  it('should  call loadByEmail with correct input', async () => {
+  it('should  call load with correct input', async () => {
     await sut({ name, email, password })
-    expect(userAccountRepo.loadByEmail).toHaveBeenCalledWith({ email })
-    expect(userAccountRepo.loadByEmail).toHaveBeenCalledTimes(1)
+    expect(userAccountRepo.load).toHaveBeenCalledWith({ email })
+    expect(userAccountRepo.load).toHaveBeenCalledTimes(1)
   })
 
-  it('should throw  EmailInUseError  if loadByEmail return data', async () => {
-    userAccountRepo.loadByEmail.mockResolvedValueOnce({
+  it('should throw  EmailInUseError  if load return data', async () => {
+    userAccountRepo.load.mockResolvedValueOnce({
       id: 'any_user_id',
       name: 'any_user_name',
-      email: 'any_user_emal',
-      password: 'any_user_password'
+      email: 'any_user_emal'
     })
 
     const promise = sut({ name, email, password })
     await expect(promise).rejects.toThrow()
   })
 
-  it('should  rethrow if loadByEmail throws', async () => {
-    userAccountRepo.loadByEmail.mockRejectedValueOnce(new Error('load_by_email_error'))
+  it('should  rethrow if load throws', async () => {
+    userAccountRepo.load.mockRejectedValueOnce(new Error('load_by_email_error'))
     const promise = sut({ name, email, password })
     await expect(promise).rejects.toThrow(new Error('load_by_email_error'))
   })
