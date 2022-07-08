@@ -1,70 +1,7 @@
 import { mock, MockProxy } from 'jest-mock-extended'
-
-export namespace TokenGenerator {
-  export type Input = { key: string }
-  export type Output = { token: string }
-}
-export interface TokenGenerator {
-  generate: (params: TokenGenerator.Input) => Promise<TokenGenerator.Output>
-}
-
-export namespace Encrypter {
-  export type Input = { password: string }
-  export type Output = { key: string }
-}
-export interface Encrypter {
-  encrypt: (params: Encrypter.Input) => Promise<Encrypter.Output>
-}
-
-export class EmailInUseError extends Error {
-  constructor () {
-    super('This email is already taken')
-    this.name = 'EmailInUseError'
-  }
-}
-
-export namespace LoadUserAccountRepository {
-  export type Input = { email: string }
-  export type Output = undefined | {
-    id: string
-    name: string
-    email: string
-    password: string
-  }
-}
-
-export interface LoadUserAccountRepository {
-  loadByEmail: (params: LoadUserAccountRepository.Input) => Promise<LoadUserAccountRepository.Output>
-}
-
-export namespace SaveUserAccountRepository {
-  export type Input = { name: string, email: string, password: string }
-  export type Output = {
-    id: string
-    name: string
-    email: string
-  }
-}
-
-export interface SaveUserAccountRepository {
-  saveUser: (params: SaveUserAccountRepository.Input) => Promise<SaveUserAccountRepository.Output>
-}
-
-type Setup = (
-  userAccountRepo: LoadUserAccountRepository & SaveUserAccountRepository,
-  crypto: Encrypter,
-  token: TokenGenerator
-) => Singup
-export type Singup = (name: string, email: string, password: string) => Promise<{ token: string }>
-
-export const setupSingup: Setup = (userAccountRepo, crypto, token) => async (name, email, password) => {
-  const accountData = await userAccountRepo.loadByEmail({ email })
-  if (accountData !== undefined) throw new EmailInUseError()
-  const passwordHashed = await crypto.encrypt({ password })
-  const { id } = await userAccountRepo.saveUser({ name, email, password: passwordHashed.key })
-  const accessToken = await token.generate({ key: id })
-  return { token: accessToken.token }
-}
+import { Encrypter, TokenGenerator } from '@/domain/contracts/crypto'
+import { LoadUserAccountRepository, SaveUserAccountRepository } from '@/domain/contracts/repos'
+import { setupSingup, Singup } from '@/domain/use-cases'
 
 describe('Singup', () => {
   let name: string
