@@ -5,7 +5,7 @@ const Routes = Router()
 Routes.post('/finance', addTransaction)
 Routes.patch('/finance/:id', updateTransaction)
 Routes.delete('/finance/:id', deleteTransaction)
-Routes.get('/finance', loadTransaction)
+Routes.get('/finance/:startDate/:endDate', loadTransaction)
 Routes.get('/balance', loadBalance)
 
 export default Routes
