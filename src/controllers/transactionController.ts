@@ -1,45 +1,48 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 const { v4: uuid } = require("uuid"); //todo check import
 import Transaction from "../models/transaction";
-// import { ITransaction } from "../types/transaction";
-import { IRequest } from "../types/definition";
-
-interface ITransaction {
-  _id: string;
-  title: string;
-  value: number;
-  created_datetime: Date;
-}
+import { ITransaction } from "../types/transaction";
 
 const TransactionController = {
-  async index({ res }: { req: Request; res: Response }) {
+  async getAllTransactions(req: Request, res: Response) {
     try {
       const transactions = await Transaction.find();
       return res.status(200).json({ transactions });
     } catch (err) {
-      return res.status(400).json(err); // TODO check error catch
+      return res.status(400).json(err);
     }
   },
-  async store({
-    req,
-    res,
-  }: {
-    req: Request;
-    res: Response;
-  }): Promise<Response> {
-    // const { title, value }: ITransaction = req.body;
 
-    await Transaction.create(req.body)
-      .then((data) => {
-        return res.json(data);
-      })
-      .catch((err) => {
-        return res.status(400).json(err.message);
-      });
-    return res.status(500);
+  async getTransactionById(req: Request, res: Response) {
+    const { id } = req.params;
+    await Transaction.findById(id, function (err: Error, Transaction: {}) {
+      if (err) {
+        res.status(400).send({ message: `${err.message} - Not Found` });
+      }
+      res.status(200).send(Transaction);
+    });
   },
 
-  async update(req: IRequest, res: Response): Promise<Response> {
+  async createTransaction(req: Request, res: Response) {
+    const { title, value }: ITransaction = req.body;
+    if (!title || value) {
+      return res.status(400).json({ err: "Title and Value are Required" });
+    }
+    const transaction = new Transaction({
+      _id: uuid.v4(),
+      title,
+      value,
+      created_datetime: new Date(),
+    });
+    try {
+      await transaction.save();
+      return res.status(201).json({ transaction });
+    } catch (err) {
+      return res.status(400).json({ err: err });
+    }
+  },
+
+  async updateTransaction(req: Request, res: Response) {
     const { id } = req.params;
     const { title, value } = req.body;
 
@@ -56,7 +59,7 @@ const TransactionController = {
     return res.status(500);
   },
 
-  async delete(req: IRequest, res: Response): Promise<Response> {
+  async deleteTransaction(req: Request, res: Response) {
     const { id } = req.params;
 
     await Transaction.findByIdAndDelete(id)
