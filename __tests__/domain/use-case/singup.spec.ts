@@ -1,5 +1,13 @@
 import { mock, MockProxy } from 'jest-mock-extended'
 
+export namespace TokenGenerator {
+  export type Input = { key: string }
+  export type Output = { token: string }
+}
+export interface TokenGenerator {
+  generate: (params: TokenGenerator.Input) => Promise<TokenGenerator.Output>
+}
+
 export namespace Encrypter {
   export type Input = { password: string }
   export type Output = { key: string }
@@ -35,7 +43,6 @@ export namespace SaveUserAccountRepository {
     id: string
     name: string
     email: string
-    password: string
   }
 }
 
@@ -43,27 +50,29 @@ export interface SaveUserAccountRepository {
   saveUser: (params: SaveUserAccountRepository.Input) => Promise<SaveUserAccountRepository.Output>
 }
 
-type Setup = (userAccountRepo: LoadUserAccountRepository & SaveUserAccountRepository, crypto: Encrypter) => Authentication
-export type Authentication = (name: string, email: string, password: string) => Promise<undefined | {
-  id: string
-  name: string
-  email: string
-  password: string
-}>
+type Setup = (
+  userAccountRepo: LoadUserAccountRepository & SaveUserAccountRepository,
+  crypto: Encrypter,
+  token: TokenGenerator
+) => Singup
+export type Singup = (name: string, email: string, password: string) => Promise<{ token: string }>
 
-export const setupAuthentication: Setup = (userAccountRepo, crypto) => async (name, email, password) => {
+export const setupSingup: Setup = (userAccountRepo, crypto, token) => async (name, email, password) => {
   const accountData = await userAccountRepo.loadByEmail({ email })
   if (accountData !== undefined) throw new EmailInUseError()
   const passwordHashed = await crypto.encrypt({ password })
-  return await userAccountRepo.saveUser({ name, email, password: passwordHashed.key })
+  const { id } = await userAccountRepo.saveUser({ name, email, password: passwordHashed.key })
+  const accessToken = await token.generate({ key: id })
+  return { token: accessToken.token }
 }
 
-describe('Authentication', () => {
+describe('Singup', () => {
   let name: string
   let email: string
   let password: string
   let crypto: MockProxy<Encrypter>
-  let sut: Authentication
+  let token: MockProxy<TokenGenerator>
+  let sut: Singup
   let userAccountRepo: MockProxy<LoadUserAccountRepository & SaveUserAccountRepository>
 
   beforeAll(() => {
@@ -75,15 +84,16 @@ describe('Authentication', () => {
     userAccountRepo.saveUser.mockResolvedValue({
       id: 'any_user_id',
       name: 'any_user_name',
-      email: 'any_user_emal',
-      password: 'any_user_password'
+      email: 'any_user_emal'
     })
     crypto = mock()
     crypto.encrypt.mockResolvedValue({ key: 'any_encrypted_key' })
+    token = mock()
+    token.generate.mockResolvedValue({ token: 'any_token' })
   })
 
   beforeEach(() => {
-    sut = setupAuthentication(userAccountRepo, crypto)
+    sut = setupSingup(userAccountRepo, crypto, token)
   })
 
   it('should  call loadByEmail with correct input', async () => {
@@ -117,9 +127,9 @@ describe('Authentication', () => {
   })
 
   it('should  rethrow if encrypter throws', async () => {
-    crypto.encrypt.mockRejectedValueOnce(new Error('load_by_email_error'))
+    crypto.encrypt.mockRejectedValueOnce(new Error('encrypter_error'))
     const promise = sut(name, email, password)
-    await expect(promise).rejects.toThrow(new Error('load_by_email_error'))
+    await expect(promise).rejects.toThrow(new Error('encrypter_error'))
   })
 
   it('should  call saveUser with correct input', async () => {
@@ -128,13 +138,32 @@ describe('Authentication', () => {
     expect(userAccountRepo.saveUser).toHaveBeenCalledTimes(1)
   })
 
-  it('should return an user account on save success', async () => {
-    const userAccount = await sut(name, email, password)
-    expect(userAccount).toEqual({
-      id: 'any_user_id',
-      name: 'any_user_name',
-      email: 'any_user_emal',
-      password: 'any_user_password'
-    })
+  it('should  rethrow if Saveuser throws', async () => {
+    userAccountRepo.saveUser.mockRejectedValueOnce(new Error('save_user_error'))
+    const promise = sut(name, email, password)
+    await expect(promise).rejects.toThrow(new Error('save_user_error'))
+  })
+
+  it('should  call generateToken with correct input', async () => {
+    await sut(name, email, password)
+    expect(token.generate).toHaveBeenCalledWith({ key: 'any_user_id' })
+    expect(token.generate).toHaveBeenCalledTimes(1)
+  })
+
+  it('should  call tokenGenerator with correct input', async () => {
+    await sut(name, email, password)
+    expect(token.generate).toHaveBeenCalledWith({ key: 'any_user_id' })
+    expect(token.generate).toHaveBeenCalledTimes(1)
+  })
+
+  it('should  return an accessToken on success', async () => {
+    const accessToken = await sut(name, email, password)
+    expect(accessToken).toEqual({ token: 'any_token' })
+  })
+
+  it('should  rethrow if generateToken throws', async () => {
+    token.generate.mockRejectedValueOnce(new Error('save_user_error'))
+    const promise = sut(name, email, password)
+    await expect(promise).rejects.toThrow(new Error('save_user_error'))
   })
 })
