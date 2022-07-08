@@ -1,12 +1,18 @@
 "use strict";
-const express = require("express");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
 require("dotenv").config();
-const app = express();
-app.use(express.json());
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const routes = require("./routes.ts");
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(routes);
+const { PORT } = process.env;
+const { HOST } = process.env;
+const development = process.env.DEVELOPMENT === "true";
 app.listen(PORT, () => {
-    return process.env.DEVELOPMENT === "true"
-        ? `Server running on http://${HOST}:${PORT}`
-        : "";
+    const URL = development ? `Server running on http://${HOST}:${PORT}` : "";
+    return URL;
 });

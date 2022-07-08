@@ -1,0 +1,7 @@
+apps:
+  - name: nodejs-challenge-backend
+    script: ./dist/server.js
+    exec_mode: cluster
+    instances: 2
+    max_memory_restart: 200M
+    watch: false

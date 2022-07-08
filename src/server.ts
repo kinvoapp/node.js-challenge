@@ -1,7 +1,7 @@
-const express = require("express");
-require("dotenv").config();
+import express from "express";
+import routes from "./routes";
 
-const routes = require("./routes.js");
+require("dotenv").config();
 
 const app = express();
 
@@ -9,11 +9,12 @@ app.use(express.json());
 
 app.use(routes);
 
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+const { PORT } = process.env;
+const { HOST } = process.env;
+const development = process.env.DEVELOPMENT === "true";
 
 app.listen(PORT, () => {
-  return process.env.DEVELOPMENT === "true"
-    ? `Server running on http://${HOST}:${PORT}`
-    : "";
+  const URL = development ? `Server running on http://${HOST}:${PORT}` : "";
+
+  return URL;
 });
