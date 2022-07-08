@@ -1,4 +1,4 @@
-const frisby = require("frisby");
+import frisby from "frisby";
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -8,7 +8,7 @@ const URL_Deploy =
   process.env.DEVELOPMENT === "true"
     ? `http://${HOST}:${PORT}`
     : "https://node-challenge-backend.herokuapp.com/";
-console.log(URL_Deploy);
+
 describe("Deploy verify.", () => {
   it("Must return application title in root route.", async () => {
     await frisby
