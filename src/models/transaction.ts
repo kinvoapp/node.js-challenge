@@ -9,6 +9,11 @@ export const transactionSchema = new mongoose.Schema({
     type: Number,
     required: "Enter a value",
   },
+  transactionType: {
+    type: String,
+    required: "Enter a transaction type",
+  },
+
   created_date: {
     type: Date,
     default: Date.now,
