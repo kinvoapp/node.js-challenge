@@ -2,10 +2,10 @@ import mongoose, { Schema } from "mongoose";
 import ITransaction from "../interfaces/ITransaction";
 
 const RecordSchema:Schema = new Schema({
-    desc: {type: String, required: true},
-    type: {type: String, required: true},
-    value: {type: Number, required: true},
-    note: {type: String, required: true},
+    desc: {type: String},
+    type: {type: String},
+    value: {type: Number},
+    note: {type: String},
 },{
     timestamps:true
 })
