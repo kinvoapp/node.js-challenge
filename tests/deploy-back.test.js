@@ -5,7 +5,9 @@ const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
 const URL_Deploy =
-  process.env.DEVELOPMENT === "true" ? `http://${HOST}:${PORT}` : "";
+  process.env.DEVELOPMENT === "true"
+    ? `http://${HOST}:${PORT}`
+    : "https://node-challenge-backend.herokuapp.com/";
 console.log(URL_Deploy);
 describe("Deploy verify.", () => {
   it("Must return application title in root route.", async () => {
