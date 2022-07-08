@@ -8,13 +8,13 @@ module.exports = {
     '!<rootDir>/src/infra/postgres/helpers/config.ts'
   ],
   moduleNameMapper: {
-    '@/__tests__/(.+)': '<rootDir>/__tests__/$1',
+    '@/tests/(.+)': '<rootDir>/tests/$1',
     '@/(.+)': '<rootDir>/src/$1'
   },
   testMatch: ['**/*.spec.ts'],
   roots: [
     '<rootDir>/src/',
-    '<rootDir>/__tests__/'
+    '<rootDir>/tests/'
   ],
   transform: {
     '.\\.ts$': 'ts-jest'
