@@ -1,0 +1,51 @@
+{
+  "name": "node.js-challenge",
+  "version": "1.0.0",
+  "description": "Node.js Challenge",
+  "main": "index.js",
+  "author": "Jeferson Lucas <jeferson.luckas@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JefersonLucas/node.js-challenge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JefersonLucas/node.js-challenge/issues"
+  },
+  "homepage": "https://github.com/JefersonLucas/node.js-challenge#readme",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/server.ts",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "lint": "eslint src/** --fix",
+    "test": "jest",
+    "test-watch": "jest --watchAll --verbose=true"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/node": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.1",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.1",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.5",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
