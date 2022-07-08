@@ -1,4 +1,4 @@
-# Node.js Challenge - Jeferson Lucas (Junior Developer)
+# Node.js Challenge - Jeferson Lucas
 
 ## Challenge
 
@@ -74,6 +74,14 @@ $ ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-wat
 Server started!
 ```
 
+Open the application on the following port [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word). The response should be something similar to this:
+
+```json
+{
+  "message": "Hello Word"
+}
+```
+
 ### Viewing tests
 
 To view the tests for this application, run the following command in the terminal or command prompt:
@@ -108,6 +116,30 @@ Done in 1s.
 ```
 
 For other scripts commands, see the `package.json` file of this project.
+
+## Deploy
+
+See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/Hello%20Word).
+
+## Using the application
+
+To create HTTP requests use some API client to perform your tests and debugs like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/).
+
+This application has the following endpoints:
+
+**/:msg**:
+
+- **GET**: `/:msg` - Initial route for message display via parameter.
+
+  - example: [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word)
+
+  - return:
+
+  ```json
+  {
+    "message": "Hello Word"
+  }
+  ```
 
 ## Stacks
 
