@@ -9,11 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = exports.userCreateService = void 0;
+exports.getUsersService = exports.userCreateService = void 0;
 const user_1 = require("../interfaces/user");
 const userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     user_1.users.push(user);
+    return { id: user_1.users.length };
 });
 exports.userCreateService = userCreateService;
-const getUsers = () => __awaiter(void 0, void 0, void 0, function* () { });
-exports.getUsers = getUsers;
+const getUsersService = () => __awaiter(void 0, void 0, void 0, function* () {
+    return user_1.users;
+});
+exports.getUsersService = getUsersService;

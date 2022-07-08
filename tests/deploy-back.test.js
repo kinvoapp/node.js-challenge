@@ -1,4 +1,4 @@
-import frisby from "frisby";
+const frisby = require("frisby");
 require("dotenv").config();
 
 const PORT = process.env.PORT;
