@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount} from '../repository/index'
-
+import { calculate } from '../utils/calcBalance';
 
     const addTransaction = (req: Request, res: Response, next: NextFunction) => {
         createRecord(req).then(result =>{
@@ -58,9 +58,7 @@ import {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount} fro
         balanceAmount()
         .then(result =>{
             return res.status(200).json({
-                record: result.reduce((value, acc) => {
-                    return value + acc.value
-                }, 0)
+                balance: calculate(result)
             })
         })
         .catch((err) => {
