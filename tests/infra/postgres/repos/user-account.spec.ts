@@ -15,11 +15,11 @@ describe('PgUserAccountRepository', () => {
     pgUserRepo = getRepository(User)
   })
 
-  describe('load', () => {
-    afterAll(async () => {
-      await getConnection().close()
-    })
+  afterAll(async () => {
+    await getConnection().close()
+  })
 
+  describe('load', () => {
     beforeEach(() => {
       backup.restore()
       sut = new PgUserAccountRepository()
@@ -34,6 +34,18 @@ describe('PgUserAccountRepository', () => {
     it('should return  undefined if email does not exists', async () => {
       const account = await sut.load({ email: 'any_email' })
       expect(account?.id).toBeUndefined()
+    })
+  })
+
+  describe('save', () => {
+    beforeEach(() => {
+      backup.restore()
+      sut = new PgUserAccountRepository()
+    })
+
+    it('should save an account', async () => {
+      const account = await sut.save({ name: 'any_user_name', email: 'any_user_email', password: 'any_user_password' })
+      expect(account).toEqual({ id: '1', name: 'any_user_name', email: 'any_user_email' })
     })
   })
 })
