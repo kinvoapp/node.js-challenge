@@ -1,7 +1,7 @@
-import { mock, MockProxy } from 'jest-mock-extended'
 import { Encrypter, TokenGenerator } from '@/domain/contracts/crypto'
 import { LoadUserAccountRepository, SaveUserAccountRepository } from '@/domain/contracts/repos'
 import { setupSingup, Singup } from '@/domain/use-cases'
+import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('Singup', () => {
   let name: string
