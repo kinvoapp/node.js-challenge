@@ -16,10 +16,15 @@
       "double",
       { "avoidEscape": true, "allowTemplateLiterals": true }
     ],
-    "import/resolver": {
-      "node": {
-        "extensios": [".js", ".jsx", ".ts", ".tsx"]
+    "import/extensios": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
-    }
+    ]
   }
 }
