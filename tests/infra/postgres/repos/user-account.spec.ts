@@ -2,22 +2,7 @@ import { User } from '@/infra/postgres/entities'
 import { makeFakeDb } from '@/tests/infra/postgres/mocks'
 import { IBackup } from 'pg-mem'
 import { getConnection, getRepository, Repository } from 'typeorm'
-
-type Input = { email: string }
-type Output = undefined | {
-  id: number
-  name: string
-  email: string
-  password: string
-}
-
-export class PgUserAccountRepository {
-  async load ({ email }: Input): Promise<Output> {
-    const pgUserRepo = getRepository(User)
-    const pgUser = await pgUserRepo.findOne({ email })
-    return pgUser !== undefined ? pgUser : undefined
-  }
-}
+import { PgUserAccountRepository } from '@/infra/postgres/repos'
 
 describe('PgUserAccountRepository', () => {
   let sut: PgUserAccountRepository
