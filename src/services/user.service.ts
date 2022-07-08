@@ -1,11 +1,32 @@
 import { User, users } from "../interfaces/user";
 
 export const userCreateService = async (user: User): Promise<number> => {
-  users.push(user);
+  const id = users.length + 1;
+
+  users.push({ ...user, id });
 
   return users.length;
 };
 
 export const getUsersService = async (): Promise<User[]> => {
   return users;
+};
+
+export const updateUserService = async (
+  id: string,
+  user: User
+): Promise<object> => {
+  const indexUser = users.findIndex((user) => user.id === Number(id));
+
+  let response = {};
+
+  if (indexUser >= 0) {
+    users[indexUser]["name"] = user["name"];
+    users[indexUser]["email"] = user["email"];
+    users[indexUser]["password"] = user["password"];
+
+    response = user;
+  }
+
+  return response;
 };
