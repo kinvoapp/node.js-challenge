@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import app from './index'
 
 const PORT = process.env.PORT 

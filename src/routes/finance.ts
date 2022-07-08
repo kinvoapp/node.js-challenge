@@ -1,11 +1,11 @@
 import {Router} from 'express'
-import {financeController} from '../controller/finance'
+import {addTransaction, updateTransaction, deleteTransaction, loadTransaction, loadBalance} from '../controller/finance'
 const Routes = Router()
 
-Routes.post('/finance',  new financeController().addTransaction)
-Routes.patch('/finance/:id', new financeController().updateTransaction)
-Routes.delete('/finance/:id', new financeController().deleteTransaction)
-Routes.get('/finance', new financeController().loadTransaction)
-Routes.get('/balance', new financeController().loadBalance)
+Routes.post('/finance', addTransaction)
+Routes.patch('/finance/:id', updateTransaction)
+Routes.delete('/finance/:id', deleteTransaction)
+Routes.get('/finance', loadTransaction)
+Routes.get('/balance', loadBalance)
 
 export default Routes
