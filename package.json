@@ -22,7 +22,8 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.17.3",
-    "mongoose": "^6.2.9"
+    "mongoose": "^6.2.9",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
