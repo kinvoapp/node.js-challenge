@@ -10,5 +10,6 @@ import MovementControllers from '@controllers/movement.controllers'
 const router = express.Router()
 
 router.post('/create', MovementControllers.createMovement)
+router.get('/', MovementControllers.getMovements)
 
 export default router
