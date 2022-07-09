@@ -1,7 +1,7 @@
 const express = require('express');
 const usuarios = require('./controladores/usuarios');
 const movimentacoes = require('./controladores/movimentacoes');
-const { autenticacao } = require('./intermediarios/autenticacao');
+const autenticacao = require('./intermediarios/autenticacao');
 
 const rotas = express();
 
