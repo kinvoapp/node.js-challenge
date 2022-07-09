@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 const {
   deleteUser,
   getUsers,
+  getUser,
   updateUser,
   userCreate,
 } = require("./controllers/user.controller");
@@ -14,6 +15,8 @@ route.get("/", (_req: Request, res: Response) =>
 route.post("/user", userCreate);
 
 route.get("/user", getUsers);
+
+route.get("/user/:id", getUser);
 
 route.put("/user/:id", updateUser);
 
