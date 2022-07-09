@@ -31,6 +31,7 @@
     "@types/jest": "^28.1.4",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.3",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -40,7 +41,10 @@
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.2",
+    "jest-mock-extended": "^2.0.6",
     "nodemon": "^2.0.19",
+    "prisma": "^4.0.0",
+    "supertest": "^6.2.4",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "ts-node-dev": "^2.0.0",
@@ -48,8 +52,10 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@prisma/client": "^4.0.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.3",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1"
   }
