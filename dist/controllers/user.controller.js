@@ -9,48 +9,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.getUsers = exports.userCreate = void 0;
-const user_service_1 = require("../services/user.service");
-const userCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const { deleteUserService, getUsersService, updateUserService, userCreateService, } = require("../services/user.service");
+exports.userCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = yield (0, user_service_1.userCreateService)(req.body);
+        const id = yield userCreateService(req.body);
         return res.status(201).json({ id });
     }
     catch (error) {
         return res.status(500);
     }
 });
-exports.userCreate = userCreate;
-const getUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let users;
     try {
-        users = yield (0, user_service_1.getUsersService)();
+        users = yield getUsersService();
     }
     catch (error) {
         return res.status(500);
     }
     return res.status(200).json(users);
 });
-exports.getUsers = getUsers;
-const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { params: { id }, } = req;
     try {
-        const update = yield (0, user_service_1.updateUserService)(id, req.body);
+        const update = yield updateUserService(id, req.body);
         return res.status(200).json(update);
     }
     catch (error) {
         return res.status(500);
     }
 });
-exports.updateUser = updateUser;
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { params: { id }, } = req;
     try {
-        const deleted = yield (0, user_service_1.deleteUserService)(id);
+        const deleted = yield deleteUserService(id);
         return res.status(200).json(deleted);
     }
     catch (error) {
         return res.status(500);
     }
 });
-exports.deleteUser = deleteUser;

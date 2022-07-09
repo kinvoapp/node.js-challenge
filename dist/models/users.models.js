@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.modelUserCreate = void 0;
-const connection_1 = require("./connection");
+const { connection } = require("./connection");
 const modelUserCreate = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const db = yield (0, connection_1.connection)();
+    const db = yield connection();
     const { insertedId } = yield db.collection("users").insertOne(user);
     console.log(insertedId);
     return insertedId;

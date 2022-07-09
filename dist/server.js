@@ -1,21 +1,15 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const routes_1 = __importDefault(require("./routes"));
+const express = require("express");
+const routes = require("./routes");
 require("dotenv").config();
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use(routes_1.default);
-const { PORT } = process.env;
-const { HOST } = process.env;
+const app = express();
+app.use(express.json());
+app.use(routes);
 const development = process.env.DEVELOPMENT === "true";
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     const URL = development
-        ? `Server running on http://${HOST}:${PORT}`
+        ? `Server running on http://${process.env.HOST}:${process.env.PORT}`
         : "https://node-challenge-backend.herokuapp.com/";
     return URL;
 });
-exports.default = app;
+module.exports = app;

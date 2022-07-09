@@ -9,21 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserService = exports.updateUserService = exports.getUsersService = exports.userCreateService = void 0;
 const user_1 = require("../interfaces/user");
-const users_models_1 = require("../models/users.models");
-const userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
+const { modelUserCreate } = require("../models/users.models");
+exports.userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const id = user_1.users.length + 1;
-    const userId = yield (0, users_models_1.modelUserCreate)(Object.assign(Object.assign({}, user), { id }));
-    // users.push({ ...user, id });
+    const userId = yield modelUserCreate(Object.assign(Object.assign({}, user), { id }));
     return userId;
 });
-exports.userCreateService = userCreateService;
-const getUsersService = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.getUsersService = () => __awaiter(void 0, void 0, void 0, function* () {
     return user_1.users;
 });
-exports.getUsersService = getUsersService;
-const updateUserService = (id, user) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateUserService = (id, user) => __awaiter(void 0, void 0, void 0, function* () {
     const indexUser = user_1.users.findIndex((user) => user.id === Number(id));
     let response = {};
     if (indexUser >= 0) {
@@ -34,8 +30,7 @@ const updateUserService = (id, user) => __awaiter(void 0, void 0, void 0, functi
     }
     return response;
 });
-exports.updateUserService = updateUserService;
-const deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const indexUser = user_1.users.findIndex((user) => user.id === Number(id));
     let response = {};
     if (indexUser >= 0) {
@@ -44,4 +39,3 @@ const deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* ()
     }
     return response;
 });
-exports.deleteUserService = deleteUserService;
