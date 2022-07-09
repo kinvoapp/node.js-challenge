@@ -7,7 +7,6 @@ const CLUSTER = `mongodb+srv://${USER_CLUSTER}:${PASSWORD_CLUSTER}@node-challeng
 const URI = DEVELOPMENT === "true"
     ? `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`
     : CLUSTER;
-// console.log("URI: ", URI);
 mongoose.Promise = global.Promise;
 mongoose
     .connect(URI, {

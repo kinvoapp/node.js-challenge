@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 const {
   deleteUserService,
   getUsersService,
+  getUserByIdService,
   updateUserService,
   userCreateService,
 } = require("../services/user.service");
@@ -25,6 +26,20 @@ exports.getUsers = async (_req: Request, res: Response): Promise<any> => {
   }
 
   return res.status(200).json(users);
+};
+
+exports.getUser = async (req: Request, res: Response): Promise<any> => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const user = await getUserByIdService(id);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500);
+  }
 };
 
 exports.updateUser = async (req: Request, res: Response): Promise<any> => {

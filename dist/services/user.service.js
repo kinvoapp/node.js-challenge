@@ -9,33 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = require("../interfaces/user");
-const { modelUserCreate } = require("../models/users.models");
+const userModel = require("../models/users.models");
 exports.userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = user_1.users.length + 1;
-    const userId = yield modelUserCreate(Object.assign(Object.assign({}, user), { id }));
+    const users = yield userModel.find();
+    const id = user.id ? user.id : users.length + 1;
+    const userId = yield userModel.create(Object.assign(Object.assign({}, user), { id }));
     return userId;
 });
 exports.getUsersService = () => __awaiter(void 0, void 0, void 0, function* () {
-    return user_1.users;
+    const users = yield userModel.find();
+    return users;
+});
+exports.getUserByIdService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield userModel.find({ id });
+    return user;
 });
 exports.updateUserService = (id, user) => __awaiter(void 0, void 0, void 0, function* () {
-    const indexUser = user_1.users.findIndex((user) => user.id === Number(id));
-    let response = {};
-    if (indexUser >= 0) {
-        user_1.users[indexUser]["name"] = user["name"];
-        user_1.users[indexUser]["email"] = user["email"];
-        user_1.users[indexUser]["password"] = user["password"];
-        response = user;
-    }
-    return response;
+    const updated = yield userModel.findOneAndUpdate(id, user);
+    return updated;
 });
 exports.deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const indexUser = user_1.users.findIndex((user) => user.id === Number(id));
-    let response = {};
-    if (indexUser >= 0) {
-        user_1.users.splice(indexUser, 1);
-        response = { deleted: `Usuário de id ${id} deletado com sucesso.` };
-    }
-    return response;
+    let deleted = yield userModel.deleteOne({ id });
+    return deleted;
 });
