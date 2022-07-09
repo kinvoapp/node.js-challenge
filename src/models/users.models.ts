@@ -1,10 +1,10 @@
-const { connection } = require("./connection");
+const mgs = require("mongoose");
 
-export const modelUserCreate = async (user: object) => {
-  const db = await connection();
+const userSchema = mgs.Schema({
+  id: { type: Number || null },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+});
 
-  const { insertedId } = await db.collection("users").insertOne(user);
-  console.log(insertedId);
-
-  return insertedId;
-};
+module.exports = mgs.model("User", userSchema);

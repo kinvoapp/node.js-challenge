@@ -1,11 +1,11 @@
 import { User, users } from "../interfaces/user";
 
-const { modelUserCreate } = require("../models/users.models");
+const userModel = require("../models/users.models");
 
 exports.userCreateService = async (user: User): Promise<object> => {
   const id = users.length + 1;
 
-  const userId = await modelUserCreate({ ...user, id });
+  const userId = await userModel.create({ ...user, id });
 
   return userId;
 };
