@@ -5,7 +5,7 @@ import {
   RequestWithStudentInfo,
 } from "../../domain/requestDto";
 import { CreateTransactionRepository } from "../../repositories/Transaction/CreateTransactionRepository";
-import { GetAccountWithBalanceRepository } from "../../repositories/Account/GetAccountWithBalanceRepository.ts";
+import { GetAccountWithBalanceRepository } from "../../repositories/Account/GetAccountWithBalanceRepository";
 import { CreateTransactionService } from "../../services/Transaction/CreateTransactionService";
 
 export class CreateTransactionController {

@@ -3,7 +3,7 @@ import {
   IBalanceResponse,
   RequestWithStudentInfo,
 } from "../../domain/requestDto";
-import { GetAccountWithBalanceRepository } from "../../repositories/Account/GetAccountWithBalanceRepository.ts";
+import { GetAccountWithBalanceRepository } from "../../repositories/Account/GetAccountWithBalanceRepository";
 import { GetAccountBalanceService } from "../../services/Account/GetAccountBalanceService";
 
 export class GetAccountBalanceController {
