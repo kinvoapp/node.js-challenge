@@ -29,4 +29,9 @@ class UsersRepository {
     return await this.ormRepository.find()
   }
 
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const user = await this.ormRepository.createQueryBuilder('users').where('users.email = :email', { email: email }).getOne()
+    return user
+  }
+
 } export {UsersRepository}

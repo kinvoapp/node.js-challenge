@@ -2,27 +2,28 @@ import { EntityRepository, getRepository, Repository } from "typeorm";
 import { Transaction } from "../model/Transaction";
 
 @EntityRepository(Transaction)
-class TransictionsRepository {
+class TransactionsRepository {
   private ormRepository: Repository<Transaction>
   constructor() {
     this.ormRepository = getRepository(Transaction);
   }
 
   public async create(
-    username: string, email: string, password: string, balance: number
+    type: string, value: number, user_id: string
   ): Promise<Transaction> {
-    const user = await this.ormRepository.create({
+    const transaction = this.ormRepository.create({
+      type, value, user_id, 
     })
 
-    return user;
+    return transaction;
   }
   
-  public async save(transiction: Transaction): Promise<Transaction> {
-    return await this.ormRepository.save(transiction)
+  public async save(transaction: Transaction): Promise<Transaction> {
+    return await this.ormRepository.save(transaction)
   }
 
   public async findAll(): Promise<Transaction[]> {
     return await this.ormRepository.find()
   }
 
-} export {TransictionsRepository}
+} export {TransactionsRepository}
