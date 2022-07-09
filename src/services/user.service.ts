@@ -11,6 +11,8 @@ exports.userCreateService = async (user: User): Promise<object> => {
 };
 
 exports.getUsersService = async (): Promise<User[]> => {
+  const users = await userModel.find();
+
   return users;
 };
 
