@@ -1,6 +1,6 @@
-# API REST - Meu Controle de Gastos (por Júlia Menezes Arapiraca)
+## API REST - Meu Controle de Gastos (por Júlia Menezes Arapiraca)
 
-## LINK DO DEPLOY: https://meu-controle-de-gastos.herokuapp.com
+### LINK DO DEPLOY: https://meu-controle-de-gastos.herokuapp.com
 
 Essa API REST foi criada como desafio técnico e parte do processo seletivo para a empresa Kinvo, usando JavaScript e NodeJS, assim como as bibliotecas dotenv, express, jsonwebtoken, knex, pg, secure-password, yup, yup-locales e nodemon. Ela possui as seguintes funcionalidades:
 
