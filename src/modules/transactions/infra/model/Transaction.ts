@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import {v4 as uuid} from 'uuid'
+import { User } from "../../../users/models/User";
 
 class Transaction {
   
@@ -10,13 +11,20 @@ class Transaction {
   type: string;
 
   @Column()
-  value: string
+  value: number
   
   @CreateDateColumn()
   created_at: Date
 
-    @UpdateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date
+
+  @Column()
+  user_id: string;
+  @ManyToOne('users', (user: User) => user.transactions)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+  
   
 
   constructor() {
