@@ -4,10 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": " ts-node-dev --respawn --transpile-only src/index.ts"
+    "start": "docker-compose up -d && ts-node-dev --respawn --transpile-only src/index.ts",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/typeorm.connection.ts migration:generate ./src/infra/database/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/infra/database/typeorm.connection.ts migration:run",
+    "migration:revert": "typeorm-ts-node-commonjs -d ./src/infra/database/typeorm.connection.ts migration:revert"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.7"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

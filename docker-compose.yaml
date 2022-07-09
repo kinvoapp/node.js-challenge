@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql
+    restart: unless-stopped
+    container_name: db_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123"
+      MYSQL_DATABASE: "mini_bank"
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./node_modules/data/mysql:/var/lib/mysql
+      - .:/usr/app
+
+  # api:
+  #   build: .
+  #   container_name: api
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/usr/app
+  #     - ./node_modules:/api/node/node_modules
+  #   depends_on:
+  #     - db
+  #   restart: on-failure
+  #   command: yarn start
