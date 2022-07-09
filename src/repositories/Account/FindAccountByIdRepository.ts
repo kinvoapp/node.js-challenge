@@ -17,8 +17,8 @@ export class FindAccountByIdRepository implements IFindAccountByIdRepository {
       select: {
         id: true,
         studentId: true,
-        created_at: true,
-        updated_at: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
     return account;

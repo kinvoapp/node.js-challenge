@@ -8,41 +8,42 @@ datasource db {
 }
 
 model Student {
-  id String @id @default(uuid())
-  name String
-  password String
-  document String @unique
-  accounts Account[]
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  deleted_at DateTime @default(now())
+  id         String    @id @default(uuid())
+  name       String
+  password   String
+  document   String    @unique
+  accounts   Account[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime  @default(now())
 
   @@map("students")
 }
 
 model Account {
-  id String @id @default(uuid())
-  student Student @relation(fields: [studentId], references: [id])
-  studentId  String
+  id           String        @id @default(uuid())
+  student      Student       @relation(fields: [studentId], references: [id])
+  studentId    String
   transactions Transaction[]
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  deleted_at DateTime @default(now())
+  balance      Balance       @relation(fields: [balanceId], references: [id])
+  balanceId    String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  deletedAt   DateTime      @default(now())
 
   @@map("accounts")
 }
 
 model Transaction {
-  id String @id @default(uuid())
-  account Account @relation(fields: [accountId], references: [id])
-  accountId String
-  currentBalance Float
+  id          String          @id @default(uuid())
+  account     Account         @relation(fields: [accountId], references: [id])
+  accountId   String
   description String
-  amount Float
-  type TransactionType
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  deleted_at DateTime @default(now())
+  amount      Float
+  type        TransactionType
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @default(now())
+  deletedAt  DateTime        @default(now())
 
   @@map("transactions")
 }
@@ -50,4 +51,14 @@ model Transaction {
 enum TransactionType {
   CASHIN
   CASHOUT
+}
+
+model Balance {
+  id             String    @id @default(uuid())
+  available      Decimal
+  account        Account?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+
+  @@map("balances")
 }

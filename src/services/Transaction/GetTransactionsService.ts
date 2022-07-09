@@ -1,6 +1,5 @@
 import { NotFound } from "../../domain/error";
 import { IFindAccountByIdRepository } from "../../domain/interface/repositories/Account/IFindAccountByIdRepository";
-import { IGetCurrentBalanceRepository } from "../../domain/interface/repositories/Transaction/IGetCurrentBalanceRepository";
 import { IGetTransactionsRepository } from "../../domain/interface/repositories/Transaction/IGetTransactionsRepository";
 import {
   ITransactionPaginationRequest,

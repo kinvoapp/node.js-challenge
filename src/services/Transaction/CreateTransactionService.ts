@@ -1,52 +1,49 @@
-import { InvalidArgument, NotFound } from "../../domain/error";
-import { IFindAccountByIdRepository } from "../../domain/interface/repositories/Account/IFindAccountByIdRepository";
+import { InvalidArgument } from "../../domain/error";
 import { ICreateTransactionRepository } from "../../domain/interface/repositories/Transaction/ICreateTransactionRepository";
-import { IGetCurrentBalanceRepository } from "../../domain/interface/repositories/Transaction/IGetCurrentBalanceRepository";
+import { IGetAccountWithBalanceRepository } from "../../domain/interface/repositories/Account/IGetAccountWithBalanceRepository";
 import {
   ICreateTransactionRequest,
   ICreateTransactionResponse,
 } from "../../domain/requestDto";
+import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
 
 export class CreateTransactionService {
   private createTransactionRepository: ICreateTransactionRepository;
-  private getCurrentBalanceRepository: IGetCurrentBalanceRepository;
-  private findAccountByIdRepository: IFindAccountByIdRepository;
+  private getAccountWithBalanceRepository: IGetAccountWithBalanceRepository;
 
   constructor(
     createTransactionRepository: ICreateTransactionRepository,
-    getCurrentBalanceRepository: IGetCurrentBalanceRepository,
-    findAccountByIdRepository: IFindAccountByIdRepository
+    getAccountWithBalanceRepository: IGetAccountWithBalanceRepository
   ) {
     this.createTransactionRepository = createTransactionRepository;
-    this.getCurrentBalanceRepository = getCurrentBalanceRepository;
-    this.findAccountByIdRepository = findAccountByIdRepository;
+    this.getAccountWithBalanceRepository = getAccountWithBalanceRepository;
   }
 
   async execute(
-    data: ICreateTransactionRequest
+    data: ICreateTransactionRequest,
+    accountId: string
   ): Promise<ICreateTransactionResponse> {
-    const account = await this.findAccountByIdRepository.findAccountById(
-      data.accountId
+    const getAccountBalanceService = new GetAccountBalanceService(
+      this.getAccountWithBalanceRepository
     );
-    if (!account) {
-      throw new NotFound("Account not found");
-    }
-    let currentBalance =
-      await this.getCurrentBalanceRepository.getCurrentBalance(account.id);
+    const account = await getAccountBalanceService.execute(accountId);
+    let newBalance = account.available;
     if (data.type === "CASHIN") {
-      currentBalance += data.amount;
+      newBalance += data.amount;
     } else {
-      if (currentBalance < data.amount) {
+      if (account.available < data.amount) {
         throw new InvalidArgument("Insufficient funds");
       }
-      currentBalance -= data.amount;
+      newBalance -= data.amount;
     }
     const transaction =
       await this.createTransactionRepository.createTransaction(
         {
           ...data,
         },
-        currentBalance
+        newBalance,
+        account.id,
+        account.balanceId
       );
     return transaction;
   }

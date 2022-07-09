@@ -2,7 +2,7 @@ import { Router, Response } from "express";
 import { AuthenticateStudentController } from "./controllers/Student/AuthenticateStudentController";
 import { CreateStudentController } from "./controllers/Student/CreateStudentController";
 import { CreateTransactionController } from "./controllers/Transaction/CreateTransactionController";
-import { GetAccountBalanceController } from "./controllers/Transaction/GetAccountBalanceController";
+import { GetAccountBalanceController } from "./controllers/Account/GetAccountBalanceController";
 import { GetTransactionsController } from "./controllers/Transaction/GetTransactionsController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 

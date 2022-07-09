@@ -23,6 +23,12 @@ export class CreateStudentRepository implements ICreateStudentRepository {
         accounts: {
           create: {
             id: accountId,
+            balance: {
+              create: {
+                id: randomUUID(),
+                available: 0,
+              },
+            },
           },
         },
       },
@@ -30,11 +36,10 @@ export class CreateStudentRepository implements ICreateStudentRepository {
         id: true,
         name: true,
         document: true,
-        accounts: true,
-        created_at: true,
-        updated_at: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
-    return { ...student, accountId };
+    return { ...student };
   }
 }

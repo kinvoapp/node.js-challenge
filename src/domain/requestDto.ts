@@ -6,7 +6,6 @@ export interface ICreateTransactionRequest {
   description: string;
   amount: number;
   type: TransactionType;
-  accountId: string;
 }
 
 export interface ICreateStudentRequest {
@@ -19,9 +18,8 @@ export interface ICreateStudentResponse {
   id: string;
   name: string;
   document: string;
-  accountId: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ICreateAccountRequest {
@@ -31,8 +29,14 @@ export interface ICreateAccountRequest {
 export interface ICreateAccountResponse {
   id: string;
   studentId: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface IGetAccountWithBalanceInfo extends ICreateAccountResponse {
+  available: number;
+  balanceId: string;
+  balanceUpdatedAt: Date;
 }
 
 export interface IPayload {
@@ -53,12 +57,11 @@ export interface IAuthenticateStudentRequest {
 export interface ICreateTransactionResponse {
   id: string;
   accountId: string;
-  currentBalance: number;
   description: string;
   amount: number;
   type: TransactionType;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface Pagination {
@@ -76,4 +79,10 @@ export interface ITransactionPaginationRequest {
 export interface ITransactionPaginationResponse {
   transactions: ICreateTransactionResponse[];
   pagination?: Pagination;
+}
+
+export interface IBalanceResponse {
+  studentId: string;
+  available: number;
+  updatedAt: Date;
 }

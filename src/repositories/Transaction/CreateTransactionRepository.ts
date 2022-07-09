@@ -1,4 +1,4 @@
-import { PrismaClient, Transaction } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { prismaClient } from "../../database/prismaClient";
 import { ICreateTransactionRepository } from "../../domain/interface/repositories/Transaction/ICreateTransactionRepository";
 import {
@@ -16,13 +16,35 @@ export class CreateTransactionRepository
 
   async createTransaction(
     data: ICreateTransactionRequest,
-    currentBalance: number
+    newBalance: number,
+    accountId: string,
+    balanceId: string
   ): Promise<ICreateTransactionResponse> {
-    return this.prismaClient.transaction.create({
-      data: {
-        ...data,
-        currentBalance,
-      },
-    });
+    const [transaction] = await this.prismaClient.$transaction([
+      this.prismaClient.transaction.create({
+        data: {
+          ...data,
+          accountId,
+        },
+        select: {
+          id: true,
+          accountId: true,
+          amount: true,
+          description: true,
+          type: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      }),
+      this.prismaClient.balance.update({
+        where: {
+          id: balanceId,
+        },
+        data: {
+          available: newBalance,
+        },
+      }),
+    ]);
+    return transaction;
   }
 }

@@ -6,6 +6,8 @@ import {
 export interface ICreateTransactionRepository {
   createTransaction(
     data: ICreateTransactionRequest,
-    currentBalance: number
+    newBalance: number,
+    accountId: string,
+    balanceId: string
   ): Promise<ICreateTransactionResponse>;
 }

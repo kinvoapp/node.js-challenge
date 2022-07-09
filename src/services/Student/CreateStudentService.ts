@@ -10,10 +10,10 @@ export class CreateStudentService {
 
   constructor(
     createStudentRepository: ICreateStudentRepository,
-    findStudentByNameRepository: IFindStudentByDocumentRepository
+    findStudentByDocumentRepository: IFindStudentByDocumentRepository
   ) {
     this.createStudentRepository = createStudentRepository;
-    this.findStudentByDocumentRepository = findStudentByNameRepository;
+    this.findStudentByDocumentRepository = findStudentByDocumentRepository;
   }
 
   async execute(data: ICreateStudentRequest) {

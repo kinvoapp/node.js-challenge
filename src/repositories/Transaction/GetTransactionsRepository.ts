@@ -4,7 +4,6 @@ import { IGetTransactionsRepository } from "../../domain/interface/repositories/
 import {
   ICreateTransactionResponse,
   ITransactionPaginationRequest,
-  ITransactionPaginationResponse,
 } from "../../domain/requestDto";
 
 export class GetTransactionsRepository implements IGetTransactionsRepository {
@@ -25,7 +24,7 @@ export class GetTransactionsRepository implements IGetTransactionsRepository {
     const transactions = await this.prismaClient.transaction.findMany({
       where: {
         accountId,
-        created_at: {
+        createdAt: {
           gte: filters?.start,
           lte: filters?.end,
         },
@@ -36,12 +35,11 @@ export class GetTransactionsRepository implements IGetTransactionsRepository {
         amount: true,
         description: true,
         type: true,
-        currentBalance: true,
-        created_at: true,
-        updated_at: true,
+        createdAt: true,
+        updatedAt: true,
       },
       orderBy: {
-        created_at: "desc",
+        createdAt: "desc",
       },
       take: filters.itemsPerPage
         ? parseInt(filters.itemsPerPage.toString())
