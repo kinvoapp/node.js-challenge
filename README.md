@@ -56,6 +56,17 @@ $ npm install
 $ yarn install
 ```
 
+### Environment variables
+
+This project makes use of environment variables. Create a `.env` file in the project root with an example of the [.env.example](.env.example) file:
+
+```env
+PORT=
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+```
+
 ### Starting the application
 
 With the necessary resources and the project installed on your computer, start the application in development mode with a terminal or command prompt with the following command:
@@ -148,6 +159,7 @@ This project is configured with the following stacks:
 - Node: `16.13.2`
 - TypeScript: `4.7.3`
 - Express: `4.18.1`
+- Mongoose: `6.4.4`
 - Yarn: `1.22.5`
 - Jest: `28.1.1`
 - Supertest: `6.2.3`
