@@ -21,4 +21,19 @@ async function createMovement (movement: IMovement): Promise<IMovement> {
   return await MovementModel.create(movement)
 }
 
-export default { createMovement }
+/**
+ * **getMovements**
+ * It is an asynchronous function
+ * that returns a promise with an `IMovement` array that contains all the results found.
+ *
+ * @returns {Promise<IMovement[]>} promise with an `IMovement` array that contains all the results found.
+ */
+
+async function getMovements (): Promise<IMovement[]> {
+  return await MovementModel.find()
+}
+
+export default {
+  createMovement,
+  getMovements
+}
