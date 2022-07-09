@@ -59,4 +59,40 @@ async function createMovement (req: Request, res: Response, next: NextFunction):
   }
 }
 
-export default { createMovement }
+/**
+ * **getMovements**
+ * it is an asynchronous function that does the search of all the movements.
+ * Returns a promise from an IMovement array.
+ *
+ * @param _ is an Request from express.
+ * @param res is an Response from express.
+ * @param next is an NextFuncion from express.
+ * @returns {Promise<Response<IMovement[], Record<string, IMovement[]>>>} a promise from an IMovement array.
+ */
+
+async function getMovements (_: Request, res: Response, next: NextFunction): Promise<Response<IMovement[], Record<string, IMovement[]>>> {
+  try {
+    const movements = await MovementServices.getMovements()
+
+    return res.status(200).json(
+      movements.map((e) => {
+        return {
+          id: e._id,
+          type: e.type,
+          value: e.value,
+          category: e.category,
+          date: e.date,
+          note: e.note
+        }
+      })
+    )
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+    next(error)
+  }
+}
+
+export default {
+  createMovement,
+  getMovements
+}
