@@ -16,13 +16,13 @@ export class CreateStudentRepository implements ICreateStudentRepository {
   async createStudent(
     data: ICreateStudentRequest
   ): Promise<ICreateStudentResponse> {
-    return this.prismaClient.student.create({
+    const accountId = randomUUID();
+    const student = await this.prismaClient.student.create({
       data: {
         ...data,
-
         accounts: {
           create: {
-            id: randomUUID(),
+            id: accountId,
           },
         },
       },
@@ -30,9 +30,11 @@ export class CreateStudentRepository implements ICreateStudentRepository {
         id: true,
         name: true,
         document: true,
+        accounts: true,
         created_at: true,
         updated_at: true,
       },
     });
+    return { ...student, accountId };
   }
 }

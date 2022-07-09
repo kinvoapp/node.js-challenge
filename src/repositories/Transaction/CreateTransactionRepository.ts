@@ -1,7 +1,10 @@
 import { PrismaClient, Transaction } from "@prisma/client";
 import { prismaClient } from "../../database/prismaClient";
 import { ICreateTransactionRepository } from "../../domain/interface/repositories/Transaction/ICreateTransactionRepository";
-import { ICreateTransactionRequest } from "../../domain/requestDto";
+import {
+  ICreateTransactionRequest,
+  ICreateTransactionResponse,
+} from "../../domain/requestDto";
 
 export class CreateTransactionRepository
   implements ICreateTransactionRepository
@@ -14,27 +17,12 @@ export class CreateTransactionRepository
   async createTransaction(
     data: ICreateTransactionRequest,
     currentBalance: number
-  ): Promise<Transaction> {
-    if (data.type === "CASHIN") {
-      const transaction = await this.prismaClient.transaction.create({
-        data: {
-          description: data.description,
-          amount: data.amount,
-          type: data.type,
-          currentBalance: currentBalance + data.amount,
-        },
-      });
-      return transaction;
-    } else {
-      const transaction = await this.prismaClient.transaction.create({
-        data: {
-          description: data.description,
-          amount: data.amount,
-          type: data.type,
-          currentBalance: currentBalance - data.amount,
-        },
-      });
-      return transaction;
-    }
+  ): Promise<ICreateTransactionResponse> {
+    return this.prismaClient.transaction.create({
+      data: {
+        ...data,
+        currentBalance,
+      },
+    });
   }
 }

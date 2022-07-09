@@ -36,9 +36,9 @@ model Transaction {
   id String @id @default(uuid())
   account Account @relation(fields: [accountId], references: [id])
   accountId String
-  currentBalance Decimal
+  currentBalance Float
   description String
-  amount Decimal
+  amount Float
   type TransactionType
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

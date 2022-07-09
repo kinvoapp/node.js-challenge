@@ -21,7 +21,7 @@ export class AuthenticateStudentService {
       throw new InvalidArgument("Email/Password incorrect");
     }
 
-    const passwordMatch = await compare(password, student.password as string);
+    const passwordMatch = await compare(password, student.password);
 
     if (!passwordMatch) {
       throw new InvalidArgument("Email/Password incorrect");
@@ -30,6 +30,7 @@ export class AuthenticateStudentService {
     const token = sign(
       {
         login: student.document,
+        accountId: student.accountId,
       },
       `${process.env.STUDENT_SECRET}`,
       {

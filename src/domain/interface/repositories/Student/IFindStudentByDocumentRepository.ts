@@ -1,5 +1,12 @@
-import { ICreateStudentResponse } from "../../../requestDto";
+export interface IUserCredentialsWithAccountId {
+  id: string;
+  document: string;
+  password: string;
+  accountId: string;
+}
 
 export interface IFindStudentByDocumentRepository {
-  findByDocument(document: string): Promise<ICreateStudentResponse | null>;
+  findByDocument(
+    document: string
+  ): Promise<IUserCredentialsWithAccountId | null>;
 }
