@@ -152,6 +152,25 @@ This application has the following endpoints:
   }
   ```
 
+**/movement**:
+
+- **POST**: `/create` - Creation of movement (income and expenses);.
+
+  - example: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
+
+  - return:
+
+  ```json
+  {
+	  "type": "expense",
+	  "value": 1000,
+	  "category": "studies",
+	  "date": "2022-04-18"
+  }
+  ```
+  
+  - Validation: this route validates that the fields are valid.
+
 ## Stacks
 
 This project is configured with the following stacks:
