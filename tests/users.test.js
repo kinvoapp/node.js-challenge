@@ -1,4 +1,5 @@
 const frisby = require("frisby");
+
 require("dotenv").config();
 
 // const db = require("./db.js");
@@ -25,5 +26,27 @@ describe("Users tests.", () => {
         password: "alunopassword",
       })
       .expect("status", 201);
+  });
+
+  it("It should be possible to list all users.", async () => {
+    await frisby.get(`${URL_Deploy}/user`).expect("status", 200);
+  });
+
+  it("It must be possible to search for a user by ID.", async () => {
+    await frisby.get(`${URL_Deploy}/user/1`).expect("status", 200);
+  });
+
+  it("It must be possible to search for a user by ID.", async () => {
+    await frisby
+      .put(`${URL_Deploy}/user/1`, {
+        name: "Adriano Xavier",
+        email: "aluno@gmail.com",
+        password: "alunopassword",
+      })
+      .expect("status", 201);
+  });
+
+  it("It must be possible to search for a user by ID.", async () => {
+    await frisby.delete(`${URL_Deploy}/user/1`).expect("status", 200);
   });
 });
