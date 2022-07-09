@@ -128,10 +128,6 @@ Done in 1s.
 
 For other scripts commands, see the `package.json` file of this project.
 
-## Deploy
-
-See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/Hello%20Word).
-
 ## Using the application
 
 To create HTTP requests use some API client to perform your tests and debugs like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/).
@@ -154,11 +150,11 @@ This application has the following endpoints:
 
 **/movement**:
 
-- **POST**: `/create` - Creation of movement (income and expenses);.
+- **POST**: `/create` - Creation of movement (income and expenses).
 
   - example: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
 
-  - return:
+  - Request:
 
   ```json
   {
@@ -168,8 +164,43 @@ This application has the following endpoints:
 	  "date": "2022-04-18"
   }
   ```
+
+  - Response:
+
+  ```json
+  {
+    "id": "62c9e5ab59468436b7e40ab0",
+    "type": "expense",
+    "value": 1000,
+    "category": "personal",
+    "date": "2022-07-12"
+  }
+  ```
   
   - Validation: this route validates that the fields are valid.
+
+- **GET**: `/` - Display all moves (income and expenses).
+
+  - example: [http://localhost:8080/movement/](http://localhost:8080/movement/)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    },
+    ... more movements
+  ]
+  ```
+
+## Deploy
+
+See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/Hello%20Word).
 
 ## Stacks
 
