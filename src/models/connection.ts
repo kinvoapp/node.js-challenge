@@ -2,12 +2,19 @@ const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
 
-const { HOST, DB_NAME } = process.env;
+const { HOST, DB_NAME, USER_CLUSTER, PASSWORD_CLUSTER, DEVELOPMENT } =
+  process.env;
 
-const MONGO_URL = `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`;
+const CLUSTER = `mongodb+srv://${USER_CLUSTER}:${PASSWORD_CLUSTER}@node-challenge.axsni.mongodb.net/?retryWrites=true&w=majority`;
+const URI =
+  DEVELOPMENT === "true"
+    ? `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`
+    : CLUSTER;
+
+console.log("URI: ", URI);
 
 exports.connection = async () =>
-  MongoClient.connect(MONGO_URL)
+  MongoClient.connect(URI)
     .then((conn: any) => conn.db(DB_NAME))
     .catch((error: any) => {
       console.log(error);
@@ -16,7 +23,7 @@ exports.connection = async () =>
     });
 
 exports.disconnect = async () => {
-  const conn = MongoClient.connect(MONGO_URL);
+  const conn = MongoClient.connect(URI);
 
   (await conn).close();
 };

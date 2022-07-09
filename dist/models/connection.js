@@ -8,26 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.disconnect = exports.connection = void 0;
-const mongodb_1 = require("mongodb");
+const { MongoClient } = require("mongodb");
 require("dotenv").config();
-const { DEVELOPMENT, HOST, DB_NAME, MONGODB_URL } = process.env;
-const MONGO_URL = DEVELOPMENT === "true"
+const { HOST, DB_NAME, USER_CLUSTER, PASSWORD_CLUSTER, DEVELOPMENT } = process.env;
+const CLUSTER = `mongodb+srv://${USER_CLUSTER}:${PASSWORD_CLUSTER}@node-challenge.axsni.mongodb.net/?retryWrites=true&w=majority`;
+const URI = DEVELOPMENT === "true"
     ? `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`
-    : MONGODB_URL;
-console.log(MONGO_URL);
-const connection = () => __awaiter(void 0, void 0, void 0, function* () {
-    return mongodb_1.MongoClient.connect(MONGO_URL)
+    : CLUSTER;
+console.log("URI: ", URI);
+exports.connection = () => __awaiter(void 0, void 0, void 0, function* () {
+    return MongoClient.connect(URI)
         .then((conn) => conn.db(DB_NAME))
         .catch((error) => {
-        console.log(error.message);
+        console.log(error);
         process.exit();
     });
 });
-exports.connection = connection;
-const disconnect = () => __awaiter(void 0, void 0, void 0, function* () {
-    const conn = mongodb_1.MongoClient.connect(MONGO_URL);
+exports.disconnect = () => __awaiter(void 0, void 0, void 0, function* () {
+    const conn = MongoClient.connect(URI);
     (yield conn).close();
 });
-exports.disconnect = disconnect;

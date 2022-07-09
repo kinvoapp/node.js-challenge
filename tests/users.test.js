@@ -10,7 +10,7 @@ const URL_Deploy =
   process.env.DEVELOPMENT === "true"
     ? `http://${HOST}:${PORT}`
     : "https://node-challenge-backend.herokuapp.com/";
-
+console.log("HOST: ", URL_Deploy);
 describe("Users tests.", () => {
   // beforeAll(() => {
   //   connection();
