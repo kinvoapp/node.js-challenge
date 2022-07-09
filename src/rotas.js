@@ -8,7 +8,7 @@ const rotas = express();
 rotas.post('/usuario', usuarios.cadastrarUsuario);
 rotas.post('/login', usuarios.login);
 
-rotas.use(autenticacao.autenticacao);
+rotas.use(autenticacao.verificarToken);
 
 rotas.post('/movimentacao', movimentacoes.criarMovimentacao);
 rotas.put('/movimentacao/:id', movimentacoes.atualizarMovimentacao);

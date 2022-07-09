@@ -1,7 +1,7 @@
 const knex = require('../bancodedados/conexao');
 const jwt = require('jsonwebtoken');
 
-const autenticacao = async (req, res, next) => {
+const verificarToken = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -29,4 +29,4 @@ const autenticacao = async (req, res, next) => {
     }
 }
 
-module.exports = autenticacao;
+module.exports = { verificarToken };
