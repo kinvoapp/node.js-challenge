@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/', HelloRoute)
+app.use('/hello', HelloRoute)
 app.use('/movement', MovementRoute)
 
 export default app
