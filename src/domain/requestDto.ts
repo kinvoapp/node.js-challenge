@@ -60,3 +60,20 @@ export interface ICreateTransactionResponse {
   created_at: Date;
   updated_at: Date;
 }
+
+interface Pagination {
+  itemsPerPage?: number;
+  currentPage?: number;
+}
+
+export interface ITransactionPaginationRequest {
+  itemsPerPage?: number;
+  currentPage?: number;
+  start?: Date;
+  end?: Date;
+}
+
+export interface ITransactionPaginationResponse {
+  transactions: ICreateTransactionResponse[];
+  pagination?: Pagination;
+}

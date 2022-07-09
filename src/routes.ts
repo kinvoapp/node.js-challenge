@@ -3,6 +3,7 @@ import { AuthenticateStudentController } from "./controllers/Student/Authenticat
 import { CreateStudentController } from "./controllers/Student/CreateStudentController";
 import { CreateTransactionController } from "./controllers/Transaction/CreateTransactionController";
 import { GetAccountBalanceController } from "./controllers/Transaction/GetAccountBalanceController";
+import { GetTransactionsController } from "./controllers/Transaction/GetTransactionsController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 
 const router = Router();
@@ -11,6 +12,7 @@ const createStudentController = new CreateStudentController();
 const authenticateStudentController = new AuthenticateStudentController();
 const createTransactionController = new CreateTransactionController();
 const getAccountBalanceController = new GetAccountBalanceController();
+const getTransactionsController = new GetTransactionsController();
 
 router.get("/", (_, response: Response) => {
   return response.json({
@@ -25,10 +27,11 @@ router.post(
   ensureAuthenticated,
   createTransactionController.handle
 );
+router.get("/balance", ensureAuthenticated, getAccountBalanceController.handle);
 router.get(
   "/transaction",
   ensureAuthenticated,
-  getAccountBalanceController.handle
+  getTransactionsController.handle
 );
 
 export { router };
