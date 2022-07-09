@@ -8,7 +8,6 @@ export function studentMock(): ICreateStudentResponse {
     id: uuid(),
     name: faker.name.findName(),
     document: faker.random.numeric(),
-    accountId: uuid(),
     createdAt: new Date(),
     updatedAt: new Date(),
   };

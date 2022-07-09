@@ -86,3 +86,14 @@ export interface IBalanceResponse {
   available: number;
   updatedAt: Date;
 }
+
+export interface IUpdateTransactionData {
+  description?: string;
+  amount?: number;
+  type?: TransactionType;
+}
+
+export interface IBalanceInfo {
+  id: string;
+  newBalance: number;
+}

@@ -5,6 +5,7 @@ import {
   ICreateTransactionResponse,
   ITransactionPaginationRequest,
 } from "../../domain/requestDto";
+import { buildTransactionSelect } from "../Helpers/selectBuilder";
 
 export class GetTransactionsRepository implements IGetTransactionsRepository {
   private prismaClient: PrismaClient;
@@ -29,15 +30,7 @@ export class GetTransactionsRepository implements IGetTransactionsRepository {
           lte: filters?.end,
         },
       },
-      select: {
-        id: true,
-        accountId: true,
-        amount: true,
-        description: true,
-        type: true,
-        createdAt: true,
-        updatedAt: true,
-      },
+      select: buildTransactionSelect(),
       orderBy: {
         createdAt: "desc",
       },

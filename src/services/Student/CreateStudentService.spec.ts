@@ -10,6 +10,7 @@ import {
 } from "../../domain/interface/repositories/Student/IFindStudentByDocumentRepository";
 import { CreateStudentService } from "./CreateStudentService";
 import { faker } from "@faker-js/faker";
+import { randomUUID } from "crypto";
 
 describe("Create Student", () => {
   it("Should be able to create a student", async () => {
@@ -58,7 +59,7 @@ describe("Create Student", () => {
         document: string
       ): Promise<IUserCredentialsWithAccountId | null> {
         return Promise.resolve({
-          accountId: student.accountId,
+          accountId: randomUUID(),
           document: student.document,
           id: student.id,
           password: faker.random.alphaNumeric(),

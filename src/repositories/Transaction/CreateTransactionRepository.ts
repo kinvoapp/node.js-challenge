@@ -5,6 +5,7 @@ import {
   ICreateTransactionRequest,
   ICreateTransactionResponse,
 } from "../../domain/requestDto";
+import { buildTransactionSelect } from "../Helpers/selectBuilder";
 
 export class CreateTransactionRepository
   implements ICreateTransactionRepository
@@ -26,15 +27,7 @@ export class CreateTransactionRepository
           ...data,
           accountId,
         },
-        select: {
-          id: true,
-          accountId: true,
-          amount: true,
-          description: true,
-          type: true,
-          createdAt: true,
-          updatedAt: true,
-        },
+        select: buildTransactionSelect(),
       }),
       this.prismaClient.balance.update({
         where: {
