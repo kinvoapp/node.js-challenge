@@ -13,20 +13,39 @@ const URL_Deploy =
 
 describe("Login tests.", () => {
   it("It should not be possible to log in without the email or with the wrong email.", async () => {
-    await loggingIn(frisby, URL_Deploy, {
-      password: "123456",
-    });
+    const response1 = await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        password: "123456",
+      },
+      400
+    );
 
-    await loggingIn(frisby, URL_Deploy, {
-      email: "alunoemail.com",
-      password: "123456",
-    });
+    expect({ message: '"email" is required' }).toEqual(response1);
+
+    const response2 = await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        email: "alunoemail.com",
+        password: "123456",
+      },
+      400
+    );
+
+    expect({ message: '"email" must be a valid email' }).toEqual(response2);
   });
 
   it("It should not be possible to log in without the password or with the wrong password.", async () => {
-    await loggingIn(frisby, URL_Deploy, {
-      email: "alunoemail.com",
-    });
+    await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        email: "alunoemail.com",
+      },
+      400
+    );
 
     await loggingIn(frisby, URL_Deploy, {
       email: "aluno@email.com",
@@ -39,6 +58,13 @@ describe("Login tests.", () => {
       email: "aluno@email.com",
       password: "123456",
     });
+
+    const token = await loggingIn(frisby, URL_Deploy, {
+      email: "aluno@email.com",
+      password: "123456",
+    });
+
+    expect(token);
   });
 
   it("It should be possible to log in and get a token.", async () => {
