@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import {
+const {
   deleteUserService,
   getUsersService,
   updateUserService,
   userCreateService,
-} from "../services/user.service";
+} = require("../services/user.service");
 
-export const userCreate = async (req: Request, res: Response): Promise<any> => {
+exports.userCreate = async (req: Request, res: Response): Promise<any> => {
   try {
     const id = await userCreateService(req.body);
 
@@ -16,7 +16,7 @@ export const userCreate = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export const getUsers = async (_req: Request, res: Response): Promise<any> => {
+exports.getUsers = async (_req: Request, res: Response): Promise<any> => {
   let users;
   try {
     users = await getUsersService();
@@ -27,7 +27,7 @@ export const getUsers = async (_req: Request, res: Response): Promise<any> => {
   return res.status(200).json(users);
 };
 
-export const updateUser = async (req: Request, res: Response): Promise<any> => {
+exports.updateUser = async (req: Request, res: Response): Promise<any> => {
   const {
     params: { id },
   } = req;
@@ -40,7 +40,7 @@ export const updateUser = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export const deleteUser = async (req: Request, res: Response): Promise<any> => {
+exports.deleteUser = async (req: Request, res: Response): Promise<any> => {
   const {
     params: { id },
   } = req;

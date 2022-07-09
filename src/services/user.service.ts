@@ -1,23 +1,20 @@
 import { User, users } from "../interfaces/user";
-import { modelUserCreate } from "../models/users.models";
 
-export const userCreateService = async (user: User): Promise<object> => {
+const { modelUserCreate } = require("../models/users.models");
+
+exports.userCreateService = async (user: User): Promise<object> => {
   const id = users.length + 1;
 
   const userId = await modelUserCreate({ ...user, id });
-  // users.push({ ...user, id });
 
   return userId;
 };
 
-export const getUsersService = async (): Promise<User[]> => {
+exports.getUsersService = async (): Promise<User[]> => {
   return users;
 };
 
-export const updateUserService = async (
-  id: string,
-  user: User
-): Promise<object> => {
+exports.updateUserService = async (id: string, user: User): Promise<object> => {
   const indexUser = users.findIndex((user) => user.id === Number(id));
 
   let response = {};
@@ -33,7 +30,7 @@ export const updateUserService = async (
   return response;
 };
 
-export const deleteUserService = async (id: string): Promise<object> => {
+exports.deleteUserService = async (id: string): Promise<object> => {
   const indexUser = users.findIndex((user) => user.id === Number(id));
 
   let response = {};

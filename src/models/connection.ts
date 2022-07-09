@@ -1,26 +1,22 @@
-import { MongoClient } from "mongodb";
+const { MongoClient } = require("mongodb");
+
 require("dotenv").config();
 
-const { DEVELOPMENT, HOST, DB_NAME, MONGODB_URL } = process.env;
+const { HOST, DB_NAME } = process.env;
 
-const MONGO_URL =
-  DEVELOPMENT === "true"
-    ? `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`
-    : MONGODB_URL;
-console.log(MONGO_URL);
+const MONGO_URL = `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`;
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-
-const connection = async () =>
-  MongoClient.connect(MONGO_URL, options)
-    .then((conn) => conn.db(DB_NAME))
-    .catch((error) => {
-      console.log(error.message);
+exports.connection = async () =>
+  MongoClient.connect(MONGO_URL)
+    .then((conn: any) => conn.db(DB_NAME))
+    .catch((error: any) => {
+      console.log(error);
 
       process.exit();
     });
 
-export default connection;
+exports.disconnect = async () => {
+  const conn = MongoClient.connect(MONGO_URL);
+
+  (await conn).close();
+};

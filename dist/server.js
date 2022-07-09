@@ -18,3 +18,4 @@ app.listen(PORT, () => {
         : "https://node-challenge-backend.herokuapp.com/";
     return URL;
 });
+exports.default = app;
