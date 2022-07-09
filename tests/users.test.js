@@ -1,8 +1,10 @@
 const frisby = require("frisby");
 require("dotenv").config();
 
-const PORT = process.env.PORT;
-const HOST = process.env.HOST;
+// const { connection, disconnect } = require("../src/models/connection");
+// const app = require("../src/server");
+
+const { PORT, HOST } = process.env;
 
 const URL_Deploy =
   process.env.DEVELOPMENT === "true"
@@ -10,10 +12,19 @@ const URL_Deploy =
     : "https://node-challenge-backend.herokuapp.com/";
 
 describe("Users tests.", () => {
+  // beforeAll(() => {
+  //   connection();
+  // });
+
+  // afterAll(() => {
+  //   disconnect();
+  //   app.close();
+  // });
+
   it("It must be possible to enter a user.", async () => {
     await frisby
       .post(`${URL_Deploy}/user`, {
-        name: "Neto Noronha",
+        name: "Aluno",
         email: "aluno@gmail.com",
         password: "alunopassword",
       })

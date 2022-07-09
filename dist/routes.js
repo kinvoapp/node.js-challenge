@@ -8,4 +8,6 @@ route.get("/", (_req, res) => {
 });
 route.post("/user", user_controller_1.userCreate);
 route.get("/user", user_controller_1.getUsers);
+route.put("/user/:id", user_controller_1.updateUser);
+route.delete("/user/:id", user_controller_1.deleteUser);
 exports.default = route;

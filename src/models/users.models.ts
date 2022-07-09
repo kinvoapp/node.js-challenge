@@ -1,4 +1,4 @@
-import connection from "./connection";
+const { connection } = require("./connection");
 
 export const modelUserCreate = async (user: object) => {
   const db = await connection();
