@@ -11,6 +11,6 @@
   "migrations": ["dist/infra/typeorm/migrations/index.js"],
   "cli": {
     "entitiesDir": "dist/infra/postgres/entities",
-    "migrationsDir": "dist/infra/typeorm/migrations"
+    "migrationsDir": "src/infra/typeorm/migrations"
   }
 }
