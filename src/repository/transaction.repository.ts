@@ -28,4 +28,8 @@ export class TransactionRepository {
       },
     });
   }
+
+  getBalance() {
+    return Record.find();
+  }
 }
