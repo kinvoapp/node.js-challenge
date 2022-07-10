@@ -1,4 +1,4 @@
-import { Encrypter } from '@/domain/contracts/crypto'
+import { Encrypter, Comparator } from '@/domain/contracts/crypto'
 import bcrypt from 'bcrypt'
 namespace encrypt {
   export type Input = { value: string }
@@ -10,7 +10,7 @@ namespace compare {
   export type Output = boolean
 }
 
-export class BcryptHandler implements Encrypter {
+export class BcryptHandler implements Encrypter, BcryptHandler, Comparator {
   constructor (private readonly salt: number) { }
 
   async encrypt (params: encrypt.Input): Promise<encrypt.Output> {

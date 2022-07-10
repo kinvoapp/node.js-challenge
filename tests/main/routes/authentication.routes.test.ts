@@ -37,4 +37,26 @@ describe('Auhtentication routes', () => {
         .expect(200)
     })
   })
+
+  describe('POST /login', () => {
+    it('should return 200 on singup', async () => {
+      await request(app)
+        .post('/api/singup')
+        .send({
+          name: 'usuário_test',
+          email: 'usuario_test@gamil.com',
+          password: 'quesenha',
+          confirmPassword: 'quesenha'
+        })
+        .expect(200)
+
+      await request(app)
+        .post('/api/login')
+        .send({
+          email: 'usuario_test@gamil.com',
+          password: 'quesenha'
+        })
+        .expect(200)
+    })
+  })
 })

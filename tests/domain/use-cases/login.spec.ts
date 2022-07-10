@@ -1,7 +1,7 @@
 import { Comparator, TokenGenerator } from '@/domain/contracts/crypto'
 import { LoadUserAccountRepository } from '@/domain/contracts/repos'
 import { mock, MockProxy } from 'jest-mock-extended'
-import { Login, loginSeup } from '@/domain/use-cases/login'
+import { Login, setupLogin } from '@/domain/use-cases/login'
 
 describe('Login', () => {
   let email: string
@@ -28,7 +28,7 @@ describe('Login', () => {
   })
 
   beforeEach(() => {
-    sut = loginSeup(userAccountRepo, crypto, token)
+    sut = setupLogin(userAccountRepo, crypto, token)
   })
 
   it('should  call load with correct input', async () => {
@@ -45,7 +45,7 @@ describe('Login', () => {
 
   it('should call Comparatorer with correct input', async () => {
     await sut({ email, password })
-    expect(crypto.compare).toHaveBeenCalledWith({ value: password, valueToComoare: 'any_password' })
+    expect(crypto.compare).toHaveBeenCalledWith({ value: password, valueToCompare: 'any_password' })
     expect(crypto.compare).toHaveBeenCalledTimes(1)
   })
 

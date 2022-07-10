@@ -1,38 +1,7 @@
-import { Controller } from '@/application/controller'
-import { RequiredStringValidator, ValidationBuilder, Validator } from '@/application/validation'
-
-import { HttpResponse, ok, unauthorized } from '@/application/helpers'
-import { Login } from '@/domain/use-cases'
-import { AuthenticationError } from '@/domain/entities/errors'
+import { RequiredStringValidator } from '@/application/validation'
 import { UnauthorizedError } from '@/application/errors'
-
-type HttpRequest = {
-  email: string
-  password: string
-}
-type Model = Error | { accessToken: string }
-
-export class LoginController extends Controller {
-  constructor (private readonly login: Login) {
-    super()
-  }
-
-  async perform ({ email, password }: HttpRequest): Promise<HttpResponse<Model>> {
-    try {
-      const accessToken = await this.login({ email, password })
-      return ok(accessToken)
-    } catch (error) {
-      return unauthorized()
-    }
-  }
-
-  override buildValidators ({ email, password }: HttpRequest): Validator[] {
-    return [
-      ...ValidationBuilder.of({ value: email, fieldName: 'email' }).required().build(),
-      ...ValidationBuilder.of({ value: password, fieldName: 'password' }).required().build()
-    ]
-  }
-}
+import { AuthenticationError } from '@/domain/entities/errors'
+import { LoginController } from '@/application/controller/login'
 
 describe('LoginController', () => {
   let sut: LoginController

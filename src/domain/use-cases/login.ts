@@ -7,10 +7,10 @@ type Input = { email: string, password: string }
 export type Login = (params: Input) => Promise<Output>
 type Setup = (userAccountRepo: LoadUserAccountRepository, crypto: Comparator, token: TokenGenerator) => Login
 
-export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (params) => {
+export const setupLogin: Setup = (userAccountRepo, crypto, token) => async (params) => {
   const result = await userAccountRepo.load({ email: params.email })
   if (result !== undefined) {
-    const isValid = await crypto.compare({ value: result.password, valueToComoare: params.password })
+    const isValid = await crypto.compare({ value: params.password, valueToCompare: result.password })
     if (isValid) {
       const accessToken = await token.generate({ key: result.id })
       return { accessToken }
