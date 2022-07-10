@@ -10,14 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const userModel = require("../models/users.models");
+const { cryptograph } = require("../utils/functions");
 exports.userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield userModel.find();
-    const { email } = user;
+    const { name, email, password } = user;
     const findUser = yield userModel.find({ email });
     if (findUser.length > 0)
         return { code: 401, message: "E-mail already registered." };
     const id = user.id ? user.id : users.length + 1;
-    const userId = yield userModel.create(Object.assign(Object.assign({}, user), { id }));
+    const userId = yield userModel.create({
+        name,
+        email,
+        password: cryptograph(password),
+        id,
+    });
     return userId;
 });
 exports.getUsersService = () => __awaiter(void 0, void 0, void 0, function* () {

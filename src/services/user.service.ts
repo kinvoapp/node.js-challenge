@@ -1,11 +1,12 @@
 import { User } from "../interfaces/user";
 
 const userModel = require("../models/users.models");
+const { cryptograph } = require("../utils/functions");
 
 exports.userCreateService = async (user: User): Promise<object> => {
   const users = await userModel.find();
 
-  const { email } = user;
+  const { name, email, password } = user;
 
   const findUser = await userModel.find({ email });
 
@@ -14,7 +15,12 @@ exports.userCreateService = async (user: User): Promise<object> => {
 
   const id = user.id ? user.id : users.length + 1;
 
-  const userId = await userModel.create({ ...user, id });
+  const userId = await userModel.create({
+    name,
+    email,
+    password: cryptograph(password),
+    id,
+  });
 
   return userId;
 };
