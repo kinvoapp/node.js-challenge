@@ -9,7 +9,8 @@ import { UpdateTransactionService } from "../services/UpdateTransactionService";
 
 class TransactionsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { type, value, user_id } = request.body;
+    const { type, value } = request.body;
+    const user_id = request.user.id
     const createTransactionService = container.resolve(CreateTransactionService);
 
     const newTransaction = await createTransactionService.execute(type, value, user_id)
@@ -19,10 +20,11 @@ class TransactionsController {
 
   public async listTransactions(request: Request, response: Response): Promise<Response> {
 
-    const { user_id } = request.params;
+    const user_id = request.user.id;
     const page: number = parseInt(request.query.page as string) || 1;
     const perPage: number = parseInt(request.query.perPage as string) || 5;
-    const { initial_date, final_date } = request.body
+    const initial_date = request.query.initial_date as string;
+    const final_date = request.query.final_date as string;
     
 
     if (initial_date && final_date) {
