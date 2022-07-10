@@ -30,12 +30,17 @@ const TransactionController = {
     return res.json(transaction)
   },
 
-  async delete (req: Request, res: Response): Promise<Response> {
+  async delete (req: Request, res: Response) {
     const { id } = req.params
 
-    const transaction = await Transaction.findByIdAndDelete(id)
-
-    return res.json(transaction)
+    return await Transaction.findByIdAndDelete(id)
+      .then((transaction) => (transaction
+        ? res.status(201).json({
+          message: 'Transação excluída'
+        })
+        : res.status(404)
+          .json({ message: 'Não encontrado' })))
+      .catch((err) => res.status(500).json({ error: err.message }))
   }
 }
 
