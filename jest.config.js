@@ -5,7 +5,9 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
     '!<rootDir>/src/**/index.ts',
-    '!<rootDir>/src/infra/postgres/helpers/config.ts'
+    '!<rootDir>/src/infra/postgres/helpers/config.ts',
+    '!<rootDir>/src/infra/typeorm/**'
+
   ],
   moduleNameMapper: {
     '@/tests/(.+)': '<rootDir>/tests/$1',

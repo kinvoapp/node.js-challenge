@@ -1,0 +1,29 @@
+version: "3"
+services:
+    postgres:
+        container_name: postgres-node-challenge-container
+        image: postgres
+        environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: node-challenge
+        restart: always
+        volumes:
+            - ./data:/data/db
+        ports:
+            - "5432:5432"
+    api:
+        container_name: api-node-challenge-container
+        image: node:16
+        working_dir: /usr/src/node-challenge-api
+        restart: always
+        command: bash -c "yarn install --only=prod && yarn debug"
+        volumes:
+            - ./dist/:/usr/src/node-challenge-api/dist/
+            - ./package.json:/usr/src/node-challenge-api/package.json
+            - ./ormconfig.json:/usr/src/node-challenge-api/ormconfig.json
+        ports:
+            - "8000:8000"
+            - "9223:9223"
+        links:
+            - postgres

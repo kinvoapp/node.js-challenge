@@ -1,0 +1,16 @@
+{
+  "type": "postgres",
+  "host": "postgres",
+  "port": 5432,
+  "username": "postgres",
+  "database": "node-challenge",
+  "password":"postgres",
+  "synchronize": true,
+  "logging": false,
+  "entities":[ "dist/infra/postgres/entities/index.js"],
+  "migrations": ["dist/infra/typeorm/migrations/index.js"],
+  "cli": {
+    "entitiesDir": "dist/infra/postgres/entities",
+    "migrationsDir": "dist/infra/typeorm/migrations"
+  }
+}

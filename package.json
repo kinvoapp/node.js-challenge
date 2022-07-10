@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node -r dotenv/config dist/main/server.js",
+    "up": "sudo docker-compose up",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "lint": "eslint .",
     "lint:fix": "yarn lint -- --fix",
@@ -16,6 +17,7 @@
     "test:watch": "yarn test -- ----watchAll",
     "test:staged": "yarn test -- --bail --findRelatedTests ./src",
     "test:coverage": "yarn test -- --coverage",
+    "predebug": "typeorm migration:run",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9221 --nolazy ./dist/main/server.js",
     "test:integration": "yarn test -- --watch -c jest.integration.config.js",
     "dev": "ts-node-dev --respawn --transpile-only -r dotenv/config  --inspect=0.0.0.0:9223 src/main/server.ts",

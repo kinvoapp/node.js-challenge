@@ -26,7 +26,7 @@ describe('Auhtentication routes', () => {
 
   describe('POST /singup', () => {
     it('should return 200 on singup', async () => {
-      const accessToken = await request(app)
+      await request(app)
         .post('/api/singup')
         .send({
           name: 'usuário_test',
@@ -35,7 +35,6 @@ describe('Auhtentication routes', () => {
           confirmPassword: 'test_password'
         })
         .expect(200)
-      console.log(accessToken.body)
     })
   })
 })

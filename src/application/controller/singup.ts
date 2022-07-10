@@ -21,8 +21,6 @@ export class SingupController extends Controller {
       const accessToken = await this.singup({ name, email, password })
       return ok(accessToken)
     } catch (error) {
-      console.log(error)
-
       return unauthorized()
     }
   }

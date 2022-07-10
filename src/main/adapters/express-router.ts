@@ -4,9 +4,6 @@ type Adapter = (controler: Controller) => RequestHandler
 
 export const adaptEpressRoute: Adapter = controler => async (req, res) => {
   const { statusCode, data } = await controler.handle({ ...req.body })
-  console.log(statusCode)
-  console.log(data.stack)
-
   const json = statusCode === 200 ? data : { error: data.message }
   res.status(statusCode).json(json)
 }
