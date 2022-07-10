@@ -1,6 +1,6 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { DecimalTransformer } from 'src/util/DecimalTransformer';
-import { Repository } from 'typeorm';
+import { Repository, Between } from 'typeorm';
 import { Item } from './item.entity';
 @Injectable()
 export class ItemService {
@@ -66,7 +66,7 @@ export class ItemService {
     await this.itemRepository.delete(id);
   }
 
-  async getBalance(item: any[]) {
+  async getBalance(item: any[]): Promise<{ balance: number }> {
     if (!item.length) return { balance: 0 };
     const formatValue = new DecimalTransformer();
     return {
@@ -76,5 +76,14 @@ export class ItemService {
           : formatValue.sub(acc, cur.value);
       }, 0),
     };
+  }
+
+  async filterByDate(dateInit, dateEnd): Promise<Item[]> {
+    const items = await this.itemRepository.find({
+      where: {
+        createdDate: Between(dateInit, dateEnd),
+      },
+    });
+    return items;
   }
 }

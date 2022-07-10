@@ -14,6 +14,7 @@ import {
 import { Response } from 'express';
 import { BadRequestExceptionFilter } from 'src/schema/ExceptionFilter';
 import { createItemDto as IItem } from './dto/item.create.dto';
+import { dateFilterDto as IDateFilter } from './dto/date.filter.dto';
 import { Item } from './item.entity';
 import { ItemService } from './item.service';
 
@@ -36,6 +37,16 @@ export class itemController {
   async getItemById(@Res() res: Response, @Param() { id }: { id: string }) {
     const item = await this.itemService.findById(id);
     return res.status(HttpStatus.ACCEPTED).json(item);
+  }
+
+  @Get('filterByDate/:dateInit/to/:dateEnd')
+  @UseFilters(new BadRequestExceptionFilter())
+  async getByDate(
+    @Res() res: Response,
+    @Param() { dateInit, dateEnd }: IDateFilter,
+  ) {
+    const items = await this.itemService.filterByDate(dateInit, dateEnd);
+    return res.status(HttpStatus.ACCEPTED).json(items);
   }
 
   @Post()
