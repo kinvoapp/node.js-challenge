@@ -14,7 +14,7 @@
             "description":"API de teste"
         },
         {
-            "url":"https://kinvo-challenge.herokuapp.com/",
+            "url":"https://kinvo-challenge.herokuapp.com/api",
             "description":"API de produção"
         }
     ],
