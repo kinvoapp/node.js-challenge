@@ -6,7 +6,7 @@
 
 ## Descrição
 
-O desafio era criar uma API para gerenciar finanças de um estudante. Este projeto for criado utilizando: setup inicial do [nestjs](https://docs.nestjs.com/#alternatives "doc nestjs"), [typeorm](https://typeorm.io/ "doc typeorm"), [typeScript](https://www.typescriptlang.org/ "doc typescript"), [docker-compose](https://docs.docker.com/compose/overview/ "doc docker-compose"), [node](https://nodejs.org/en/ "doc node"), [mysql](https://www.mysql.com/ "doc mysql"), [jest](https://jestjs.io/ "doc jest"), [bcrypt](https://www.npmjs.com/package/bcrypt "doc bcrypt"), [postman](https://www.postman.com/ "doc postman"), [eslint](https://eslint.org/ "doc eslint"), [prettier](https://prettier.io/ "doc prettier"). Validação de entrada de dados feita com [class-validator](https://www.npmjs.com/package/class-validator "docs class-validator").
+O desafio era criar uma API para gerenciar finanças de um estudante. Este projeto foi criado utilizando: [nestjs](https://docs.nestjs.com/#alternatives "doc nestjs"), [typeorm](https://typeorm.io/ "doc typeorm"), [typeScript](https://www.typescriptlang.org/ "doc typescript"), [docker-compose](https://docs.docker.com/compose/overview/ "doc docker-compose"), [node](https://nodejs.org/en/ "doc node"), [mysql](https://www.mysql.com/ "doc mysql"), [jest](https://jestjs.io/ "doc jest"), [bcrypt](https://www.npmjs.com/package/bcrypt "doc bcrypt"), [postman](https://www.postman.com/ "doc postman"), [eslint](https://eslint.org/ "doc eslint"), [prettier](https://prettier.io/ "doc prettier"). Validação de entrada de dados feita com [class-validator](https://www.npmjs.com/package/class-validator "docs class-validator").
 
 ## Rodando localmente
 
@@ -138,7 +138,7 @@ $ npm run test:cov
 - <details>
       <summary>POST (cadastra transação)</summary>
 
-  - Nota: somente cria se o campo `user` estiver um id de usuário valido no banco de dados, então tem que cadastrar um usuário primeiro e obter o id dele para criar o item(transação). O campo `inputValue` é um booleano, se for true, é uma transação de entrada, se for false, é uma transação de saída.
+  - Nota: somente cria se o campo `user` estiver um id de usuário for valido no banco de dados, então tem que cadastrar um usuário primeiro e obter o id dele para criar o item(transação). O campo `inputValue` é um booleano, se for true é uma transação de entrada, se for false é uma transação de saída.
 
   - Url:
      - `/item`
@@ -178,7 +178,7 @@ $ npm run test:cov
 - <details>
       <summary>GET (busca todos, com paginação)</summary>
 
-  - Nota: page e limit é opcional, onde page é a página e limit é o limite de itens por página. O padrão é page 1 e limit 10, se não informar page ou limit)
+  - Nota: page e limit é opcional, onde page é a página e limit é o limite de itens por página. O padrão é page 1 e limit 10, se não informar page ou limit.
 
   - Url:
      - `/item` ou `/item?&page=page&limit=limit`
