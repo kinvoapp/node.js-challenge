@@ -6,3 +6,17 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum TransactionType {
+  Deposit
+  Withdraw
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  value       Decimal
+  type        TransactionType
+  description String?
+
+  @@map("transactions")
+}
