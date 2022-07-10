@@ -41,10 +41,7 @@ jobs:
         run: |
           npm run test
         env:
-          DB_DATABASE: kinvochallengetest
-          DB_HOST: localhost
-          DB_USERNAME: root
-          DB_PASSWORD: admin
+          DATABASE_URL: postgresql://root:admin@localhost:5432/kinvochallengetest?schema=public
           STUDENT_SECRET: 607dcd8c0bb5be4567df79417088bab6
       - name: Deploy application
         if: ${{ github.ref == 'refs/heads/master' }}
