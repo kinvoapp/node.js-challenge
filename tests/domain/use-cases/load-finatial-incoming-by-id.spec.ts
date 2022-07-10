@@ -1,28 +1,6 @@
+import { LoadFinantialIncomeByUserIdRepository } from '@/domain/contracts/repos'
+import { LoadFinantialIncomeByUserId, setupLoadFinantialIncomeByUserId } from '@/domain/use-cases/index'
 import { mock, MockProxy } from 'jest-mock-extended'
-import { AuthenticationError } from '@/domain/entities/errors'
-
-export namespace LoadFinantialIncomeByUserIdRepository {
-  export type Input = { userId: number }
-  export type Output = undefined | { id: string, type: string, value: number, description: string, user_id: number }
-
-}
-
-export interface LoadFinantialIncomeByUserIdRepository {
-  load: (param: LoadFinantialIncomeByUserIdRepository.Input) => Promise<LoadFinantialIncomeByUserIdRepository.Output>
-}
-
-type Input = LoadFinantialIncomeByUserIdRepository.Input
-type Output = LoadFinantialIncomeByUserIdRepository.Output
-
-export type LoadFinantialIncomeByUserId = (params: Input) => Promise<Output>
-export type Setup = (bankAccoutRepo: LoadFinantialIncomeByUserIdRepository) => LoadFinantialIncomeByUserId
-export const setupAddFinantialIncome: Setup = (bankAccoutRepo) => async params => {
-  const resutl = await bankAccoutRepo.load({ userId: params.userId })
-  if (resutl !== undefined) {
-    return resutl
-  }
-  throw new AuthenticationError()
-}
 
 describe('LoadFinantialIncomeByUserId', () => {
   let sut: LoadFinantialIncomeByUserId
@@ -40,7 +18,7 @@ describe('LoadFinantialIncomeByUserId', () => {
   })
 
   beforeEach(() => {
-    sut = setupAddFinantialIncome(bankAccoutRepo)
+    sut = setupLoadFinantialIncomeByUserId(bankAccoutRepo)
   })
 
   it('should call load with correct input', async () => {
