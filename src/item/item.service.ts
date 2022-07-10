@@ -19,7 +19,7 @@ export class ItemService {
       return this.itemRepository.save(item);
     } catch (error) {
       throw new HttpException(
-        { message: 'User not found' },
+        { message: 'User not found. Verify if `user` of this id is created.' },
         HttpStatus.NOT_FOUND,
       );
     }
