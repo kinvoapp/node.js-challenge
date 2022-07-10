@@ -400,6 +400,11 @@ $ npm run test:cov
 
 </details>
 
+## Banco de Dados
+
+| ![Banco de Dados](./image/database.png) |
+|-----------------------------------------|
+| _Modelo_,  _Tabelas_,  _Campos_         |
 ## License
 
   Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
