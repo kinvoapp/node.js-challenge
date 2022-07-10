@@ -50,4 +50,15 @@ export class Item {
   })
   @JoinColumn({ name: 'user', referencedColumnName: 'id' })
   user: User;
+
+  constructor(item?: Partial<Item>) {
+    this.id = item?.id;
+    this.title = item?.title;
+    this.value = item?.value;
+    this.createdDate = item?.createdDate;
+    this.updatedDate = item?.updatedDate;
+    this.inputValue = item?.inputValue;
+    this.description = item?.description;
+    this.user = item?.user;
+  }
 }
