@@ -6,7 +6,7 @@
   "author": "Lucas Mortoni <lucasmortoni@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "server": "tsnd src/infra/http/server.ts --respawn --transpile-only --exit-child --ignore-watch node_modules",
+    "server": "tsnd --respawn --transpile-only --exit-child --ignore-watch node_modules src/infra/http/server.ts",
     "lint": "eslint --fix --ext .ts"
   },
   "devDependencies": {

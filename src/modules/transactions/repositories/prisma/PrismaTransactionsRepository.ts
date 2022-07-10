@@ -1,5 +1,5 @@
 import { TransactionsRepository } from '../TransactionsRepository'
-import { Transaction } from '../../domain/transaction'
+import { Transaction, TransactionType } from '../../domain/transaction'
 import { prisma } from '../../../../infra/prisma/client'
 
 export class PrismaTransactionsRepository implements TransactionsRepository {
@@ -16,5 +16,18 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
 
   async delete(id: string): Promise<void> {
     await prisma.transaction.delete({ where: { id } })
+  }
+
+  async show(): Promise<Transaction[]> {
+    const res = await prisma.transaction.findMany()
+    const transactions = res.map(transaction =>
+      Transaction.create({
+        id: transaction.id,
+        value: transaction.value,
+        type: transaction.type === 'Deposit' ? TransactionType.Deposit : TransactionType.Withdraw,
+        description: transaction.description || ''
+      })
+    )
+    return transactions
   }
 }
