@@ -10,21 +10,25 @@ export class ItemService {
     private itemRepository: Repository<Item>,
   ) {}
 
+  // https://stackoverflow.com/questions/53922503/how-to-implement-pagination-in-nestjs-with-typeorm
   pagination({ result, total, take, skip }): object {
     return {
       infoPage: {
-        totalPage: total / take,
-        currentPage: skip === 0 ? 1 : skip,
+        totalPage: Math.ceil(total / take),
+        currentPage: skip + 1,
         totalItems: total,
+        itemsPerPage: take,
       },
       data: result,
     };
   }
 
-  async findAll(take = 10, skip = 0): Promise<Item[] | object> {
+  async findAll(options): Promise<Item[] | object> {
+    const take = +options?.limit || 10;
+    const skip = +options?.page - 1 || 0;
     const [result, total] = await this.itemRepository.findAndCount({
       take,
-      skip,
+      skip: skip * take,
     });
     return this.pagination({ result, total, take, skip });
   }
@@ -94,18 +98,15 @@ export class ItemService {
     return { balance };
   }
 
-  async filterByDate({
-    dateInit,
-    dateEnd,
-    take = 10,
-    skip = 0,
-  }): Promise<Item[] | object> {
+  async filterByDate({ dateInit, dateEnd, options }): Promise<Item[] | object> {
+    const take = +options?.limit || 10;
+    const skip = +options?.page - 1 || 0;
     const [result, total] = await this.itemRepository.findAndCount({
       where: {
         createdDate: Between(dateInit, dateEnd),
       },
       take,
-      skip,
+      skip: skip * take,
     });
     return this.pagination({ result, total, take, skip });
   }

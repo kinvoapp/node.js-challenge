@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Res,
   UseFilters,
 } from '@nestjs/common';
@@ -23,8 +24,8 @@ export class itemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Get()
-  findAll(): Promise<Item[] | object> {
-    return this.itemService.findAll();
+  findAll(@Query() query: object): Promise<Item[] | object> {
+    return this.itemService.findAll(query);
   }
 
   @Get('/balance')
@@ -44,8 +45,13 @@ export class itemController {
   async getByDate(
     @Res() res: Response,
     @Param() { dateInit, dateEnd }: IDateFilter,
+    @Query() query: object,
   ) {
-    const items = await this.itemService.filterByDate({ dateInit, dateEnd });
+    const items = await this.itemService.filterByDate({
+      dateInit,
+      dateEnd,
+      options: query,
+    });
     return res.status(HttpStatus.ACCEPTED).json(items);
   }
 
