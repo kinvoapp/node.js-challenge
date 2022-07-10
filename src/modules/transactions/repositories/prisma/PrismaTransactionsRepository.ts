@@ -13,4 +13,8 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
       data: transaction.props
     })
   }
+
+  async delete(id: string): Promise<void> {
+    await prisma.transaction.delete({ where: { id } })
+  }
 }
