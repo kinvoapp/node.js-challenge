@@ -5,4 +5,4 @@ export enum MovementTypeEnum {
 
 export const MovementTypeMap = [ MovementTypeEnum.REVENUES, MovementTypeEnum.EXPENSES ];
 
-export const isMovementType = (value: any) => MovementTypeMap.includes(value);
+export const isMovementType = (value: number) => MovementTypeMap.includes(value);

@@ -33,7 +33,10 @@ class MovementRepository {
         return __awaiter(this, void 0, void 0, function* () {
             let response = null;
             try {
-                response = yield Movement_1.default.find(where).limit(order.limit).skip(order.offset);
+                response = {
+                    count: yield Movement_1.default.count(where),
+                    rows: yield Movement_1.default.find(where).limit(order.limit).skip(order.offset),
+                };
             }
             catch (err) {
                 throw new AppError_1.AppError(http_status_1.default.INTERNAL_SERVER_ERROR, `Error: ${err}`);

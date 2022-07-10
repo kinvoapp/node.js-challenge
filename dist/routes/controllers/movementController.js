@@ -44,6 +44,16 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return res.status(http_status_1.default.OK).json(response);
 }));
+router.get('/balance', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let response = null;
+    try {
+        response = yield MovementService_1.MovementService.calculateBalance();
+    }
+    catch ({ statusCode, message }) {
+        return res.status(statusCode).json({ message });
+    }
+    return res.status(http_status_1.default.OK).json(response);
+}));
 router.put('/:id', (0, validation_1.validation)(movementSchema_1.movementSchema.updateById), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let response = null;
     try {

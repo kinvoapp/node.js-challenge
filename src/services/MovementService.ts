@@ -23,20 +23,26 @@ export class MovementService {
       deletedAt: null,
     };
 
-    const movementList = await MovementRepository.selectAll(where, order);
-    
-    if (!movementList.length) {
-      throw new AppError(httpStatus.NOT_FOUND, 'Você não possui nenhuma movimentação financeira!');
+    const response = await MovementRepository.selectAll(where, order);
+
+    if (response.rows && !response.rows.length) {
+      throw new AppError(httpStatus.NOT_FOUND, 'Nenhuma movimentação financeira foi encontrada!');
     }
 
-    const response = MovementService.calculateBalance(movementList);
     return response;
   }
 
-  public static calculateBalance(movementList: Array<IMovement>) {    
+  public static async calculateBalance() {
+    const options: ISearchParameter = {
+      where: {},
+      order: { offset: 0, limit: 0 },
+    };
+
+    const movementList = await MovementService.getAll(options);
+
     let balance: any = 0.00;
 
-    movementList.forEach((movement: IMovement) => {
+    movementList.rows.forEach((movement: IMovement) => {
       if (movement.type === MovementTypeEnum.REVENUES) {
         balance += movement.value;
       } else if (movement.type === MovementTypeEnum.EXPENSES) {
@@ -46,9 +52,8 @@ export class MovementService {
 
     const response = {
       balance,
-      movementList,
+      movementsCount: movementList.count,
     };
-
     return response;
   }
   

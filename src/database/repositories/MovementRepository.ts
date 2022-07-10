@@ -21,7 +21,10 @@ export class MovementRepository {
     let response: any = null;
 
     try {
-      response = await Movement.find(where).limit(order.limit).skip(order.offset);
+      response = {
+        count: await Movement.count(where),
+        rows: await Movement.find(where).limit(order.limit).skip(order.offset),
+      }
     } catch (err) {
       throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, `Error: ${err}`);
     }

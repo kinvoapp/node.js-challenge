@@ -31,29 +31,35 @@ class MovementService {
     static getAll({ where, order }) {
         return __awaiter(this, void 0, void 0, function* () {
             where = Object.assign(Object.assign({}, where), { deletedAt: null });
-            const movementList = yield MovementRepository_1.MovementRepository.selectAll(where, order);
-            if (!movementList.length) {
-                throw new AppError_1.AppError(http_status_1.default.NOT_FOUND, 'Você não possui nenhuma movimentação financeira!');
+            const response = yield MovementRepository_1.MovementRepository.selectAll(where, order);
+            if (response.rows && !response.rows.length) {
+                throw new AppError_1.AppError(http_status_1.default.NOT_FOUND, 'Nenhuma movimentação financeira foi encontrada!');
             }
-            const response = MovementService.calculateBalance(movementList);
             return response;
         });
     }
-    static calculateBalance(movementList) {
-        let balance = 0.00;
-        movementList.forEach((movement) => {
-            if (movement.type === MovementTypeEnum_1.MovementTypeEnum.REVENUES) {
-                balance += movement.value;
-            }
-            else if (movement.type === MovementTypeEnum_1.MovementTypeEnum.EXPENSES) {
-                balance -= movement.value;
-            }
+    static calculateBalance() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const options = {
+                where: {},
+                order: { offset: 0, limit: 0 },
+            };
+            const movementList = yield MovementService.getAll(options);
+            let balance = 0.00;
+            movementList.rows.forEach((movement) => {
+                if (movement.type === MovementTypeEnum_1.MovementTypeEnum.REVENUES) {
+                    balance += movement.value;
+                }
+                else if (movement.type === MovementTypeEnum_1.MovementTypeEnum.EXPENSES) {
+                    balance -= movement.value;
+                }
+            });
+            const response = {
+                balance,
+                movementsCount: movementList.count,
+            };
+            return response;
         });
-        const response = {
-            balance,
-            movementList,
-        };
-        return response;
     }
     static getById(id, options) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -14,4 +14,4 @@ export const FormOfPaymentMap = [
   FormOfPaymentEnum.TRANSFER,
 ];
 
-export const isFormOfPayment = (value: any) => FormOfPaymentMap.includes(value);
+export const isFormOfPayment = (value: number) => FormOfPaymentMap.includes(value);

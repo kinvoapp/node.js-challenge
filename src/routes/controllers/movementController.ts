@@ -40,6 +40,19 @@ router.get('/',
     return res.status(httpStatus.OK).json(response);
   });
 
+router.get('/balance',
+  async (req: Request, res: Response) => {
+    let response = null;
+
+    try {
+      response = await MovementService.calculateBalance();
+    } catch ({ statusCode, message }) {
+      return res.status(statusCode as number).json({ message });
+    }
+
+    return res.status(httpStatus.OK).json(response);
+  });
+
 
 router.put('/:id',
   validation(movementSchema.updateById),
