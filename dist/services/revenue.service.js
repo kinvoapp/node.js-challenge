@@ -18,3 +18,20 @@ exports.revenueCreateService = (revenue) => __awaiter(void 0, void 0, void 0, fu
     const { title, value, date } = yield revenueModel.create(revenue);
     return { title, value, date };
 });
+exports.revenueGetAllService = () => __awaiter(void 0, void 0, void 0, function* () {
+    const revenues = yield revenueModel.find();
+    return revenues;
+});
+exports.revenueGetByIdService = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const revenues = yield revenueModel.find({ id });
+    return revenues;
+});
+exports.revenueSrcForDatesService = (initialDate, finalDate) => __awaiter(void 0, void 0, void 0, function* () {
+    const revenues = yield revenueModel.find({
+        date: {
+            $gte: initialDate,
+            $lte: finalDate,
+        },
+    });
+    return revenues;
+});

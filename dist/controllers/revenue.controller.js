@@ -9,16 +9,55 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { revenueCreateService } = require("../services/revenue.service");
+const { revenueCreateService, revenueGetAllService, revenueGetByIdService, revenueSrcForDatesService, } = require("../services/revenue.service");
 exports.revenueCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let revenues;
+    try {
+        revenues = yield revenueCreateService(req.body);
+    }
+    catch (error) {
+        return res.status(500);
+    }
+    return revenues.code
+        ? res.status(revenues.code).json(revenues.message)
+        : res.status(201).json(revenues);
+});
+exports.revenueGetAll = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let revenues;
+    try {
+        revenues = yield revenueGetAllService();
+    }
+    catch (error) {
+        return res.status(500);
+    }
+    return revenues.code
+        ? res.status(revenues.code).json(revenues.message)
+        : res.status(200).json(revenues);
+});
+exports.revenueGetById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { params: { id }, } = req;
     let revenue;
     try {
-        revenue = yield revenueCreateService(req.body);
+        revenue = yield revenueGetByIdService(id);
     }
     catch (error) {
         return res.status(500);
     }
     return revenue.code
         ? res.status(revenue.code).json(revenue.message)
-        : res.status(201).json(revenue);
+        : res.status(200).json(revenue);
+});
+exports.revenueSearchForDates = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { initialDate, finalDate } = req.body;
+    console.log(initialDate, finalDate);
+    let revenues;
+    try {
+        revenues = yield revenueSrcForDatesService(initialDate, finalDate);
+    }
+    catch (error) {
+        return res.status(500);
+    }
+    return revenues.code
+        ? res.status(revenues.code).json(revenues.message)
+        : res.status(200).json(revenues);
 });

@@ -2,7 +2,7 @@ const frisby = require("frisby");
 
 const {
   createTestFunction,
-  // deleteTestFunction,
+  getTestFunction,
 } = require("../src/utils/tests.functions");
 
 require("dotenv").config();
@@ -37,5 +37,44 @@ describe("Revenues tests.", () => {
         date.getMonth() + 1
       }-0${date.getDate()}T03:00:00.000Z`,
     });
+  });
+
+  it("It should be possible to list revenues.", async () => {
+    await getTestFunction(frisby, URL_Deploy, "revenue", null, 200);
+  });
+
+  it("It should be possible to search for a recipe by id.", async () => {
+    await getTestFunction(frisby, URL_Deploy, "revenue", 1, 200);
+  });
+
+  it.only("It should be possible to search for revenues between dates.", async () => {
+    for (let i = 1; i <= 4; i++) {
+      await createTestFunction(
+        frisby,
+        URL_Deploy,
+        "revenue",
+        {
+          title: `Salário test ${i}`,
+          value: i * 1000,
+          date: `0${i}/07/2022`,
+        },
+        201
+      );
+    }
+
+    const revenues = await frisby
+      .post(`${URL_Deploy}/search-revenues`, {
+        initialDate: "02/07/2022",
+        finalDate: "03/07/2022",
+      })
+      .expect("status", 200)
+      .then((response) => {
+        const { body } = response;
+
+        return JSON.parse(body);
+      });
+    console.log(revenues);
+    expect(revenues[0].date).toEqual("2022-02-07T03:00:00.000Z");
+    expect(revenues[1].date).toEqual("2022-03-07T03:00:00.000Z");
   });
 });

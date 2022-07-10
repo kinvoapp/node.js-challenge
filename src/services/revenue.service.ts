@@ -11,3 +11,29 @@ exports.revenueCreateService = async (revenue: Revenue): Promise<object> => {
 
   return { title, value, date };
 };
+
+exports.revenueGetAllService = async (): Promise<object> => {
+  const revenues = await revenueModel.find();
+
+  return revenues;
+};
+
+exports.revenueGetByIdService = async (id: number): Promise<object> => {
+  const revenues = await revenueModel.find({ id });
+
+  return revenues;
+};
+
+exports.revenueSrcForDatesService = async (
+  initialDate: string,
+  finalDate: string
+): Promise<object> => {
+  const revenues = await revenueModel.find({
+    date: {
+      $gte: initialDate,
+      $lte: finalDate,
+    },
+  });
+
+  return revenues;
+};
