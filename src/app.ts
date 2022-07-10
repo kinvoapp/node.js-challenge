@@ -1,5 +1,5 @@
 import express from 'express'
-import Routes from './routes/finance'
+import Routes from './routes/finance-router'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv';
 

@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {addTransaction, updateTransaction, deleteTransaction, loadTransaction, loadBalance} from '../controller/finance'
+import {addTransaction, updateTransaction, deleteTransaction, loadTransaction, loadBalance} from '../controller/finance-controller'
 const Routes = Router()
 
 Routes.post('/finance', addTransaction)
