@@ -13,9 +13,9 @@ export class DeleteTransactionController {
 
     this.repository
       .deleteRecord(req.params.id)
-      .then((result) => {
-        return res.status(200).json({
-          record: result,
+      .then(() => {
+        return res.status(204).json({
+          Record: "Deleted!",
         });
       })
       .catch((err) => {
