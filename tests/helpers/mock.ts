@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import {
   ICreateStudentRequest,
   ICreateTransactionRequest,
+  IUpdateTransactionData,
 } from "../../src/domain/requestDto";
 
 export function mockICreateUserRequest() {
@@ -19,5 +20,15 @@ export function mockICreateTransactionRequest() {
     description: faker.commerce.productDescription(),
     type: "CASHIN",
   };
+  return transactionData;
+}
+
+export function mockIUpdateTransactionRequest() {
+  const transactionData: IUpdateTransactionData = {
+    amount: faker.datatype.number(),
+    description: faker.commerce.productDescription(),
+    type: "CASHIN",
+  };
+
   return transactionData;
 }

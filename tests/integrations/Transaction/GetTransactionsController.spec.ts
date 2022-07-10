@@ -1,4 +1,8 @@
-import { authenticateStudent, createStudent } from "../../helpers/helper";
+import {
+  authenticateStudent,
+  createStudent,
+  createTransaction,
+} from "../../helpers/helper";
 import {
   mockICreateTransactionRequest,
   mockICreateUserRequest,
@@ -20,15 +24,9 @@ describe("Get Transactions Controller", () => {
 
     const transactionRequest = mockICreateTransactionRequest();
 
-    await superAppRequest
-      .post("/transaction")
-      .send(transactionRequest)
-      .set("Authorization", `Bearer ${token}`);
+    await createTransaction(transactionRequest, token);
 
-    await superAppRequest
-      .post("/transaction")
-      .send(transactionRequest)
-      .set("Authorization", `Bearer ${token}`);
+    await createTransaction(transactionRequest, token);
 
     const response = await superAppRequest
       .get("/transaction")

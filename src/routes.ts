@@ -7,6 +7,12 @@ import { GetTransactionsController } from "./controllers/Transaction/GetTransact
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 import { UpdateTransactionsController } from "./controllers/Transaction/UpdateTransactionController";
 import { DeleteTransactionController } from "./controllers/Transaction/DeleteTransactionController";
+import validateResource from "./middlewares/requestValidator";
+import {
+  createStudentSchema,
+  authenticateStudentSchema,
+  createTransactionSchema,
+} from "./domain/schema";
 
 const router = Router();
 
@@ -24,10 +30,19 @@ router.get("/", (_, response: Response) => {
   });
 });
 
-router.post("/student", createStudentController.handle);
-router.post("/login/student", authenticateStudentController.handle);
+router.post(
+  "/student",
+  validateResource(createStudentSchema),
+  createStudentController.handle
+);
+router.post(
+  "/login/student",
+  validateResource(authenticateStudentSchema),
+  authenticateStudentController.handle
+);
 router.post(
   "/transaction",
+  validateResource(createTransactionSchema),
   ensureAuthenticated,
   createTransactionController.handle
 );
