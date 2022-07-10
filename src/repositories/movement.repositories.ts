@@ -6,6 +6,7 @@
 
 import MovementModel from '@models/Movement'
 import { UpdateWriteOpResult } from 'mongoose'
+import { DeleteResult } from 'mongodb'
 import { IMovement } from 'types'
 
 /**
@@ -61,9 +62,23 @@ async function updateMovement (id: string, movement: IMovement): Promise<UpdateW
   return await MovementModel.updateOne({ _id: id }, movement)
 }
 
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` as parameters.
+ * Returns a promise of type `DeleteResult`.
+ *
+ * @param id is an string.
+ * @returns {Promise<DeleteResult>} promise a promise of type `DeleteResult`.
+ */
+
+async function deleteMovement (id:string): Promise<DeleteResult> {
+  return await MovementModel.deleteOne({ _id: id })
+}
+
 export default {
   createMovement,
   getMovements,
   getMovement,
-  updateMovement
+  updateMovement,
+  deleteMovement
 }

@@ -4,8 +4,9 @@
  * and serving the repositories layer.
  */
 
-import MovementRepository from '@repositories/movement.repositories'
+import MovementRepositories from '@repositories/movement.repositories'
 import { UpdateWriteOpResult } from 'mongoose'
+import { DeleteResult } from 'mongodb'
 
 import { IMovement } from 'types'
 
@@ -20,7 +21,7 @@ import { IMovement } from 'types'
  */
 
 async function createMovement (movement: IMovement): Promise<IMovement> {
-  return await MovementRepository.createMovement(movement)
+  return await MovementRepositories.createMovement(movement)
 }
 
 /**
@@ -32,7 +33,7 @@ async function createMovement (movement: IMovement): Promise<IMovement> {
  */
 
 async function getMovements (): Promise<IMovement[]> {
-  return await MovementRepository.getMovements()
+  return await MovementRepositories.getMovements()
 }
 
 /**
@@ -45,7 +46,7 @@ async function getMovements (): Promise<IMovement[]> {
  */
 
 async function getMovement (id: string): Promise<IMovement> {
-  return await MovementRepository.getMovement(id)
+  return await MovementRepositories.getMovement(id)
 }
 
 /**
@@ -60,12 +61,27 @@ async function getMovement (id: string): Promise<IMovement> {
  */
 
 async function updateMovement (id: string, movement: IMovement): Promise<UpdateWriteOpResult> {
-  return await MovementRepository.updateMovement(id, movement)
+  return await MovementRepositories.updateMovement(id, movement)
+}
+
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` as parameters
+ * and forwards to the repositories layer.
+ * Returns a promise of type `DeleteResult`.
+ *
+ * @param id is an string.
+ * @returns {Promise<DeleteResult>} promise a promise of type `DeleteResult`.
+ */
+
+async function deleteMovement (id: string): Promise<DeleteResult> {
+  return await MovementRepositories.deleteMovement(id)
 }
 
 export default {
   createMovement,
   getMovements,
   getMovement,
-  updateMovement
+  updateMovement,
+  deleteMovement
 }
