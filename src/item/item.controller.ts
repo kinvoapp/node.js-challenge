@@ -20,7 +20,7 @@ import { Item } from './item.entity';
 import { ItemService } from './item.service';
 
 @Controller('item')
-export class itemController {
+export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Get()
