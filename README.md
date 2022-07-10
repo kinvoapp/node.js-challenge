@@ -138,7 +138,7 @@ This application has the following endpoints:
 
 - **GET**: `/:msg` - Initial route for message display via parameter.
 
-  - example: [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word)
+  - endpoint: [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word)
 
   - return:
 
@@ -152,7 +152,7 @@ This application has the following endpoints:
 
 - **POST**: `/create` - Creation of movement (income and expenses).
 
-  - example: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
+  - endpoint: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
 
   - Request:
 
@@ -177,11 +177,11 @@ This application has the following endpoints:
   }
   ```
   
-  - Validation: this route validates that the fields are valid.
+  - Validation: validates that the fields are valid.
 
-- **GET**: `/` - Display all moves (income and expenses).
+- **GET**: `/` - Display all movements (income and expenses).
 
-  - example: [http://localhost:8080/movement/](http://localhost:8080/movement/)
+  - endpoint: [http://localhost:8080/movement/](http://localhost:8080/movement/)
 
   - response:
 
@@ -197,6 +197,25 @@ This application has the following endpoints:
     ... more movements
   ]
   ```
+
+  - **GET**: `/:id` - Display only one movement.
+
+  - endpoint: [http://localhost:8080/movement/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1000,
+    "category": "studies",
+    "date": "2022-07-12"
+   }
+  ]
+  ```
+
+  - Validation: validates if the movement exists.
 
 ## Deploy
 
