@@ -5,6 +5,7 @@ export class createItemDto {
   @IsNotEmpty()
   @Length(4, 100)
   title: string;
+
   @IsNotEmpty()
   value: Decimal;
 
@@ -14,7 +15,10 @@ export class createItemDto {
 
   createdDate?: Date;
 
+  updatedDate?: Date;
+
   description?: string;
+
   @IsNotEmpty()
   user: number;
 }

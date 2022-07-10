@@ -14,14 +14,12 @@ export class DecimalTransformer implements ValueTransformer {
   sum(value: Decimal, other: string): Decimal {
     const otherInDecimal = new Decimal(other);
     const result = Decimal.sum(value, otherInDecimal);
-    console.log('add', result);
     return result;
   }
 
   sub(value: Decimal, other: string): Decimal {
     const otherInDecimal = new Decimal(other);
     const result = Decimal.sub(value, otherInDecimal);
-    console.log('sub', result);
     return result;
   }
 }

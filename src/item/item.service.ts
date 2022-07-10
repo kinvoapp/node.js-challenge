@@ -28,7 +28,8 @@ export class ItemService {
 
   async createItem(data): Promise<Item | any> {
     try {
-      const item = await this.itemRepository.save(data);
+      const newItem = { createdDate: new Date(), ...data };
+      const item = await this.itemRepository.save(newItem);
       return this.itemRepository.save(item);
     } catch (error) {
       throw new HttpException(

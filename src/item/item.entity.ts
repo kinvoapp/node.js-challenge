@@ -29,17 +29,11 @@ export class Item {
   value: Decimal;
 
   // https://stackoverflow.com/questions/62696628/how-can-i-create-columns-with-type-date-and-type-datetime-in-nestjs-with-typeorm
-  @Column({
-    type: 'datetime',
-    default: () => 'NOW()',
-  })
+  @Column()
   @Index()
   createdDate: string;
 
-  @Column({
-    type: 'datetime',
-    nullable: true,
-  })
+  @Column({ nullable: true })
   @Index()
   updatedDate: string;
 

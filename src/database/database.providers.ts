@@ -10,6 +10,8 @@ export const databaseProviders = [
         port: 8080,
         username: 'test',
         password: 'test',
+        // https://github.com/typeorm/typeorm/issues/976
+        timezone: 'Z',
         database: 'manager_finance',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
