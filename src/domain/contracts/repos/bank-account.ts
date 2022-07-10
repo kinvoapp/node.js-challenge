@@ -1,6 +1,6 @@
 export namespace AddFinantialIncomeRepository {
   export type Input = { type: string, value: number, description: string, user_id: number }
-  export type Output = undefined |{ id: string, type: string, value: number, description: string, user_id: number }
+  export type Output = undefined | { id: string, type: string, value: number, description: string, user_id: number }
 
 }
 
@@ -16,4 +16,14 @@ export namespace LoadFinantialIncomeByUserIdRepository {
 
 export interface LoadFinantialIncomeByUserIdRepository {
   load: (param: LoadFinantialIncomeByUserIdRepository.Input) => Promise<LoadFinantialIncomeByUserIdRepository.Output>
+}
+
+export namespace UpdateFinantialIncomeRepository {
+  export type Input = { type: string, value: number, description: string }
+  export type Output = undefined | { message: string }
+
+}
+
+export interface UpdateFinantialIncomeRepository {
+  update: (param: UpdateFinantialIncomeRepository.Input) => Promise<UpdateFinantialIncomeRepository.Output>
 }
