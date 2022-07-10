@@ -52,4 +52,10 @@ describe('LoginController', () => {
       new RequiredStringValidator('any_password', 'password')
     ])
   })
+
+  it('should call login with correct params', async () => {
+    await sut.handle({ email: 'any_valid_email', password: 'any_valid_password' })
+    expect(login).toHaveBeenCalledWith({ email: 'any_valid_email', password: 'any_valid_password' })
+    expect(login).toHaveBeenCalledTimes(1)
+  })
 })
