@@ -6,7 +6,9 @@ export class UpdateTransactionController {
   handle(req: Request, res: Response) {
     const id = req.params.id;
     const data = req.body;
-
+    if (!id) return res.status(400).json({ error: "the id is required" });
+    if (!data)
+      return res.status(400).json({ error: "your body params are wrong" });
     this.repository
       .updateRecord(id, data)
       .then((result) => {

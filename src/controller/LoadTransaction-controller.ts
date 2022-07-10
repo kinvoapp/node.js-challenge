@@ -6,6 +6,9 @@ export class LoadTransactionController {
 
   handle(req: Request, res: Response) {
     const { startDate, endDate, limit } = req.params;
+    if (!startDate)
+      return res.status(400).json({ error: "startDate are missing" });
+    if (!endDate) return res.status(400).json({ error: "endDate are missing" });
     this.repository
       .loadRecord(startDate, endDate, limit)
       .then((result) => {
