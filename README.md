@@ -40,10 +40,16 @@ yarn start
   POST /transactions
 ```
 
-#### Retorna todos as Transações
+#### Retorna todas as Transações
 
 ```http
   GET /transactions
+```
+
+#### Retorna Transações por data.
+
+```http
+  GET /transactions/:beginDate/:endDate
 ```
 
 #### Atualiza Transação
