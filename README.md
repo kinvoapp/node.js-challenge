@@ -36,8 +36,6 @@ npm run dev
 
   - Response: 
     - Status: `201 Created`
-
-
 </details>
 
 - <details>
@@ -99,7 +97,7 @@ npm run dev
         }
 
     - Response: 
-    - Status: `201 OK`    ```
+      - Status: `201 OK`
 
 
 
