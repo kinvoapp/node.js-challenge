@@ -1,25 +1,32 @@
 import { Router } from "express";
 import {
-  addTransaction,
-  updateTransaction,
+  CreateTransactionController,
+  UpdateTransactionController,
+} from "../controller/index";
+import { TransactionRepository } from "../repository/transaction.repository";
+import {
   deleteTransaction,
   loadTransaction,
   loadBalance,
 } from "../controller/finance-controller";
+
 const Routes = Router();
 
-import { CreateTransactionController } from "../controller/CreateTransaction-controller";
-import { TransactionRepository } from "../repository/transaction.repository";
 const transactionRepository = new TransactionRepository();
 const createTransactionController = new CreateTransactionController(
   transactionRepository
 );
-console.log(createTransactionController);
+const updateTransactionController = new CreateTransactionController(
+  transactionRepository
+);
+Routes.patch("/finance/:id", (req, res) => {
+  updateTransactionController.handle(req, res);
+});
+
 Routes.post("/finance", (req, res) => {
   createTransactionController.handle(req, res);
 });
 
-Routes.patch("/finance/:id", updateTransaction);
 Routes.delete("/finance/:id", deleteTransaction);
 Routes.get("/finance/:startDate/:endDate", loadTransaction);
 Routes.get("/balance", loadBalance);
