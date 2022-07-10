@@ -43,7 +43,6 @@ export class Item {
   @Column({ length: 255, default: '' })
   description?: string;
 
-  @Column({ nullable: true })
   @ManyToOne(() => User, (user) => user.items, {
     cascade: true,
     onDelete: 'CASCADE',
