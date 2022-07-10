@@ -3,9 +3,7 @@ import mongoose from "mongoose";
 
 function connectToDataBase() {
   mongoose
-    .connect(
-      "mongodb+srv://wendreslucas:NewHorizons7@cluster0.gw8ne4d.mongodb.net/myFirstDatabase"
-    )
+    .connect(process.env.MONGO_URL)
     .then((data) => {
       console.log("Mongoose Connected");
     })

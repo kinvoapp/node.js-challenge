@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Transaction from "../models/transaction";
-import { ITransaction } from "../types/ITransaction";
+import ITransaction from "../types/ITransaction";
 
 const TransactionController = {
   async getAllTransactions(req: Request, res: Response) {
