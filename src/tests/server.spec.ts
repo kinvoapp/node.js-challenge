@@ -16,4 +16,20 @@ describe('must checkt the server', () => {
 
     expect(res.status).toBe(200)
   })
+
+  test('must check the /movement/:id endpoint', async () => {
+    const id = '62c9e5ab59468436b7e40ab0'
+
+    const res = await request.get(`/movement/${id}`)
+
+    expect(res.status).toBe(200)
+
+    expect(res.body).toStrictEqual({
+      id: '62c9e5ab59468436b7e40ab0',
+      type: 'expense',
+      value: 1000,
+      category: 'personal',
+      date: '2022-07-12'
+    })
+  })
 })
