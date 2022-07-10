@@ -1,6 +1,7 @@
 import { AddFinantialIncomeRepository } from '@/domain/contracts/repos'
 import { mock, MockProxy } from 'jest-mock-extended'
 import { AddFinantialIncome, setupAddFinantialIncome } from '@/domain/use-cases'
+import { ServerError } from '@/domain/entities/errors'
 
 describe('AddFinantialIncome', () => {
   let sut: AddFinantialIncome
@@ -39,8 +40,8 @@ describe('AddFinantialIncome', () => {
   })
 
   it('should  rethrow if add throws', async () => {
-    bankAccoutRepo.add.mockRejectedValueOnce(new Error('An error occured with trying save the data.'))
+    bankAccoutRepo.add.mockResolvedValueOnce(undefined)
     const promise = sut({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
-    await expect(promise).rejects.toThrow(new Error('An error occured with trying save the data.'))
+    await expect(promise).rejects.toThrow(new ServerError())
   })
 })

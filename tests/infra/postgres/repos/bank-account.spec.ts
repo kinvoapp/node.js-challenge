@@ -28,7 +28,7 @@ describe('PgBankAccountRepository', () => {
     it('should return an banck account finantial incomes', async () => {
       const userAccount = await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
       const bankAccount = await sut.add({ type: 'any_type', value: 1000, description: 'any_desc', user_id: userAccount.id })
-      expect(bankAccount.id).toBe('1')
+      expect(bankAccount?.id).toBe('1')
     })
   })
 })

@@ -1,8 +1,8 @@
 import { AddFinantialIncomeRepository } from '@/domain/contracts/repos'
 import { ServerError } from '@/domain/entities/errors'
 
-type Input = { type: string, value: number, description: string, user_id: number }
-type Output = undefined | { id: string, type: string, value: number, description: string, user_id: number }
+type Input = AddFinantialIncomeRepository.Input
+type Output = AddFinantialIncomeRepository.Output
 
 export type AddFinantialIncome = (params: Input) => Promise<Output>
 export type Setup = (bankAccoutRepo: AddFinantialIncomeRepository) => AddFinantialIncome
