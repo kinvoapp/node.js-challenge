@@ -14,6 +14,7 @@ describe('BcryptHandler', () => {
     hashedPassword = 'any_hashed_passoword'
     fakeBcrypt = bcrypt as jest.Mocked<typeof bcrypt>
     fakeBcrypt.hash.mockImplementation(() => hashedPassword)
+    fakeBcrypt.compare.mockImplementation(() => true)
     sut = new BcryptHandler(salt)
   })
 
@@ -32,5 +33,22 @@ describe('BcryptHandler', () => {
     fakeBcrypt.hash.mockImplementationOnce(() => { throw new Error('token_error') })
     const promise = sut.encrypt({ value: 'any_value' })
     await expect(promise).rejects.toThrow(new Error('token_error'))
+  })
+
+  it('should call Compare with correct input', async () => {
+    await sut.compare({ value: 'any_value', valueToCompare: 'any_value' })
+    expect(fakeBcrypt.compare).toHaveBeenCalledWith('any_value', 'any_value')
+    expect(fakeBcrypt.compare).toBeCalledTimes(1)
+  })
+
+  it('should return true on secuess', async () => {
+    const isValid = await sut.compare({ value: 'any_value', valueToCompare: 'any_value' })
+    expect(isValid).toBe(true)
+  })
+
+  it('should return false on secuess', async () => {
+    fakeBcrypt.compare.mockImplementationOnce(() => false)
+    const isValid = await sut.compare({ value: 'any_value', valueToCompare: 'any_value_diferent' })
+    expect(isValid).toBe(false)
   })
 })
