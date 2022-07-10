@@ -5,6 +5,8 @@ const {
   revenueGetAllService,
   revenueGetByIdService,
   revenueSrcForDatesService,
+  revenueUpdateService,
+  revenueDeleteService,
 } = require("../services/revenue.service");
 
 exports.revenueCreate = async (req: Request, res: Response): Promise<any> => {
@@ -66,4 +68,31 @@ exports.revenueSearchForDates = async (
   return revenues.code
     ? res.status(revenues.code).json(revenues.message)
     : res.status(200).json(revenues);
+};
+
+exports.revenueUpdate = async (req: Request, res: Response): Promise<any> => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const update = await revenueUpdateService(id, req.body);
+
+    return res.status(200).json(update);
+  } catch (error) {
+    return res.status(500);
+  }
+};
+
+exports.revenueDelete = async (req: Request, res: Response): Promise<any> => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const deleted = await revenueDeleteService(id);
+
+    return res.status(200).json(deleted);
+  } catch (error) {
+    return res.status(500);
+  }
 };

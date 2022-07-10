@@ -7,9 +7,16 @@ exports.revenueCreateService = async (revenue: Revenue): Promise<object> => {
 
   if (error) return { code: 400, message: error.message };
 
-  const { title, value, date } = await revenueModel.create(revenue);
+  const revenues = await revenueModel.find();
 
-  return { title, value, date };
+  const newId = revenue.id ? revenue.id : revenues.length + 1;
+
+  const { title, value, date, id } = await revenueModel.create({
+    ...revenue,
+    id: newId,
+  });
+
+  return { title, value, date, id };
 };
 
 exports.revenueGetAllService = async (): Promise<object> => {
@@ -36,4 +43,19 @@ exports.revenueSrcForDatesService = async (
   });
 
   return revenues;
+};
+
+exports.revenueUpdateService = async (
+  id: number,
+  revenue: object
+): Promise<object> => {
+  const updated = await revenueModel.findOneAndUpdate(id, revenue);
+
+  return updated;
+};
+
+exports.revenueDeleteService = async (id: number): Promise<object> => {
+  const deleted = await revenueModel.deleteOne({ id });
+
+  return deleted;
 };

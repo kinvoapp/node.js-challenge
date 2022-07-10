@@ -12,5 +12,12 @@ const revenueSchema = mgs.Schema({
     value: { type: Number, required: true },
     date: { type: Date, required: true },
 });
+const expenseSchema = mgs.Schema({
+    id: { type: Number || null },
+    title: { type: String, required: true },
+    value: { type: Number, required: true },
+    date: { type: Date, required: true },
+});
 exports.userModel = mgs.model("User", userSchema);
 exports.revenueModel = mgs.model("Revenue", revenueSchema);
+exports.expenseModel = mgs.model("Expense", expenseSchema);
