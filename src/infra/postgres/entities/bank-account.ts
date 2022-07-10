@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import { User } from './user'
 
 @Entity({ name: 'bankAccount' })
-export class bankAccount {
+export class BankAccount {
   @PrimaryGeneratedColumn()
   id!: number
 
@@ -11,7 +11,7 @@ export class bankAccount {
   type!: string
 
   @Column()
-  value!: string
+  value!: number
 
   @Column({ nullable: false })
   description!: string

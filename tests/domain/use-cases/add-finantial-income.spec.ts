@@ -13,7 +13,7 @@ describe('AddFinantialIncome', () => {
       type: 'any_type',
       value: 1000,
       description: 'any_desc',
-      userId: 'any_user_id'
+      user_id: 1
     })
   })
 
@@ -22,25 +22,25 @@ describe('AddFinantialIncome', () => {
   })
 
   it('should call add with correct input', async () => {
-    await sut({ type: 'any_type', value: 1000, description: 'any_desc', userId: 'any_user_id' })
-    expect(bankAccoutRepo.add).toHaveBeenCalledWith({ type: 'any_type', value: 1000, description: 'any_desc', userId: 'any_user_id' })
+    await sut({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
+    expect(bankAccoutRepo.add).toHaveBeenCalledWith({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
     expect(bankAccoutRepo.add).toHaveBeenCalledTimes(1)
   })
 
   it('should return a finantial income on sucess', async () => {
-    const result = await sut({ type: 'any_type', value: 1000, description: 'any_desc', userId: 'any_user_id' })
+    const result = await sut({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
     expect(result).toEqual({
       id: 'any_id',
       type: 'any_type',
       value: 1000,
       description: 'any_desc',
-      userId: 'any_user_id'
+      user_id: 1
     })
   })
 
   it('should  rethrow if add throws', async () => {
     bankAccoutRepo.add.mockRejectedValueOnce(new Error('An error occured with trying save the data.'))
-    const promise = sut({ type: 'any_type', value: 1000, description: 'any_desc', userId: 'any_user_id' })
+    const promise = sut({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
     await expect(promise).rejects.toThrow(new Error('An error occured with trying save the data.'))
   })
 })

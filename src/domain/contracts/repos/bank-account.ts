@@ -1,6 +1,6 @@
 export namespace AddFinantialIncomeRepository {
-  export type Input = { type: string, value: number, description: string, userId: string }
-  export type Output = { id: string, type: string, value: number, description: string, userId: string }
+  export type Input = { type: string, value: number, description: string, user_id: number }
+  export type Output = { id: string, type: string, value: number, description: string, user_id: number }
 
 }
 
