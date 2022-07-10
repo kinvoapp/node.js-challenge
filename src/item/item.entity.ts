@@ -9,12 +9,15 @@ import {
   CreateDateColumn,
   JoinColumn,
 } from 'typeorm';
+
 @Entity()
 export class Item {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Column({ length: 100 })
   title: string;
+
   // https://medium.com/@matthew.bajorek/how-to-properly-handle-decimals-with-typeorm-f0eb2b79ca9c
   @Column({
     type: 'decimal',
@@ -24,6 +27,7 @@ export class Item {
     transformer: new DecimalTransformer(),
   })
   value: Decimal;
+
   @CreateDateColumn()
   createdDate: Date;
 
@@ -32,10 +36,13 @@ export class Item {
 
   @Column({ length: 255, default: '' })
   description?: string;
+
+  @Column({ nullable: true })
   @ManyToOne(() => User, (user) => user.items, {
     cascade: true,
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'user', referencedColumnName: 'id' })
   user: User;
 }

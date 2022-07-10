@@ -13,6 +13,17 @@ export class ItemService {
     return items;
   }
 
+  async findById(id): Promise<Item | null> {
+    const item = await this.itemRepository.findOne({ where: { id: +id } });
+    if (!item) {
+      throw new HttpException(
+        { message: 'Transation not found.' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return item;
+  }
+
   async createItem(data): Promise<Item | any> {
     try {
       const item = await this.itemRepository.save(data);
