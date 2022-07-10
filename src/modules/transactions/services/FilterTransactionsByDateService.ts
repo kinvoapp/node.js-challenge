@@ -11,8 +11,11 @@ class FilterTransactionsByDateService {
     @inject('TransactionsRepository') private transactionsRepository: TransactionsRepository
   ) { }
   
-  public async execute(user_id: string, initial_date: Date, final_date: Date, page: number, perPage: number): Promise<ITransactionsPagination> {
-    const transactions = await this.transactionsRepository.filterTransactionsByDate(user_id, initial_date, final_date, page, perPage)
+  public async execute(user_id: string, initial_date: string, final_date: string, page: number, perPage: number): Promise<ITransactionsPagination> {
+
+    console.log('aqui')
+
+    const transactions = await this.transactionsRepository.filterTransactionsByDate(user_id, new Date(initial_date), new Date(final_date), page, perPage)
 
     return transactions
 
