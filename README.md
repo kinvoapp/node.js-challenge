@@ -134,11 +134,11 @@ To create HTTP requests use some API client to perform your tests and debugs lik
 
 This application has the following endpoints:
 
-**/:msg**:
+**/hello/:msg**:
 
-- **GET**: `/:msg` - Initial route for message display via parameter.
+- **GET**: `hello/:msg` - Initial route for message display via parameter.
 
-  - endpoint: [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word)
+  - endpoint: [http://localhost:8080/hello/Hello%20Word](http://localhost:8080/hello/Hello%20Word)
 
   - return:
 
@@ -194,7 +194,7 @@ This application has the following endpoints:
       "category": "studies",
       "date": "2022-07-12"
     },
-    ... more movements
+    // ... more movements
   ]
   ```
 
@@ -212,7 +212,6 @@ This application has the following endpoints:
     "category": "studies",
     "date": "2022-07-12"
    }
-  ]
   ```
 
   - Validation: validates if the movement exists.
@@ -246,9 +245,23 @@ This application has the following endpoints:
 
   - Validation: validates if the movement exists and if the fields are valid.
 
+- **DELETE**: `delete/:id` - Deletion of movement.
+
+  - endpoint: [http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "message": "movement removed."
+  }
+  ```
+
+  - Validation: validates if the movement exists.
+
 ## Deploy
 
-See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/Hello%20Word).
+See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/hello/Hello%20Word).
 
 ## Stacks
 
