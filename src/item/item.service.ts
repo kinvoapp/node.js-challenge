@@ -1,4 +1,5 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import Decimal from 'decimal.js';
 import { DecimalTransformer } from 'src/util/DecimalTransformer';
 import { Repository, Between } from 'typeorm';
 import { Item } from './item.entity';
@@ -20,17 +21,12 @@ export class ItemService {
     };
   }
 
-  async findAll(
-    url = undefined,
-    take = 10,
-    skip = 0,
-  ): Promise<Item[] | object> {
+  async findAll(take = 10, skip = 0): Promise<Item[] | object> {
     const [result, total] = await this.itemRepository.findAndCount({
       take,
       skip,
     });
-    if (!url) return this.pagination({ result, total, take, skip });
-    return this.getBalance(result);
+    return this.pagination({ result, total, take, skip });
   }
 
   async findById(id): Promise<Item | null> {
@@ -84,16 +80,18 @@ export class ItemService {
     await this.itemRepository.delete(id);
   }
 
-  async getBalance(item: any[]): Promise<{ balance: number }> {
+  async getBalance() {
+    const item: Item[] = await this.itemRepository.find({
+      select: ['value', 'inputValue'],
+    });
     if (!item.length) return { balance: 0 };
     const formatValue = new DecimalTransformer();
-    return {
-      balance: item.reduce((acc, cur) => {
-        return cur.inputValue
-          ? formatValue.sum(acc, cur.value)
-          : formatValue.sub(acc, cur.value);
-      }, 0),
-    };
+    const balance = item.reduce((acc: any | string | number, cur) => {
+      return cur.inputValue
+        ? formatValue.sum(acc, (cur.value as Decimal).toString())
+        : formatValue.sub(acc, (cur.value as Decimal).toString());
+    }, 0);
+    return { balance };
   }
 
   async filterByDate({

@@ -26,7 +26,7 @@ export class Item {
     default: 0.0,
     transformer: new DecimalTransformer(),
   })
-  value: Decimal;
+  value: Decimal | string;
 
   // https://stackoverflow.com/questions/62696628/how-can-i-create-columns-with-type-date-and-type-datetime-in-nestjs-with-typeorm
   @Column()

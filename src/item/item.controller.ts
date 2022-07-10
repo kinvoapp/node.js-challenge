@@ -29,7 +29,7 @@ export class itemController {
 
   @Get('/balance')
   async getBalance(): Promise<Item[] | object> {
-    return this.itemService.findAll();
+    return this.itemService.getBalance();
   }
 
   @Get('/:id')
