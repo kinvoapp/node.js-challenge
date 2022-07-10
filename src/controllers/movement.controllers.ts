@@ -7,7 +7,7 @@
 import { Request, Response, NextFunction } from 'express'
 import MovementModel from '@models/Movement'
 import MovementServices from '@services/movement.services'
-import Utils from '@utils/movementsUtils'
+import MovementsUtils from '@utils/movements.utils'
 import { Balance, IMovement } from 'types'
 
 /**
@@ -148,7 +148,7 @@ async function getBalance (_: Request, res: Response, next: NextFunction): Promi
       return res.status(200).json({ message: 'there are no movements' })
     }
 
-    const balance = Utils.balanceMovement(movements)
+    const balance = MovementsUtils.balanceMovement(movements)
 
     return res.status(200).json(balance)
   } catch (error) {
