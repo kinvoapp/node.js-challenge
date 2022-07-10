@@ -1,8 +1,15 @@
-import Data from "../models/transaction";
+import Data from "../models";
 import { Request } from "express";
 
-const deleteData = (req: Request) => {
-  return Data.findByIdAndDelete(req.params.id);
+const deleteExpense = (req: Request) => {
+  return Data.expense.findByIdAndDelete(req.params.id);
 };
 
-export default deleteData;
+const deleteRevenue = (req: Request) => {
+  return Data.revenue.findByIdAndDelete(req.params.id);
+};
+
+export default {
+  deleteExpense,
+  deleteRevenue,
+};

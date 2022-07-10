@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import Transaction from "../models/transaction";
 import {
   saveData,
   getData,
@@ -8,29 +7,12 @@ import {
   deleteData,
   amount,
 } from "../repository";
-// import ITransaction from "../types/ITransaction";
 import { calculate } from "../utils/calcAmount";
 
-const TransactionController = {
-  async getAllTransactions(req: Request, res: Response, next: NextFunction) {
-    getAllData(req)
-      .then((data) => {
-        return res.status(200).json(data);
-      })
-      .catch((error) => {
-        return res.status(500).json(error);
-      });
-
-    // Transaction.find({}, (err: Error, transaction: ITransaction) => {
-    //   if (err) {
-    //     res.send(err);
-    //   }
-    //   res.json(transaction);
-    // });
-  },
-
-  async getTransactionByDate(req: Request, res: Response, next: NextFunction) {
-    getData(req)
+const RevenueController = {
+  async getAllRevenues(req: Request, res: Response, next: NextFunction) {
+    getAllData
+      .getAllDataRevenue(req)
       .then((data) => {
         return res.status(200).json(data);
       })
@@ -39,8 +21,20 @@ const TransactionController = {
       });
   },
 
-  async createTransaction(req: Request, res: Response, next: NextFunction) {
-    saveData(req)
+  async getRevenueByDate(req: Request, res: Response, next: NextFunction) {
+    getData
+      .getDataRevenue(req)
+      .then((data) => {
+        return res.status(200).json(data);
+      })
+      .catch((error) => {
+        return res.status(500).json(error);
+      });
+  },
+
+  async createRevenue(req: Request, res: Response, next: NextFunction) {
+    saveData
+      .saveDataRevenue(req)
       .then((data) => {
         return res.status(201).json(data);
       })
@@ -49,8 +43,9 @@ const TransactionController = {
       });
   },
 
-  async updateTransaction(req: Request, res: Response) {
-    updateData(req)
+  async updateRevenue(req: Request, res: Response) {
+    updateData
+      .updateDataRevenue(req)
       .then((data) => {
         return res.status(200).json(data);
       })
@@ -59,8 +54,9 @@ const TransactionController = {
       });
   },
 
-  async deleteTransaction(req: Request, res: Response) {
-    deleteData(req)
+  async deleteRevenue(req: Request, res: Response) {
+    deleteData
+      .deleteRevenue(req)
       .then(() => {
         return res.status(200).json({ message: "Data deleted successfully" });
       })
@@ -70,10 +66,10 @@ const TransactionController = {
   },
 
   async getAmount(req: Request, res: Response, next: NextFunction) {
-    amount().then((data) => {
+    amount.amountRevenue().then((data) => {
       res.status(200).json({ balance: calculate(data) });
     });
   },
 };
 
-export default TransactionController;
+export default RevenueController;

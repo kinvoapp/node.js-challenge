@@ -1,8 +1,15 @@
-import Data from "../models/transaction";
+import Data from "../models";
 import { Request } from "express";
 
-const getAllData = (req: Request) => {
-  return Data.find({});
+const getAllDataExpense = (req: Request) => {
+  return Data.expense.find({});
 };
 
-export default getAllData;
+const getAllDataRevenue = (req: Request) => {
+  return Data.revenue.find({});
+};
+
+export default {
+  getAllDataExpense,
+  getAllDataRevenue,
+};

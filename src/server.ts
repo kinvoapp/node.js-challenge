@@ -2,8 +2,9 @@ import express, { Request, Response } from "express";
 const app = express();
 const PORT = process.env.PORT || 8080;
 const cors = require("cors");
-import routes from "./routes/transaction.Routes";
+import routes from "./routes/router";
 import connectToDataBase from "./database";
+import router from "./routes/router";
 
 connectToDataBase();
 app.use(cors());

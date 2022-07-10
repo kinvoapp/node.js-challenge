@@ -1,8 +1,7 @@
 import { Document } from "mongoose";
 
-export default interface ITransaction extends Document {
+export default interface IRevenue extends Document {
   _id?: String;
   title: String;
-  transactionType: String;
   value: Number;
 }

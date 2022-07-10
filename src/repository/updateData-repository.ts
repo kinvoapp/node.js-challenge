@@ -1,8 +1,15 @@
-import Data from "../models/transaction";
+import Data from "../models";
 import { Request } from "express";
 
-const updateData = (req: Request) => {
-  return Data.findByIdAndUpdate(req.params.id, req.body);
+const updateDataRevenue = (req: Request) => {
+  return Data.revenue.findByIdAndUpdate(req.params.id, req.body);
 };
 
-export default updateData;
+const updateDataExpense = (req: Request) => {
+  return Data.expense.findByIdAndUpdate(req.params.id, req.body);
+};
+
+export default {
+  updateDataRevenue,
+  updateDataExpense,
+};

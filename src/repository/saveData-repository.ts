@@ -1,16 +1,28 @@
 import mongoose from "mongoose";
-import Data from "../models/transaction";
+import Data from "../models";
 import { Request } from "express";
 
-const saveData = (req: Request) => {
-  const { title, transactionType, value } = req.body;
-  const newData = new Data({
+const saveDataRevenue = (req: Request) => {
+  const { title, value } = req.body;
+  const newData = new Data.revenue({
     _id: new mongoose.Types.ObjectId(),
     title,
-    transactionType,
     value,
   });
   return newData.save();
 };
 
-export default saveData;
+const saveDataExpense = (req: Request) => {
+  const { title, value } = req.body;
+  const newData = new Data.expense({
+    _id: new mongoose.Types.ObjectId(),
+    title,
+    value,
+  });
+  return newData.save();
+};
+
+export default {
+  saveDataRevenue,
+  saveDataExpense,
+};

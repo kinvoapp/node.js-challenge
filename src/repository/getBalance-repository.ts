@@ -1,7 +1,14 @@
-import Data from "../models/transaction";
+import Data from "../models";
 
-const amount = () => {
-  return Data.find();
+const amountRevenue = () => {
+  return Data.revenue.find();
 };
 
-export default amount;
+const amountExpense = () => {
+  return Data.expense.find();
+};
+
+export default {
+  amountRevenue,
+  amountExpense,
+};
