@@ -20,7 +20,7 @@ const AppError_1 = require("../utils/errors/AppError");
 class MovementService {
     static create({ name, description, formOfPayment, type, value, date }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const movementFound = yield MovementService.getByName(name);
+            const movementFound = yield MovementService.getByName(name, { lean: false });
             if (movementFound) {
                 throw new AppError_1.AppError(http_status_1.default.CONFLICT, 'Já existe uma movimentação financeira com esse mesmo nome!');
             }
@@ -64,15 +64,18 @@ class MovementService {
             return response;
         });
     }
-    static getByName(name) {
+    static getByName(name, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            const response = yield MovementRepository_1.MovementRepository.selectOne({ name, deletedAt: null }, { lean: false });
+            const response = yield MovementRepository_1.MovementRepository.selectOne({ name, deletedAt: null }, options);
             return response;
         });
     }
     static updateById(id, { name, description, formOfPayment, type, value, date }) {
         return __awaiter(this, void 0, void 0, function* () {
-            let movement = yield MovementService.getById(id, { lean: true });
+            let movement = yield MovementService.getByName(name, { lean: true });
+            if (String(movement._id) !== id) {
+                throw new AppError_1.AppError(http_status_1.default.CONFLICT, 'Já existe uma outra movimentação financeira com esse mesmo nome!');
+            }
             movement = Object.assign(Object.assign({}, movement), { name,
                 description,
                 formOfPayment,

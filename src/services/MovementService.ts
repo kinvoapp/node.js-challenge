@@ -7,7 +7,7 @@ import { ISearchParameter } from '../interfaces/ISearchParameter';
 
 export class MovementService {
   public static async create({ name, description, formOfPayment, type, value, date }: any) {
-    const movementFound = await MovementService.getByName(name);
+    const movementFound = await MovementService.getByName(name, { lean: false });
 
     if (movementFound) {
       throw new AppError(httpStatus.CONFLICT, 'Já existe uma movimentação financeira com esse mesmo nome!');
@@ -62,13 +62,17 @@ export class MovementService {
     return response;
   }
 
-  public static async getByName(name: string) {
-    const response = await MovementRepository.selectOne({ name, deletedAt: null }, { lean: false });
+  public static async getByName(name: string, options?: any) {
+    const response = await MovementRepository.selectOne({ name, deletedAt: null }, options);
     return response;
   }
 
   public static async updateById(id: string, { name, description, formOfPayment, type, value, date }: any) {
-    let movement: IMovement = await MovementService.getById(id, { lean: true });
+    let movement: IMovement = await MovementService.getByName(name, { lean: true });
+
+    if (String(movement._id) !== id) {
+      throw new AppError(httpStatus.CONFLICT, 'Já existe uma outra movimentação financeira com esse mesmo nome!');
+    }
 
     movement = {
       ...movement,

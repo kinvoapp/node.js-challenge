@@ -1,4 +1,6 @@
 export interface IMovement {
+  _id?: string;
+  id?: string;
   name: string;
   description?: string;
   formOfPayment?: number;
