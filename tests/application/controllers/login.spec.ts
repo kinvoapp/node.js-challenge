@@ -69,4 +69,12 @@ describe('LoginController', () => {
       data: new UnauthorizedError()
     })
   })
+
+  it('should return  200 if authentication succeeds', async () => {
+    const httpResponse = await sut.handle({ email: 'any_valid_email', password: 'any_valid_password' })
+    expect(httpResponse).toEqual({
+      statusCode: 200,
+      data: { accessToken: 'any_value' }
+    })
+  })
 })
