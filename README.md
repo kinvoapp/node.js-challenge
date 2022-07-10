@@ -35,7 +35,7 @@ npm run dev
     }
     ```
 
-- Response: - Status: `201 Created`
+    - Response: - Status: `201 Created`
 </details>
 
 - <details>
