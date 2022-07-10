@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "56699a47-c0fa-49aa-9dea-4739fea3da3a",
+		"name": "changelle-manager-finances",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19152983"
+	},
+	"item": [
+		{
+			"name": "User, create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Dogl4\",\n    \"email\": \"doougllas@kinvo.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/user",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users, get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User, delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criação da movimentação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Comida\",\n    \"value\": 20.05,\n    \"inputValue\": false,\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criação da movimentação Salario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Salário\",\n    \"value\": 3000.1,\n    \"inputValue\": true,\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criação da movimentação Imposto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Imposto\",\n    \"value\": 600.86,\n    \"inputValue\": false,\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criação da movimentação Compra de Veiculo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Aquisição de veiculo\",\n    \"value\": 25000.50,\n    \"inputValue\": false,\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listagem de movimentações",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listagem de movimentações Pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item?&page=1&limit=200",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Item, get by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualização da movimentação",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Comida\",\n    \"value\": 20.05,\n    \"inputValue\": false,\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/item/2",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exclusão da movimentação",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item/2",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exibição do saldo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item/balance",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtro na listagem de movimentações por data (data inicial e data final);",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item/filterByDate/2021-12-20/to/2022-10-30",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"filterByDate",
+						"2021-12-20",
+						"to",
+						"2022-10-30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtro na listagem de movimentações por data (data inicial e data final) com paginação",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/item/filterByDate/2021-12-09/to/2022-10-30?&page=1&limit=200",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"item",
+						"filterByDate",
+						"2021-12-09",
+						"to",
+						"2022-10-30"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
