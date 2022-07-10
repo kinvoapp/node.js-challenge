@@ -10,7 +10,7 @@ class App {
     this.server = express();
 
     mongoose.connect(
-      `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@kinvo.qjizd.mongodb.net/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`,
+      "mongodb+srv://admin:admin@kinvo.qjizd.mongodb.net/kinvo?retryWrites=true&w=majority",
       { useNewUrlParser: true, useUnifiedTopology: true }
     );
 
