@@ -8,17 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const schemas = require("./schemas");
-const { userModel } = require("../models/index.models");
-const { generateToken } = require("../middlewares/auth");
-exports.loginService = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const { error } = schemas.loginSchema.validate({ email, password });
-    if (error)
-        return { code: 400, message: error.message };
-    const user = yield userModel.find({
-        email,
-    });
-    return user.length > 0
-        ? generateToken({ email: user[0].email })
-        : { code: 400, message: "User no register" };
+Object.defineProperty(exports, "__esModule", { value: true });
+const { revenueCreateService } = require("../services/revenue.service");
+exports.revenueCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let revenue;
+    try {
+        revenue = yield revenueCreateService(req.body);
+    }
+    catch (error) {
+        return res.status(500);
+    }
+    return revenue.code
+        ? res.status(revenue.code).json(revenue.message)
+        : res.status(201).json(revenue);
 });

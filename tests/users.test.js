@@ -1,6 +1,9 @@
 const frisby = require("frisby");
 
-const { createUser, deleteUser } = require("../src/utils/tests.functions");
+const {
+  createTestFunction,
+  deleteTestFunction,
+} = require("../src/utils/tests.functions");
 
 require("dotenv").config();
 
@@ -13,9 +16,10 @@ const URL_Deploy =
 
 describe("Users tests.", () => {
   it("It should not be possible to register a user with an email already registered.", async () => {
-    await createUser(
+    await createTestFunction(
       frisby,
       URL_Deploy,
+      "user",
       {
         id: 1,
         name: "Aluno - Cadastro",
@@ -25,9 +29,10 @@ describe("Users tests.", () => {
       201
     );
 
-    const response = await createUser(
+    const response = await createTestFunction(
       frisby,
       URL_Deploy,
+      "user",
       {
         id: 1,
         name: "Aluno - Cadastro",
@@ -39,7 +44,13 @@ describe("Users tests.", () => {
 
     expect(response).toEqual("E-mail already registered.");
 
-    const deleted = await deleteUser(frisby, URL_Deploy, 1, 200);
+    const deleted = await deleteTestFunction(
+      frisby,
+      URL_Deploy,
+      "user",
+      1,
+      200
+    );
 
     expect(deleted).toEqual({
       acknowledged: true,
@@ -48,9 +59,10 @@ describe("Users tests.", () => {
   });
 
   it("It must be possible to enter a user.", async () => {
-    await createUser(
+    await createTestFunction(
       frisby,
       URL_Deploy,
+      "user",
       {
         id: 1,
         name: "Aluno",
@@ -80,9 +92,10 @@ describe("Users tests.", () => {
   });
 
   it("It must be possible to delete a user by ID.", async () => {
-    await createUser(
+    await createTestFunction(
       frisby,
       URL_Deploy,
+      "user",
       {
         id: 1,
         name: "Aluno a ser excluído",
@@ -92,7 +105,13 @@ describe("Users tests.", () => {
       201
     );
 
-    const deleted = await deleteUser(frisby, URL_Deploy, 1, 200);
+    const deleted = await deleteTestFunction(
+      frisby,
+      URL_Deploy,
+      "user",
+      1,
+      200
+    );
 
     expect(deleted).toEqual({
       acknowledged: true,

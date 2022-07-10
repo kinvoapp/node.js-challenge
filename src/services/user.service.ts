@@ -1,6 +1,6 @@
 import { User } from "../interfaces/user";
 
-const userModel = require("../models/users.models");
+const { userModel } = require("../models/index.models");
 const { cryptograph } = require("../utils/functions");
 
 exports.userCreateService = async (user: User): Promise<object> => {

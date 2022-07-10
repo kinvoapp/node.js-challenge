@@ -1,5 +1,5 @@
 const schemas = require("./schemas");
-const userModel = require("../models/users.models");
+const { userModel } = require("../models/index.models");
 const { generateToken } = require("../middlewares/auth");
 
 exports.loginService = async (email: string, password: string) => {

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const userModel = require("../models/users.models");
+const { userModel } = require("../models/index.models");
 const { cryptograph } = require("../utils/functions");
 exports.userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield userModel.find();
