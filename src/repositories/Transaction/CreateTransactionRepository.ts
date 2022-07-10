@@ -1,7 +1,11 @@
-import { PrismaClient, Transaction } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { prismaClient } from "../../database/prismaClient";
 import { ICreateTransactionRepository } from "../../domain/interface/repositories/Transaction/ICreateTransactionRepository";
-import { ICreateTransactionRequest } from "../../domain/requestDto";
+import {
+  ICreateTransactionRequest,
+  ICreateTransactionResponse,
+} from "../../domain/requestDto";
+import { buildTransactionSelect } from "../Helpers/selectBuilder";
 
 export class CreateTransactionRepository
   implements ICreateTransactionRepository
@@ -13,28 +17,27 @@ export class CreateTransactionRepository
 
   async createTransaction(
     data: ICreateTransactionRequest,
-    currentBalance: number
-  ): Promise<Transaction> {
-    if (data.type === "CASHIN") {
-      const transaction = await this.prismaClient.transaction.create({
+    newBalance: number,
+    accountId: string,
+    balanceId: string
+  ): Promise<ICreateTransactionResponse> {
+    const [transaction] = await this.prismaClient.$transaction([
+      this.prismaClient.transaction.create({
         data: {
-          description: data.description,
-          amount: data.amount,
-          type: data.type,
-          currentBalance: currentBalance + data.amount,
+          ...data,
+          accountId,
         },
-      });
-      return transaction;
-    } else {
-      const transaction = await this.prismaClient.transaction.create({
+        select: buildTransactionSelect(),
+      }),
+      this.prismaClient.balance.update({
+        where: {
+          id: balanceId,
+        },
         data: {
-          description: data.description,
-          amount: data.amount,
-          type: data.type,
-          currentBalance: currentBalance - data.amount,
+          available: newBalance,
         },
-      });
-      return transaction;
-    }
+      }),
+    ]);
+    return transaction;
   }
 }

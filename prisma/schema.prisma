@@ -6,3 +6,59 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Student {
+  id         String    @id @default(uuid())
+  name       String
+  password   String
+  document   String    @unique
+  accounts   Account[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime  @default(now())
+
+  @@map("students")
+}
+
+model Account {
+  id           String        @id @default(uuid())
+  student      Student       @relation(fields: [studentId], references: [id])
+  studentId    String
+  transactions Transaction[]
+  balance      Balance       @relation(fields: [balanceId], references: [id])
+  balanceId    String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  deletedAt   DateTime      @default(now())
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  account     Account         @relation(fields: [accountId], references: [id])
+  accountId   String
+  description String
+  amount      Float
+  type        TransactionType
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @default(now())
+  deletedAt  DateTime        @default(now())
+
+  @@map("transactions")
+}
+
+enum TransactionType {
+  CASHIN
+  CASHOUT
+}
+
+model Balance {
+  id             String    @id @default(uuid())
+  available      Decimal
+  account        Account?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+
+  @@map("balances")
+}

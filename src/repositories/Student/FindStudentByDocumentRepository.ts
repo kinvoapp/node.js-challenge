@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { prismaClient } from "../../database/prismaClient";
-import { IFindStudentByDocumentRepository } from "../../domain/interface/repositories/Student/IFindStudentByDocumentRepository";
-import { ICreateStudentResponse } from "../../domain/requestDto";
+import {
+  IFindStudentByDocumentRepository,
+  IUserCredentialsWithAccountId,
+} from "../../domain/interface/repositories/Student/IFindStudentByDocumentRepository";
 
 export class FindStudentByDocumentRepository
   implements IFindStudentByDocumentRepository
@@ -13,12 +15,21 @@ export class FindStudentByDocumentRepository
 
   async findByDocument(
     document: string
-  ): Promise<ICreateStudentResponse | null> {
+  ): Promise<IUserCredentialsWithAccountId | null> {
     const student = await this.prismaClient.student.findUnique({
       where: {
         document,
       },
+      select: {
+        id: true,
+        document: true,
+        password: true,
+        accounts: true,
+      },
     });
-    return student;
+    if (!student) {
+      return null;
+    }
+    return { ...student, accountId: student.accounts[0].id };
   }
 }
