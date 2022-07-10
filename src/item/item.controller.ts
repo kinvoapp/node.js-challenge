@@ -22,8 +22,13 @@ export class itemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Get()
-  findAll(): Promise<Item[]> {
+  findAll(): Promise<Item[] | object> {
     return this.itemService.findAll();
+  }
+
+  @Get('/balance')
+  async getBalance(): Promise<Item[] | object> {
+    return this.itemService.findAll('balance');
   }
 
   @Get('/:id')

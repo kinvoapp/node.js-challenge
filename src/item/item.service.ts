@@ -1,4 +1,5 @@
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { DecimalTransformer } from 'src/util/DecimalTransformer';
 import { Repository } from 'typeorm';
 import { Item } from './item.entity';
 @Injectable()
@@ -8,9 +9,10 @@ export class ItemService {
     private itemRepository: Repository<Item>,
   ) {}
 
-  async findAll(): Promise<Item[]> {
+  async findAll(url = undefined): Promise<Item[] | object> {
     const items = await this.itemRepository.find();
-    return items;
+    if (!url) return items;
+    return this.getBalance(items);
   }
 
   async findById(id): Promise<Item | null> {
@@ -61,5 +63,17 @@ export class ItemService {
       );
     }
     await this.itemRepository.delete(id);
+  }
+
+  async getBalance(item: any[]) {
+    if (!item.length) return { balance: 0 };
+    const formatValue = new DecimalTransformer();
+    return {
+      balance: item.reduce((acc, cur) => {
+        return cur.inputValue
+          ? formatValue.sum(acc, cur.value)
+          : formatValue.sub(acc, cur.value);
+      }, 0),
+    };
   }
 }
