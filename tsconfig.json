@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2017",                         
-    "module": "commonjs",                   
-    "strict": true,                  
-    "esModuleInterop": true,                 
+    "target": "es2017",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
     "strictPropertyInitialization": false,
-    "forceConsistentCasingInFileNames": true 
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*.ts"]
 }
