@@ -1,4 +1,4 @@
-import Utils from '../utils/movementsUtils'
+import Utils from '../utils/movements.utils'
 import { IMovement } from 'types'
 
 test('must return balance of movements', () => {
