@@ -6,7 +6,7 @@ import { UserAuthInfoRequest } from '../interfaces/UserAuthInfoRequest';
 export default (req: UserAuthInfoRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   //verifica se existe o header na requisição
-  if(!authHeader)
+  if(!authHeader) 
     return res.status(401).send({ error: 'No Token Provided' });
 
   //separa o header em duas partes
