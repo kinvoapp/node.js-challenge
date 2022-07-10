@@ -17,14 +17,14 @@ npm run dev
 - <details>
       <summary>POST (add a transaction)</summary>
 
-- Url:
+  - Url:
 
-  - `/api/finance`
-  - Exemplo: `http://localhost:4000/api/finance`
+    - `/api/finance`
+    - Exemplo: `http://localhost:4000/api/finance`
 
-- Request:
+    - Request:
 
-  - Body
+        - Body
 
     ```json
     {
