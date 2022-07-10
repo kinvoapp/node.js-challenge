@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
   Res,
   UseFilters,
@@ -19,6 +20,14 @@ export class itemController {
   findAll(): Promise<Item[]> {
     return this.itemService.findAll();
   }
+
+  @Get('/:id')
+  @UseFilters(new BadRequestExceptionFilter())
+  async createItem(@Res() res: Response, @Param() { id }: { id: string }) {
+    const item = await this.itemService.findById(id);
+    return res.status(HttpStatus.ACCEPTED).json(item);
+  }
+
   @Post()
   @UseFilters(new BadRequestExceptionFilter())
   async createUser(@Res() res: Response, @Body() data: IItem) {
