@@ -6,8 +6,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  CreateDateColumn,
   JoinColumn,
+  Index,
 } from 'typeorm';
 
 @Entity()
@@ -28,8 +28,20 @@ export class Item {
   })
   value: Decimal;
 
-  @CreateDateColumn()
-  createdDate: Date;
+  // https://stackoverflow.com/questions/62696628/how-can-i-create-columns-with-type-date-and-type-datetime-in-nestjs-with-typeorm
+  @Column({
+    type: 'datetime',
+    default: () => 'NOW()',
+  })
+  @Index()
+  createdDate: string;
+
+  @Column({
+    type: 'datetime',
+    nullable: true,
+  })
+  @Index()
+  updatedDate: string;
 
   @Column({ name: 'input_value', type: 'boolean', default: false })
   inputValue: boolean;

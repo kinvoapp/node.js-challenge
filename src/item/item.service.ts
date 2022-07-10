@@ -35,4 +35,20 @@ export class ItemService {
       );
     }
   }
+
+  // https://stackoverflow.com/questions/47792808/typeorm-update-item-and-return-it
+  async updateItemById(id, data): Promise<Item | any> {
+    try {
+      const item = await this.itemRepository.findOne({ where: { id: +id } });
+      if (!item) return null;
+      const newItem = { updatedDate: new Date(), ...data, id: +id };
+      await this.itemRepository.save(newItem);
+      return await this.itemRepository.findOne({ where: { id: +id } });
+    } catch (error) {
+      throw new HttpException(
+        { message: 'User not found. Verify if `user` of this id is created.' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  }
 }
