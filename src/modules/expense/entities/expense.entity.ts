@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
+import { User } from "src/modules/user/entities/user.entity";
 import { EntityBase } from "src/shared/base/entity.base";
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('expense')
 export class Expense {
@@ -25,14 +26,7 @@ export class Expense {
     @Column({ type: 'varchar' })
     description: string
 
-    /*   constructor(exprense?: Partial<Expense>) {
-          this.createdAt = exprense.createdAt;
-          this.updatedAt = exprense.updatedAt;
-          this.id = exprense.id;
-          this.title = exprense.title;
-          this.description = exprense.description;
-          this.value = exprense.value;
-      } */
-
+    @ManyToOne(() => User, (user) => user.expenses)
+    user: User
 }
 

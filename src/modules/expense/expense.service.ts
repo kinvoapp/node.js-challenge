@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToClass } from 'class-transformer';
+import { Result } from 'src/shared/utils/result';
 import { Repository } from 'typeorm';
+import { User } from '../user/entities/user.entity';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { GetAllExpensesDto } from './dto/get-all-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
@@ -13,16 +16,19 @@ export class ExpenseService {
     private readonly expenseRepository: Repository<Expense>
   ) { }
 
-  async create(createExpenseDto: CreateExpenseDto): Promise<Expense> {
-    return await this.expenseRepository.save(createExpenseDto);
+  async create(accountId: string, createExpenseDto: CreateExpenseDto): Promise<Result> {
+    createExpenseDto['user'] = accountId;
+    await this.expenseRepository.save(createExpenseDto);
+    return new Result(true, [], [{ message: 'Expense added!' }], 201);
   }
 
-  async getAll(model: GetAllExpensesDto, page: number): Promise<Expense[]> {
+  async getAll(accountId: string, model: GetAllExpensesDto, page: number): Promise<Result> {
     if (page !== 0) page = page * 2;
 
     let queryBuilder = await this.expenseRepository.createQueryBuilder('expense')
       .skip(page)
       .take(2)
+      .where('expense.user = :user', { user: accountId })
       .orderBy('expense.createdAt', 'DESC');
 
     let startDate: Date;
@@ -38,18 +44,39 @@ export class ExpenseService {
       queryBuilder.andWhere('expense.createdAt <= :finalDate', { finalDate: finalDate });
     }
 
-    return await queryBuilder.getMany();
+    let expenses = await queryBuilder.getMany();
+    if (expenses.length == 0)
+      return new Result(false, expenses, [{ message: "Expenses Not Found!" }], 404);
+
+    expenses.forEach(expense => delete expense.updatedAt);
+    return new Result(true, expenses);
+
   }
 
-  async getById(expenseId: string): Promise<Expense> {
-    return await this.expenseRepository.findOne({ where: { id: expenseId } });
+  async getById(accountId: string, expenseId: string): Promise<Result> {
+    let user: User = new User()
+    user.id = accountId;
+    let expense = await this.expenseRepository.findOne({ where: { id: expenseId, user: user } });
+    if (!expense)
+      return new Result(false, expense, [{ message: "Expense Not Found!" }], 404);
+    return new Result(true, expense);
   }
 
-  async update(expenseId: string, updateExpenseDto: UpdateExpenseDto)/* : Promise<Expense> */ {
-    return await this.expenseRepository.update({ id: expenseId }, updateExpenseDto);
+  async update(accountId: string, expenseId: string, updateExpenseDto: UpdateExpenseDto) {
+    let user: User = new User()
+    user.id = accountId;
+    let result = await this.expenseRepository.update({ id: expenseId, user: user }, updateExpenseDto);
+    if (result.affected === 0)
+      return new Result(false, [], [{ message: "Expense Not updated!" }], 500);
+    return new Result(true, [], [{ message: "Expense updated!" }], 204);
   }
 
-  async remove(expenseId: string) {
-    return await this.expenseRepository.delete({ id: expenseId });
+  async remove(accountId: string, expenseId: string): Promise<Result> {
+    let user: User = new User()
+    user.id = accountId;
+    let result = await this.expenseRepository.delete({ id: expenseId, user: user });
+    if (result.affected === 0)
+      return new Result(false, [], [{ message: "Expense Not deleted!" }], 500);
+    return new Result(true, [], [{ message: "Expense deleted!" }], 200);
   }
 }
