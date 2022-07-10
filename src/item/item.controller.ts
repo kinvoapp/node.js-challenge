@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -54,5 +55,12 @@ export class itemController {
       );
     }
     return res.status(HttpStatus.ACCEPTED).json(item);
+  }
+
+  @Delete('/:id')
+  @UseFilters(new BadRequestExceptionFilter())
+  async deleteItemById(@Res() res: Response, @Param() { id }: { id: string }) {
+    await this.itemService.deleteItemById(id);
+    return res.status(HttpStatus.NO_CONTENT).json({});
   }
 }

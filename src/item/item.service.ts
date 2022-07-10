@@ -51,4 +51,15 @@ export class ItemService {
       );
     }
   }
+
+  async deleteItemById(id): Promise<void> {
+    const item = await this.itemRepository.findOne({ where: { id: +id } });
+    if (!item) {
+      throw new HttpException(
+        { message: 'Transation not found.' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    await this.itemRepository.delete(id);
+  }
 }
