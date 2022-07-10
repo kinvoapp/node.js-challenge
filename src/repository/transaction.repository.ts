@@ -19,4 +19,13 @@ export class TransactionRepository {
   deleteRecord(id: string) {
     return Record.findByIdAndDelete(id);
   }
+
+  loadRecord(startDate: string, endDate: string) {
+    return Record.find({
+      createdAt: {
+        $gte: `${startDate}T00:00:00.000Z`,
+        $lt: `${endDate}T23:59:59.999Z`,
+      },
+    });
+  }
 }

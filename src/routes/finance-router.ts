@@ -2,14 +2,10 @@ import { Router } from "express";
 import {
   CreateTransactionController,
   UpdateTransactionController,
+  DeleteTransactionController,
 } from "../controller/index";
 import { TransactionRepository } from "../repository/transaction.repository";
-import {
-  deleteTransaction,
-  loadTransaction,
-  loadBalance,
-} from "../controller/finance-controller";
-import { DeleteTransactionController } from "../controller/DeleteTransaction-controller";
+import { loadTransaction, loadBalance } from "../controller/finance-controller";
 
 const Routes = Router();
 
