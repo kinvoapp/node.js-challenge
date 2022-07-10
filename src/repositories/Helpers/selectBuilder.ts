@@ -1,5 +1,3 @@
-import { Prisma, Transaction } from "@prisma/client";
-
 export function buildTransactionSelect() {
   return {
     id: true,

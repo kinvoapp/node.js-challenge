@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -15,7 +16,6 @@ model Student {
   accounts   Account[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now())
-  deletedAt DateTime  @default(now())
 
   @@map("students")
 }
@@ -29,7 +29,6 @@ model Account {
   balanceId    String        @unique
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
-  deletedAt   DateTime      @default(now())
 
   @@map("accounts")
 }
@@ -43,7 +42,6 @@ model Transaction {
   type        TransactionType
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @default(now())
-  deletedAt  DateTime        @default(now())
 
   @@map("transactions")
 }

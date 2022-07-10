@@ -5,6 +5,8 @@ import { CreateTransactionController } from "./controllers/Transaction/CreateTra
 import { GetAccountBalanceController } from "./controllers/Account/GetAccountBalanceController";
 import { GetTransactionsController } from "./controllers/Transaction/GetTransactionsController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
+import { UpdateTransactionsController } from "./controllers/Transaction/UpdateTransactionController";
+import { DeleteTransactionController } from "./controllers/Transaction/DeleteTransactionController";
 
 const router = Router();
 
@@ -13,6 +15,8 @@ const authenticateStudentController = new AuthenticateStudentController();
 const createTransactionController = new CreateTransactionController();
 const getAccountBalanceController = new GetAccountBalanceController();
 const getTransactionsController = new GetTransactionsController();
+const updateTransactionController = new UpdateTransactionsController();
+const deleteTransactionController = new DeleteTransactionController();
 
 router.get("/", (_, response: Response) => {
   return response.json({
@@ -32,6 +36,16 @@ router.get(
   "/transaction",
   ensureAuthenticated,
   getTransactionsController.handle
+);
+router.patch(
+  "/transaction/:transactionId",
+  ensureAuthenticated,
+  updateTransactionController.handle
+);
+router.delete(
+  "/transaction/:transactionId",
+  ensureAuthenticated,
+  deleteTransactionController.handle
 );
 
 export { router };
