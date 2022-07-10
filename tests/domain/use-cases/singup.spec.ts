@@ -43,7 +43,8 @@ describe('Singup', () => {
     userAccountRepo.load.mockResolvedValueOnce({
       id: 'any_user_id',
       name: 'any_user_name',
-      email: 'any_user_emal'
+      email: 'any_user_emal',
+      password: 'any_password'
     })
 
     const promise = sut({ name, email, password })

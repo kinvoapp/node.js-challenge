@@ -5,7 +5,7 @@ export class PgUserAccountRepository implements LoadUserAccountRepository, SaveU
   async load ({ email }: LoadUserAccountRepository.Input): Promise<LoadUserAccountRepository.Output> {
     const pgUserRepo = getRepository(User)
     const pgUser = await pgUserRepo.findOne({ email })
-    return pgUser !== undefined ? { id: pgUser.id.toString(), name: pgUser.name, email: pgUser.email } : undefined
+    return pgUser !== undefined ? { id: pgUser.id.toString(), name: pgUser.name, email: pgUser.email, password: pgUser.password } : undefined
   }
 
   async save ({ name, email, password }: SaveUserAccountRepository.Input): Promise<SaveUserAccountRepository.Output> {
