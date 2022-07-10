@@ -1,17 +1,8 @@
-import { BankAccount, User } from '@/infra/postgres/entities'
+import { User } from '@/infra/postgres/entities'
+import { PgBankAccountRepository } from '@/infra/postgres/repos'
 import { makeFakeDb } from '@/tests/infra/postgres/mocks'
 import { IBackup } from 'pg-mem'
 import { getConnection, getRepository, Repository } from 'typeorm'
-
-import { AddFinantialIncomeRepository } from '@/domain/contracts/repos'
-export class PgBankAccountRepository {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  async add ({ type, value, description, user_id }: AddFinantialIncomeRepository.Input): Promise<AddFinantialIncomeRepository.Output> {
-    const pgBankAccountRepo = getRepository(BankAccount)
-    const pgBankAccount = await pgBankAccountRepo.save({ type, value, description, user_id })
-    return { id: pgBankAccount.id.toString(), type: pgBankAccount.type, value: pgBankAccount.value, description: pgBankAccount.description, user_id: pgBankAccount.user_id }
-  }
-}
 
 describe('PgBankAccountRepository', () => {
   let sut: PgBankAccountRepository
