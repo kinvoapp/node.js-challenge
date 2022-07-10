@@ -198,7 +198,7 @@ This application has the following endpoints:
   ]
   ```
 
-  - **GET**: `/:id` - Display only one movement.
+- **GET**: `/:id` - Display only one movement.
 
   - endpoint: [http://localhost:8080/movement/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/62c9cf218adf8b69bbee4484)
 
@@ -216,6 +216,35 @@ This application has the following endpoints:
   ```
 
   - Validation: validates if the movement exists.
+  
+- **PUT**: `update/:id` - Movement update.
+
+  - endpoint: [http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484)
+
+  - request:
+
+  ```jsonc
+  {
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - response:
+
+  ```jsonc
+  {
+	  "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - Validation: validates if the movement exists and if the fields are valid.
 
 ## Deploy
 

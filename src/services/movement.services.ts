@@ -5,6 +5,7 @@
  */
 
 import MovementRepository from '@repositories/movement.repositories'
+import { UpdateWriteOpResult } from 'mongoose'
 
 import { IMovement } from 'types'
 
@@ -47,8 +48,24 @@ async function getMovement (id: string): Promise<IMovement> {
   return await MovementRepository.getMovement(id)
 }
 
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` and `movement` as parameters
+ * and forwards to the repositories layer.
+ * Returns a promise of an updated object of type `UpdateWriteOpResult`.
+ *
+ * @param id is an string.
+ * @param movement is an object from IMovement interface.
+ * @returns {Promise<UpdateWriteOpResult>} promise of an updated object of type `UpdateWriteOpResult`.
+ */
+
+async function updateMovement (id: string, movement: IMovement): Promise<UpdateWriteOpResult> {
+  return await MovementRepository.updateMovement(id, movement)
+}
+
 export default {
   createMovement,
   getMovements,
-  getMovement
+  getMovement,
+  updateMovement
 }
