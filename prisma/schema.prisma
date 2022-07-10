@@ -14,7 +14,7 @@ enum TransactionType {
 
 model Transaction {
   id          String          @id @default(uuid())
-  value       Decimal
+  value       String
   type        TransactionType
   description String?
 

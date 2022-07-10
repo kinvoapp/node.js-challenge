@@ -5,7 +5,7 @@ export enum TransactionType {
 
 export type TransactionProps = {
   id?: string
-  value: number
+  value: string
   type: TransactionType
   description: string
 }
