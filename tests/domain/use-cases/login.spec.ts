@@ -1,4 +1,4 @@
-import { Decrypt, TokenGenerator } from '@/domain/contracts/crypto'
+import { Comparator, TokenGenerator } from '@/domain/contracts/crypto'
 import { LoadUserAccountRepository } from '@/domain/contracts/repos'
 import { mock, MockProxy } from 'jest-mock-extended'
 import { Login, loginSeup } from '@/domain/use-cases/login'
@@ -6,7 +6,7 @@ import { Login, loginSeup } from '@/domain/use-cases/login'
 describe('Login', () => {
   let email: string
   let password: string
-  let crypto: MockProxy<Decrypt>
+  let crypto: MockProxy<Comparator>
   let token: MockProxy<TokenGenerator>
   let sut: Login
   let userAccountRepo: MockProxy<LoadUserAccountRepository>
@@ -22,7 +22,7 @@ describe('Login', () => {
       password: 'any_password'
     })
     crypto = mock()
-    crypto.decrypt.mockResolvedValue({ key: password })
+    crypto.compare.mockResolvedValue(true)
     token = mock()
     token.generate.mockResolvedValue('any_token')
   })
@@ -43,14 +43,14 @@ describe('Login', () => {
     await expect(promise).rejects.toThrow(new Error('Athentication failed'))
   })
 
-  it('should call decrypter with correct input', async () => {
+  it('should call Comparatorer with correct input', async () => {
     await sut({ email, password })
-    expect(crypto.decrypt).toHaveBeenCalledWith({ value: password })
-    expect(crypto.decrypt).toHaveBeenCalledTimes(1)
+    expect(crypto.compare).toHaveBeenCalledWith({ value: password, valueToComoare: 'any_password' })
+    expect(crypto.compare).toHaveBeenCalledTimes(1)
   })
 
   it('should rethrow if the password dont match', async () => {
-    crypto.decrypt.mockResolvedValueOnce({ key: 'any_key' })
+    crypto.compare.mockResolvedValueOnce(false)
     const promise = sut({ email, password })
     await expect(promise).rejects.toThrow(new Error('Invalid param: password'))
   })
