@@ -252,13 +252,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/item/2",
+					"raw": "{{URL}}/item/1",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"item",
-						"2"
+						"1"
 					]
 				}
 			},
