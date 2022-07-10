@@ -1,5 +1,5 @@
+import { AddFinatitalIncomesControler } from '@/application/controller/'
 import { RequiredStringValidator } from '@/application/validation'
-import { AddFinatitalIncomesControler } from '@/application/controller/add-finantial-incomes'
 import { ServerError } from '@/domain/entities/errors'
 
 describe('AddFinatitalIncomesControler', () => {

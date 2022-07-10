@@ -1,3 +1,5 @@
+export * from './add-finantial-incomes'
 export * from './controller'
-export * from './singup'
 export * from './login'
+export * from './singup'
+export * from './update-finantial-incomes'
