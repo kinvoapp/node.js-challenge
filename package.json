@@ -1,0 +1,8 @@
+{
+  "name": "node.js-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/matheusobarboza/node.js-challenge.git",
+  "author": "Matheus Barboza <matheus.barboza102@gmail.com>",
+  "license": "MIT"
+}
