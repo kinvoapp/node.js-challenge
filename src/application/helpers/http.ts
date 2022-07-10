@@ -2,7 +2,7 @@ import { ForbiddenError, SeverError, UnauthorizedError } from '@/application/err
 
 export type HttpResponse<T = any> = {
   statusCode: number
-  data: T
+  data?: T
 }
 
 export type HttpRequest<T = any> = {
@@ -13,6 +13,10 @@ export type HttpRequest<T = any> = {
 export const ok = <T = any>(data: T): HttpResponse<T> => ({
   statusCode: 200,
   data
+})
+
+export const noContent = <T = any>(): HttpResponse<T> => ({
+  statusCode: 204
 })
 
 export const badRequest = (error: Error): HttpResponse<Error> => ({
