@@ -1,8 +1,9 @@
 import { RequiredStringValidator, ValidationBuilder, Validator } from '@/application/validation'
 
 import { Controller } from '@/application/controller'
-import { HttpResponse, noContent, unauthorized } from '@/application/helpers'
+import { HttpResponse, noContent, serverError } from '@/application/helpers'
 import { AddFinantialIncome } from '@/domain/use-cases'
+import { ServerError } from '@/domain/entities/errors'
 
 type HttpRequest = {
   type: string
@@ -22,7 +23,7 @@ export class AddFinatitalIncomesControler extends Controller {
       await this.add({ type, value, description, user_id })
       return noContent()
     } catch (error) {
-      return unauthorized()
+      return serverError(error)
     }
   }
 
@@ -57,5 +58,20 @@ describe('AddFinatitalIncomesControler', () => {
       new RequiredStringValidator('any_desc', 'description'),
       new RequiredStringValidator('1', 'user_id')
     ])
+  })
+
+  it('should call add with correct params', async () => {
+    await sut.handle({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
+    expect(addFinantialIncomes).toHaveBeenCalledWith({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
+    expect(addFinantialIncomes).toHaveBeenCalledTimes(1)
+  })
+
+  it('should return 500 if add fails', async () => {
+    addFinantialIncomes.mockRejectedValueOnce(new ServerError())
+    const httpResponse = await sut.handle({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
+    expect(httpResponse).toEqual({
+      statusCode: 500,
+      data: new ServerError()
+    })
   })
 })

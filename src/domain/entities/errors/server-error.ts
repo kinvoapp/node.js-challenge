@@ -1,6 +1,6 @@
 export class ServerError extends Error {
   constructor () {
-    super('An error occured with trying save the data.')
+    super('Internal server Error, try again later or call the suport')
     this.name = 'ServerError'
   }
 }
