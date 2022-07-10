@@ -4,9 +4,13 @@ const router = express.Router();
 
 router
   .get("/transactions", TransactionController.getAllTransactions)
-  .get("/transactions/:id", TransactionController.getTransactionById)
+  .get(
+    "/transactions/:beginDate/:endDate",
+    TransactionController.getTransactionByDate
+  )
+  .get("/transactions/amount", TransactionController.getAmount)
   .post("/transactions", TransactionController.createTransaction)
-  .put("/transactions/:id", TransactionController.updateTransaction)
+  .patch("/transactions/:id", TransactionController.updateTransaction)
   .delete("/transactions/:id", TransactionController.deleteTransaction);
 
 export default router;

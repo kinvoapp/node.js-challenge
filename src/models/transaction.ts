@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import ITransaction from "../types/ITransaction";
 
-export const transactionSchema = new mongoose.Schema(
+export const transactionSchema: Schema = new mongoose.Schema(
   {
     title: {
       type: String,
