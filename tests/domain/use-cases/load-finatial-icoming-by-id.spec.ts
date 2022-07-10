@@ -16,8 +16,8 @@ type Output = LoadFinantialIncomeByUserIdRepository.Output
 export type LoadFinantialIncomeByUserId = (params: Input) => Promise<Output>
 export type Setup = (bankAccoutRepo: LoadFinantialIncomeByUserIdRepository) => LoadFinantialIncomeByUserId
 export const setupAddFinantialIncome: Setup = (bankAccoutRepo) => async params => {
-  await bankAccoutRepo.load({ userId: params.userId })
-  return undefined
+  const resutl = await bankAccoutRepo.load({ userId: params.userId })
+  return resutl !== undefined ? resutl : undefined
 }
 
 describe('LoadFinantialIncomeByUserId', () => {
@@ -43,5 +43,16 @@ describe('LoadFinantialIncomeByUserId', () => {
     await sut({ userId: 1 })
     expect(bankAccoutRepo.load).toHaveBeenCalledWith({ userId: 1 })
     expect(bankAccoutRepo.load).toHaveBeenCalledTimes(1)
+  })
+
+  it('should return a finantial income on sucess', async () => {
+    const result = await sut({ userId: 1 })
+    expect(result).toEqual({
+      id: 'any_id',
+      type: 'any_type',
+      value: 1000,
+      description: 'any_desc',
+      user_id: 1
+    })
   })
 })
