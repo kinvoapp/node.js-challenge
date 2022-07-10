@@ -41,7 +41,7 @@ describe('BcryptHandler', () => {
     expect(fakeBcrypt.compare).toBeCalledTimes(1)
   })
 
-  it('should return true on secuess', async () => {
+  it('should return true on sucuess', async () => {
     const isValid = await sut.compare({ value: 'any_value', valueToCompare: 'any_value' })
     expect(isValid).toBe(true)
   })
@@ -50,5 +50,11 @@ describe('BcryptHandler', () => {
     fakeBcrypt.compare.mockImplementationOnce(() => false)
     const isValid = await sut.compare({ value: 'any_value', valueToCompare: 'any_value_diferent' })
     expect(isValid).toBe(false)
+  })
+
+  it('should rethrow if compare throws', async () => {
+    fakeBcrypt.compare.mockImplementationOnce(() => { throw new Error('comparer-error') })
+    const promise = sut.compare({ value: 'any_value', valueToCompare: 'any_value_diferent' })
+    await expect(promise).rejects.toThrow(new Error('comparer-error'))
   })
 })
