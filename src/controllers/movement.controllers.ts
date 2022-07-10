@@ -92,7 +92,31 @@ async function getMovements (_: Request, res: Response, next: NextFunction): Pro
   }
 }
 
+async function getMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
+  const { id } = req.params
+  try {
+    const movement = await MovementServices.getMovement(id)
+
+    if (!movement) {
+      return res.status(422).json({ error: 'movement not found.' })
+    }
+
+    return res.status(200).json({
+      id: movement._id,
+      type: movement.type,
+      value: movement.value,
+      category: movement.category,
+      date: movement.date,
+      note: movement.note
+    })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+    next(error)
+  }
+}
+
 export default {
   createMovement,
-  getMovements
+  getMovements,
+  getMovement
 }

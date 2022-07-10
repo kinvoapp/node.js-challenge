@@ -33,7 +33,21 @@ async function getMovements (): Promise<IMovement[]> {
   return await MovementModel.find()
 }
 
+/**
+ * **getMovement**
+ * It is an asynchronous function that takes an `id` parameter
+ * and returns an object promise of type IMovement.
+ *
+ * @param id is an string.
+ * @returns {Promise<IMovement>} an object promise of type IMovement.
+ */
+
+async function getMovement (id: string): Promise<IMovement> {
+  return await MovementModel.findById(id)
+}
+
 export default {
   createMovement,
-  getMovements
+  getMovements,
+  getMovement
 }

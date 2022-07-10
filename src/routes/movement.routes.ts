@@ -11,5 +11,6 @@ const router = express.Router()
 
 router.post('/create', MovementControllers.createMovement)
 router.get('/', MovementControllers.getMovements)
+router.get('/:id', MovementControllers.getMovement)
 
 export default router
