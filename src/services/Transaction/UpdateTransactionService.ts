@@ -40,18 +40,19 @@ export class UpdateTransactionService {
     if (!transaction) {
       throw new NotFound("Transaction doesn't exist");
     }
-
+    const balanceInfo = this.buildBalanceInfo(
+      account.available,
+      data,
+      account.balanceId,
+      transaction
+    );
     const updatedTransaction =
       await this.updateTransactionRepository.updateTransaction(
         transaction.id,
         data,
-        this.buildBalanceInfo(
-          account.available,
-          data,
-          account.balanceId,
-          transaction
-        )
+        balanceInfo
       );
+    return updatedTransaction;
   }
 
   private buildBalanceInfo(
@@ -60,22 +61,88 @@ export class UpdateTransactionService {
     balanceId: string,
     transaction: ICreateTransactionResponse
   ): IBalanceInfo | undefined {
-    if (!data.amount) {
-      return undefined;
-    }
     const balanceInfo: IBalanceInfo = {
       id: balanceId,
       newBalance: currentBalance,
     };
 
-    if (data.type === "CASHIN") {
-      balanceInfo.newBalance += data.amount;
-    } else {
-      if (currentBalance < data.amount) {
-        throw new InvalidArgument("Insufficient funds");
-      }
-      balanceInfo.newBalance -= data.amount;
+    if (
+      data.amount === transaction.amount &&
+      (data.type === transaction.type || !data.type)
+    ) {
+      return undefined;
     }
-    return balanceInfo;
+
+    if (
+      data.amount === transaction.amount &&
+      data.type &&
+      data.type !== transaction.type
+    ) {
+      if (transaction.type === "CASHOUT") {
+        balanceInfo.newBalance += 2 * data.amount;
+        return balanceInfo;
+      }
+      const debit = 2 * data.amount;
+      this.validateBalance(currentBalance, debit);
+      balanceInfo.newBalance -= debit;
+      return balanceInfo;
+    }
+
+    if (!data.amount && data.type !== transaction.type) {
+      if (transaction.type === "CASHIN") {
+        const debit = 2 * transaction.amount;
+        this.validateBalance(currentBalance, debit);
+        balanceInfo.newBalance -= debit;
+        return balanceInfo;
+      } else {
+        const credit = 2 * transaction.amount;
+        balanceInfo.newBalance += credit;
+        return balanceInfo;
+      }
+    }
+
+    if (data.amount && data.amount !== transaction.amount) {
+      if (transaction.type === "CASHIN") {
+        if (data.type === "CASHIN" || !data.type) {
+          if (data.amount > transaction.amount) {
+            const difference = data.amount - transaction.amount;
+            balanceInfo.newBalance += difference;
+            return balanceInfo;
+          } else {
+            const debit = transaction.amount - data.amount;
+            this.validateBalance(currentBalance, debit);
+            balanceInfo.newBalance -= debit;
+            return balanceInfo;
+          }
+        } else {
+          const debitValue = transaction.amount + data.amount;
+          this.validateBalance(currentBalance, debitValue);
+          balanceInfo.newBalance -= debitValue;
+          return balanceInfo;
+        }
+      } else {
+        if (data.type === "CASHOUT" || !data.type) {
+          if (data.amount < transaction.amount) {
+            const credit = transaction.amount - data.amount;
+            balanceInfo.newBalance += credit;
+            return balanceInfo;
+          } else {
+            const debit = data.amount - transaction.amount;
+            balanceInfo.newBalance -= debit;
+            return balanceInfo;
+          }
+        } else {
+          const credit = transaction.amount + data.amount;
+          balanceInfo.newBalance += credit;
+          return balanceInfo;
+        }
+      }
+    }
+  }
+
+  private validateBalance(currentBalance: number, amount: number) {
+    if (currentBalance < amount) {
+      throw new InvalidArgument("Insufficient funds");
+    }
   }
 }
