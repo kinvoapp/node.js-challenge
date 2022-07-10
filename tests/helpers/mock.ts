@@ -8,7 +8,7 @@ import {
 export function mockICreateUserRequest() {
   const studentData: ICreateStudentRequest = {
     name: faker.name.findName(),
-    document: Math.floor(Math.random() * 1000000000000).toString(),
+    document: Math.floor(Math.random() * 100000000000).toString(),
     password: "admin",
   };
   return studentData;
