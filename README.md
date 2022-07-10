@@ -94,7 +94,7 @@ O workflow completo pode ser encontrado em:
 |  Verbo   |                    Endpoint                     |                 Descrição                  |     Acessível à:      |
 | :------- | :---------------------------------------------: | :----------------------------------------: | :-------------------: |
 | `POST`   |                    `/student`                   |         Criação de novo estudante          |       ---------       |
-| `POST`   |                    `/login/user`                |        Autenticação de estudante           |       ---------       |
+| `POST`   |                  `/login/student`               |        Autenticação de estudante           |       ---------       |
 | `POST`   |                   `/transaction`                |         Criação de movimentação            |       Estudante       |
 | `GET`    |                   `/transaction`                |           Listagem de movimentações        |       Estudante       |
 | `PATCH`  |                 `/transaction/:id`              |        Atualização de movimentação         |       Estudante       |

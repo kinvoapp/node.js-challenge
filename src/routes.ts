@@ -12,6 +12,7 @@ import {
   createStudentSchema,
   authenticateStudentSchema,
   createTransactionSchema,
+  updateTransactionSchema,
 } from "./domain/schema";
 
 const router = Router();
@@ -54,6 +55,7 @@ router.get(
 );
 router.patch(
   "/transaction/:transactionId",
+  validateResource(updateTransactionSchema),
   ensureAuthenticated,
   updateTransactionController.handle
 );

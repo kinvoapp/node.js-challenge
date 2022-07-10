@@ -38,3 +38,11 @@ export const createTransactionSchema = object({
     }),
   }),
 });
+
+export const updateTransactionSchema = object({
+  body: object({
+    amount: number().optional(),
+    description: string().optional(),
+    type: string().optional(),
+  }),
+});
