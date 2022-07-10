@@ -32,7 +32,7 @@ export class AddFinatitalIncomesControler extends Controller {
   override buildValidators ({ type, value, description }: HttpRequest): Validator[] {
     return [
       ...ValidationBuilder.of({ value: type, fieldName: 'type' }).required().build(),
-      ...ValidationBuilder.of({ value: value.toString(), fieldName: 'value' }).required().build(),
+      ...ValidationBuilder.of({ value: value !== undefined ? value.toString() : '', fieldName: 'value' }).required().build(),
       ...ValidationBuilder.of({ value: description, fieldName: 'description' }).required().build()
     ]
   }

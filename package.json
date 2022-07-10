@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node -r dotenv/config dist/main/server.js",
-    "up": "sudo docker-compose up",
+    "up": "yarn build && sudo docker-compose up",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "lint": "eslint .",
     "lint:fix": "yarn lint -- --fix",

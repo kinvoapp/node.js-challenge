@@ -3,7 +3,7 @@ export class bancAccount1657470422706 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'bancAccount',
+        name: 'bankAccount',
         columns: [
           {
             name: 'id',
@@ -16,7 +16,7 @@ export class bancAccount1657470422706 implements MigrationInterface {
           },
           {
             name: 'value',
-            type: 'number'
+            type: 'int'
           },
           {
             name: 'description',
@@ -24,7 +24,7 @@ export class bancAccount1657470422706 implements MigrationInterface {
           },
           {
             name: 'user_id',
-            type: 'number'
+            type: 'int'
           }
         ]
       })

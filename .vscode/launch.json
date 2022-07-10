@@ -6,9 +6,17 @@
             "type": "node",
             "request": "attach",
             "name": "Attach to Node",
-            "remoteRoot": "/usr/src/clean-node-api",
+            "remoteRoot": "/usr/src/node-challenge-api",
             "port": 9223,
             "restart": true
-        }
+        },
+        {
+          "type": "node",
+          "request": "attach",
+          "name": "Docker: Attach to Node",
+          "remoteRoot": "/usr/src/node-challenge-api",
+          "port": 9223,
+          "restart": true
+      }
     ]
 }
