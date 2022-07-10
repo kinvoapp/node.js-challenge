@@ -8,6 +8,8 @@ const usersController = new UsersControllers()
 
 
 usersRoutes.post('/', usersController.create)
+usersRoutes.post('/login', usersController.createSession)
+usersRoutes.get('/:user_id', usersController.show)
 
 
 export {usersRoutes}

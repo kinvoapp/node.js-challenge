@@ -1,10 +1,11 @@
-import { Column, CreateDateColumn, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import {v4 as uuid} from 'uuid'
-import { Transaction } from "../../transactions/infra/model/Transaction";
+import { Transaction } from "../../transactions/model/Transaction";
 import { UserToken } from "./UserToken";
 
+@Entity('users')
 class User {
-  
+
   @PrimaryColumn()
   id: string;
 
@@ -29,7 +30,7 @@ class User {
   @OneToMany(() => UserToken, userToken => userToken.user_id)
   userTokens: UserToken[]
 
-  @OneToMany(() => Transaction, transaction => transaction.user_id)
+  @OneToMany(type => Transaction, transaction => transaction.user)
   transactions: Transaction[]
   
 

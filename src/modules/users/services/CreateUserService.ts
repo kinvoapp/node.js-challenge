@@ -1,11 +1,14 @@
 import { inject, injectable } from "tsyringe";
 import { UsersRepository } from "../repositories/UsersRepository";
 import {hash} from 'bcryptjs'
+import { IUsersRepository } from "../models/IUsersRepository";
 
 
 @injectable()
 class CreateUserService {
-  constructor(@inject('UsersRepository') private usersRepository: UsersRepository) { }
+  constructor(
+    @inject('UsersRepository') private usersRepository: IUsersRepository
+  ){}
   
   public async execute(username: string, email: string, password: string) {
 

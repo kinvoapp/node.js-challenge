@@ -22,6 +22,12 @@ class TransactionsRepository {
     return await this.ormRepository.save(transaction)
   }
 
+  public async findByUserId(user_id: string): Promise<Transaction[]> {
+    const transactions = await this.ormRepository.createQueryBuilder('transactions').where('user_id = :user_id', { user_id: user_id }).getMany()
+    
+    return transactions
+  }
+
   public async findAll(): Promise<Transaction[]> {
     return await this.ormRepository.find()
   }

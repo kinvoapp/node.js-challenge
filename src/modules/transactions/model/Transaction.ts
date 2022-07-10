@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import {v4 as uuid} from 'uuid'
-import { User } from "../../../users/models/User";
+import { User } from "../../users/models/User";
 
+@Entity('transactions')
 class Transaction {
   
   @PrimaryColumn()
@@ -21,7 +22,7 @@ class Transaction {
 
   @Column()
   user_id: string;
-  @ManyToOne('users', (user: User) => user.transactions)
+  @ManyToOne(type => User, user => user.transactions)
   @JoinColumn({ name: 'user_id' })
   user: User;
   

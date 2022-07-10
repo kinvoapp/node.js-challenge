@@ -1,6 +1,11 @@
-import express, {Request, Response} from 'express'
+import 'reflect-metadata'
+import 'express-async-errors';
+import express, { Request, Response } from 'express'
 import cors from 'cors'
 import logger from 'morgan'
+import { routes } from './shared/routes'
+import './shared/container'
+
 
 export const app = express()
 
@@ -10,6 +15,10 @@ app.use(express.json())
 
 app.use(logger('dev'))
 
-app.use('/', (req: Request , res: Response) => {
+
+
+app.use('/', routes)
+
+app.use('/', (__: Request , res: Response) => {
     res.send('Opa')
 })

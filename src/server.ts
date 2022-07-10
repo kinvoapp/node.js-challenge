@@ -1,11 +1,15 @@
 import { app } from "./app";
+import Database from "./config/database";
 
 
 const PORT = 1000;
 
-const server = app.listen(PORT, () => console.log(`App na porta ${PORT}`))
+const server = app.listen(PORT, async() => {
+  const database = new Database();
+  const dbConn = await database.getConnection();
+  console.log(`App on port ${PORT}`)})
 
 process.on('SIGINT', () => {
   server.close();
-  console.log('App finalizado.')
+  console.log('App closed')
 })
