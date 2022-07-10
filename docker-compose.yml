@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7.37
+    container_name: typeorm-mysql
+    ports:
+      - "8080:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_DATABASE: "manager_finance"
+      MYSQL_USER: "test"
+      MYSQL_PASSWORD: "test"
+    restart: always
+networks:
+  typeorm:
