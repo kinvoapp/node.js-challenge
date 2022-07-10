@@ -26,7 +26,7 @@ yarn start
 
 #### Retorna o saldo total
 
-```http
+```
   GET /transactions/amount
 ```
 
@@ -34,30 +34,30 @@ yarn start
 
 #### Cria uma nova Transação
 
-```http
+```
   POST /transactions
 ```
 
 #### Retorna todas as Transações
 
-```http
+```
   GET /transactions
 ```
 
 #### Retorna Transações por data.
 
-```http
+```
   GET /transactions/:beginDate/:endDate
 ```
 
 #### Atualiza Transação
 
-```http
+```
   PATCH /transactions/:id
 ```
 
 #### Exclui uma Transação
 
-```http
+```
   DELETE /transactions/:id
 ```
