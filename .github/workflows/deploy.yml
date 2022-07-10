@@ -42,7 +42,7 @@ jobs:
           npm run test
         env:
           DATABASE_URL: postgresql://root:admin@localhost:5432/kinvochallengetest?schema=public
-          STUDENT_SECRET: 607dcd8c0bb5be4567df79417088bab6
+          STUDENT_SECRET: 3dd4375b259007313f23bc7709c7b08c
       - name: Deploy application
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.12

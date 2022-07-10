@@ -1,5 +1,4 @@
-import { TransactionType } from "@prisma/client";
-import { boolean, number, object, string, TypeOf } from "zod";
+import { number, object, string } from "zod";
 
 export const createStudentSchema = object({
   body: object({
@@ -8,10 +7,10 @@ export const createStudentSchema = object({
     }),
     password: string({
       required_error: "Password is required",
-    }).min(6, "Password too short"),
+    }),
     document: string({
       required_error: "Document is required",
-    }).length(11),
+    }),
   }),
 });
 
