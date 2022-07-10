@@ -1,6 +1,6 @@
 export enum TransactionType {
-  Deposit,
-  Withdraw
+  Deposit = 'Deposit',
+  Withdraw = 'Withdraw'
 }
 
 export type TransactionProps = {
