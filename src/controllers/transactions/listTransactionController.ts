@@ -1,7 +1,6 @@
 import { ITransaction } from "@models/transactions";
 import { RequestHandler } from "express";
 import { getTransactions } from "../../services/transactions/listTransactionService";
-import { errorHandler } from "../../utils/errorHandler";
 
 export const listTransactions: RequestHandler = async (req, res) => {
     const user_id = req.userID!
