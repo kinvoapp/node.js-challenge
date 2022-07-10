@@ -20,7 +20,7 @@ export class CreateUserController {
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          return response.status(401).json({ message: 'Este email já está cadastrado no sistema'})
+          return response.status(401).json({ message: 'Este email já está cadastrado no sistema' })
         }
       }
     }

@@ -4,7 +4,7 @@ import { prismaClient } from '../../database/prismaClient';
 import generateToken from '../../utils/generateToken';
 
 export class LoginController {
-  async handle (request: Request, response: Response) {
+  async handle(request: Request, response: Response) {
     const { email, password } = request.body;
     await prismaClient.user.findFirst({
       where: {

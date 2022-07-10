@@ -5,6 +5,7 @@ import { GetAllTransactionsByUserController } from '../controllers/Transactions/
 import { GetTransactionsByDateController } from '../controllers/Transactions/GetTransactionsByDateController';
 import { UpdateTransactionController } from '../controllers/Transactions/UpdateTransactionController';
 import { GetBalanceController } from '../controllers/Transactions/GetBalanceController';
+import { GetTransactionsWithPaginationController } from '../controllers/Transactions/GetTransactionsWithPaginationController';
 import AuthMiddleware from '../middlewares/auth';
 const routes = Router();
 
@@ -12,6 +13,7 @@ routes
   .get('/transactions/all', AuthMiddleware, new GetAllTransactionsByUserController().handle)
   .get('/transactions', AuthMiddleware, new GetTransactionsByDateController().handle)
   .get('/transactions/balance', AuthMiddleware, new GetBalanceController().handle)
+  .get('/transactions/paginate', AuthMiddleware, new GetTransactionsWithPaginationController().handle)
   .post('/transactions/new', AuthMiddleware, new CreateTransactionController().handle)
   .put('/transactions/update/:id', AuthMiddleware, new UpdateTransactionController().handle)
   .delete('/transactions/delete/:id', AuthMiddleware, new DeleteTransactionController().handle)
