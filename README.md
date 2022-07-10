@@ -50,6 +50,7 @@ npm run dev
 
   - Response: 
     - Status: `200 OK`
+    - Body
         ```json
         {
             "record": [
