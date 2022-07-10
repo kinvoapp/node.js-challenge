@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 mongoose
   .connect(
-    "mongodb+srv://pedrobuenoxs:12345@dev-challenge.wwuxf6z.mongodb.net/?retryWrites=true&w=majority"
+    `mongodb+srv://pedrobuenoxs:12345@dev-challenge.wwuxf6z.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
     console.log("Db connected");
