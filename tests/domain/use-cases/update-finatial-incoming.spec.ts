@@ -16,19 +16,19 @@ describe('UpdateFinantialIncome', () => {
   })
 
   it('should call load with correct input', async () => {
-    await sut({ type: 'any_type', value: 1000, description: 'any_desc' })
-    expect(bankAccoutRepo.update).toHaveBeenCalledWith({ type: 'any_type', value: 1000, description: 'any_desc' })
+    await sut({ id: 1, type: 'any_type', value: 1000, description: 'any_desc' })
+    expect(bankAccoutRepo.update).toHaveBeenCalledWith({ id: 1, type: 'any_type', value: 1000, description: 'any_desc' })
     expect(bankAccoutRepo.update).toHaveBeenCalledTimes(1)
   })
 
   it('should return a finantial income on sucess', async () => {
-    const result = await sut({ type: 'any_type', value: 1000, description: 'any_desc' })
+    const result = await sut({ id: 1, type: 'any_type', value: 1000, description: 'any_desc' })
     expect(result).toEqual({ message: 'updated' })
   })
 
   it('should rethrow if finatila icome not found', async () => {
     bankAccoutRepo.update.mockResolvedValueOnce(undefined)
-    const promise = sut({ type: 'any_type', value: 1000, description: 'any_desc' })
+    const promise = sut({ id: 1, type: 'any_type', value: 1000, description: 'any_desc' })
     await expect(promise).rejects.toThrow()
   })
 })

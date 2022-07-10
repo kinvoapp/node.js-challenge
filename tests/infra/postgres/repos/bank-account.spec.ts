@@ -19,7 +19,7 @@ describe('PgBankAccountRepository', () => {
     await getConnection().close()
   })
 
-  describe('load', () => {
+  describe('add', () => {
     beforeEach(() => {
       backup.restore()
       sut = new PgBankAccountRepository()
@@ -29,6 +29,34 @@ describe('PgBankAccountRepository', () => {
       const userAccount = await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
       const bankAccount = await sut.add({ type: 'any_type', value: 1000, description: 'any_desc', user_id: userAccount.id })
       expect(bankAccount?.id).toBe('1')
+    })
+  })
+
+  describe('load', () => {
+    it('should return an account if email exists', async () => {
+      await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
+      const account = await sut.load({ userId: 1 })
+
+      expect(account?.id).toEqual(1)
+    })
+
+    it('should return  undefined if email does not exists', async () => {
+      const account = await sut.load({ userId: 2 })
+      expect(account?.id).toBeUndefined()
+    })
+  })
+
+  describe('load', () => {
+    it('should return an account if email exists', async () => {
+      await pgUserRepo.save({ name: 'any_name', email: 'any_existing_email', password: 'any_password' })
+      const account = await sut.load({ userId: 1 })
+
+      expect(account?.id).toEqual(1)
+    })
+
+    it('should return  undefined if email does not exists', async () => {
+      const account = await sut.load({ userId: 2 })
+      expect(account?.id).toBeUndefined()
     })
   })
 })

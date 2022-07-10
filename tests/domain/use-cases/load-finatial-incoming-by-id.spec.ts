@@ -9,7 +9,7 @@ describe('LoadFinantialIncomeByUserId', () => {
   beforeAll(() => {
     bankAccoutRepo = mock()
     bankAccoutRepo.load.mockResolvedValue({
-      id: 'any_id',
+      id: 1,
       type: 'any_type',
       value: 1000,
       description: 'any_desc',
@@ -30,7 +30,7 @@ describe('LoadFinantialIncomeByUserId', () => {
   it('should return a finantial income on sucess', async () => {
     const result = await sut({ userId: 1 })
     expect(result).toEqual({
-      id: 'any_id',
+      id: 1,
       type: 'any_type',
       value: 1000,
       description: 'any_desc',

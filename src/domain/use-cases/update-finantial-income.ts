@@ -7,7 +7,7 @@ export type UpdateFinantialIncome = (params: Input) => Promise<Output>
 type Setup = (bankAccoutRepo: UpdateFinantialIncomeRepository) => UpdateFinantialIncome
 
 export const setupUpdateFinantialIncome: Setup = (bankAccoutRepo) => async params => {
-  const resutl = await bankAccoutRepo.update({ type: params.type, value: params.value, description: params.description })
+  const resutl = await bankAccoutRepo.update({ id: params.id, type: params.type, value: params.value, description: params.description })
   if (resutl !== undefined) {
     return { message: 'updated' }
   }

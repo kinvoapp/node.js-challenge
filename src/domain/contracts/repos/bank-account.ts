@@ -10,7 +10,7 @@ export interface AddFinantialIncomeRepository {
 
 export namespace LoadFinantialIncomeByUserIdRepository {
   export type Input = { userId: number }
-  export type Output = undefined | { id: string, type: string, value: number, description: string, user_id: number }
+  export type Output = undefined | { id: number, type: string, value: number, description: string, user_id: number }
 
 }
 
@@ -19,7 +19,7 @@ export interface LoadFinantialIncomeByUserIdRepository {
 }
 
 export namespace UpdateFinantialIncomeRepository {
-  export type Input = { type: string, value: number, description: string }
+  export type Input = { id: number, type: string, value: number, description: string }
   export type Output = undefined | { message: string }
 
 }
