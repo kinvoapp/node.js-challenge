@@ -27,7 +27,9 @@ export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (param
   const result = await userAccountRepo.load({ email: params.email })
   if (result !== undefined) {
     const { key } = await crypto.decrypt({ value: result.password })
-    if (key !== params.password) {
+    if (key === params.password) {
+      await token.generate({ key: result.id })
+    } else {
       throw new InvalidParamError('password')
     }
   } else {
@@ -84,5 +86,11 @@ describe('Login', () => {
     crypto.decrypt.mockResolvedValueOnce({ key: 'any_key' })
     const promise = sut({ email, password })
     await expect(promise).rejects.toThrow(new Error('Invalid param: password'))
+  })
+
+  it('should  call token generator correct input', async () => {
+    await sut({ email, password })
+    expect(token.generate).toHaveBeenCalledWith({ key: 'any_user_id' })
+    expect(token.generate).toHaveBeenCalledTimes(1)
   })
 })
