@@ -97,3 +97,7 @@ export interface IBalanceInfo {
   id: string;
   newBalance: number;
 }
+
+export interface IBalanceInfoWithType extends IBalanceInfo {
+  type: TransactionType;
+}

@@ -8,6 +8,7 @@ import {
   IUpdateTransactionData,
 } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
+import { validateBalance } from "../Helpers/helper";
 
 export class UpdateTransactionService {
   private updateTransactionRepository: IUpdateTransactionRepository;
@@ -83,7 +84,7 @@ export class UpdateTransactionService {
         return balanceInfo;
       }
       const debit = 2 * data.amount;
-      this.validateBalance(currentBalance, debit);
+      validateBalance(currentBalance, debit);
       balanceInfo.newBalance -= debit;
       return balanceInfo;
     }
@@ -91,7 +92,7 @@ export class UpdateTransactionService {
     if (!data.amount && data.type !== transaction.type) {
       if (transaction.type === "CASHIN") {
         const debit = 2 * transaction.amount;
-        this.validateBalance(currentBalance, debit);
+        validateBalance(currentBalance, debit);
         balanceInfo.newBalance -= debit;
         return balanceInfo;
       } else {
@@ -110,13 +111,13 @@ export class UpdateTransactionService {
             return balanceInfo;
           } else {
             const debit = transaction.amount - data.amount;
-            this.validateBalance(currentBalance, debit);
+            validateBalance(currentBalance, debit);
             balanceInfo.newBalance -= debit;
             return balanceInfo;
           }
         } else {
           const debitValue = transaction.amount + data.amount;
-          this.validateBalance(currentBalance, debitValue);
+          validateBalance(currentBalance, debitValue);
           balanceInfo.newBalance -= debitValue;
           return balanceInfo;
         }
@@ -137,12 +138,6 @@ export class UpdateTransactionService {
           return balanceInfo;
         }
       }
-    }
-  }
-
-  private validateBalance(currentBalance: number, amount: number) {
-    if (currentBalance < amount) {
-      throw new InvalidArgument("Insufficient funds");
     }
   }
 }
