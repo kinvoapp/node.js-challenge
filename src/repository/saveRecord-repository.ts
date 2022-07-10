@@ -1,15 +1,11 @@
 import mongoose from "mongoose";
 import Record from "../models/recordModel";
-import { Request } from "express";
+import { TransactionDTO } from "../DTO/transaction-DTO";
 
-const createRecord = (Request: Request) => {
-  const { desc, type, value, note } = Request.body;
+const createRecord = (data: TransactionDTO) => {
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
-    desc,
-    type,
-    value,
-    note,
+    ...data,
   });
 
   return record.save();

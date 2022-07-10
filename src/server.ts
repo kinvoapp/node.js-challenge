@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 import app from "./app";
 dotenv.config();
-const PORT = process.env.PORT;
 
-const HOSTNAME = process.env.HOSTNAME;
+const PORT = process.env.PORT || 3000;
+
+const HOSTNAME = process.env.HOSTNAME || "localhost";
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`);

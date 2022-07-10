@@ -19,7 +19,8 @@ const addTransaction = (req: Request, res: Response) => {
     if (!type) return res.status(400).json({ error: "the type is required" });
     if (!value) return res.status(400).json({ error: "the value is required" });
 
-    createRecord(req)
+    const data = req.body;
+    createRecord(data)
       .then((result) => {
         return res.status(201).json({
           record: result,
@@ -30,12 +31,14 @@ const addTransaction = (req: Request, res: Response) => {
       });
   } catch (error) {
     res.status(500).json({ error: "something went wrong." });
-    // next();
   }
 };
 
 const updateTransaction = (req: Request, res: Response) => {
-  updateRecord(req)
+  const id = req.params.id;
+  const data = req.body;
+
+  updateRecord(id, data)
     .then((result) => {
       return res.status(201).json({
         record: result,

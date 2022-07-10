@@ -1,8 +1,7 @@
 import Record from "../models/recordModel";
-import { Request } from "express";
+import { TransactionDTO } from "../DTO/transaction-DTO";
 
-const updateRecord = (Request: Request) => {
-  return Record.findByIdAndUpdate(Request.params.id, Request.body);
+const updateRecord = (id: string, data: TransactionDTO) => {
+  return Record.findByIdAndUpdate(id, data);
 };
-
 export default updateRecord;
