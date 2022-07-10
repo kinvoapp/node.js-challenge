@@ -8,7 +8,12 @@ export const signUp = async (req: Request, res: Response) => {
     await registerUser(user).then(() => {
         return res.status(201).json({ message: "User registered successfully" })
     }).catch((error) => {
-        return res.status(error.status).json({ message: error.message })
+        if (error.status) {
+            return res.status(error.status).json({ message: error.message })
+        } else {
+            return res.status(500).json(error)
+        }
+
     })
 
 }
