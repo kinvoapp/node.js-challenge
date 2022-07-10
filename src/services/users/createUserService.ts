@@ -8,22 +8,23 @@ export const registerUser = async (user: IUserData) => {
     const { email, password, firstname } = user
 
     if (!email) {
-        throw { status: 404, message: "E-mail is required" }
+        throw { status: 400, message: "E-mail is required" }
 
     }
 
     if (!firstname) {
-        throw { status: 404, message: "Name is required" }
+        throw { status: 400, message: "Name is required" }
     }
 
     if (!password) {
-        throw { status: 404, message: "Password is required" }
+        throw { status: 400, message: "Password is required" }
     }
 
     const userExist = await findUserService(user)
 
     if (userExist) {
-        throw { status: 404, message: "E-mail already registered" }
+
+        throw { status: 400, message: "E-mail already registered" }
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10)
