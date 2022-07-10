@@ -6,8 +6,14 @@ export type Hello = {
 
 export type TypeMovement = 'expense' | 'income'
 
+export type Balance = {
+  expenses: number
+  incomes: number
+  balance: number
+}
+
 export interface IMovement {
-  _id?: Types.ObjectId
+  _id?: Types.ObjectId | string
   type: TypeMovement
   value: number
   category: string

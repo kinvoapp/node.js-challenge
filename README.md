@@ -215,6 +215,22 @@ This application has the following endpoints:
   ```
 
   - Validation: validates if the movement exists.
+
+- **GET**: `/balance` - Balance display.
+
+  - endpoint: [http://localhost:8080/movement/balance](http://localhost:8080/movement/balance)
+
+  - response:
+
+  ```jsonc
+  {
+	  "expenses": 2200,
+	  "incomes": 0,
+	  "balance": -2200
+  }
+  ```
+
+  - Validation: validates if the movement exists.
   
 - **PUT**: `/update/:id` - Movement update.
 
