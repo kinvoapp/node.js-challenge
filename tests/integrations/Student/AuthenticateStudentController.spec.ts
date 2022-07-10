@@ -17,5 +17,21 @@ describe("Create Student Controller", () => {
       .post("/login/student")
       .send(loginRequest);
     expect(response.status).toBe(200);
+    expect(response.body.token).toBeDefined();
+  });
+  it("should fail if credentials don't match", async () => {
+    const studentRequest = mockICreateUserRequest();
+
+    const createUserResponse = await createStudent(studentRequest);
+
+    const loginRequest = {
+      document: createUserResponse.document,
+      password: "fail",
+    };
+
+    const response = await superAppRequest
+      .post("/login/student")
+      .send(loginRequest);
+    expect(response.status).toBe(400);
   });
 });

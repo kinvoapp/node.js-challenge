@@ -8,7 +8,7 @@ import {
   IUpdateTransactionData,
 } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
-import { validateBalance } from "../Helpers/helper";
+import { validateBalance } from "../../helpers/helper";
 
 export class UpdateTransactionService {
   private updateTransactionRepository: IUpdateTransactionRepository;
