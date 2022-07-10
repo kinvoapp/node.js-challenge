@@ -1,4 +1,5 @@
 import { mock, MockProxy } from 'jest-mock-extended'
+import { AuthenticationError } from '@/domain/entities/errors'
 
 export namespace LoadFinantialIncomeByUserIdRepository {
   export type Input = { userId: number }
@@ -17,7 +18,10 @@ export type LoadFinantialIncomeByUserId = (params: Input) => Promise<Output>
 export type Setup = (bankAccoutRepo: LoadFinantialIncomeByUserIdRepository) => LoadFinantialIncomeByUserId
 export const setupAddFinantialIncome: Setup = (bankAccoutRepo) => async params => {
   const resutl = await bankAccoutRepo.load({ userId: params.userId })
-  return resutl !== undefined ? resutl : undefined
+  if (resutl !== undefined) {
+    return resutl
+  }
+  throw new AuthenticationError()
 }
 
 describe('LoadFinantialIncomeByUserId', () => {
@@ -54,5 +58,11 @@ describe('LoadFinantialIncomeByUserId', () => {
       description: 'any_desc',
       user_id: 1
     })
+  })
+
+  it('should rethrow if finatila icome not found', async () => {
+    bankAccoutRepo.load.mockResolvedValueOnce(undefined)
+    const promise = sut({ userId: 1 })
+    await expect(promise).rejects.toThrow()
   })
 })
