@@ -1,27 +1,31 @@
 import { Router } from "express";
-import { createTransaction } from "@controllers/transactions/createTransaction/createTransactionController";
-import { deleteTransaction } from "@controllers/transactions/deleteTransaction/deleteTransactionController";
-import { updateTransaction } from "@controllers/transactions/updateTransaction/updateTransactionController";
-
-import { getBalance } from "@controllers/transactions/getBalance";
-import { filterByDate } from "@controllers/filter/filterByDate";
-import { listTransactions } from "@controllers/transactions/listTransactions/listTransactionController";
+import { createTransaction } from "@controllers/transactions/createTransactionController";
+import { deleteTransaction } from "@controllers/transactions/deleteTransactionController";
+import { updateTransaction } from "@controllers/transactions/updateTransactionController";
+import { listTransactions } from "@controllers/transactions/listTransactionController";
+import { getBalance } from "@controllers/transactions/sumTransactionsController";
+import { filterByDate } from "@controllers/filters/filterByDateController";
+import { signUp } from "@controllers/users/createUserController";
+import { signIn } from "@controllers/authentication/authenticationController";
+import { validateToken } from "../middlewares/validateToken";
 
 const router = Router()
 
 //Users Routes
-
+router.post("/user", signUp)
+router.post("/user/authentication", signIn)
 
 
 //Transactions Routes
-router.get('/user/balance', getBalance)
+router.use(validateToken)
+router.get('/balance', getBalance)
 router.get('/transactions/:page', listTransactions)
 
 router.post('/transactions', createTransaction)
-router.put('/transactions/:id', updateTransaction)
+router.patch('/transactions/:id', updateTransaction)
 router.delete('/transactions/:id', deleteTransaction)
 
 //Filter Routes
-router.post('/transactions/filterByDate', filterByDate)
+router.get('/transactions/filter', filterByDate) //query
 
 export default router
