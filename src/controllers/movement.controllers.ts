@@ -7,7 +7,8 @@
 import { Request, Response, NextFunction } from 'express'
 import MovementModel from '@models/Movement'
 import MovementServices from '@services/movement.services'
-import { IMovement } from 'types'
+import Utils from '@utils/movementsUtils'
+import { Balance, IMovement } from 'types'
 
 /**
  * **createMovement**
@@ -74,6 +75,10 @@ async function getMovements (_: Request, res: Response, next: NextFunction): Pro
   try {
     const movements = await MovementServices.getMovements()
 
+    if (movements.length === 0) {
+      return res.status(200).json({ message: 'there are no movements' })
+    }
+
     return res.status(200).json(
       movements.map((e) => {
         return {
@@ -119,6 +124,33 @@ async function getMovement (req: Request, res: Response, next: NextFunction): Pr
       date: movement.date,
       note: movement.note
     })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+    next(error)
+  }
+}
+
+/**
+ * **getBalance**
+ * is an asynchronous function that returns the balance of the movements.
+ *
+ * @param _ is an Request from express.
+ * @param res is an Response from express.
+ * @param next is an NextFuncion from express.
+ * @returns {Promise<Response<Balance, Record<string, Balance>>>} a promise from an Balance.
+ */
+
+async function getBalance (_: Request, res: Response, next: NextFunction): Promise<Response<Balance, Record<string, Balance>>> {
+  try {
+    const movements = await MovementServices.getMovements()
+
+    if (movements.length === 0) {
+      return res.status(200).json({ message: 'there are no movements' })
+    }
+
+    const balance = Utils.balanceMovement(movements)
+
+    return res.status(200).json(balance)
   } catch (error) {
     res.status(500).json({ error: error.message })
     next(error)
@@ -213,6 +245,7 @@ export default {
   createMovement,
   getMovements,
   getMovement,
+  getBalance,
   updateMovement,
   deleteMovement
 }
