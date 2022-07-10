@@ -1,6 +1,6 @@
 const frisby = require("frisby");
 
-const { createUser } = require("../src/utils/tests.functions");
+const { createUser, deleteUser } = require("../src/utils/tests.functions");
 
 require("dotenv").config();
 
@@ -11,24 +11,54 @@ const URL_Deploy =
     ? `http://${HOST}:${PORT}`
     : "https://node-challenge-backend.herokuapp.com/";
 
-// const createUser = async () =>
-//   await frisby
-//     .post(`${URL_Deploy}/user`, {
-//       id: 1,
-//       name: "Aluno",
-//       email: "aluno@gmail.com",
-//       password: "alunopassword",
-//     })
-//     .expect("status", 201);
-
 describe("Users tests.", () => {
-  it("It must be possible to enter a user.", async () => {
-    await createUser(frisby, URL_Deploy, {
-      id: 1,
-      name: "Aluno",
-      email: "aluno@gmail.com",
-      password: "alunopassword",
+  it("It should not be possible to register a user with an email already registered.", async () => {
+    await createUser(
+      frisby,
+      URL_Deploy,
+      {
+        id: 1,
+        name: "Aluno - Cadastro",
+        email: "alunojacadastrado@gmail.com",
+        password: "alunojacadastrado",
+      },
+      201
+    );
+
+    const response = await createUser(
+      frisby,
+      URL_Deploy,
+      {
+        id: 1,
+        name: "Aluno - Cadastro",
+        email: "alunojacadastrado@gmail.com",
+        password: "alunojacadastrado",
+      },
+      401
+    );
+
+    expect(response).toEqual("E-mail already registered.");
+
+    const deleted = await deleteUser(frisby, URL_Deploy, 1, 200);
+
+    expect(deleted).toEqual({
+      acknowledged: true,
+      deletedCount: 1,
     });
+  });
+
+  it("It must be possible to enter a user.", async () => {
+    await createUser(
+      frisby,
+      URL_Deploy,
+      {
+        id: 1,
+        name: "Aluno",
+        email: "aluno@gmail.com",
+        password: "alunopassword",
+      },
+      201
+    );
   });
 
   it("It should be possible to list all users.", async () => {
@@ -49,19 +79,24 @@ describe("Users tests.", () => {
       .expect("status", 200);
   });
 
-  it("It must be possible to search for a user by ID.", async () => {
-    await createUser();
+  it("It must be possible to delete a user by ID.", async () => {
+    await createUser(
+      frisby,
+      URL_Deploy,
+      {
+        id: 1,
+        name: "Aluno a ser excluído",
+        email: "alunoaserdeletado@gmail.com",
+        password: "alunoaserdeletado",
+      },
+      201
+    );
 
-    await frisby
-      .delete(`${URL_Deploy}/user/1`)
-      .expect("status", 200)
-      .then((response) => {
-        const { body } = response;
-        console.log(body);
-        expect({
-          acknowledged: true,
-          deletedCount: 1,
-        }).toEqual(JSON.parse(body));
-      });
+    const deleted = await deleteUser(frisby, URL_Deploy, 1, 200);
+
+    expect(deleted).toEqual({
+      acknowledged: true,
+      deletedCount: 1,
+    });
   });
 });

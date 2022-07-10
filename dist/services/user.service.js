@@ -12,6 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const userModel = require("../models/users.models");
 exports.userCreateService = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield userModel.find();
+    const { email } = user;
+    const findUser = yield userModel.find({ email });
+    if (findUser.length > 0)
+        return { code: 401, message: "E-mail already registered." };
     const id = user.id ? user.id : users.length + 1;
     const userId = yield userModel.create(Object.assign(Object.assign({}, user), { id }));
     return userId;

@@ -17,7 +17,7 @@ describe("Deploy verify.", () => {
       .then((response) => {
         const { body } = response;
 
-        expect({ app: "Cada centavo" }).toEqual(JSON.parse(body));
+        expect(JSON.parse(body)).toEqual({ app: "Cada centavo" });
       });
   });
 });

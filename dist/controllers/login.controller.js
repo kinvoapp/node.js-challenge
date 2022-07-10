@@ -12,11 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { loginService } = require("../services/login.service");
 exports.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let login;
+    const { email, password } = req.body;
     try {
-        login = yield loginService(req.body);
+        login = yield loginService(email, password);
     }
     catch (error) {
         return res.status(500);
     }
-    return res.status(login.code).json({ message: login.message });
+    return login.code
+        ? res.status(login.code).json({ message: login.message })
+        : res.status(200).json({ token: login });
 });

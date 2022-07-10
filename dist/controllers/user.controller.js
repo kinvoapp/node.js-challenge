@@ -11,13 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const { deleteUserService, getUsersService, getUserByIdService, updateUserService, userCreateService, } = require("../services/user.service");
 exports.userCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let user;
     try {
-        const id = yield userCreateService(req.body);
-        return res.status(201).json({ id });
+        user = yield userCreateService(req.body);
     }
     catch (error) {
         return res.status(500);
     }
+    return user.code
+        ? res.status(user.code).json(user.message)
+        : res.status(201).json({ id: user.id });
 });
 exports.getUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let users;

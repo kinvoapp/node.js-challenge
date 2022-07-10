@@ -8,13 +8,16 @@ const {
 } = require("../services/user.service");
 
 exports.userCreate = async (req: Request, res: Response): Promise<any> => {
+  let user;
   try {
-    const id = await userCreateService(req.body);
-
-    return res.status(201).json({ id });
+    user = await userCreateService(req.body);
   } catch (error) {
     return res.status(500);
   }
+
+  return user.code
+    ? res.status(user.code).json(user.message)
+    : res.status(201).json({ id: user.id });
 };
 
 exports.getUsers = async (_req: Request, res: Response): Promise<any> => {

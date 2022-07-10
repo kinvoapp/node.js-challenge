@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const { deleteUser, getUsers, getUser, updateUser, userCreate, } = require("./controllers/user.controller");
 const { login } = require("./controllers/login.controller");
-// const { validationToken } = require("./middlewares/auth");
 const route = (0, express_1.Router)();
 route.get("/", (_req, res) => res.status(200).json({ app: "Cada centavo" }));
 // User CRUD

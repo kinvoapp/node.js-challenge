@@ -22,7 +22,7 @@ describe("Login tests.", () => {
       400
     );
 
-    expect({ message: '"email" is required' }).toEqual(response1);
+    expect(response1).toEqual({ message: '"email" is required' });
 
     const response2 = await loggingIn(
       frisby,
@@ -34,49 +34,72 @@ describe("Login tests.", () => {
       400
     );
 
-    expect({ message: '"email" must be a valid email' }).toEqual(response2);
+    expect(response2).toEqual({ message: '"email" must be a valid email' });
   });
 
   it("It should not be possible to log in without the password or with the wrong password.", async () => {
-    await loggingIn(
+    const response1 = await loggingIn(
       frisby,
       URL_Deploy,
       {
-        email: "alunoemail.com",
+        email: "aluno@email.com",
       },
       400
     );
 
-    await loggingIn(frisby, URL_Deploy, {
-      email: "aluno@email.com",
-      password: "12345",
+    expect(response1).toEqual({ message: '"password" is required' });
+
+    const response2 = await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        email: "aluno@email.com",
+        password: "12345",
+      },
+      400
+    );
+
+    expect(response2).toEqual({
+      message: '"password" length must be at least 6 characters long',
     });
   });
 
   it("It should not be possible to log in without being registered.", async () => {
-    await loggingIn(frisby, URL_Deploy, {
-      email: "aluno@email.com",
-      password: "123456",
-    });
+    const response1 = await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        email: "noregister@email.com",
+        password: "noregister",
+      },
+      400
+    );
 
-    const token = await loggingIn(frisby, URL_Deploy, {
-      email: "aluno@email.com",
-      password: "123456",
-    });
-
-    expect(token);
+    expect(response1).toEqual({ message: "User no register" });
   });
 
   it("It should be possible to log in and get a token.", async () => {
-    await createUser(frisby, URL_Deploy, {
-      name: "Aluno Teste",
-      email: "aluno@email.com",
-      password: "123456",
-    });
+    await createUser(
+      frisby,
+      URL_Deploy,
+      {
+        name: "Aluno Teste",
+        email: "novoalunoteste@email.com",
+        password: "novoalunoteste",
+      },
+      201
+    );
 
-    await loggingIn(frisby, URL_Deploy, {
-      email: "aluno@email.com",
-      password: "123456",
-    });
+    const response = await loggingIn(
+      frisby,
+      URL_Deploy,
+      {
+        email: "novoalunoteste@email.com",
+        password: "novoalunoteste",
+      },
+      200
+    );
+
+    expect(response).not.toContain({ message: "User no register" });
   });
 });
