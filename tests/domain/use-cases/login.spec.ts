@@ -3,6 +3,13 @@ import { LoadUserAccountRepository } from '@/domain/contracts/repos'
 import { mock, MockProxy } from 'jest-mock-extended'
 import { AuthenticationError } from '@/domain/entities/errors'
 
+export class InvalidParamError extends Error {
+  constructor (paramName: string) {
+    super(`Invalid param: ${paramName}`)
+    this.name = 'InvalidParamError'
+  }
+}
+
 export namespace Decrypt {
   export type Input = { value: string }
   export type Output = { key: string }
@@ -11,16 +18,21 @@ export interface Decrypt {
   decrypt: (params: Decrypt.Input) => Promise<Decrypt.Output>
 }
 
-type Output = { accessToken: string }
+// type Output = { accessToken: string }
 type Input = { email: string, password: string }
-export type Login = (params: Input) => Promise<Output>
+export type Login = (params: Input) => Promise<void>
 type Setup = (userAccountRepo: LoadUserAccountRepository, crypto: Decrypt, token: TokenGenerator) => Login
 
 export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (params) => {
   const result = await userAccountRepo.load({ email: params.email })
-  if (result === undefined) throw new AuthenticationError()
-  await crypto.decrypt({ value: result.password })
-  return { accessToken: 'aaa' }
+  if (result !== undefined) {
+    const { key } = await crypto.decrypt({ value: result.password })
+    if (key !== params.password) {
+      throw new InvalidParamError('password')
+    }
+  } else {
+    throw new AuthenticationError()
+  }
 }
 
 describe('Login', () => {
@@ -32,19 +44,18 @@ describe('Login', () => {
   let userAccountRepo: MockProxy<LoadUserAccountRepository>
 
   beforeAll(() => {
-    email = 'any_emal'
+    email = 'any_email'
     password = 'any_password'
     userAccountRepo = mock()
     userAccountRepo.load.mockResolvedValue({
-      id: 'any_id',
-      email: 'any_email',
-      name: 'any_name',
+      id: 'any_user_id',
+      name: 'any_user_name',
+      email: 'any_user_emal',
       password: 'any_password'
     })
-
     crypto = mock()
+    crypto.decrypt.mockResolvedValue({ key: password })
     token = mock()
-    token.generate.mockResolvedValue('any_token')
   })
 
   beforeEach(() => {
@@ -57,15 +68,21 @@ describe('Login', () => {
     expect(userAccountRepo.load).toHaveBeenCalledTimes(1)
   })
 
-  it('should  trhrow Authentication error if user not found', async () => {
-    userAccountRepo.load.mockRejectedValueOnce(new Error('load_error'))
+  it('should rethrow if load returns undefined', async () => {
+    userAccountRepo.load.mockResolvedValueOnce(undefined)
     const promise = sut({ email, password })
-    await expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow(new Error('Athentication failed'))
   })
 
-  it('should call Decrypter with correct input', async () => {
+  it('should call decrypter with correct input', async () => {
     await sut({ email, password })
     expect(crypto.decrypt).toHaveBeenCalledWith({ value: password })
     expect(crypto.decrypt).toHaveBeenCalledTimes(1)
+  })
+
+  it('should rethrow if the password dont match', async () => {
+    crypto.decrypt.mockResolvedValueOnce({ key: 'any_key' })
+    const promise = sut({ email, password })
+    await expect(promise).rejects.toThrow(new Error('Invalid param: password'))
   })
 })
