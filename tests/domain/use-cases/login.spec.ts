@@ -1,6 +1,7 @@
 import { Encrypter, TokenGenerator } from '@/domain/contracts/crypto'
 import { LoadUserAccountRepository } from '@/domain/contracts/repos'
 import { mock, MockProxy } from 'jest-mock-extended'
+import { AuthenticationError } from '@/domain/entities/errors'
 
 type Output = { accessToken: string }
 type Input = { email: string, password: string }
@@ -8,7 +9,8 @@ export type Login = (params: Input) => Promise<Output>
 type Setup = (userAccountRepo: LoadUserAccountRepository, crypto: Encrypter, token: TokenGenerator) => Login
 
 export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (params) => {
-  await userAccountRepo.load({ email: params.email })
+  const result = await userAccountRepo.load({ email: params.email })
+  if (result === undefined) throw new AuthenticationError()
   return { accessToken: 'gagga' }
 }
 
@@ -24,7 +26,12 @@ describe('Login', () => {
     email = 'any_emal'
     password = 'any_password'
     userAccountRepo = mock()
-    userAccountRepo.load.mockResolvedValue(undefined)
+    userAccountRepo.load.mockResolvedValue({
+      email: 'any_email',
+      name: 'any_name',
+      id: 'any_id'
+    })
+
     crypto = mock()
     crypto.encrypt.mockResolvedValue({ key: 'any_encrypted_key' })
     token = mock()
@@ -39,5 +46,11 @@ describe('Login', () => {
     await sut({ email, password })
     expect(userAccountRepo.load).toHaveBeenCalledWith({ email })
     expect(userAccountRepo.load).toHaveBeenCalledTimes(1)
+  })
+
+  it('should  trhrow Authentication error if user not found', async () => {
+    userAccountRepo.load.mockRejectedValueOnce(new Error('load_error'))
+    const promise = sut({ email, password })
+    await expect(promise).rejects.toThrow()
   })
 })
