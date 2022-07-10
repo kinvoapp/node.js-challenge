@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "npx prisma migrate dev && ts-node-dev -r dotenv/config src/server.ts",
-    "test": "jest"
+    "test": "dotenv -e .env.test npx prisma migrate dev && jest --runInBand --coverage true"
   },
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
@@ -25,6 +25,7 @@
     "express-async-errors": "^3.1.1",
     "faker": "^6.6.6",
     "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^3.2.6",
     "prisma": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.8.2",
@@ -33,7 +34,10 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.12",
+    "dotenv-cli": "^6.0.0",
     "jest": "^28.1.2",
+    "supertest": "^6.2.4",
     "ts-jest": "^28.0.5"
   }
 }
