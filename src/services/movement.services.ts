@@ -34,7 +34,21 @@ async function getMovements (): Promise<IMovement[]> {
   return await MovementRepository.getMovements()
 }
 
+/**
+ * **getMovement**
+ * It is an asynchronous function that receives an `id` parameter
+ * that it passes to the getMovement function of the repository layer.
+ *
+ * @param id is an string.
+ * @returns an object promise of type IMovement.
+ */
+
+async function getMovement (id: string): Promise<IMovement> {
+  return await MovementRepository.getMovement(id)
+}
+
 export default {
   createMovement,
-  getMovements
+  getMovements,
+  getMovement
 }
