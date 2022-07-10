@@ -5,9 +5,9 @@ export class LoadTransactionController {
   constructor(private repository: TransactionRepository) {}
 
   handle(req: Request, res: Response) {
-    const { startDate, endDate } = req.params;
+    const { startDate, endDate, limit } = req.params;
     this.repository
-      .loadRecord(startDate, endDate)
+      .loadRecord(startDate, endDate, limit)
       .then((result) => {
         return res.status(200).json({
           record: result,

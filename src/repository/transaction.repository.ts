@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export class TransactionRepository {
   findById(id: string) {
-    const count = Record.find({ _id: id }).limit(1).size();
+    const count = Record.countDocuments({ _id: id });
     if (count != 0) return true;
   }
   saveRecord(data: TransactionDTO) {
@@ -24,13 +24,13 @@ export class TransactionRepository {
     return Record.findByIdAndDelete(id);
   }
 
-  loadRecord(startDate: string, endDate: string) {
+  loadRecord(startDate: string, endDate: string, limit?: string) {
     return Record.find({
       createdAt: {
         $gte: `${startDate}T00:00:00.000Z`,
         $lt: `${endDate}T23:59:59.999Z`,
       },
-    });
+    }).limit(parseInt(limit) || 5);
   }
 
   getBalance() {

@@ -37,7 +37,7 @@ Routes.delete("/finance/:id", (req, res) => {
   deleteTransactionController.handle(req, res);
 });
 
-Routes.get("/finance/:startDate/:endDate", (req, res) => {
+Routes.get("/finance/:startDate/:endDate/:limit?", (req, res) => {
   loadTransactionController.handle(req, res);
 });
 Routes.get("/balance", (req, res) => {
