@@ -1,8 +1,6 @@
 > ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
 
-# Desafio Back-end Junior
-
-# Kinvo - Desafio Back-end
+# Kinvo - Desafio - Back-end Junior
 
 ## Instruções
 
@@ -11,7 +9,7 @@ Instalar as dependencias do projeto.
 ```
 yarn
 ```
-
+ou
 ```
 npm install
 ```
