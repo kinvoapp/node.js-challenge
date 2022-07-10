@@ -7,7 +7,7 @@
             "request": "attach",
             "name": "Attach to Node",
             "remoteRoot": "/usr/src/clean-node-api",
-            "port": 9221,
+            "port": 9223,
             "restart": true
         }
     ]

@@ -12,7 +12,6 @@ export class RequiredField extends Error {
     this.name = 'RequiresFied'
   }
 }
-
 export class CompraredFieldError extends Error {
   constructor () {
     super('The password don\'t match')

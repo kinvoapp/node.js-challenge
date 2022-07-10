@@ -21,6 +21,8 @@ export class SingupController extends Controller {
       const accessToken = await this.singup({ name, email, password })
       return ok(accessToken)
     } catch (error) {
+      console.log(error)
+
       return unauthorized()
     }
   }
@@ -30,7 +32,7 @@ export class SingupController extends Controller {
       ...ValidationBuilder.of({ value: name, fieldName: 'name' }).required().build(),
       ...ValidationBuilder.of({ value: email, fieldName: 'email' }).required().build(),
       ...ValidationBuilder.of({ value: password, fieldName: 'password' }).required().build(),
-      ...ValidationBuilder.of({ value: confirmPassword, fieldName: 'confirmPassword' }).compare(password).build()
+      ...ValidationBuilder.of({ value: password, fieldName: 'password' }).compare(confirmPassword).build()
 
     ]
   }
