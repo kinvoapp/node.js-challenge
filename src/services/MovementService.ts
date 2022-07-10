@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import { MovementRepository } from '../database/repositories/MovementRepository';
 import { IMovement } from '../interfaces/IMovement';
 import { AppError } from '../utils/errors/AppError';
+import { ISearchParameter } from '../interfaces/ISearchParameter';
 
 export class MovementService {
   public static async create({ name, description, formOfPayment, type, value, date }: any) {
@@ -16,8 +17,13 @@ export class MovementService {
     return response;
   }
 
-  public static async getAll() {
-    const movementList = await MovementRepository.selectAll({ deletedAt: null });
+  public static async getAll({ where, order }: ISearchParameter) {
+    where = {
+      ...where,
+      deletedAt: null,
+    };
+
+    const movementList = await MovementRepository.selectAll(where, order);
     
     if (!movementList.length) {
       throw new AppError(httpStatus.NOT_FOUND, 'Você não possui nenhuma movimentação financeira!');

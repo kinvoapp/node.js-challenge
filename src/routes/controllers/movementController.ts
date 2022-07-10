@@ -1,8 +1,10 @@
 import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status';
 import { MovementService } from '../../services/MovementService';
+import { controllerPagination } from '../../utils/helper';
 import { validation } from '../middlewares/validation';
 import { movementSchema } from '../schemas/movementSchema';
+import { getAllFilter } from './filters/movementControllerFilter';
 
 const router = Router();
 
@@ -25,7 +27,12 @@ router.get('/',
     let response = null;
 
     try {
-      response = await MovementService.getAll();
+      const searchParameter = {
+        where: getAllFilter(req),
+        order: controllerPagination(req),
+      };
+
+      response = await MovementService.getAll(searchParameter);
     } catch ({ statusCode, message }) {
       return res.status(statusCode as number).json({ message });
     }

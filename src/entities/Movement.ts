@@ -8,7 +8,7 @@ const MovementSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    maxlength: 30,
+    maxlength: 50,
   },
   description: {
     type: String,

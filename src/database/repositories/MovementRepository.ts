@@ -1,5 +1,6 @@
 import httpStatus from 'http-status';
 import Movement from '../../entities/Movement';
+import { IControllerPagination } from '../../interfaces/IControllerPagination';
 import { AppError } from '../../utils/errors/AppError';
 import { IMovement } from './../../interfaces/IMovement';
 
@@ -16,11 +17,11 @@ export class MovementRepository {
     return response;
   }
 
-  public static async selectAll(where: any) {
+  public static async selectAll(where: any, order: IControllerPagination) {
     let response: any = null;
 
     try {
-      response = await Movement.find(where);
+      response = await Movement.find(where).limit(order.limit).skip(order.offset);
     } catch (err) {
       throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, `Error: ${err}`);
     }
