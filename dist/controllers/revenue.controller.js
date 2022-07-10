@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { revenueCreateService, revenueGetAllService, revenueGetByIdService, revenueSrcForDatesService, } = require("../services/revenue.service");
+const { revenueCreateService, revenueGetAllService, revenueGetByIdService, revenueSrcForDatesService, revenueUpdateService, revenueDeleteService, } = require("../services/revenue.service");
 exports.revenueCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let revenues;
     try {
@@ -49,7 +49,6 @@ exports.revenueGetById = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.revenueSearchForDates = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { initialDate, finalDate } = req.body;
-    console.log(initialDate, finalDate);
     let revenues;
     try {
         revenues = yield revenueSrcForDatesService(initialDate, finalDate);
@@ -60,4 +59,24 @@ exports.revenueSearchForDates = (req, res) => __awaiter(void 0, void 0, void 0, 
     return revenues.code
         ? res.status(revenues.code).json(revenues.message)
         : res.status(200).json(revenues);
+});
+exports.revenueUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { params: { id }, } = req;
+    try {
+        const update = yield revenueUpdateService(id, req.body);
+        return res.status(200).json(update);
+    }
+    catch (error) {
+        return res.status(500);
+    }
+});
+exports.revenueDelete = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { params: { id }, } = req;
+    try {
+        const deleted = yield revenueDeleteService(id);
+        return res.status(200).json(deleted);
+    }
+    catch (error) {
+        return res.status(500);
+    }
 });
