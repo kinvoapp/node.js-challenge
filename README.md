@@ -14,7 +14,7 @@ npm run dev
 
 ## Endpoints
 
-<details>
+- <details>
       <summary>POST (add a transaction)</summary>
 
 - Url:
