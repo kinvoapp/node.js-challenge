@@ -3,6 +3,7 @@ import {
   CreateTransactionController,
   UpdateTransactionController,
   DeleteTransactionController,
+  LoadTransactionController,
 } from "../controller/index";
 import { TransactionRepository } from "../repository/transaction.repository";
 import { loadTransaction, loadBalance } from "../controller/finance-controller";
@@ -19,6 +20,10 @@ const updateTransactionController = new UpdateTransactionController(
 const deleteTransactionController = new DeleteTransactionController(
   transactionRepository
 );
+
+const loadTransactionController = new LoadTransactionController(
+  transactionRepository
+);
 Routes.patch("/finance/:id", (req, res) => {
   updateTransactionController.handle(req, res);
 });
@@ -31,7 +36,9 @@ Routes.delete("/finance/:id", (req, res) => {
   deleteTransactionController.handle(req, res);
 });
 
-Routes.get("/finance/:startDate/:endDate", loadTransaction);
+Routes.get("/finance/:startDate/:endDate", (req, res) => {
+  loadTransactionController.handle(req, res);
+});
 Routes.get("/balance", loadBalance);
 
 export default Routes;
