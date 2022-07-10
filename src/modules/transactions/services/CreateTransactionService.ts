@@ -2,9 +2,8 @@ import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "../../users/models/IUsersRepository";
 import { Transaction } from "../model/Transaction";
 import { TransactionsRepository } from "../repositories/TransactionsRepository";
-import { UpdateUserBalanceService } from "./UpdateUserBalanceService";
 
-enum TransactionType {
+export enum TransactionType {
   EXPENSE = 'EXPENSE',
   REVENUE = 'REVENUE'
   
