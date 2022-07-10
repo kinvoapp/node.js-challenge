@@ -6,11 +6,21 @@
   "author": "Matheus Barboza <matheus.barboza102@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "sucrase-node src/index.ts",
-    "build": ""
+    "dev": "nodemon src/server.ts",
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
     "sucrase": "^3.23.0",
     "typescript": "^4.7.4"
   }
