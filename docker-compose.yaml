@@ -13,8 +13,7 @@ services:
     expose:
       - 3306
     volumes:
-      - ./node_modules/data/mysql:/var/lib/mysql
-      - .:/usr/app
+      - /mysqlData:/var/lib/postgresql/data
 
   # api:
   #   build: .
