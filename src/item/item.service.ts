@@ -9,10 +9,28 @@ export class ItemService {
     private itemRepository: Repository<Item>,
   ) {}
 
-  async findAll(url = undefined): Promise<Item[] | object> {
-    const items = await this.itemRepository.find();
-    if (!url) return items;
-    return this.getBalance(items);
+  pagination({ result, total, take, skip }): object {
+    return {
+      infoPage: {
+        totalPage: total / take,
+        currentPage: skip === 0 ? 1 : skip,
+        totalItems: total,
+      },
+      data: result,
+    };
+  }
+
+  async findAll(
+    url = undefined,
+    take = 10,
+    skip = 0,
+  ): Promise<Item[] | object> {
+    const [result, total] = await this.itemRepository.findAndCount({
+      take,
+      skip,
+    });
+    if (!url) return this.pagination({ result, total, take, skip });
+    return this.getBalance(result);
   }
 
   async findById(id): Promise<Item | null> {
@@ -78,12 +96,19 @@ export class ItemService {
     };
   }
 
-  async filterByDate(dateInit, dateEnd): Promise<Item[]> {
-    const items = await this.itemRepository.find({
+  async filterByDate({
+    dateInit,
+    dateEnd,
+    take = 10,
+    skip = 0,
+  }): Promise<Item[] | object> {
+    const [result, total] = await this.itemRepository.findAndCount({
       where: {
         createdDate: Between(dateInit, dateEnd),
       },
+      take,
+      skip,
     });
-    return items;
+    return this.pagination({ result, total, take, skip });
   }
 }

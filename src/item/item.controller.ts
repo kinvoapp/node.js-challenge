@@ -29,7 +29,7 @@ export class itemController {
 
   @Get('/balance')
   async getBalance(): Promise<Item[] | object> {
-    return this.itemService.findAll('balance');
+    return this.itemService.findAll();
   }
 
   @Get('/:id')
@@ -45,7 +45,7 @@ export class itemController {
     @Res() res: Response,
     @Param() { dateInit, dateEnd }: IDateFilter,
   ) {
-    const items = await this.itemService.filterByDate(dateInit, dateEnd);
+    const items = await this.itemService.filterByDate({ dateInit, dateEnd });
     return res.status(HttpStatus.ACCEPTED).json(items);
   }
 
