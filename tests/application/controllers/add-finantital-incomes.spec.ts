@@ -74,4 +74,11 @@ describe('AddFinatitalIncomesControler', () => {
       data: new ServerError()
     })
   })
+
+  it('should return  204 if addFinantialIncomes succeeds', async () => {
+    const httpResponse = await sut.handle({ type: 'any_type', value: 1000, description: 'any_desc', user_id: 1 })
+    expect(httpResponse).toEqual({
+      statusCode: 204
+    })
+  })
 })
