@@ -4,5 +4,14 @@
   "main": "index.js",
   "repository": "https://github.com/matheusobarboza/node.js-challenge.git",
   "author": "Matheus Barboza <matheus.barboza102@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "sucrase-node src/index.ts",
+    "build": ""
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "sucrase": "^3.23.0",
+    "typescript": "^4.7.4"
+  }
 }
