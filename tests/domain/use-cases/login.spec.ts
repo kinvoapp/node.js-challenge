@@ -18,9 +18,9 @@ export interface Decrypt {
   decrypt: (params: Decrypt.Input) => Promise<Decrypt.Output>
 }
 
-// type Output = { accessToken: string }
+type Output = { accessToken: string }
 type Input = { email: string, password: string }
-export type Login = (params: Input) => Promise<void>
+export type Login = (params: Input) => Promise<Output>
 type Setup = (userAccountRepo: LoadUserAccountRepository, crypto: Decrypt, token: TokenGenerator) => Login
 
 export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (params) => {
@@ -28,7 +28,8 @@ export const loginSeup: Setup = (userAccountRepo, crypto, token) => async (param
   if (result !== undefined) {
     const { key } = await crypto.decrypt({ value: result.password })
     if (key === params.password) {
-      await token.generate({ key: result.id })
+      const accessToken = await token.generate({ key: result.id })
+      return { accessToken }
     } else {
       throw new InvalidParamError('password')
     }
@@ -58,6 +59,7 @@ describe('Login', () => {
     crypto = mock()
     crypto.decrypt.mockResolvedValue({ key: password })
     token = mock()
+    token.generate.mockResolvedValue('any_token')
   })
 
   beforeEach(() => {
@@ -92,5 +94,10 @@ describe('Login', () => {
     await sut({ email, password })
     expect(token.generate).toHaveBeenCalledWith({ key: 'any_user_id' })
     expect(token.generate).toHaveBeenCalledTimes(1)
+  })
+
+  it('should  return an accessToken on success', async () => {
+    const aceestoken = await sut({ email, password })
+    expect(aceestoken).toEqual({ accessToken: 'any_token' })
   })
 })
