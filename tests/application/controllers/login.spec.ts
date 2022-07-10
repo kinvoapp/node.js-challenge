@@ -3,6 +3,8 @@ import { RequiredStringValidator, ValidationBuilder, Validator } from '@/applica
 
 import { HttpResponse, ok, unauthorized } from '@/application/helpers'
 import { Login } from '@/domain/use-cases'
+import { AuthenticationError } from '@/domain/entities/errors'
+import { UnauthorizedError } from '@/application/errors'
 
 type HttpRequest = {
   email: string
@@ -57,5 +59,14 @@ describe('LoginController', () => {
     await sut.handle({ email: 'any_valid_email', password: 'any_valid_password' })
     expect(login).toHaveBeenCalledWith({ email: 'any_valid_email', password: 'any_valid_password' })
     expect(login).toHaveBeenCalledTimes(1)
+  })
+
+  it('should return 401 if login fails', async () => {
+    login.mockRejectedValueOnce(new AuthenticationError())
+    const httpResponse = await sut.handle({ email: 'any_valid_email', password: 'any_valid_password' })
+    expect(httpResponse).toEqual({
+      statusCode: 401,
+      data: new UnauthorizedError()
+    })
   })
 })
