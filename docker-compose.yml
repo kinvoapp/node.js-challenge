@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: kinvo
+      POSTGRES_USER: kinvo
+      POSTGRES_DB: kinvo
+    ports:
+      - "5432:5432"
+    volumes:
+      - C:\Users\Aluisio\Documents\Kinvo\postgres:/var/lib/postgresql/data
+    networks:
+      - postgres-compose-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  postgres-compose-network:
+    driver: bridge
