@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import "reflect-metadata"
-import { AppDataSource } from "./shared/data-source/data-source"
-
+require('dotenv').config() 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

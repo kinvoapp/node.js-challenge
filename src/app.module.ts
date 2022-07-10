@@ -7,6 +7,12 @@ import { ExpenseModule } from './modules/expense/expense.module';
 import { RevenueModule } from './modules/revenue/revenue.module';
 import * as ormconfig from '../ormconfig.js';
 import { UserModule } from './modules/user/user.module';
+import { LoginModule } from './modules/login/login.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './modules/login/jwt-constants';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './shared/guards/auth.guards';
 
 
 
@@ -16,9 +22,23 @@ import { UserModule } from './modules/user/user.module';
     RevenueModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(ormconfig),
-    UserModule
+    UserModule,
+    LoginModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      secretOrPrivateKey: jwtConstants.secret,
+      signOptions: {
+        expiresIn: 3600,
+      },
+    })
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers:
+    [AppService,
+      {
+        provide: APP_GUARD,
+        useClass: JwtAuthGuard,
+      },
+    ],
 })
 export class AppModule { }
