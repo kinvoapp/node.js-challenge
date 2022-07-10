@@ -1,6 +1,9 @@
 const frisby = require("frisby");
 
-const { createUser, loggingIn } = require("../src/utils/tests.functions");
+const {
+  createTestFunction,
+  loggingIn,
+} = require("../src/utils/tests.functions");
 
 require("dotenv").config();
 
@@ -79,9 +82,10 @@ describe("Login tests.", () => {
   });
 
   it("It should be possible to log in and get a token.", async () => {
-    await createUser(
+    await createTestFunction(
       frisby,
       URL_Deploy,
+      "user",
       {
         name: "Aluno Teste",
         email: "novoalunoteste@email.com",

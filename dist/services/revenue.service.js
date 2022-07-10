@@ -8,17 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const schemas = require("./schemas");
-const { userModel } = require("../models/index.models");
-const { generateToken } = require("../middlewares/auth");
-exports.loginService = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const { error } = schemas.loginSchema.validate({ email, password });
+Object.defineProperty(exports, "__esModule", { value: true });
+const { revenueModel } = require("../models/index.models");
+const { revenueSchema } = require("./schemas");
+exports.revenueCreateService = (revenue) => __awaiter(void 0, void 0, void 0, function* () {
+    const { error } = revenueSchema.validate(revenue);
     if (error)
         return { code: 400, message: error.message };
-    const user = yield userModel.find({
-        email,
-    });
-    return user.length > 0
-        ? generateToken({ email: user[0].email })
-        : { code: 400, message: "User no register" };
+    const { title, value, date } = yield revenueModel.create(revenue);
+    return { title, value, date };
 });

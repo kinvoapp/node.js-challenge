@@ -7,6 +7,8 @@ const {
   userCreate,
 } = require("./controllers/user.controller");
 const { login } = require("./controllers/login.controller");
+const { revenueCreate } = require("./controllers/revenue.controller");
+// const { validationToken } = require("./middlewares/auth");
 
 const route = Router();
 
@@ -27,5 +29,8 @@ route.delete("/user/:id", deleteUser);
 
 // Login
 route.post("/login", login);
+
+// Revenues and Expenses
+route.post("/revenue", revenueCreate);
 
 module.exports = route;
