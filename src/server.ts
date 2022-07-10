@@ -7,5 +7,5 @@ const PORT = process.env.PORT || 3000;
 const HOSTNAME = process.env.HOSTNAME || "localhost";
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`);
+  console.log(`Server is running on: ${HOSTNAME}:${PORT}`);
 });
