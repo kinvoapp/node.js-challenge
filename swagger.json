@@ -1,0 +1,366 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+        "title":"API de registro de transações",
+        "description":"API desenvolvida para o desafio proposto pela KINVO",
+        "contact":{
+            "email":"rafabarros1@hotmail.com"
+        },
+        "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3001/api",
+            "description":"API de teste"
+        },
+        {
+            "url":"http://www.heroku.com",
+            "description":"API de produção"
+        }
+    ],
+    "paths":{
+        "/user":{
+            "post":{
+                "summary":"Registro de usuário",
+                "description":"Essa rota é responsável por registar um novo usuário",
+                "tag":["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/User"
+                            },
+                            "examples":{
+                                "user":{
+                                    "value":{
+                                        "firstname":"Rafael",
+                                        "email":"rafael@teste.com",
+                                        "password":"123"
+
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                },
+                "responses":{
+                    "201":{
+                        "description":"User registered successfully",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "description":"success message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Missing required user Data or E-mail alredy registered"
+                    },
+                    "500":{
+                        "description":"Internal error in DB connection"
+                    }
+                }
+
+            }
+    
+        },
+        "/user/authentication":{
+            "post":{
+                "summary":"Autenticação de usuário",
+                "description":"Responsável pela autenticação do usuário gerando o token JWT",
+                "tag":["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/UserAuth"
+                            },
+                            "examples":{
+                                "user":{
+                                    "value":{
+                                        "email":"rafael@teste.com",
+                                        "password":"123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success authentication operation"
+                    },
+                    "400":{
+                        "description":"Missing required field or Invalid emai/password"
+                    }
+                }
+            }
+        },
+        "/transactions":{
+            "post":{
+                "summary":"Cadastro de nova transação",
+                "description":"Responsável pela adição de novas transações",
+                "tag":["Transactions"],
+                "security":[{"bearerAuth":[]}],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Transaction"
+                            },
+                            "examples":{
+                                "transaction":{
+                                    "value":{
+                                        "amount":"500",
+                                        "type":"credit",
+                                        "date":"05/07/2022"
+                                    }
+                                }
+                            }                        
+                        
+
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                 "description":"Transaction registered"       
+                    },
+                    "400":{
+                        "description":"Missing or Invalid transaction data fields"
+                    },
+                    "401":{
+                        "description":"User is not authenticated"
+                    },
+                    "500":{
+                        "description":"Internal error in DB connection"
+                    }
+                }
+            }
+        },
+        "/transaction/{id}":{
+            "patch":{
+                "summary":"Edição de transação",
+                "description":"Responsável pela edição de transações existentes",
+                "tag":["Transactions"],
+                "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID da transação. Para conseguir o ID, fazer a listagem de transações e copiar um ID.",
+                        "required":true,
+                        "default":"Insira o ID aqui"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Transaction"
+                            },
+                            "examples":{
+                                "transaction":{
+                                    "value":{
+                                        "amount":"500",
+                                        "type":"credit",
+                                        "date":"05/07/2022"
+                                    }
+                                }
+                            }                        
+                        
+
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Transaction updated"       
+                    },
+                    "400":{
+                        "description":"Invalid transaction data fields"
+                    },
+                    "401":{
+                        "description":"User is not authenticated"
+                    },
+                    "500":{
+                        "description":"Internal error trying to update Transaction in DB"
+                    }
+                }
+
+            },
+            "delete":{
+                "summary":"Exclusão de transação",
+                "description":"Responsável pela exclusão de uma transação",
+                "tag":["Transactions"],
+                "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID da transação. Para conseguir o ID, fazer a listagem de transações e copiar um ID.",
+                        "required":true,
+                        "default":"Insira o ID aqui"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Deleted transaction"
+                    },
+                    "401":{
+                        "description":"User is not authenticated"
+                    },
+                    "500":{
+                        "description":"Internal error tryins to delete the transaction in the DB"
+                    }
+                }
+            }
+        },
+        "/transactions/{page}":{
+            "get":{
+                "summary":"Listar transações com paginação",
+                "description":"Responsável por mostrar todas as transações do usuário e em cada página ter 5 transações. Para muda de página, basta trocar o valor da página parâmetro do header",
+                "tag":["Transactions"],
+                "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":"page",
+                        "in":"path",
+                        "description":"Número da página a ser visualizada",
+                        "required":true,
+                        "default":1
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "401":{
+                        "description":"User is not authenticated"
+                    }
+                }
+                
+            }
+        },
+        "/transactions/filter":{
+            "get":{
+                "summary":"Filtrar transações por data",
+                "description":"Responsável por filtrar transações pelo período selecionado e com paginação",
+                "tag":["Transactions"],
+                "security":[{"bearerAuth":[]}],
+                "parameters":[
+                    {
+                        "name":"initialDate",
+                        "in":"query",
+                        "description":"Data inicial do filtro",
+                        "required":true,
+                        "default":"05/07/2022",
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    {
+                        "name":"endDate",
+                        "in":"query",
+                        "description":"Data final do filtro",
+                        "required":true,
+                        "default":"10/07/2022",
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "400":{
+                        "description":"Date is invalid"
+                    },
+                    "401":{
+                        "description":"User is not authenticated"
+                    },
+                    "500":{
+                        "description":"Internal error in DB connection"
+                    }
+                }
+                
+            }
+        }
+
+    },
+    "components":{
+        "schemas":{
+            "User":{
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "type":"string"
+                    },
+                    "firstname":{
+                        "type":"string"
+                    },
+                    "email":{
+                        "type":"string"
+                    },"password":{
+                        "type":"string"
+                    }
+                }
+            },
+            "UserAuth":{
+                "type":"object",
+                "properties":{
+                    "email":{
+                        "type":"string"
+                    },"password":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Transaction":{
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "type":"string"
+                    },
+                    "user_id":{
+                        "type":"string"
+                    },
+                    "amount":{
+                        "type":"integer"
+                    },
+                    "type":{
+                        "type":"string",
+                        "enum":["credit","debit"]
+                    },
+                    "date":{
+                        "type":"date"
+                    },
+                    "created_at":{
+                        "type":"date"
+                    },
+                    "updated_at":{
+                        "type":"date"
+                    }
+                }
+            }
+
+        },
+        "securitySchemes":{
+            "bearerAuth":{
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+        }
+    }
+}

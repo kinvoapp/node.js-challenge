@@ -136,7 +136,7 @@ Rodando os scripts de teste com automatização do docker:
 # Criar o banco de dados no docker
 $ npm run docker:up
 
-# Destruir o containr
+# Destruir o container
 $ npm run docker:down
 
 # Rodar os testes unitários e de integração
