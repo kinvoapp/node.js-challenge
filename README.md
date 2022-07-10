@@ -1,5 +1,120 @@
 > ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
 
+## Instruções para executar
+
+### Comandos
+
+Com o node já instalado, conecte o banco de dados pelo arquivo .env (deixei alguns exemplos), e caso use outro banco de dados que não seja o postgres, altere no arquivo /prisma/schema.prisma
+
+ basta rodar os comandos abaixo:
+
+`git clone https://github.com/otaviomartinss/challenge.git`
+
+`npm install`
+
+`npm run build`
+
+`npx prisma migrate dev`
+
+`npm run start:dev`
+
+Pronto, agora é só entrar no insomnia, o collection está junto ao projeto.
+
+O cache tem um TTL de 30 segundos, por isso após fazer post, update e delete, ele não vai refletir imediatamente no get. O TTL também pode ser alterado em /src/modules/carteira.module.ts, após a implementação do cache, o tempo de resposta das requisições reduziu cerca de 40 a 70%, com isso, temos uma api mais rápida e com menos requisições ao banco de dados.
+
+### Endpoints
+
+/api/movimentacao<br />
+  POST adiciona movimentação<br />
+  Obs: No "tipo" colocar se é "receita" ou "despesa", se for despesa no valor colocar negativo ex: -369.50
+  GET lista todas as movimentações<br />
+
+/api/movimentacao/:id<br />
+  PUT atualiza movimentação<br />
+  DELETE deleta movimentação<br />
+
+/api/movimentacao/:page<br />
+  GET utiliza paginação para listar as movimentações troque :page pelo número da página que deseja acessar (cada página vai listar 10 movimentações)<br />
+
+/api/inicial/:dataInicial/:dataFinal<br />
+  GET filtra e lista todas as movimentações entre a data inicial e a data final da mais antiga para a mais recente (para usar paginação é só adicionar /:page e trocar :page pelo número da página que deseja acessar como no anterior)<br />
+  Obs: use as datas no formato => ano-mes-diaT03:00:00.000Z (pode alterar o horário também)<br />
+
+/api/final/:dataInicial/:dataFinal<br />
+  GET filtra e lista todas as movimentações entre a data inicial e a data final da mais recente para a mais antiga (para usar paginação é só adicionar /:page e trocar :page pelo número da página que deseja acessar como no anterior)<br />
+  Obs: use as datas no formato => ano-mes-diaT03:00:00.000Z (pode alterar o horário também)<br />
+
+/api/saldo<br />
+  GET consulta saldo da carteira
+
+
+## Descrição das versões
+v1 <br />
+Upload com todos os arquivos para o git<br />
+
+v2<br />
+GET, POST, PUT conectando com o banco<br />
+Banco de dados atualizado<br />
+
+v3<br />
+GET, POST, PUT, DELETE 100%<br />
+Table movimentacoes atualizada<br />
+
+v4<br />
+Atualizei schema.prisma<br />
+
+v5<br />
+Filtragem das datas<br />
+
+v6<br />
+Table, Service e Controller do saldo<br />
+
+v7<br />
+Consulta de saldo<br />
+Paginação<br />
+
+v8<br />
+Atualização Service movimentação<br />
+Atualização Controller movimentação<br />
+Atualização Service saldo<br />
+Atualização Controller saldo<br />
+Atualização DTO<br />
+Aualização schema.prisma<br />
+
+v9<br />
+Atualização dos Services e Controllers<br />
+Atualização filtragem por data e paginação nos endpoints<br />
+
+v10<br />
+.env para testes<br />
+
+v11<br />
+update README.md<br />
+
+v12<br />
+update README.md<br />
+
+v13<br />
+update README.md<br />
+
+v14<br />
+add collection<br />
+update README.md<br />
+
+v15<br />
+update README.md<br />
+
+v16<br />
+Atualização saldo<br />
+
+v17<br />
+cache<br />
+Atualização consulta de saldo<br />
+Collection<br />
+Atualização gitignore<br />
+Atualização packages<br />
+
+
 
 # Kinvo - Desafio Back-end
 
@@ -72,3 +187,4 @@ Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu
 * Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
 
 ### Boa sorte! 🍀
+
