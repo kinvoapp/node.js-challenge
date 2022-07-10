@@ -7,8 +7,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "start": "prisma migrate deploy && node dist/src/server.js",
     "dev": "npx prisma migrate dev && ts-node-dev -r dotenv/config src/server.ts",
-    "test": "dotenv -e .env.test npx prisma migrate dev && jest --runInBand --coverage true"
+    "test": "dotenv -e .env.test npx prisma migrate dev && jest --runInBand --coverage true",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
