@@ -17,7 +17,7 @@ describe('must checkt the server', () => {
     expect(res.status).toBe(200)
   })
 
-  test('must check the /movement/:id endpoint', async () => {
+  test('must validate if it searches for movement', async () => {
     const id = '62c9e5ab59468436b7e40ab0'
 
     const res = await request.get(`/movement/${id}`)
@@ -31,5 +31,14 @@ describe('must checkt the server', () => {
       category: 'personal',
       date: '2022-07-12'
     })
+  })
+
+  test('must validate if there is movement', async () => {
+    const idNotValid = '62c9e5ab59468436b7e40ab1'
+
+    const res = await request.get(`/movement/${idNotValid}`)
+
+    expect(res.status).toBe(422)
+    expect(res.body).toStrictEqual({ error: 'movement not found.' })
   })
 })
