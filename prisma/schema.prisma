@@ -18,7 +18,7 @@ enum transaction_type {
 model Transactions {
   id     String           @id @default(uuid()) @map("_id")
   amount BigInt
-  types  transaction_type @default(debit)
+  type   transaction_type @default(debit)
   date   DateTime
 
   created_at DateTime @default(now())
@@ -33,7 +33,6 @@ model Transactions {
 model User {
   id        String @id @default(uuid()) @map("_id")
   firstname String
-  lastname  String
   email     String @unique
   password  String
 
