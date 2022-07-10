@@ -181,9 +181,38 @@ async function updateMovement (req: Request, res: Response, next: NextFunction):
   }
 }
 
+/**
+ * **deleteMovement**
+ * is an asynchronous function that does motion deletion by its `id`.
+ *
+ * @param req is an Request from express.
+ * @param res is an Response from express.
+ * @param next is an NextFuncion from express.
+ * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
+ */
+
+async function deleteMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
+  const { id } = req.params
+  try {
+    const movement = await MovementServices.getMovement(id)
+
+    if (!movement) {
+      return res.status(422).json({ error: 'movement not found.' })
+    }
+
+    await MovementServices.deleteMovement(id)
+
+    return res.status(200).json({ message: 'movement removed.' })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+    next(error)
+  }
+}
+
 export default {
   createMovement,
   getMovements,
   getMovement,
-  updateMovement
+  updateMovement,
+  deleteMovement
 }
