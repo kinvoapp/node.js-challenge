@@ -15,4 +15,8 @@ export class TransactionRepository {
   updateRecord(id: string, data: TransactionDTO) {
     return Record.findByIdAndUpdate(id, data);
   }
+
+  deleteRecord(id: string) {
+    return Record.findByIdAndDelete(id);
+  }
 }
