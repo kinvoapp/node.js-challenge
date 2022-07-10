@@ -28,15 +28,15 @@ $ npm install
 
 ```bash
 # subindo o container do banco de dados, mysql
-$ docker-composer up -d
+$ docker-compose up -d
 
 # verifique se o container docker foi criado
 $ docker ps
 
 # se quiser parar o container
-$ docker-composer down
+$ docker-compose down
 
-# se quiser limpar os container parado e deletar as imagens docker no seu ps
+# se quiser limpar os container parado e deletar as imagens docker no seu pc
 $ docker system prune -a
 ```
 
@@ -138,7 +138,7 @@ $ npm run test:cov
 - <details>
       <summary>POST (cadastra transação)</summary>
 
-  - Nota: somente cria se o campo `user` estiver um id de usuário valido no banco de dados, então tem que cadastrar um usuário primeiro e obter o id dele para criar o item(transação). O campo `inputValue` é um booleano, se for true, é uma transação de entrada, se for false, é uma transação de saída.
+  - Nota: somente cria se o campo `user` estiver um id de usuário valido no banco de dados, então tem que cadastrar um usuário primeiro e obter o id dele para criar o item(transação). O campo `inputValue` é um booleano, se for true, é uma transação de entrada, se for false é uma transação de saída.
 
   - Url:
      - `/item`
