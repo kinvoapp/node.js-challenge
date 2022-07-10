@@ -8,7 +8,7 @@ export class CreateTransactionController {
     const { desc, type, value } = req.body;
     try {
       if (!req.body)
-        return res.status(400).json({ error: "your body params are" });
+        return res.status(400).json({ error: "your body params are wrong" });
       if (!desc)
         return res.status(400).json({ error: "the description is required" });
       if (!type) return res.status(400).json({ error: "the type is required" });
