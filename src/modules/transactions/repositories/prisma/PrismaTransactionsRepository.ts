@@ -6,4 +6,11 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
   async create(transaction: Transaction): Promise<void> {
     await prisma.transaction.create({ data: transaction.props })
   }
+
+  async save(transaction: Transaction): Promise<void> {
+    await prisma.transaction.update({
+      where: { id: transaction.props.id },
+      data: transaction.props
+    })
+  }
 }
