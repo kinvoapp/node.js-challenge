@@ -1,8 +1,8 @@
-import createRecord from './saveRecord'
-import updateRecord from './updateRecord'
-import deleteRecord from './deleteRecord'
-import loadRecord from './loadRecord'
-import balanceAmount from './loadBalance'
+import createRecord from './saveRecord-repository'
+import updateRecord from './updateRecord-repository'
+import deleteRecord from './deleteRecord-repository'
+import loadRecord from './loadRecord-repository'
+import balanceAmount from './loadBalance-repository'
 
 
 export {createRecord, updateRecord, deleteRecord, loadRecord, balanceAmount}
