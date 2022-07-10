@@ -98,7 +98,7 @@ npm run dev
         }
 
     - Response: 
-    - Status: `201 OK`    ```
+      - Status: `201 OK`
 
 
 
