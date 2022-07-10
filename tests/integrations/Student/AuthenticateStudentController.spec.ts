@@ -1,18 +1,16 @@
+import { createStudent } from "../../helpers/helper";
+import { mockICreateUserRequest } from "../../helpers/mock";
 import { superAppRequest } from "../../setup";
 
 describe("Create Student Controller", () => {
   it("should be able to authenticate a student", async () => {
-    const studentRequest = {
-      name: "Gustavo Ferreira",
-      document: "123456",
-      password: "test",
-    };
+    const studentRequest = mockICreateUserRequest();
 
-    await superAppRequest.post("/student").send(studentRequest);
+    const createUserResponse = await createStudent(studentRequest);
 
     const loginRequest = {
-      document: "123456",
-      password: "test",
+      document: createUserResponse.document,
+      password: "admin",
     };
 
     const response = await superAppRequest
