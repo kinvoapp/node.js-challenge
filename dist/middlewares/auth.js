@@ -13,11 +13,11 @@ exports.generateToken = (user) => {
     const token = jwt.sign({ user }, secret, jwtConfig);
     return token;
 };
-exports.validateToken = (req, _res, next) => {
+exports.validationToken = (req, _res, next) => {
     try {
         const { authorization } = req.headers;
         const { user } = jwt.verify(authorization, secret);
-        next(Object.assign(Object.assign({}, req), { user }));
+        next(user);
     }
     catch ({ message }) {
         console.error(message);

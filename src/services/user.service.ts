@@ -5,6 +5,13 @@ const userModel = require("../models/users.models");
 exports.userCreateService = async (user: User): Promise<object> => {
   const users = await userModel.find();
 
+  const { email } = user;
+
+  const findUser = await userModel.find({ email });
+
+  if (findUser.length > 0)
+    return { code: 401, message: "E-mail already registered." };
+
   const id = user.id ? user.id : users.length + 1;
 
   const userId = await userModel.create({ ...user, id });

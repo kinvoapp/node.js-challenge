@@ -9,9 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const schemas = require("./schemas");
-exports.loginService = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const { error } = schemas.loginSchema.validate(user);
+const userModel = require("../models/users.models");
+const { generateToken } = require("../middlewares/auth");
+exports.loginService = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+    const { error } = schemas.loginSchema.validate({ email, password });
     if (error)
         return { code: 400, message: error.message };
-    return user;
+    const user = yield userModel.find({
+        email,
+    });
+    return user.length > 0
+        ? generateToken({ email: user[0].email })
+        : { code: 400, message: "User no register" };
 });

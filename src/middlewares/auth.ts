@@ -22,13 +22,17 @@ exports.generateToken = (user: object) => {
   return token;
 };
 
-exports.validateToken = (req: Request, _res: Response, next: NextFunction) => {
+exports.validationToken = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
   try {
     const { authorization } = req.headers;
 
     const { user } = jwt.verify(authorization, secret);
 
-    next({ ...req, user });
+    next(user);
   } catch ({ message }) {
     console.error(message);
     next(message);

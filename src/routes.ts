@@ -7,9 +7,9 @@ const {
   userCreate,
 } = require("./controllers/user.controller");
 const { login } = require("./controllers/login.controller");
-// const { validationToken } = require("./middlewares/auth");
 
 const route = Router();
+
 route.get("/", (_req: Request, res: Response) =>
   res.status(200).json({ app: "Cada centavo" })
 );
