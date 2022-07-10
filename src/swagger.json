@@ -1,0 +1,300 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Kinvo-Challenge Documentation",
+      "description": "API Rent",
+      "version": "1.0.0",
+      "contact": {
+        "email": "gustavofvv@gmail.com"
+      }
+    },
+    "paths": {
+      "/student": {
+        "post": {
+          "tags": ["Student"],
+          "summary": "Creates an Student",
+          "description": "Create a new student",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "document": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "Gustavo Ferreira",
+                    "password": "test",
+                    "document": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Invalid Argument/Student already exists"
+            }
+          }
+        }
+      },
+      "/login/student": {
+        "post": {
+          "tags": ["Student"],
+          "summary": "Authenticates an student",
+          "description": "Authenticates student via JWT",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string"
+                    },
+                    "document": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "password": "test",
+                    "document": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Token"
+            },
+            "400": {
+              "description": "Email/Password incorrect"
+            }
+          }
+        }
+      },
+      "/transaction": {
+        "post": {
+          "security": [{ "tokenAuth": [] }],
+          "tags": ["Transaction"],
+          "summary": "Creates a Transaction",
+          "description": "Creates a Transaction",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": ["CASHIN", "CASHOUT"]
+                    }
+                  },
+                  "example": {
+                    "amount": 500,
+                    "description": "Dividendos VALE3",
+                    "type": "CASHIN"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Create transaction successfull"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        },
+        "get": {
+          "security": [{ "tokenAuth": [] }],
+          "tags": ["Transaction"],
+          "summary": "Lists transactions",
+          "description": "Lists all transactions by user",
+          "responses": {
+            "200": {
+              "description": "Done",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "accountId": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "type": "number"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": ["CASHOUT", "CASHIN"]
+                          },
+                        "createdat": {
+                          "type": "Date"
+                        },
+                        "updatedat": {
+                          "type": "Date"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/transaction/{id}": {
+        "patch": {
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "schema": {
+                "type": "string"
+              },
+              "required": "true"
+            }
+          ],
+          "security": [{ "tokenAuth": [] }],
+          "tags": ["Transaction"],
+          "summary": "Updates a transactions",
+          "description": "Updates a transaction",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": ["CASHIN", "CASHOUT"]
+                    }
+                  },
+                  "example": {
+                    "amount": 550,
+                    "description": "Dividendos BBDC4",
+                    "type": "CASHIN"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Create transaction successfull"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        },
+        "delete": {
+            "parameters": [{
+              "in": "path",
+              "name": "id",
+              "required": "true",
+              "schema": {
+                "type": "string"
+              }
+            }],
+            "security": [{ "tokenAuth": [] }],
+            "tags": ["Transaction"],
+            "summary": "Deletes a transaction",
+            "description": "Delete a desired transactions",
+            "responses": {
+              "200": {
+                "description": ""
+              },
+              "401": {
+                "description": "Unauthorized"
+              }
+            }
+          }
+      },
+      "/balance": {
+        "get": {
+            "security": [{ "tokenAuth": [] }],
+            "tags": ["Balance"],
+            "summary": "Lists account balance",
+            "description": "Lists account balance",
+            "responses": {
+              "200": {
+                "description": "Done",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                        "properties": {
+                          "studentId": {
+                            "type": "string"
+                          },
+                          "available": {
+                            "type": "number"
+                          },
+                          "amount": {
+                            "type": "number"
+                          },
+                          "updatedAt": {
+                            "type": "Date"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                    "description": "Unauthorized"
+                  }
+              }
+            }
+        }
+      },
+    "components": {
+      "securitySchemes": {
+        "tokenAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+}
+  
