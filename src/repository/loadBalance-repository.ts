@@ -1,9 +1,7 @@
-
-import Record from '../models/recordModel'
-
+import Record from "../models/recordModel";
 
 const balanceAmount = () => {
-   return Record.find()
-}
+  return Record.find();
+};
 
-export default balanceAmount
+export default balanceAmount;

@@ -1,429 +1,371 @@
 {
-	"info": {
-		"_postman_id": "a53268e6-ad6d-4672-8db5-c4ba303439d6",
-		"name": "finance",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20803731"
-	},
-	"item": [
-		{
-			"name": "create record",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"desc\": \"Festa\",\n    \"type\": \"expense\",\n    \"value\": -60,\n    \"note\": \"aniversário\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/finance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"finance"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "create record",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"desc\": \"Gasolina\",\n    \"type\": \"expense\",\n    \"value\": -350,\n    \"note\": \"posto da esquina\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/finance",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"finance"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "205"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"cd-mGFsx34NKerRyxnF44j+O7p2/so\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 08 Jul 2022 10:50:21 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"record\": {\n        \"desc\": \"Gasolina\",\n        \"type\": \"expense\",\n        \"value\": -350,\n        \"note\": \"posto da esquina\",\n        \"_id\": \"62c80bed154aa3e6bf5de04c\",\n        \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n        \"updatedAt\": \"2022-07-08T10:50:21.569Z\",\n        \"__v\": 0\n    }\n}"
-				}
-			]
-		},
-		{
-			"name": "update record",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"note\": \"mercado da semana - batata + banana\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/finance/62c80aba154aa3e6bf5de03c",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"finance",
-						"62c80aba154aa3e6bf5de03c"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "update record",
-					"originalRequest": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"note\": \"posto da esquina de casa\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/finance/62c80bed154aa3e6bf5de04c",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"finance",
-								"62c80bed154aa3e6bf5de04c"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "213"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"d5-XcIkussNZit2r6V/lTxgKOcNWT0\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 08 Jul 2022 10:51:46 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"record\": {\n        \"_id\": \"62c80bed154aa3e6bf5de04c\",\n        \"desc\": \"Gasolina\",\n        \"type\": \"expense\",\n        \"value\": -350,\n        \"note\": \"posto da esquina de casa\",\n        \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n        \"updatedAt\": \"2022-07-08T10:51:05.224Z\",\n        \"__v\": 0\n    }\n}"
-				}
-			]
-		},
-		{
-			"name": "delete record",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/finance/62c8091bcc5fd05ff53f4afe",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"finance",
-						"62c8091bcc5fd05ff53f4afe"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "delete record",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/finance/62c80a87154aa3e6bf5de036",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"finance",
-								"62c80a87154aa3e6bf5de036"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "219"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"db-PPReYZZtpPVIKF2d16PZnknanp4\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 08 Jul 2022 10:52:07 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"record\": {\n        \"_id\": \"62c80a87154aa3e6bf5de036\",\n        \"desc\": \"Mensalidade academia\",\n        \"type\": \"expense\",\n        \"value\": -200,\n        \"note\": \"parcela de janeiro\",\n        \"createdAt\": \"2022-07-08T10:44:23.413Z\",\n        \"updatedAt\": \"2022-07-08T10:44:23.413Z\",\n        \"__v\": 0\n    }\n}"
-				}
-			]
-		},
-		{
-			"name": "load by period",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/finance/2022-07-07/2022-07-08",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"finance",
-						"2022-07-07",
-						"2022-07-08"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "load by period",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/finance/2022-07-07/2022-07-08",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"finance",
-								"2022-07-07",
-								"2022-07-08"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "1017"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"3f9-rRSLR4T6flJ0HLHKScOe5fFSitg\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 08 Jul 2022 10:52:13 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"record\": [\n        {\n            \"_id\": \"62c80aa5154aa3e6bf5de039\",\n            \"desc\": \"Salário\",\n            \"type\": \"profit\",\n            \"value\": 1600,\n            \"note\": \"salário de janeiro\",\n            \"createdAt\": \"2022-07-08T10:44:53.131Z\",\n            \"updatedAt\": \"2022-07-08T10:44:53.131Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80aba154aa3e6bf5de03c\",\n            \"desc\": \"Supermercado\",\n            \"type\": \"expense\",\n            \"value\": -150,\n            \"note\": \"mercado da semana - batata + banana\",\n            \"createdAt\": \"2022-07-08T10:45:14.784Z\",\n            \"updatedAt\": \"2022-07-08T10:47:28.826Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80b37154aa3e6bf5de044\",\n            \"desc\": \"Supermercado\",\n            \"type\": \"expense\",\n            \"value\": -150,\n            \"note\": \"compras da semana\",\n            \"createdAt\": \"2022-07-08T10:47:19.134Z\",\n            \"updatedAt\": \"2022-07-08T10:47:19.134Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80b5f154aa3e6bf5de048\",\n            \"desc\": \"Festa\",\n            \"type\": \"expense\",\n            \"value\": -60,\n            \"note\": \"aniversário\",\n            \"createdAt\": \"2022-07-08T10:47:59.047Z\",\n            \"updatedAt\": \"2022-07-08T10:47:59.047Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80bed154aa3e6bf5de04c\",\n            \"desc\": \"Gasolina\",\n            \"type\": \"expense\",\n            \"value\": -350,\n            \"note\": \"posto da esquina de casa\",\n            \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n            \"updatedAt\": \"2022-07-08T10:51:46.301Z\",\n            \"__v\": 0\n        }\n    ]\n}"
-				}
-			]
-		},
-		{
-			"name": "get balance",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/balance",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"balance"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "get balance",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/balance",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"balance"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "15"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"f-nAZyQgQl32Vjcvuuv+70v78aIso\""
-						},
-						{
-							"key": "Date",
-							"value": "Fri, 08 Jul 2022 10:52:18 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"balance\": 890\n}"
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "a53268e6-ad6d-4672-8db5-c4ba303439d6",
+    "name": "finance",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20803731"
+  },
+  "item": [
+    {
+      "name": "create record",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"desc\": \"Festa\",\n    \"type\": \"expense\",\n    \"value\": -60,\n    \"note\": \"aniversário\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/finance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "finance"]
+        }
+      },
+      "response": [
+        {
+          "name": "create record",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"desc\": \"Gasolina\",\n    \"type\": \"expense\",\n    \"value\": -350,\n    \"note\": \"posto da esquina\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/finance",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "finance"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "205"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"cd-mGFsx34NKerRyxnF44j+O7p2/so\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 08 Jul 2022 10:50:21 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"record\": {\n        \"desc\": \"Gasolina\",\n        \"type\": \"expense\",\n        \"value\": -350,\n        \"note\": \"posto da esquina\",\n        \"_id\": \"62c80bed154aa3e6bf5de04c\",\n        \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n        \"updatedAt\": \"2022-07-08T10:50:21.569Z\",\n        \"__v\": 0\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "update record",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"note\": \"mercado da semana - batata + banana\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/finance/62c80aba154aa3e6bf5de03c",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "finance", "62c80aba154aa3e6bf5de03c"]
+        }
+      },
+      "response": [
+        {
+          "name": "update record",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"note\": \"posto da esquina de casa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/finance/62c80bed154aa3e6bf5de04c",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "finance", "62c80bed154aa3e6bf5de04c"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "213"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"d5-XcIkussNZit2r6V/lTxgKOcNWT0\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 08 Jul 2022 10:51:46 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"record\": {\n        \"_id\": \"62c80bed154aa3e6bf5de04c\",\n        \"desc\": \"Gasolina\",\n        \"type\": \"expense\",\n        \"value\": -350,\n        \"note\": \"posto da esquina de casa\",\n        \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n        \"updatedAt\": \"2022-07-08T10:51:05.224Z\",\n        \"__v\": 0\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "delete record",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/finance/62c8091bcc5fd05ff53f4afe",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "finance", "62c8091bcc5fd05ff53f4afe"]
+        }
+      },
+      "response": [
+        {
+          "name": "delete record",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/finance/62c80a87154aa3e6bf5de036",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "finance", "62c80a87154aa3e6bf5de036"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "219"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"db-PPReYZZtpPVIKF2d16PZnknanp4\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 08 Jul 2022 10:52:07 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"record\": {\n        \"_id\": \"62c80a87154aa3e6bf5de036\",\n        \"desc\": \"Mensalidade academia\",\n        \"type\": \"expense\",\n        \"value\": -200,\n        \"note\": \"parcela de janeiro\",\n        \"createdAt\": \"2022-07-08T10:44:23.413Z\",\n        \"updatedAt\": \"2022-07-08T10:44:23.413Z\",\n        \"__v\": 0\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "load by period",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/finance/2022-07-07/2022-07-08",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "finance", "2022-07-07", "2022-07-08"]
+        }
+      },
+      "response": [
+        {
+          "name": "load by period",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/finance/2022-07-07/2022-07-08",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "finance", "2022-07-07", "2022-07-08"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1017"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"3f9-rRSLR4T6flJ0HLHKScOe5fFSitg\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 08 Jul 2022 10:52:13 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"record\": [\n        {\n            \"_id\": \"62c80aa5154aa3e6bf5de039\",\n            \"desc\": \"Salário\",\n            \"type\": \"profit\",\n            \"value\": 1600,\n            \"note\": \"salário de janeiro\",\n            \"createdAt\": \"2022-07-08T10:44:53.131Z\",\n            \"updatedAt\": \"2022-07-08T10:44:53.131Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80aba154aa3e6bf5de03c\",\n            \"desc\": \"Supermercado\",\n            \"type\": \"expense\",\n            \"value\": -150,\n            \"note\": \"mercado da semana - batata + banana\",\n            \"createdAt\": \"2022-07-08T10:45:14.784Z\",\n            \"updatedAt\": \"2022-07-08T10:47:28.826Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80b37154aa3e6bf5de044\",\n            \"desc\": \"Supermercado\",\n            \"type\": \"expense\",\n            \"value\": -150,\n            \"note\": \"compras da semana\",\n            \"createdAt\": \"2022-07-08T10:47:19.134Z\",\n            \"updatedAt\": \"2022-07-08T10:47:19.134Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80b5f154aa3e6bf5de048\",\n            \"desc\": \"Festa\",\n            \"type\": \"expense\",\n            \"value\": -60,\n            \"note\": \"aniversário\",\n            \"createdAt\": \"2022-07-08T10:47:59.047Z\",\n            \"updatedAt\": \"2022-07-08T10:47:59.047Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62c80bed154aa3e6bf5de04c\",\n            \"desc\": \"Gasolina\",\n            \"type\": \"expense\",\n            \"value\": -350,\n            \"note\": \"posto da esquina de casa\",\n            \"createdAt\": \"2022-07-08T10:50:21.569Z\",\n            \"updatedAt\": \"2022-07-08T10:51:46.301Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "get balance",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/balance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "balance"]
+        }
+      },
+      "response": [
+        {
+          "name": "get balance",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/balance",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "balance"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "15"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"f-nAZyQgQl32Vjcvuuv+70v78aIso\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 08 Jul 2022 10:52:18 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"balance\": 890\n}"
+        }
+      ]
+    }
+  ]
 }

@@ -1,10 +1,8 @@
-
-import Record from '../models/recordModel'
-import { Request } from 'express';
+import Record from "../models/recordModel";
+import { Request } from "express";
 
 const updateRecord = (Request: Request) => {
-    return Record.findByIdAndUpdate(Request.params.id, Request.body)
+  return Record.findByIdAndUpdate(Request.params.id, Request.body);
+};
 
-}
-
-export default updateRecord
+export default updateRecord;
