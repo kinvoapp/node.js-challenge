@@ -216,7 +216,7 @@ This application has the following endpoints:
 
   - Validation: validates if the movement exists.
   
-- **PUT**: `update/:id` - Movement update.
+- **PUT**: `/update/:id` - Movement update.
 
   - endpoint: [http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484)
 
@@ -245,7 +245,7 @@ This application has the following endpoints:
 
   - Validation: validates if the movement exists and if the fields are valid.
 
-- **DELETE**: `delete/:id` - Deletion of movement.
+- **DELETE**: `/delete/:id` - Deletion of movement.
 
   - endpoint: [http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484)
 
