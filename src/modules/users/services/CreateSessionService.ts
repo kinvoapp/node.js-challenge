@@ -14,6 +14,8 @@ class CreateSessionService {
   ) { }
     public async execute(email: string, password: string): Promise<any> {
       const user = await this.usersRepository.findByEmail(email)
+
+      console.log(user)
       
       if (!user) {
         throw Error()
