@@ -5,6 +5,7 @@
  */
 
 import MovementModel from '@models/Movement'
+import { UpdateWriteOpResult } from 'mongoose'
 import { IMovement } from 'types'
 
 /**
@@ -13,7 +14,7 @@ import { IMovement } from 'types'
  * layer the `movement` parameter of type `IMovement`
  * and returns a promise of an object created in the database.
  *
- * @param movement is a object of the interface IMovement.
+ * @param movement is an object from IMovement interface.
  * @returns {Promise<IMovement>} the promisse of an object create in the database.
  */
 
@@ -46,8 +47,23 @@ async function getMovement (id: string): Promise<IMovement> {
   return await MovementModel.findById(id)
 }
 
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` and `movement` as parameters.
+ * Returns a promise of an updated object of type `UpdateWriteOpResult`.
+ *
+ * @param id is an string.
+ * @param movement is an object from IMovement interface.
+ * @returns {Promise<UpdateWriteOpResult>} promise of an updated object of type `UpdateWriteOpResult`.
+ */
+
+async function updateMovement (id: string, movement: IMovement): Promise<UpdateWriteOpResult> {
+  return await MovementModel.updateOne({ _id: id }, movement)
+}
+
 export default {
   createMovement,
   getMovements,
-  getMovement
+  getMovement,
+  updateMovement
 }
