@@ -3,7 +3,7 @@ import { Schema, model, Document } from 'mongoose'
 interface TransactionInterface extends Document {
   value: number,
   type: string,
-  description: string
+  description: 'receita' | 'despesa'
 }
 
 const TransactionSchema = new Schema({
