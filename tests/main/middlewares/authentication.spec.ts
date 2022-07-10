@@ -20,7 +20,7 @@ describe('AuthenticationMiddleware', () => {
     })
     const { status, body } = await request(app)
       .get('/fake_route')
-      .set({ authorization })
+      .set({ authorization: `Bear ${authorization}` })
     expect(status).toBe(200)
     expect(body).toEqual({ userId: 'any_user_id' })
   })

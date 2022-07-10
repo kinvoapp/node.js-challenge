@@ -7,13 +7,18 @@ export abstract class Controller {
     return []
   }
 
-  async handle (httRequest: any): Promise<HttpResponse> {
+  async handle (httRequest: any, locals?: any): Promise<HttpResponse> {
     const error = this.validate(httRequest)
     if (error !== undefined) {
       return badRequest(error)
     }
     try {
-      return await this.perform(httRequest)
+      if (locals !== undefined) {
+        httRequest.locals = locals
+        return await this.perform(httRequest)
+      } else {
+        return await this.perform(httRequest)
+      }
     } catch (error) {
       return serverError(error)
     }

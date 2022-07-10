@@ -1,13 +1,14 @@
-import { HttpResponse, noContent, serverError } from '@/application/helpers'
+import { forbidden, HttpResponse, noContent, serverError, unauthorized } from '@/application/helpers'
 import { ValidationBuilder, Validator } from '@/application/validation'
 import { AddFinantialIncome } from '@/domain/use-cases'
+import { UnauthorizedError } from '../errors'
 import { Controller } from './controller'
 
 type HttpRequest = {
   type: string
   value: number
   description: string
-  user_id: number
+  locals?: any
 }
 type Model = Error | { accessToken: string }
 
@@ -16,21 +17,23 @@ export class AddFinatitalIncomesControler extends Controller {
     super()
   }
 
-  async perform ({ type, value, description, user_id }: HttpRequest): Promise<HttpResponse<Model>> {
+  async perform ({ type, value, description, locals }: HttpRequest): Promise<HttpResponse<Model>> {
     try {
-      await this.add({ type, value, description, user_id })
-      return noContent()
+      if (locals.userId !== undefined) {
+        await this.add({ type, value, description, user_id: locals.userId })
+        return noContent()
+      }
+      return serverError(unauthorized())
     } catch (error) {
       return serverError(error)
     }
   }
 
-  override buildValidators ({ type, value, description, user_id }: HttpRequest): Validator[] {
+  override buildValidators ({ type, value, description }: HttpRequest): Validator[] {
     return [
       ...ValidationBuilder.of({ value: type, fieldName: 'type' }).required().build(),
       ...ValidationBuilder.of({ value: value.toString(), fieldName: 'value' }).required().build(),
-      ...ValidationBuilder.of({ value: description, fieldName: 'description' }).required().build(),
-      ...ValidationBuilder.of({ value: user_id.toString(), fieldName: 'user_id' }).required().build()
+      ...ValidationBuilder.of({ value: description, fieldName: 'description' }).required().build()
     ]
   }
 }

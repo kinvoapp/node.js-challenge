@@ -14,7 +14,8 @@ export class AuthenticationMiddleware implements Middleware {
   async handler ({ authorization }: HttpRequest): Promise<HttpResponse<Model>> {
     if (!this.validate({ authorization })) return forbidden()
     try {
-      const userId = await this.authorize({ token: authorization })
+      const token = authorization.split(' ')[1]
+      const userId = await this.authorize({ token })
       return ok({ userId })
     } catch (error) {
       return forbidden()
