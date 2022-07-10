@@ -4,7 +4,7 @@ import { IDeleteTransactionRepository } from "../../domain/interface/repositorie
 import { IGetTransactionRepository } from "../../domain/interface/repositories/Transaction/IGetTransactionRepository";
 import { IBalanceInfoWithType } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
-import { validateBalance } from "../Helpers/helper";
+import { validateBalance } from "../../helpers/helper";
 
 export class DeleteTransactionService {
   private getTransactionRepository: IGetTransactionRepository;

@@ -1,11 +1,34 @@
 import { faker } from "@faker-js/faker";
-import { ICreateStudentRequest } from "../../src/domain/requestDto";
+import {
+  ICreateStudentRequest,
+  ICreateTransactionRequest,
+  IUpdateTransactionData,
+} from "../../src/domain/requestDto";
 
 export function mockICreateUserRequest() {
   const studentData: ICreateStudentRequest = {
     name: faker.name.findName(),
-    document: faker.random.numeric(),
+    document: Math.floor(Math.random() * 1000000000000).toString(),
     password: "admin",
   };
   return studentData;
+}
+
+export function mockICreateTransactionRequest() {
+  const transactionData: ICreateTransactionRequest = {
+    amount: faker.datatype.number(),
+    description: faker.commerce.productDescription(),
+    type: "CASHIN",
+  };
+  return transactionData;
+}
+
+export function mockIUpdateTransactionRequest() {
+  const transactionData: IUpdateTransactionData = {
+    amount: faker.datatype.number(),
+    description: faker.commerce.productDescription(),
+    type: "CASHIN",
+  };
+
+  return transactionData;
 }

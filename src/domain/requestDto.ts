@@ -101,3 +101,7 @@ export interface IBalanceInfo {
 export interface IBalanceInfoWithType extends IBalanceInfo {
   type: TransactionType;
 }
+
+export interface IAuthenticateStudentResponse {
+  token: string;
+}

@@ -10,6 +10,7 @@
     "start": "prisma migrate deploy && node dist/src/server.js",
     "dev": "npx prisma migrate dev && ts-node-dev -r dotenv/config src/server.ts",
     "test": "dotenv -e .env.test npx prisma migrate dev && jest --runInBand --coverage true",
+    "test-unique": "dotenv -e .env.test npx prisma migrate dev && jest -t",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -33,7 +34,8 @@
     "ts-node": "^10.8.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "zod": "^3.17.3"
   },
   "devDependencies": {
     "@types/supertest": "^2.0.12",
