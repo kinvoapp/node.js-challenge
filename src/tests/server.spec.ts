@@ -41,4 +41,17 @@ describe('must checkt the server', () => {
     expect(res.status).toBe(422)
     expect(res.body).toStrictEqual({ error: 'movement not found.' })
   })
+
+  test('must test if there is movement', async () => {
+    const idNotValid = '62c9e5ab59468436b7e40ab1'
+
+    const res = await request.get(`/movement/${idNotValid}`).send({
+      type: 'expense',
+      value: 1200,
+      category: 'studies',
+      date: '2022-04-18'
+    })
+
+    expect(res.status).toBe(422)
+  })
 })
