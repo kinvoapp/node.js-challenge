@@ -55,7 +55,7 @@ export class Item {
     this.id = item?.id;
     this.title = item?.title;
     this.value = item?.value;
-    this.createdDate = item?.createdDate;
+    this.createdDate = item?.createdDate || new Date().toISOString();
     this.updatedDate = item?.updatedDate;
     this.inputValue = item?.inputValue;
     this.description = item?.description;

@@ -64,7 +64,7 @@ export class ItemController {
 
   @Put('/:id')
   @UseFilters(new BadRequestExceptionFilter())
-  async upadateItemById(
+  async updateItemById(
     @Res() res: Response,
     @Param() { id }: { id: string },
     @Body() data: IItem,
