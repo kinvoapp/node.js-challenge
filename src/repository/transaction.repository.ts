@@ -3,6 +3,10 @@ import Record from "../models/recordModel";
 import mongoose from "mongoose";
 
 export class TransactionRepository {
+  findById(id: string) {
+    const count = Record.find({ _id: id }).limit(1).size();
+    if (count != 0) return true;
+  }
   saveRecord(data: TransactionDTO) {
     const record = new Record({
       _id: new mongoose.Types.ObjectId(),
