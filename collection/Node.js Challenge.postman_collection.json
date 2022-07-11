@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "b7802bd6-9788-46c6-ae36-91c6ef3a23e8",
+		"name": "Node.js Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movement",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Transferência de PIX para Gabriel\",\r\n    \"type\": 2,\r\n    \"value\": 200,\r\n    \"formOfPayment\": 1,\r\n    \"date\": \"2022-07-01T05:50:20.194Z\",\r\n    \"description\": \"Transferência de PIX feita para o Gabriel como pagamento do sorvete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/movement",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/movement?limit=10&offset=0&date=09/07/2022,10/07/2022&type=2&formOfPayment=1",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movement"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "date",
+									"value": "09/07/2022,10/07/2022"
+								},
+								{
+									"key": "type",
+									"value": "2"
+								},
+								{
+									"key": "formOfPayment",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Transferência de PIX para André\",\r\n    \"type\": 2,\r\n    \"value\": 200,\r\n    \"formOfPayment\": 1,\r\n    \"date\": \"2022-07-01T05:50:20.194Z\",\r\n    \"description\": \"Transferência de PIX feita para o André como pagamento do sorvete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/movement/62ca79f606d0df5a5a65205d",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movement",
+								"62ca79f606d0df5a5a65205d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/movement/62caee5b3c21b83f27983f62",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movement",
+								"62caee5b3c21b83f27983f62"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/movement/balance",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"movement",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lourencotestalima@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lourencotestalima@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-challenge-kinvo.herokuapp.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"node-challenge-kinvo",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
