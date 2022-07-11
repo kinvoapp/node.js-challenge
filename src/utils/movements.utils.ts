@@ -21,4 +21,32 @@ function balanceMovement (arr: IMovement[]): Balance {
   }
 }
 
-export default { balanceMovement }
+/**
+ * **organizesMovement**
+ * is a function that receives an array of objects of type `IMovement`
+ * and the parameters `from` and `to` (optional) as parameters.
+ * Returns an array of objects that may or may not be filtered by the from and to parameters.
+ *
+ * @param movements is an array of objects from IMovement.
+ * @param from is an number and optional.
+ * @param to is an number and optional.
+ * @returns {IMovement[]} the array of objects that may or may not be filtered by the from and to parameters.
+ */
+
+function organizesMovement (movements: IMovement[], from?: number, to?: number): IMovement[] {
+  return movements.map((e) => {
+    return {
+      id: e._id,
+      type: e.type,
+      value: e.value,
+      category: e.category,
+      date: e.date,
+      note: e.note
+    }
+  }).slice(from, to)
+}
+
+export default {
+  balanceMovement,
+  organizesMovement
+}
