@@ -33,7 +33,9 @@ const criarMovimentacao = async (req, res) => {
 };
 
 const listarMovimentacoes = async (req, res) => {
-    const { id } = req.params;
+    const { authorization } = req.headers;
+    const token = authorization.replace('Bearer', '').trim();
+    const { id } = jwt.verify(token, jwt_secret);
 
     try {
         const movimentacoes = await knex('movimentacoes').where({ id }).first();
@@ -122,9 +124,9 @@ const exibirSaldo = async (req, res) => {
             return res.status(200).json({ despesas: despesas.sum, receitas: receitas });
         }
 
-        const saldo = receitas - despesas;
+        const saldo = Number(receitas) - Number(despesas);
 
-        console.log(receitas, despesas, saldo);
+        console.log(receitas, despesas, saldo); { sum: '20000' } { sum: '10000' } NaN
         return res.status(200).json(saldo);
     } catch (error) {
         return res.status(400).json(error.message);
