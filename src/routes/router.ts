@@ -19,13 +19,13 @@ router.post("/user/authentication", signIn)
 //Transactions Routes
 router.use(validateToken)
 router.get('/balance', getBalance)
-router.get('/transactions/:page', listTransactions)
+router.get('/transactions/:id', listTransactions)
 
 router.post('/transactions', createTransaction)
 router.patch('/transactions/:id', updateTransaction)
 router.delete('/transactions/:id', deleteTransaction)
-
+router.get('/filter/transactions', filterByDate)
 //Filter Routes
-router.get('/transactions/filter', filterByDate) //query
+
 
 export default router
