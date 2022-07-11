@@ -5,6 +5,7 @@ const { deleteUser, getUsers, getUser, updateUser, userCreate, } = require("./co
 const { login } = require("./controllers/login.controller");
 const { revenueCreate, revenueGetAll, revenueGetById, revenueSearchForDates, revenueUpdate, revenueDelete, } = require("./controllers/revenue.controller");
 const { expenseCreate, expenseGetAll, expenseGetById, expenseSearchForDates, expenseUpdate, expenseDelete, } = require("./controllers/expense.controller");
+const { getBalance } = require("./controllers/balance.controller");
 // const { validationToken } = require("./middlewares/auth");
 const route = (0, express_1.Router)();
 route.get("/", (_req, res) => res.status(200).json({ app: "Cada centavo" }));
@@ -30,4 +31,6 @@ route.get("/expense/:id", expenseGetById);
 route.post("/search-expenses", expenseSearchForDates);
 route.put("/expense/:id", expenseUpdate);
 route.delete("/expense/:id", expenseDelete);
+// Balance
+route.get("/balance", getBalance);
 module.exports = route;
