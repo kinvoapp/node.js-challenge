@@ -1,15 +1,17 @@
 const knex = require('../bancodedados/conexao');
 const schemaMovimentacoes = require('../validacoes/schemaMovimentacoes');
 const jwt = require('jsonwebtoken');
+const jwt_secret = require('../jwt_secret');
 
 const criarMovimentacao = async (req, res) => {
     const { descricao, tipo, valor, data } = req.body;
-    const { id } = jwt.verify(token, process.env.SENHA_JWT);
+    const token = authorization.replace('Bearer', '').trim();
+    const { id } = jwt.verify(token, jwt_secret);
 
     try {
         await schemaMovimentacoes.schemaCriarMovimentacao.validate(req.body);
 
-        const perfilUsuario = await knex('usuarios').where({ id: usuario_id }).first();
+        const perfilUsuario = await knex('usuarios').where({ usuario_id: id }).first();
 
         if (!perfilUsuario) {
             return res.status(404).json('Usuário não encontrado.');
