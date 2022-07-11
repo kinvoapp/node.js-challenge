@@ -4,7 +4,7 @@ import { Revenue } from "src/modules/revenue/entities/revenue.entity";
 import { RolesType } from "src/shared/types/roles.type";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('User')
+@Entity('user')
 export class User {
 
     @PrimaryGeneratedColumn("uuid")

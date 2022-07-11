@@ -18,6 +18,7 @@ export class ExpenseService {
 
   async create(accountId: string, createExpenseDto: CreateExpenseDto): Promise<Result> {
     createExpenseDto['user'] = accountId;
+    createExpenseDto.value = -createExpenseDto.value;
     await this.expenseRepository.save(createExpenseDto);
     return new Result(true, [], [{ message: 'Expense added!' }], 201);
   }
@@ -65,6 +66,7 @@ export class ExpenseService {
   async update(accountId: string, expenseId: string, updateExpenseDto: UpdateExpenseDto) {
     let user: User = new User()
     user.id = accountId;
+    updateExpenseDto.value = -updateExpenseDto.value;
     let result = await this.expenseRepository.update({ id: expenseId, user: user }, updateExpenseDto);
     if (result.affected === 0)
       return new Result(false, [], [{ message: "Expense Not updated!" }], 500);

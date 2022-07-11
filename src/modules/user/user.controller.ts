@@ -46,12 +46,12 @@ export class UserController {
 
   @Get('balance')
   @UseInterceptors(new RoleInterceptor([RolesType.ADMIN, RolesType.USER]))
-  async balance(@TokenJwt() token: string): Promise<number> {
+  async balance(@TokenJwt() token: string): Promise<Result> {
     try {
       let { accountId } = AuthService.decode(token);
       return await this.userService.getBalance(accountId);
     } catch (error) {
-      throw new HttpException(new Result(false, {}), HttpStatus.INTERNAL_SERVER_ERROR);
+       throw new HttpException(new Result(false, {}), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
