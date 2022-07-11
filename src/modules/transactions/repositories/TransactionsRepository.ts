@@ -5,4 +5,5 @@ export interface TransactionsRepository {
   save(transaction: Transaction): Promise<void>
   delete(id: String): Promise<void>
   show(): Promise<Transaction[]>
+  showWithDate(initialDate: string, finalDate: string): Promise<Transaction[]>
 }

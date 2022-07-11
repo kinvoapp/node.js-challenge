@@ -3,6 +3,7 @@ import { createTransactionFactory } from '../factories/controllers/CreateTransac
 import { deleteTransactionFactory } from '../factories/controllers/DeleteTransactionFactory'
 import { getBalanceFactory } from '../factories/controllers/GetBalanceFactory'
 import { listTransactionFactory } from '../factories/controllers/ListTransactionFactory'
+import { listTransactionByDate } from '../factories/controllers/ListTransactionsByDateFactory'
 import { updateTransactionFactory } from '../factories/controllers/UpdateTransactionFactory'
 
 const transactionsRouter = Router()
@@ -10,6 +11,7 @@ const transactionsRouter = Router()
 transactionsRouter.post('/', createTransactionFactory)
 transactionsRouter.put('/', updateTransactionFactory)
 transactionsRouter.get('/', listTransactionFactory)
+transactionsRouter.get('/:initialDate/:finalDate', listTransactionByDate)
 transactionsRouter.get('/balance', getBalanceFactory)
 transactionsRouter.delete('/', deleteTransactionFactory)
 

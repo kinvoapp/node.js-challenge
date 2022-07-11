@@ -30,4 +30,21 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     )
     return transactions
   }
+
+  async showWithDate(initialDate: string, finalDate: string): Promise<Transaction[]> {
+    const res = await prisma.transaction.findMany({
+      where: {
+        updated_at: { gte: new Date(initialDate), lte: new Date(finalDate + 'T23:59:59.000Z') }
+      }
+    })
+    const transactions = res.map(transaction =>
+      Transaction.create({
+        id: transaction.id,
+        value: transaction.value,
+        type: transaction.type === 'Deposit' ? TransactionType.Deposit : TransactionType.Withdraw,
+        description: transaction.description || ''
+      })
+    )
+    return transactions
+  }
 }
