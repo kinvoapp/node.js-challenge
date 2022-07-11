@@ -8,25 +8,28 @@ export const listTransactions: RequestHandler = async (req, res) => {
 
 
     await getTransactions(user_id, page).then((response) => {
-        let listTransactionsResponse: ITransaction[] = []
-        response.forEach((transaction) => {
-            const { amount, date, type, created_at, updated_at, id, user_id } = transaction
+        if (response.length) {
+            let listTransactionsResponse: ITransaction[] = []
+            response.forEach((transaction) => {
+                const { amount, date, type, created_at, updated_at, id, user_id } = transaction
 
-            listTransactionsResponse.push(
-                {
-                    user_id,
-                    id,
-                    amount: amount,
-                    date,
-                    type,
-                    created_at,
-                    updated_at
+                listTransactionsResponse.push(
+                    {
+                        user_id,
+                        id,
+                        amount: amount,
+                        date,
+                        type,
+                        created_at,
+                        updated_at
 
-                }
-            )
-        })
+                    }
+                )
+            })
 
-        return res.status(200).json({ data: listTransactionsResponse })
+            return res.status(200).json({ data: listTransactionsResponse })
+        }
+        return res.status(200).json([])
     }).catch((error) => {
         if (error.status) {
             return res.status(error.status).json(error.data)
