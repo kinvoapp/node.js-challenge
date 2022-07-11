@@ -11,15 +11,15 @@ import MovementsUtils from '@utils/movements.utils'
 import { Balance, IMovement } from 'types'
 
 /**
- * **createMovement**
- * is an asynchronous function that takes `req`, `res` and `next` parameters from the Express interfaces.
- * It handles the data and sends it to the services layer.
- *
- * @param req is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
- */
+  * **createMovement**
+  * is an asynchronous function that takes `req`, `res` and `next` parameters from the Express interfaces.
+  * It handles the data and sends it to the services layer.
+  *
+  * @param req is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
+  */
 async function createMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
   const {
     type,
@@ -61,15 +61,15 @@ async function createMovement (req: Request, res: Response, next: NextFunction):
 }
 
 /**
- * **getMovements**
- * it is an asynchronous function that does the search of all the movements.
- * Returns a promise from an IMovement array.
- *
- * @param _ is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<IMovement[], Record<string, IMovement[]>>>} a promise from an IMovement array.
- */
+  * **getMovements**
+  * it is an asynchronous function that does the search of all the movements.
+  * Returns a promise from an IMovement array.
+  *
+  * @param _ is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<IMovement[], Record<string, IMovement[]>>>} a promise from an IMovement array.
+  */
 
 async function getMovements (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement[], Record<string, IMovement[]>>> {
   const from = Number(req.query.from)
@@ -94,14 +94,14 @@ async function getMovements (req: Request, res: Response, next: NextFunction): P
 }
 
 /**
- * **getMovement**
- * is an asynchronous function that searches for a movement by its id.
- *
- * @param req is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
- */
+  * **getMovement**
+  * is an asynchronous function that searches for a movement by its id.
+  *
+  * @param req is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
+  */
 
 async function getMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
   const { id } = req.params
@@ -127,14 +127,14 @@ async function getMovement (req: Request, res: Response, next: NextFunction): Pr
 }
 
 /**
- * **getBalance**
- * is an asynchronous function that returns the balance of the movements.
- *
- * @param _ is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<Balance, Record<string, Balance>>>} a promise from an Balance.
- */
+  * **getBalance**
+  * is an asynchronous function that returns the balance of the movements.
+  *
+  * @param _ is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<Balance, Record<string, Balance>>>} a promise from an Balance.
+  */
 
 async function getBalance (_: Request, res: Response, next: NextFunction): Promise<Response<Balance, Record<string, Balance>>> {
   try {
@@ -154,15 +154,15 @@ async function getBalance (_: Request, res: Response, next: NextFunction): Promi
 }
 
 /**
- * **updateMovement**
- * is an asynchronous function that does motion update by its `id`
- * and a new `movement` object of type IMovement.
- *
- * @param req is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
- */
+  * **updateMovement**
+  * is an asynchronous function that does motion update by its `id`
+  * and a new `movement` object of type IMovement.
+  *
+  * @param req is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
+  */
 
 async function updateMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
   const { id } = req.params
@@ -210,14 +210,14 @@ async function updateMovement (req: Request, res: Response, next: NextFunction):
 }
 
 /**
- * **deleteMovement**
- * is an asynchronous function that does motion deletion by its `id`.
- *
- * @param req is an Request from express.
- * @param res is an Response from express.
- * @param next is an NextFuncion from express.
- * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
- */
+  * **deleteMovement**
+  * is an asynchronous function that does motion deletion by its `id`.
+  *
+  * @param req is an Request from express.
+  * @param res is an Response from express.
+  * @param next is an NextFuncion from express.
+  * @returns {Promise<Response<IMovement, Record<string, IMovement>>>} a promise from an IMovement.
+  */
 
 async function deleteMovement (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement, Record<string, IMovement>>> {
   const { id } = req.params
