@@ -67,7 +67,7 @@ Segue abaixo todas as funcionalidades listadas para o projeto e as que foram imp
 
 ### Swagger
 
-Para facilitar o acesso as rotas do projeto, fiz o deploy no Heroku e também implementei o [Swagger](https://kinvo-challenge.herokuapp.com/api-docs/).
+Para facilitar o acesso as rotas do projeto, fiz o deploy no Heroku e também implementei o [Swagger](https://kinvo-challenge.herokuapp.com/api-docs/). Caso utilize a versão do deploy, lembrar de mudar para o servidor de produção no topo da página do Swagger.
 
 <img alt="swagger page" src="./images/swaggermain.png">
 
