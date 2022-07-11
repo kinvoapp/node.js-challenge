@@ -38,7 +38,7 @@ const listarMovimentacoes = async (req, res) => {
     const { id } = jwt.verify(token, jwt_secret);
 
     try {
-        const movimentacoes = await knex('movimentacoes').where({ id: usuario_id }).first();
+        const movimentacoes = await knex('movimentacoes').where({ usuario_id: id }).first();
 
         if (!movimentacoes) {
             return res.status(404).json('Não há movimentações cadastradas');
