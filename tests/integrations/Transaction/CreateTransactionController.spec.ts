@@ -41,4 +41,27 @@ describe("Create Transaction Controller", () => {
 
     expect(response.status).toBe(401);
   });
+  it("should fail due to insufficient funds", async () => {
+    const studentRequest = mockICreateUserRequest();
+
+    const createUserResponse = await createStudent(studentRequest);
+
+    const loginRequest = {
+      document: createUserResponse.document,
+      password: "admin",
+    };
+
+    const token = await authenticateStudent(loginRequest);
+
+    const transactionRequest = mockICreateTransactionRequest();
+    transactionRequest.type = "CASHOUT";
+
+    const response = await superAppRequest
+      .post("/transaction")
+      .send(transactionRequest)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual("Insufficient funds");
+  });
 });

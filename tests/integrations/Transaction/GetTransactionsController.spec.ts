@@ -24,9 +24,9 @@ describe("Get Transactions Controller", () => {
 
     const transactionRequest = mockICreateTransactionRequest();
 
-    await createTransaction(transactionRequest, token);
-
-    await createTransaction(transactionRequest, token);
+    for (let i = 0; i < 2; i++) {
+      await createTransaction(transactionRequest, token);
+    }
 
     const response = await superAppRequest
       .get("/transaction")
@@ -47,5 +47,62 @@ describe("Get Transactions Controller", () => {
     const response = await superAppRequest.get("/transaction");
 
     expect(response.status).toBe(401);
+  });
+  it("should be able list all transactions with filters", async () => {
+    const studentRequest = mockICreateUserRequest();
+
+    const createUserResponse = await createStudent(studentRequest);
+
+    const loginRequest = {
+      document: createUserResponse.document,
+      password: "admin",
+    };
+
+    const token = await authenticateStudent(loginRequest);
+
+    const transactionRequest = mockICreateTransactionRequest();
+
+    for (let i = 0; i < 5; i++) {
+      await createTransaction(transactionRequest, token);
+    }
+
+    const response = await superAppRequest
+      .get("/transaction?itemsPerPage=3")
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.transactions.length).toEqual(3);
+  });
+  it("should be able list all transactions with timestamp filters", async () => {
+    const studentRequest = mockICreateUserRequest();
+
+    const createUserResponse = await createStudent(studentRequest);
+
+    const loginRequest = {
+      document: createUserResponse.document,
+      password: "admin",
+    };
+
+    const token = await authenticateStudent(loginRequest);
+
+    const transactionRequest = mockICreateTransactionRequest();
+
+    let lastCreatedAt: Date | null = null;
+
+    for (let i = 0; i < 3; i++) {
+      const transaction = await createTransaction(transactionRequest, token);
+      lastCreatedAt = transaction.createdAt;
+    }
+
+    for (let i = 0; i < 2; i++) {
+      await createTransaction(transactionRequest, token);
+    }
+
+    const response = await superAppRequest
+      .get(`/transaction?end=${lastCreatedAt}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.transactions.length).toEqual(3);
   });
 });

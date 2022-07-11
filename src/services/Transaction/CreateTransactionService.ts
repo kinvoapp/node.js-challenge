@@ -7,6 +7,7 @@ import {
 } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
 import { ICreateTransactionService } from "../../domain/interface/services/Transaction/ICreateTransactionService";
+import { validateBalance } from "../../helpers/helper";
 
 export class CreateTransactionService implements ICreateTransactionService {
   private createTransactionRepository: ICreateTransactionRepository;
@@ -32,9 +33,7 @@ export class CreateTransactionService implements ICreateTransactionService {
     if (data.type === "CASHIN") {
       newBalance += data.amount;
     } else {
-      if (account.available < data.amount) {
-        throw new InvalidArgument("Insufficient funds");
-      }
+      validateBalance(newBalance, data.amount);
       newBalance -= data.amount;
     }
     const transaction =
