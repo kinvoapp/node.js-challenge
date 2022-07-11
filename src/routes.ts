@@ -27,6 +27,8 @@ const {
   expenseUpdate,
   expenseDelete,
 } = require("./controllers/expense.controller");
+
+const { getBalance } = require("./controllers/balance.controller");
 // const { validationToken } = require("./middlewares/auth");
 
 const route = Router();
@@ -74,5 +76,8 @@ route.post("/search-expenses", expenseSearchForDates);
 route.put("/expense/:id", expenseUpdate);
 
 route.delete("/expense/:id", expenseDelete);
+
+// Balance
+route.get("/balance", getBalance);
 
 module.exports = route;

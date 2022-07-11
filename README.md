@@ -2,6 +2,14 @@
 
 # Kinvo - Desafio Back-end
 
+Aplicação backend para finanças pessoais com as seguintes funcionalidades:
+
+Criação da movimentação (receitas e despesas);
+Atualização da movimentação;
+Exclusão da movimentação;
+Listagem de movimentações;
+Exibição do saldo.
+
 ## Rodando a aplicação
 
 ```bash
@@ -20,10 +28,18 @@ npm run dev
 yarn test
 ```
 
+```bash
+yarn test tests/login.test.js
+```
+
 ou
 
 ```bash
 npm run test
+```
+
+```bash
+npm run test tests/login.test.js
 ```
 
 ## Rodando o lint da aplicação
