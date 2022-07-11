@@ -34,7 +34,6 @@ export class UpdateFinatitalIncomesControler extends Controller {
       }
       return serverError(unauthorized())
     } catch (error) {
-      console.log(error)
       return serverError(error)
     }
   }
