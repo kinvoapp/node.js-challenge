@@ -1,74 +1,320 @@
-> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
+# Node.js Challenge - Jeferson Lucas
 
+## Challenge
 
-# Kinvo - Desafio Back-end
+### Context
 
-## Instruções
+A student in order to save expenses and control his personal finances decided to develop an application to help him in this mission. After a case study he mapped the following features:
 
-- Utilize Typescript com Node;
-- Desenvolva uma API REST ou GraphQL;
-- Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
-- Crie um arquivo README com instruções para executar seu projeto;
-- Crie a collection do Insomnia ou Postman, salve com o nome "collection".
+- Creation of movement (income and expenses);
+- Movement update;
+- Exclusion of the movement;
+- List of movements;
+- Balance display.
 
-## Contexto
+### Requirements
 
-Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu desenvolver um aplicativo para lhe ajudar nessa missão. Após um estudo de caso ele mapeou as seguintes funcionalidades:
+#### Junior Developer
 
-- Criação da movimentação (receitas e despesas);
-- Atualização da movimentação;
-- Exclusão da movimentação;
-- Listagem de movimentações;
-- Exibição do saldo.
+- Filter in the list of transactions by date (start date and end date);
+- Pagination in the movement listing.
 
-## Requisitos
+#### Pleno Developer
 
-### Desenvolvedor Júnior
+- All Junior requirements;
+- Semantic Rest API (if you chose to develop a Rest API);
+- Minimally scalable architecture;
+- Minimum coverage of automated tests.
 
-- Filtro na listagem de movimentações por data (data inicial e data final);
-- Paginação na listagem de movimentações.
+#### Senior Developer
 
-### Desenvolvedor Pleno
-
-- Todos os requisitos do Júnior;
-- API Rest semântica (se escolheu desenvolver uma API Rest);
-- Arquitetura minimamente escalável;
-- Cobertura mínima de testes automatizados.
-
-### Desenvolvedor Sênior
-
-- Todos os requisitos do Pleno;
-- Autenticação:
-  - Cadastro de usuário;
+- All Plenary requirements;
+- Authentication:
+  - User registration;
   - Login;
-  - Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- Dockerizar a aplicação;
-- Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
+  - User's need to be authenticated to carry out the activities mentioned in the context.
+- Dockerize the application;
+- Good OOP practices (Examples: SOLID, Design Patterns, etc.).
 
-### Diferenciais
+#### Differentials
 
 - Cache;
-- Segurança da aplicação;
+- Application security;
 - Deploy.
 
-## Dicas
+## Starting
 
-- Se optar por uma API REST, tenha cuidado ao definir as rotas e verbos HTTP: faça uso de boas práticas;
-- Crie uma aplicação flexível, ou seja, que seja fácil incluir novas funcionalidades;
-- Clean Code: o código deve ser fácil de entender;
-- Atente-se a boas práticas de versionamento.
+Follow this information to start this application.
 
-## Processo de submissão
+### Installing
 
-1. Faça o fork deste repositório;
-2. Faça seu projeto neste fork;
-3. Suba as alterações para o seu fork;
-4. Submeta uma PR para este repositório.
+To install, make sure you have [Node.js](https://nodejs.org/dist/v16.16.0/node-v16.16.0-x64.msi) and [Yarn](https://classic.yarnpkg.com/en/) (optional) installed on your computer. Make a copy of this project on your machine. Open the folder of this project in a terminal or command propt and run the following command below:
 
-## Observações:
+```bash
+$ npm install
+#or
+$ yarn install
+```
 
-* O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
-* Apesar da listagem de requisitos mínimos acima, caso não tenha tido tempo suficiente ou tenha se esbarrado em alguma dificuldade, entregue o desafio ainda que incompleto e conte-nos na descrição do pull request quais foram as suas maiores dificuldades. Não se preocupe, avaliaremos ainda assim! :)
-* Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
+### Environment variables
 
-### Boa sorte! 🍀
+This project makes use of environment variables. Create a `.env` file in the project root with an example of the [.env.example](.env.example) file:
+
+```env
+PORT=
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+```
+
+### Starting the application
+
+With the necessary resources and the project installed on your computer, start the application in development mode with a terminal or command prompt with the following command:
+
+```bash
+$ npm run dev
+#or
+$ yarn run dev
+```
+
+The response from this command should look something like this:
+
+```bash
+$ ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/server.ts
+[INFO] 00:00:00 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.8.1, typescript ver. 4.7.3)
+Server started!
+```
+
+Open the application on the following port [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word). The response should be something similar to this:
+
+```json
+{
+  "message": "Hello Word"
+}
+```
+
+### Viewing tests
+
+To view the tests for this application, run the following command in the terminal or command prompt:
+
+```bash
+$ npm run test
+# or 
+$ yarn run test
+```
+
+Or in watch mode test:
+
+```bash
+$ npm run test-watch
+# or 
+$ yarn run test-watch
+```
+
+The response of these commands should look something like this:
+
+```bash
+$ jest
+ PASS  src/tests/firsTest.spec.ts (00.001 s)
+ PASS  src/tests/server.spec.ts (00.001 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        1 s
+Ran all test suites.
+Done in 1s.
+```
+
+For other scripts commands, see the `package.json` file of this project.
+
+## Using the application
+
+To create HTTP requests use some API client to perform your tests and debugs like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/).
+
+This application has the following endpoints:
+
+**/hello/:msg**:
+
+- **GET**: `hello/:msg` - Initial route for message display via parameter.
+
+  - endpoint: [http://localhost:8080/hello/Hello%20Word](http://localhost:8080/hello/Hello%20Word)
+
+  - return:
+
+  ```json
+  {
+    "message": "Hello Word"
+  }
+  ```
+
+**/movement**:
+
+- **POST**: `/create` - Creation of movement (income and expenses).
+
+  - endpoint: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
+
+  - Request:
+
+  ```json
+  {
+	  "type": "expense",
+	  "value": 1000,
+	  "category": "studies",
+	  "date": "2022-04-18"
+  }
+  ```
+
+  - Response:
+
+  ```json
+  {
+    "id": "62c9e5ab59468436b7e40ab0",
+    "type": "expense",
+    "value": 1000,
+    "category": "personal",
+    "date": "2022-07-12"
+  }
+  ```
+  
+  - Validation: validates that the fields are valid.
+
+- **GET**: `/` - Display all movements (income and expenses).
+
+  - endpoint: [http://localhost:8080/movement/](http://localhost:8080/movement/)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    },
+    // ... more movements
+  ]
+  ```
+
+- **GET**: `/?from=0&to=1` - Display all movements (income and expenses) with pagination.
+
+  - endpoint: [http://localhost:8080/movement/?from=0&to=1](http://localhost:8080/movement/?from=0&to=1)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    }
+  ]
+  ```
+
+- **GET**: `/:id` - Display only one movement.
+
+  - endpoint: [http://localhost:8080/movement/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1000,
+    "category": "studies",
+    "date": "2022-07-12"
+   }
+  ```
+
+  - Validation: validates if the movement exists.
+
+- **GET**: `/balance` - Balance display.
+
+  - endpoint: [http://localhost:8080/movement/balance](http://localhost:8080/movement/balance)
+
+  - response:
+
+  ```jsonc
+  {
+	  "expenses": 2200,
+	  "incomes": 0,
+	  "balance": -2200
+  }
+  ```
+
+  - Validation: validates if the movement exists.
+  
+- **PUT**: `/update/:id` - Movement update.
+
+  - endpoint: [http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484)
+
+  - request:
+
+  ```jsonc
+  {
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - response:
+
+  ```jsonc
+  {
+	  "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - Validation: validates if the movement exists and if the fields are valid.
+
+- **DELETE**: `/delete/:id` - Deletion of movement.
+
+  - endpoint: [http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "message": "movement removed."
+  }
+  ```
+
+  - Validation: validates if the movement exists.
+
+## Deploy
+
+See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/hello/Hello%20Word).
+
+## Stacks
+
+This project is configured with the following stacks:
+
+- Node: `16.13.2`
+- TypeScript: `4.7.3`
+- Express: `4.18.1`
+- Mongoose: `6.4.4`
+- Yarn: `1.22.5`
+- Jest: `28.1.1`
+- Supertest: `6.2.3`
+- Babel: `7.18.5`
+- ESLint: `8.19.0`
+- Git: `2.28.0`
+- Git Flow: `1.12.3`
+
+For more information check the [package.json](package.json) file of this project.
+
+## License 
+
+This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) for details.

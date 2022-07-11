@@ -1,0 +1,87 @@
+/**
+ * **Service layers**
+ * this layer is responsible for receiving information from the control layer
+ * and serving the repositories layer.
+ */
+
+import MovementRepositories from '@repositories/movement.repositories'
+import { UpdateWriteOpResult } from 'mongoose'
+import { DeleteResult } from 'mongodb'
+
+import { IMovement } from 'types'
+
+/**
+ * **createMovement**
+ * is an asynchronous function that receives from the control
+ * layer the `movement` parameter of type `IMovement`
+ * and returns a promise of a created object of type `IMovement`.
+ *
+ * @param movement is an object of the interface IMovement.
+ * @returns { Promise<IMovement>} the promisse of an object create in the database.
+ */
+
+async function createMovement (movement: IMovement): Promise<IMovement> {
+  return await MovementRepositories.createMovement(movement)
+}
+
+/**
+ * **getMovement**
+ * It is an asynchronous function that
+ * uses from the repository layer a function that returns a promise with an IMovement array
+ * that contains all the results found.
+ * @returns {Promise<IMovement[]>} promise with an `IMovement` array that contains all the results found.
+ */
+
+async function getMovements (): Promise<IMovement[]> {
+  return await MovementRepositories.getMovements()
+}
+
+/**
+ * **getMovement**
+ * It is an asynchronous function that receives an `id` parameter
+ * that it passes to the getMovement function of the repository layer.
+ *
+ * @param id is an string.
+ * @returns an object promise of type IMovement.
+ */
+
+async function getMovement (id: string): Promise<IMovement> {
+  return await MovementRepositories.getMovement(id)
+}
+
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` and `movement` as parameters
+ * and forwards to the repositories layer.
+ * Returns a promise of an updated object of type `UpdateWriteOpResult`.
+ *
+ * @param id is an string.
+ * @param movement is an object from IMovement interface.
+ * @returns {Promise<UpdateWriteOpResult>} promise of an updated object of type `UpdateWriteOpResult`.
+ */
+
+async function updateMovement (id: string, movement: IMovement): Promise<UpdateWriteOpResult> {
+  return await MovementRepositories.updateMovement(id, movement)
+}
+
+/**
+ * **updateMovement**
+ * It is an asynchronous function that takes `id` as parameters
+ * and forwards to the repositories layer.
+ * Returns a promise of type `DeleteResult`.
+ *
+ * @param id is an string.
+ * @returns {Promise<DeleteResult>} promise a promise of type `DeleteResult`.
+ */
+
+async function deleteMovement (id: string): Promise<DeleteResult> {
+  return await MovementRepositories.deleteMovement(id)
+}
+
+export default {
+  createMovement,
+  getMovements,
+  getMovement,
+  updateMovement,
+  deleteMovement
+}

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": ["ES6"],
+    "allowJs": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+			"@controllers/*": ["controllers/*"],
+			"@models/*": ["models/*"],
+			"@repositories/*": ["repositories/*"],
+			"@routes/*": ["routes/*"],
+			"@services/*": ["services/*"],
+			"@utils/*": ["utils/*"]
+		},
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
