@@ -38,7 +38,7 @@ const listarMovimentacoes = async (req, res) => {
     const { id } = jwt.verify(token, jwt_secret);
 
     try {
-        const movimentacoes = await knex('movimentacoes').where({ id }).first();
+        const movimentacoes = await knex('movimentacoes').where({ id: usuario_id }).first();
 
         if (!movimentacoes) {
             return res.status(404).json('Não há movimentações cadastradas');
@@ -132,7 +132,6 @@ const exibirSaldo = async (req, res) => {
         return res.status(400).json(error.message);
     }
 };
-
 
 module.exports = {
     criarMovimentacao,
