@@ -126,7 +126,6 @@ const exibirSaldo = async (req, res) => {
 
         const saldo = Number(receitas - despesas);
 
-        console.log(receitas, despesas, saldo);
         return res.status(200).json(saldo);
     } catch (error) {
         return res.status(400).json(error.message);
