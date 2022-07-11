@@ -109,6 +109,7 @@ const exibirSaldo = async (req, res) => {
     const receitasUsuarios = await knex('movimentacoes').where({ tipo: 'receitas' });
 
     console.log(despesasUsuarios, receitasUsuarios);
+    return res.status().json(despesasUsuarios);
 };
 
 
