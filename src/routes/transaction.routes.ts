@@ -26,4 +26,6 @@ transactionRoutes.delete(
   transactionsController.deleteTransaction
 );
 
+transactionRoutes.get("/", transactionsController.getAllTransaction);
+
 export default transactionRoutes;

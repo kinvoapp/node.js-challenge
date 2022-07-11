@@ -60,4 +60,10 @@ export class TransactionsControllers {
       ok: true,
     });
   }
+
+  async getAllTransaction(req: Request, res: Response) {
+    const transactions = await transactionHistoryRepository.find();
+
+    return res.status(200).json(transactions);
+  }
 }

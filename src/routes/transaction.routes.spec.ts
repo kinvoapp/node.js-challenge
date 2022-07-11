@@ -110,7 +110,7 @@ describe("Transaction Route", () => {
     });
   });
 
-  fdescribe("Delete Transaction", () => {
+  describe("Delete Transaction", () => {
     it("should return a error if id param is not a number", async () => {
       const response = await request(app).delete("/transactions/not-a-number");
 
@@ -139,6 +139,20 @@ describe("Transaction Route", () => {
       });
 
       expect(transaction).toBeNull();
+    });
+  });
+
+  describe("Get All Transaction", () => {
+    it("should return transactions", async () => {
+      const newTransaction = transactionHistoryRepository.create({
+        entry: 150,
+      });
+
+      await transactionHistoryRepository.save(newTransaction);
+
+      const response = await request(app).get("/transactions");
+
+      expect(response.body.length).toBeGreaterThan(0);
     });
   });
 });
