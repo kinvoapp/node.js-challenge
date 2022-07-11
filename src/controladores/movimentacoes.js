@@ -36,7 +36,7 @@ const listarMovimentacoes = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const movimentacoes = await knex('movimentacoes').where({ usuario_id: id }).first();
+        const movimentacoes = await knex('movimentacoes').where({ id }).first();
 
         if (!movimentacoes) {
             return res.status(404).json('Não há movimentações cadastradas');
@@ -111,7 +111,7 @@ const exibirSaldo = async (req, res) => {
 
         const saldo = receitasUsuarios.sum - despesasUsuarios.sum;
 
-        console.log(receitasUsuarios.sum, receitasUsuarios.Sum);
+        console.log(receitasUsuarios.value, receitasUsuarios.value);
         return res.status(200).json(saldo);
     } catch (error) {
         return res.status(400).json(error.message);
