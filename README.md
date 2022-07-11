@@ -1,74 +1,37 @@
-> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
-
-
-# Kinvo - Desafio Back-end
-
-## Instruções
-
-- Utilize Typescript com Node;
-- Desenvolva uma API REST ou GraphQL;
-- Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
-- Crie um arquivo README com instruções para executar seu projeto;
-- Crie a collection do Insomnia ou Postman, salve com o nome "collection".
-
-## Contexto
-
+# Kinvo Challenge
+Este repositório é a execução de um desafio cuja descrição está presente no arquivo "ChallengeDescription.md".
+### Contexto
 Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu desenvolver um aplicativo para lhe ajudar nessa missão. Após um estudo de caso ele mapeou as seguintes funcionalidades:
-
 - Criação da movimentação (receitas e despesas);
 - Atualização da movimentação;
 - Exclusão da movimentação;
 - Listagem de movimentações;
 - Exibição do saldo.
+## Tecnologias Utilizadas
+Para o desenvolvimento desta aplicação, foram utilizadas as seguintes tecnologias:
+- Express
+- Prisma
+- SQLite
+## Funcionalidades Desenvolvidas
 
-## Requisitos
+Foram desenvolvidas as funcionalidades esperadas ao nível Júnior, além do cadastro e consulta de usuários, e acesso a transações somente para usuários autenticados.
 
-### Desenvolvedor Júnior
+## Como Rodar
+Para rodar este projeto, pode-se utilizar o gerenciador de pacotes `yarn`, primeiramente rodando o comando `yarn`, para instalar todas as dependências.
+Após isto, rodar o comando `yarn dev`, que fará funcionar a dependência `ts-node-dev`, e colocará o sistema em pé, rodando na porta 3000 do seu localhost. Como o banco de dados utilizado foi SQLite, não se faz necessária qualquer instalação. 
+ 
+## Rotas
+### Rotas de Usuário
+- `/users/all`: `GET`
+- `/users/:id`: `GET`
+- `/users/new`: `POST`
+- `/login`: `POST`
 
-- Filtro na listagem de movimentações por data (data inicial e data final);
-- Paginação na listagem de movimentações.
-
-### Desenvolvedor Pleno
-
-- Todos os requisitos do Júnior;
-- API Rest semântica (se escolheu desenvolver uma API Rest);
-- Arquitetura minimamente escalável;
-- Cobertura mínima de testes automatizados.
-
-### Desenvolvedor Sênior
-
-- Todos os requisitos do Pleno;
-- Autenticação:
-  - Cadastro de usuário;
-  - Login;
-  - Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- Dockerizar a aplicação;
-- Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
-
-### Diferenciais
-
-- Cache;
-- Segurança da aplicação;
-- Deploy.
-
-## Dicas
-
-- Se optar por uma API REST, tenha cuidado ao definir as rotas e verbos HTTP: faça uso de boas práticas;
-- Crie uma aplicação flexível, ou seja, que seja fácil incluir novas funcionalidades;
-- Clean Code: o código deve ser fácil de entender;
-- Atente-se a boas práticas de versionamento.
-
-## Processo de submissão
-
-1. Faça o fork deste repositório;
-2. Faça seu projeto neste fork;
-3. Suba as alterações para o seu fork;
-4. Submeta uma PR para este repositório.
-
-## Observações:
-
-* O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
-* Apesar da listagem de requisitos mínimos acima, caso não tenha tido tempo suficiente ou tenha se esbarrado em alguma dificuldade, entregue o desafio ainda que incompleto e conte-nos na descrição do pull request quais foram as suas maiores dificuldades. Não se preocupe, avaliaremos ainda assim! :)
-* Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
-
-### Boa sorte! 🍀
+### Rotas de Transações
+- `/transactions/all`: `GET` 
+- `/transactions`: `GET`
+- `/transactions/balance`: `GET`
+- `/transactions/paginate`: `GET`
+- `/transactions/new`: `POST`
+- `/transactions/update/:id`: `PUT`
+- `/transactions/delete/:id`: `DELETE`

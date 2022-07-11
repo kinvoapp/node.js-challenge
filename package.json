@@ -1,0 +1,34 @@
+{
+  "name": "kinvo-challenge",
+  "version": "1.0.0",
+  "description": "> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dffs-code/node.js-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dffs-code/node.js-challenge/issues"
+  },
+  "homepage": "https://github.com/dffs-code/node.js-challenge#readme",
+  "dependencies": {
+    "@prisma/client": "^4.0.0",
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "prisma": "^4.0.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "ts-node-dev": "^2.0.0"
+  }
+}
