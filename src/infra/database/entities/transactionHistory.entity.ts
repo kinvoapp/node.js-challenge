@@ -1,13 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
+@Entity("transaction_history")
 export class TransactionHistory {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn({
+    unsigned: true,
+    type: "int",
+  })
+  id: number;
 
-  @Column()
-  entry!: number;
+  @Column({ type: "float" })
+  entry: number;
 
-  @Column()
-  created_at!: Date;
+  @Column({
+    type: "date",
+    default: new Date().toISOString(),
+  })
+  created_at: Date;
 }

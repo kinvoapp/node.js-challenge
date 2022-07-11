@@ -1,13 +1,19 @@
 import { Request, Response } from "express";
+import { CreateTransactionDto } from "../dto/Transaction.dto";
+import { transactionHistoryRepository } from "../repositories/transactionHistory.repository";
 
 export class TransactionsControllers {
   async createTransaction(req: Request, res: Response) {
-    const entry = req.body?.entry;
+    const { entry } = req.body as CreateTransactionDto;
 
-    if (!entry) {
-      return res.status(400).json({
-        message: "Entry field was not provided",
-      });
-    }
+    const transaction = transactionHistoryRepository.create({
+      entry,
+    });
+
+    const transactionCreated = await transactionHistoryRepository.save(
+      transaction
+    );
+
+    return res.json(transactionCreated);
   }
 }

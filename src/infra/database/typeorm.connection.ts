@@ -1,8 +1,16 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
-import { TransactionHistory } from "./entities/transactionHistory.entity";
+import { DataSource, DataSourceOptions } from "typeorm";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const AppDataSource = new DataSource({
+const jestOptions: DataSourceOptions = {
+  type: "sqlite",
+  database: ":memory:",
+  entities: [`${__dirname}/entities/*.entity.{ts,js}`],
+  synchronize: true,
+};
+
+const devOptions: DataSourceOptions = {
   type: "mysql",
   host: "localhost",
   port: 3306,
@@ -11,10 +19,11 @@ export const AppDataSource = new DataSource({
   database: "mini_bank",
   synchronize: false,
   logging: false,
-  entities: [TransactionHistory],
+  entities: [`${__dirname}/entities/*.entity.{ts,js}`],
   subscribers: [],
   migrations: [`${__dirname}/migrations/*.{ts,js}`],
-});
+};
 
-export const TransactionHistoryRepository =
-  AppDataSource.getRepository(TransactionHistory);
+export const AppDataSource = new DataSource(
+  process.env.NODE_ENV === "test" ? jestOptions : devOptions
+);
