@@ -29,7 +29,7 @@
          AppDataSource = new DataSource({
             type: 'postgres' >> (altere para o tipo de banco de dados que irá utilizar, caso não seja o postgres)
     
- - A aplicação tem apenas funcionalides simples de um CRUD.
+ - A aplicação tem apenas funcionalidades simples de um CRUD.
  - Teste a aplicação no Insomnia seguindo as rotas que constam em "routes/routes.ts"
 
  
