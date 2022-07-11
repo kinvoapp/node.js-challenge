@@ -1,6 +1,21 @@
 version: "3.2"
 
 services:
+  app:
+    build: .
+    container_name: kinvo-challenge
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports: 
+      - 4100:4100
+    links: 
+     - postgres
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
   postgres:
     image: postgres:14.2
     restart: unless-stopped
@@ -10,5 +25,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    networks:
+      - app-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+networks:
+  app-network:
+    driver: bridge

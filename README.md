@@ -57,7 +57,7 @@ Setar variáveis de ambiente de acordo
 
 OBS: Há a alternativa de incializar a aplicação via Docker:
 
-- Buildar imagem da aplicação: `docker build -t kinvo-challenge .`
+- Buildar imagem da aplicação: `docker build --no-cache -t kinvo-challenge .`
 - Executar docker-compose: `docker-compose up -d`
 
 ## Gerando e Implementando Migrations (Prisma)
