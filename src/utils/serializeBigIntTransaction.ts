@@ -1,11 +1,11 @@
 import { ITransaction } from "@models/transactions"
 
 export function serializeBigIntToString(transactions: ITransaction[]) {
-    let listTransactionsResponse: ITransaction[] = []
+    let listResponse: ITransaction[] = []
     transactions.forEach((transaction) => {
         const { amount, date, type, created_at, updated_at, id, user_id } = transaction
 
-        listTransactionsResponse.push(
+        listResponse.push(
             {
                 user_id,
                 id,
@@ -18,5 +18,5 @@ export function serializeBigIntToString(transactions: ITransaction[]) {
             }
         )
     })
-    return listTransactionsResponse
+    return listResponse
 }
