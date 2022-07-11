@@ -3,6 +3,26 @@ version: '3.9'
 
 # The containers that compose the project
 services:
+  api:
+    container_name: api
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env.test
+    environment:
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - ${PORT}:${PORT}
+    external_links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
   db:
     image: postgres:13
     restart: always
@@ -13,3 +33,9 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
+    volumes:
+      - ./data:/data/db
+
+volumes:
+  postgres-data:
+    driver: local
