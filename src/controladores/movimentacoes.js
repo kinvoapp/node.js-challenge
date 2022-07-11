@@ -5,6 +5,7 @@ const jwt_secret = require('../jwt_secret');
 
 const criarMovimentacao = async (req, res) => {
     const { descricao, tipo, valor, data } = req.body;
+    const { authorization } = req.headers;
     const token = authorization.replace('Bearer', '').trim();
     const { id } = jwt.verify(token, jwt_secret);
 
@@ -50,6 +51,9 @@ const atualizarMovimentacao = async (req, res) => {
     const { descricao, tipo, valor, data } = req.body;
     const { id } = req.params;
     const { usuario } = req;
+    const { authorization } = req.headers;
+    const token = authorization.replace('Bearer', '').trim();
+    const { usuario_id } = jwt.verify(token, jwt_secret);
 
     if (!usuario) {
         return res.status(401).json('Usuário não autenticado!');
