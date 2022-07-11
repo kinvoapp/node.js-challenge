@@ -71,7 +71,10 @@ async function createMovement (req: Request, res: Response, next: NextFunction):
  * @returns {Promise<Response<IMovement[], Record<string, IMovement[]>>>} a promise from an IMovement array.
  */
 
-async function getMovements (_: Request, res: Response, next: NextFunction): Promise<Response<IMovement[], Record<string, IMovement[]>>> {
+async function getMovements (req: Request, res: Response, next: NextFunction): Promise<Response<IMovement[], Record<string, IMovement[]>>> {
+  const from = Number(req.query.from)
+  const to = Number(req.query.to)
+
   try {
     const movements = await MovementServices.getMovements()
 
@@ -79,18 +82,11 @@ async function getMovements (_: Request, res: Response, next: NextFunction): Pro
       return res.status(200).json({ message: 'there are no movements' })
     }
 
-    return res.status(200).json(
-      movements.map((e) => {
-        return {
-          id: e._id,
-          type: e.type,
-          value: e.value,
-          category: e.category,
-          date: e.date,
-          note: e.note
-        }
-      })
-    )
+    if (from && to) {
+      return res.status(200).json(MovementsUtils.organizesMovement(movements, from, to))
+    }
+
+    return res.status(200).json(MovementsUtils.organizesMovement(movements))
   } catch (error) {
     res.status(500).json({ error: error.message })
     next(error)
@@ -151,6 +147,17 @@ async function getBalance (_: Request, res: Response, next: NextFunction): Promi
     const balance = MovementsUtils.balanceMovement(movements)
 
     return res.status(200).json(balance)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+    next(error)
+  }
+}
+
+async function filterMovement (req: Request, res: Response, next: NextFunction) {
+  const initialDate = req.query.initialDate
+  const finalDate = req.query.finalDate
+  try {
+    return res.json({ initialDate, finalDate })
   } catch (error) {
     res.status(500).json({ error: error.message })
     next(error)
@@ -246,6 +253,7 @@ export default {
   getMovements,
   getMovement,
   getBalance,
+  filterMovement,
   updateMovement,
   deleteMovement
 }
