@@ -1,4 +1,5 @@
-export interface IAccount {
+export interface Account {
+  id: number;
   name: string;
   cpf: string;
   password: string;
