@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+    database_kinvo_api:
+        image: postgres
+        container_name: database_kinvo_api
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=admin_main
+            - POSTGRES_PASSWORD=admin123
+            - POSTGRES_DB=kinvo_db
+        volumes:
+            - pgdata:/data/postgres
+    app:
+        build: .
+        container_name: kinvo_api
+        ports:
+            - 3333:3333
+        volumes:
+            - .:/usr/app
+        links:
+            - database_kinvo_api
+        depends_on:
+            - database_kinvo_api
+
+volumes:
+    pgdata:
+        driver: local
