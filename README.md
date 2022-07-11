@@ -198,6 +198,24 @@ This application has the following endpoints:
   ]
   ```
 
+- **GET**: `/?from=0&to=1` - Display all movements (income and expenses) with pagination.
+
+  - endpoint: [http://localhost:8080/movement/?from=0&to=1](http://localhost:8080/movement/?from=0&to=1)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    }
+  ]
+  ```
+
 - **GET**: `/:id` - Display only one movement.
 
   - endpoint: [http://localhost:8080/movement/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/62c9cf218adf8b69bbee4484)
