@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "bed67d88-7b01-43aa-8f5f-1f8ef8123483",
+		"name": "Revenue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15464705"
+	},
+	"item": [
+		{
+			"name": "Create Revenue",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 500,\r\n    \"title\": \"IRRF\",\r\n    \"description\": \"Imposto de Renda\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{revenues}}/",
+					"host": [
+						"{{revenues}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Revenue",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Cashback\",\r\n    \"value\": 55,\r\n    \"description\": \"Cashback do Cartão\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{revenues}}/fd88ea67-c317-473b-925f-2b48fdebd297",
+					"host": [
+						"{{revenues}}"
+					],
+					"path": [
+						"fd88ea67-c317-473b-925f-2b48fdebd297"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Revenues",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"startDate\": \"2022/07/09\",\r\n    \"finalDate\": \"10/10/2022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{revenues}}/?page=0",
+					"host": [
+						"{{revenues}}"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Revenue By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{revenues}}/37c127df-3db0-4207-ae47-27fa4d65e8c5",
+					"host": [
+						"{{revenues}}"
+					],
+					"path": [
+						"37c127df-3db0-4207-ae47-27fa4d65e8c5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Revenue",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{revenues}}/b6c89392-b1ab-4bcd-a046-20dde09527ed",
+					"host": [
+						"{{revenues}}"
+					],
+					"path": [
+						"b6c89392-b1ab-4bcd-a046-20dde09527ed"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

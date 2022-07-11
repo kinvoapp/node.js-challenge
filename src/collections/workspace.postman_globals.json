@@ -1,0 +1,39 @@
+{
+	"id": "696b3bc4-9450-4f34-8ef4-f7aff31c5ec4",
+	"values": [
+		{
+			"key": "expenses",
+			"value": "http://localhost:3001/finances/expenses",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "revenues",
+			"value": "http://localhost:3001/finances/revenues",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "users",
+			"value": "http://localhost:3001/finances/users",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "login",
+			"value": "http://localhost:3001/finances/login",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI5OTU4MGI3My1iODZkLTQ0OGEtYmEyNS05ZmFkNjk5NDk3ZjIiLCJyb2xlcyI6WyJhZG1pbiJdLCJpYXQiOjE2NTc0OTY3MTR9._FPGUbX5r7xQyRHTRGf7ZUXWJSNY6dpbX1hL3dpFYas",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-07-11T01:00:01.762Z",
+	"_postman_exported_using": "Postman/9.24.1"
+}

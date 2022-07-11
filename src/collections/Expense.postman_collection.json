@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "33d01b0f-9365-4b3e-abeb-323608c7db08",
+		"name": "Expense",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15464705"
+	},
+	"item": [
+		{
+			"name": "Create Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 100,\r\n    \"title\": \"Sushi\",\r\n    \"description\": \"Shushi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{expenses}}/",
+					"host": [
+						"{{expenses}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 30,\r\n    \"title\": \"Lanche diurno\",\r\n    \"description\": \"Lanche de tarde\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{expenses}}/acffe210-79b3-4f8e-b236-5ea5438b0979",
+					"host": [
+						"{{expenses}}"
+					],
+					"path": [
+						"acffe210-79b3-4f8e-b236-5ea5438b0979"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Expenses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"startDate\": \"2022/07/09\",\r\n    \"finalDate\": \"10/10/2022\",\r\n    \"accountId\":\"c072cb8a-2494-4143-96ae-76eceb6d8a3a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{expenses}}/?page=0",
+					"host": [
+						"{{expenses}}"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Expense By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{expenses}}/4a217bf4-687b-4fbc-85c3-01d5a0e08343",
+					"host": [
+						"{{expenses}}"
+					],
+					"path": [
+						"4a217bf4-687b-4fbc-85c3-01d5a0e08343"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{expenses}}/expenseId",
+					"host": [
+						"{{expenses}}"
+					],
+					"path": [
+						"expenseId"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
