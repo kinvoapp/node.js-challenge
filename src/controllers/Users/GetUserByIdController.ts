@@ -10,6 +10,8 @@ export class GetUserByIdController {
       }
     });
 
+    if(!user?.id) return response.status(404).json({message: 'User não encontrado'})
+
     return response.status(200).json(user);
   }
 }

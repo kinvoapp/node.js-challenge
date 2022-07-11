@@ -7,7 +7,9 @@ export class GetTransactionsByDateController {
     const { initialDate, finalDate } = request.query;
     const user_id = request.userId;
 
-    if (!initialDate || !finalDate) return response.status(400).json({ message: 'Parmâmetros inválidos, verifique sua consulta' })
+
+    if (!initialDate || !finalDate || (new Date(initialDate) === "Invalid Date") || (new Date(finalDate) === "Invalid Date")
+      ) return response.status(400).json({ message: 'Parmâmetros inválidos, verifique sua consulta' })
 
     const transactions = await prismaClient.transaction.findMany({
       where: {
