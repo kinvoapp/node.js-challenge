@@ -104,7 +104,11 @@ const excluirMovimentacao = async (req, res) => {
 };
 
 const exibirSaldo = async (req, res) => {
+    const despesasUsuarios = await knex('movimentacoes').where({ tipo: 'despesas' });
 
+    const receitasUsuarios = await knex('movimentacoes').where({ tipo: 'receitas' });
+
+    console.log(despesasUsuarios, receitasUsuarios);
 };
 
 
