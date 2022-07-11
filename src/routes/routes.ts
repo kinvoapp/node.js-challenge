@@ -17,6 +17,8 @@ routes.delete('/earning/:id/', new EarningController().deleteEarning);
 routes.post('/expense', new ExpenseController().create);
 routes.get('/expense', new ExpenseController().index);
 routes.put('/expense/:id/', new ExpenseController().updateExpense);
+routes.delete('/expense/:id/', new ExpenseController().deleteExpense);
+
 
 routes.get('/balance', new BalanceController().index);
 
