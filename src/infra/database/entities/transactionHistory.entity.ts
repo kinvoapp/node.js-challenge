@@ -15,5 +15,5 @@ export class TransactionHistory {
     type: "date",
     default: new Date().toISOString(),
   })
-  created_at: Date;
+  created_at: string;
 }

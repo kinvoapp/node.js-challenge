@@ -14,4 +14,10 @@ transactionRoutes.post(
   transactionsController.createTransaction
 );
 
+transactionRoutes.put(
+  "/:id",
+  transactionsMiddlewares.validateUpdateTransactionDTO,
+  transactionsController.updateTransaction
+);
+
 export default transactionRoutes;
