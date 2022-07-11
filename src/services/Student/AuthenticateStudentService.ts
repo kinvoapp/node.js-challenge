@@ -2,9 +2,10 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { InvalidArgument } from "../../domain/error";
 import { IFindStudentByDocumentRepository } from "../../domain/interface/repositories/Student/IFindStudentByDocumentRepository";
+import { IAuthenticateStudentService } from "../../domain/interface/services/Student/IAuthenticateStudentService";
 import { IAuthenticateStudentRequest } from "../../domain/requestDto";
 
-export class AuthenticateStudentService {
+export class AuthenticateStudentService implements IAuthenticateStudentService {
   private findStudentByDocumentRepository: IFindStudentByDocumentRepository;
 
   constructor(
