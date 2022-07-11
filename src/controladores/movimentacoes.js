@@ -124,7 +124,7 @@ const exibirSaldo = async (req, res) => {
             return res.status(200).json({ despesas: despesas.sum, receitas: receitas });
         }
 
-        const saldo = Number(receitas) - Number(despesas);
+        const saldo = Number(receitas - despesas);
 
         console.log(receitas, despesas, saldo);
         return res.status(200).json(saldo);
