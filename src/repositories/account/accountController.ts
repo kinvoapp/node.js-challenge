@@ -30,7 +30,23 @@ async function loginAccountController(
 
     const login = await accountService.login({ cpf, password });
 
-    return response.status(201).json(login);
+    return response.status(200).json(login);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getBalance(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  try {
+    const { cpf } = request.body;
+
+    const balance = await accountService.getBalance(cpf);
+
+    return response.status(200).json(balance);
   } catch (error) {
     next(error);
   }

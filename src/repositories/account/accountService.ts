@@ -32,34 +32,50 @@ export class AccountService {
     });
 
     const account = await this.accountModel.findByCpf(cpf!);
-    return account;
+    const { password: pass, ...withoutPassword } = account!;
+
+    return withoutPassword;
   }
 
   async login({ password, cpf }: Omit<ICreateAccountDTO, 'name'>) {
-    await this.accountModel.findByCpf(cpf!).then((response) => {
-      if (!response?.cpf) {
-        throw new Error('Conta não encontrada.');
-      } else if (response.password !== password) {
-        throw new Error('CPF ou Password inválido.');
-      } else {
-        const { id, cpf, name } = response!;
-        return {
-          token: jwt.sign({ id, cpf, name }, this._jwtSecret, {
-            expiresIn: '20m',
-            algorithm: 'HS256',
-          }),
-        };
-      }
-    });
+    const account = await this.accountModel.findByCpf(cpf!);
+
+    if (!account) {
+      throw new Error('Conta não encontrada.');
+    } else if (account.password !== password) {
+      throw new Error('CPF ou Password inválido.');
+    } else {
+      const { cpf, name, amount } = account!;
+
+      return this.genToken({ cpf, name, amount });
+    }
+  }
+
+  genToken(payload: ICreateAccountDTO) {
+    try {
+      const token = jwt.sign(payload, this._jwtSecret, {
+        expiresIn: '20m',
+        algorithm: 'HS256',
+      });
+
+      return token;
+    } catch (err) {
+      throw new Error('Error.');
+    }
   }
 
   verifyToken(token: string) {
     try {
       const decoded = jwt.verify(token, this._jwtSecret);
-
+      console.log('DECODED', decoded);
       return decoded;
     } catch (err) {
       throw new Error('Token inválido.');
     }
+  }
+
+  async getBalance(cpf: string) {
+    const accountBalance = await this.accountModel.getBalance(cpf);
+    return accountBalance;
   }
 }

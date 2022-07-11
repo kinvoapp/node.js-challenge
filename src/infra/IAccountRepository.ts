@@ -10,4 +10,5 @@ export interface ICreateAccountDTO {
 export interface IAccountRepository {
   findByCpf(cpf: string): Promise<Account | null>;
   create(account: ICreateAccountDTO): Promise<void>;
+  getBalance(cpf: string): Promise<number>;
 }
