@@ -109,9 +109,10 @@ const exibirSaldo = async (req, res) => {
 
         const receitasUsuarios = await knex('movimentacoes').where({ tipo: 'receita' }).sum('valor');
 
-        const saldo = receitasUsuarios.sum - despesasUsuarios.sum;
+        const saldo = Number(receitasUsuarios.valor) - Number(despesasUsuarios.valor);
 
-        console.log(receitasUsuarios.value, receitasUsuarios.value);
+        [{ sum: '10000' }][{ sum: '20000' }]
+
         return res.status(200).json(saldo);
     } catch (error) {
         return res.status(400).json(error.message);
