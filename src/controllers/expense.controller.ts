@@ -17,7 +17,6 @@ exports.expenseCreate = async (req: Request, res: Response): Promise<any> => {
   } catch (error) {
     return res.status(500);
   }
-  console.log(expenses);
 
   return expenses.code
     ? res.status(expenses.code).json(expenses.message)
