@@ -131,6 +131,32 @@
           "tags": ["Transaction"],
           "summary": "Lists transactions",
           "description": "Lists all transactions by user",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "itemsPerPage",
+              "type": "number",
+              "description": "Number of items displayed"
+            },
+            {
+              "in": "query",
+              "name": "currentPage",
+              "type": "number",
+              "description": "Current page"
+            },
+            {
+              "in": "query",
+              "name": "start",
+              "type": "Date",
+              "description": "Start date"
+            },
+            {
+              "in": "query",
+              "name": "end",
+              "type": "Date",
+              "description": "End date"
+            }
+          ],
           "responses": {
             "200": {
               "description": "Done",
@@ -157,11 +183,11 @@
                             "type": "string",
                             "enum": ["CASHOUT", "CASHIN"]
                           },
-                        "createdat": {
-                          "type": "Date"
+                        "createdAt": {
+                          "type": "string"
                         },
-                        "updatedat": {
-                          "type": "Date"
+                        "updatedAt": {
+                          "type": "string"
                         }
                       }
                     }
@@ -273,7 +299,7 @@
                             "type": "number"
                           },
                           "updatedAt": {
-                            "type": "Date"
+                            "type": "string"
                           }
                         }
                       }
