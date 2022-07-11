@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const { HOST, DB_NAME, USER_CLUSTER, PASSWORD_CLUSTER, DEVELOPMENT } = process.env;
-const CLUSTER = `mongodb+srv://${USER_CLUSTER}:${PASSWORD_CLUSTER}@node-challenge.axsni.mongodb.net/?retryWrites=true&w=majority`;
+const CLUSTER = `mongodb+srv://${USER_CLUSTER}:${PASSWORD_CLUSTER}@cluster0.dkla5.mongodb.net/?retryWrites=true&w=majority`;
 const URI = DEVELOPMENT === "true"
     ? `mongodb://${HOST || "mongodb"}:27017/${DB_NAME}`
     : CLUSTER;
