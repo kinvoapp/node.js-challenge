@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "admin_main",
+  "password": "admin123",
+  "database": "kinvo_db",
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+  "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
+}
