@@ -155,4 +155,36 @@ describe("Transaction Route", () => {
       expect(response.body.length).toBeGreaterThan(0);
     });
   });
+
+  describe("Get One Transaction", () => {
+    it("should return a error if id param is not a number", async () => {
+      const response = await request(app).get("/transactions/not-a-number");
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe("Id param should be number!");
+    });
+
+    it("should return error if transaction was not found", async () => {
+      const response = await request(app).get("/transactions/0");
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe("Transaction was not found");
+    });
+
+    it("should return transaction", async () => {
+      const newTransaction = transactionHistoryRepository.create({
+        entry: 150,
+      });
+
+      await transactionHistoryRepository.save(newTransaction);
+
+      const response = await request(app).get(
+        `/transactions/${newTransaction.id}`
+      );
+
+      expect(response.body.created_at).toBe(newTransaction.created_at);
+      expect(response.body.entry).toBe(newTransaction.entry);
+      expect(response.body.id).toBe(newTransaction.id);
+    });
+  });
 });

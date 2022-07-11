@@ -28,4 +28,10 @@ transactionRoutes.delete(
 
 transactionRoutes.get("/", transactionsController.getAllTransaction);
 
+transactionRoutes.get(
+  "/:id",
+  transactionsMiddlewares.validateGetOneTransactionDTO,
+  transactionsController.getOneTransaction
+);
+
 export default transactionRoutes;

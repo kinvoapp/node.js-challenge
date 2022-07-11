@@ -66,4 +66,16 @@ export class TransactionsControllers {
 
     return res.status(200).json(transactions);
   }
+
+  async getOneTransaction(req: Request, res: Response) {
+    const transaction = await transactionHistoryRepository.findOneBy({
+      id: Number(req.params.id),
+    });
+
+    if (!transaction) {
+      return res.status(404).json({ message: "Transaction was not found" });
+    }
+
+    return res.status(200).json(transaction);
+  }
 }

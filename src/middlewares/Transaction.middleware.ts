@@ -74,4 +74,21 @@ export class TransactionsMiddlewares {
 
     next();
   }
+
+  validateGetOneTransactionDTO(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    if (
+      isNaN(Number(req.params.id)) ||
+      typeof Number(req.params.id) !== "number"
+    ) {
+      return res.status(400).json({
+        message: "Id param should be number!",
+      });
+    }
+
+    next();
+  }
 }
