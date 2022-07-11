@@ -153,17 +153,6 @@ async function getBalance (_: Request, res: Response, next: NextFunction): Promi
   }
 }
 
-async function filterMovement (req: Request, res: Response, next: NextFunction) {
-  const initialDate = req.query.initialDate
-  const finalDate = req.query.finalDate
-  try {
-    return res.json({ initialDate, finalDate })
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-    next(error)
-  }
-}
-
 /**
  * **updateMovement**
  * is an asynchronous function that does motion update by its `id`
@@ -253,7 +242,6 @@ export default {
   getMovements,
   getMovement,
   getBalance,
-  filterMovement,
   updateMovement,
   deleteMovement
 }
