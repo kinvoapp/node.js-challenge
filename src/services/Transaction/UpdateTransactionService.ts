@@ -9,8 +9,9 @@ import {
 } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
 import { validateBalance } from "../../helpers/helper";
+import { IUpdateTransactionService } from "../../domain/interface/services/Transaction/IUpdateTransactionService";
 
-export class UpdateTransactionService {
+export class UpdateTransactionService implements IUpdateTransactionService {
   private updateTransactionRepository: IUpdateTransactionRepository;
   private getTransactionRepository: IGetTransactionRepository;
   private getAccountWithBalanceRepository: IGetAccountWithBalanceRepository;

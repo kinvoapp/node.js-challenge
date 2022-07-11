@@ -6,8 +6,9 @@ import {
   ICreateTransactionResponse,
 } from "../../domain/requestDto";
 import { GetAccountBalanceService } from "../Account/GetAccountBalanceService";
+import { ICreateTransactionService } from "../../domain/interface/services/Transaction/ICreateTransactionService";
 
-export class CreateTransactionService {
+export class CreateTransactionService implements ICreateTransactionService {
   private createTransactionRepository: ICreateTransactionRepository;
   private getAccountWithBalanceRepository: IGetAccountWithBalanceRepository;
 

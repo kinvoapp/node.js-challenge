@@ -1,12 +1,13 @@
 import { NotFound } from "../../domain/error";
 import { IFindAccountByIdRepository } from "../../domain/interface/repositories/Account/IFindAccountByIdRepository";
 import { IGetTransactionsRepository } from "../../domain/interface/repositories/Transaction/IGetTransactionsRepository";
+import { IGetTransactionService } from "../../domain/interface/services/Transaction/IGetTransactionService";
 import {
   ITransactionPaginationRequest,
   ITransactionPaginationResponse,
 } from "../../domain/requestDto";
 
-export class GetTransactionsService {
+export class GetTransactionsService implements IGetTransactionService {
   private getTransactionsRepository: IGetTransactionsRepository;
   private findAccountByIdRepository: IFindAccountByIdRepository;
 

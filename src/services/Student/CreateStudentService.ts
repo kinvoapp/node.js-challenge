@@ -2,9 +2,10 @@ import { hash } from "bcryptjs";
 import { InvalidArgument } from "../../domain/error";
 import { ICreateStudentRepository } from "../../domain/interface/repositories/Student/ICreateStudentRepository";
 import { IFindStudentByDocumentRepository } from "../../domain/interface/repositories/Student/IFindStudentByDocumentRepository";
+import { ICreateStudentService } from "../../domain/interface/services/Student/ICreateStudentService";
 import { ICreateStudentRequest } from "../../domain/requestDto";
 
-export class CreateStudentService {
+export class CreateStudentService implements ICreateStudentService {
   private createStudentRepository: ICreateStudentRepository;
   private findStudentByDocumentRepository: IFindStudentByDocumentRepository;
 
