@@ -1,0 +1,10 @@
+version: '1.0'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: challenge
+      POSTGRES_PASSWORD: challenge
+      POSTGRES_DB: challengedb
+    ports:
+      - '5432:5432'
