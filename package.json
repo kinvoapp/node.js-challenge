@@ -1,27 +1,25 @@
 {
+  "name": "kinovo-desafio-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
-    "@types/body-parser": "^1.19.2",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.13",
+    "@types/body-parser": "^1.19.0",
     "@types/node": "^18.0.3",
+    "@types/express": "^4.17.13",
     "@types/sqlite3": "^3.1.8",
-    "body-parser": "^1.20.0",
-    "dotenv": "^16.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.6.0",
     "express": "^4.18.1",
-    "node-dev": "^7.4.3",
     "sqlite3": "^5.0.8",
     "ts-node": "^10.8.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4"
   },
-  "name": "kinvo-desafio-back-end",
-  "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }

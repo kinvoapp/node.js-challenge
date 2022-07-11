@@ -1,0 +1,1 @@
+/home/anikulapo/Área de Trabalho/Nova pasta/Kinovo-Desafio Back-end -/.env

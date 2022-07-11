@@ -15,9 +15,6 @@ const insertReceitas = (req: Request, res: Response) => {
         if (!receitas.descricao)
             return badRequest(res, 'Informe a discrição');
 
-        if (!receitas.data)
-            return badRequest(res, 'informe a data');    
-
         if (!validateNumber(receitas.valor))
             return badRequest(res, 'informe o valor');
     }
@@ -48,9 +45,6 @@ const updateReceitas = async (req: Request, res: Response) => {
 
         if (!validateNumber(receitas.valor))
             return badRequest(res, 'Informe o preço');
-
-            if(!receitas.data) 
-        return badRequest(res, 'informe a data');
 
         const receitasSaved = await receitasModel.getReceitas(id);
         if (!receitasSaved)

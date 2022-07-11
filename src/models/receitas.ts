@@ -6,17 +6,31 @@ export type Receitas = {
     id: number;
     descricao: string;    
     valor: number;
+<<<<<<< HEAD
+
+=======
     data: Date;
+    
+    
+>>>>>>> fd4eb80 (Add despensas e saldo)
 }
 
 const insertReceitas = async (receitas: Receitas) => {
-    await dbQuery(`INSERT INTO receitas (descricao, valor, data_receitas) VALUES(?, ?, ?)`, [receitas.descricao, receitas.valor, receitas.data])
+    await dbQuery(`INSERT INTO receitas (descricao, valor, data) VALUES(?, ?)`, [receitas.descricao, receitas.valor, receitas.data])
     let retorno = await dbQuery(`SELECT seq AS Id FROM sqlite_sequence WHERE  name = 'receitas'`);
+<<<<<<< HEAD
     return retorno[0].Id as number | undefined;
 
 }
 const updateReceitas = async (receitas: Receitas) => {
-    await dbQuery(`UPDATE receitas SET descricao = ?, valor = ?, data = ? WHERE id = ?`,  [receitas.descricao, receitas.valor, receitas.data, receitas.id])
+    await dbQuery(`UPDATE receitas SET descricao = ?, valor = ? WHERE id = ?`, [receitas.descricao, receitas.valor, receitas.id])
+=======
+   return retorno [0].Id as number | undefined | Date;
+
+}
+const updateReceitas = async (receitas: Receitas) => {
+    await dbQuery(`UPDATE receitas SET descricao = ?, valor = ?, data = ? WHERE id = ?`, [receitas.descricao, receitas.valor, receitas.data, receitas.id])
+>>>>>>> fd4eb80 (Add despensas e saldo)
     return getReceitas(receitas.id);
 }
 

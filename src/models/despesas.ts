@@ -12,7 +12,7 @@ export type Despesas = {
 }
 
 const insertDespesas = async (despesas: Despesas) => {
-    await dbQuery(`INSERT INTO despesas (descricao, valor, data) VALUES(?, ?, ?)`, [despesas.descricao, despesas.valor, despesas.data])
+    await dbQuery(`INSERT INTO despesas (descricao, valor, data) VALUES(?, ?)`, [despesas.descricao, despesas.valor, despesas.data])
     let retorno = await dbQuery(`SELECT seq AS Id FROM sqlite_sequence WHERE  name = 'despesas'`);
    return retorno [0].Id as number | undefined | Date;
 
