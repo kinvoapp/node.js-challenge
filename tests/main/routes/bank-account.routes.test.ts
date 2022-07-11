@@ -66,4 +66,60 @@ describe('Auhtentication routes', () => {
         .expect(403)
     })
   })
+
+  describe('PUT /bankAccount/updateFinantialIcomes', () => {
+    it('should return 204 on add sucess', async () => {
+      const accessToken = await request(app)
+        .post('/api/singup')
+        .send({
+          name: 'usuário_test',
+          email: 'email_76',
+          password: 'test_password',
+          confirmPassword: 'test_password'
+        })
+        .expect(200)
+
+      await request(app)
+        .post('/api/bankAccount/addFinantialIncome')
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        .set('authorization', `Bear ${accessToken.body.accessToken}`)
+        .send({
+          type: 'any_type',
+          value: 1000,
+          description: 'any_desc'
+        })
+        .expect(204)
+
+      await request(app)
+        .put('/api/bankAccount/updateFinantialIcomes')
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        .set('authorization', `Bear ${accessToken.body.accessToken}`)
+        .send({
+          type: 'any_type',
+          value: 1000,
+          description: 'any_desc'
+        })
+        .expect(204)
+    })
+
+    it('should return 204 on add sucess', async () => {
+      await request(app)
+        .post('/api/singup')
+        .send({
+          name: 'usuário_test',
+          email: 'email_45',
+          password: 'test_password',
+          confirmPassword: 'test_password'
+        })
+        .expect(200)
+      const data = await request(app)
+        .put('/api/bankAccount/updateFinantialIcomes')
+        .send({
+          type: 'any_type',
+          value: 1000,
+          description: 'any_desc'
+        })
+        .expect(403)
+    })
+  })
 })

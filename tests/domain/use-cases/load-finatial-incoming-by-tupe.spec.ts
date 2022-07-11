@@ -1,5 +1,5 @@
 import { LoadFinantialIncomeByTypeRepository } from '@/domain/contracts/repos'
-import { LoadFinantialIncomeByType, setupLoadFinantialIncomeByTypeRepository, setupLoadFinantialIncomeByUserId } from '@/domain/use-cases/index'
+import { LoadFinantialIncomeByType, setupLoadFinantialIncomeByType, setupLoadFinantialIncomeByUserId } from '@/domain/use-cases/index'
 import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('LoadFinantialIncomeByUserId', () => {
@@ -8,7 +8,7 @@ describe('LoadFinantialIncomeByUserId', () => {
 
   beforeAll(() => {
     bankAccoutRepo = mock()
-    bankAccoutRepo.load.mockResolvedValue({
+    bankAccoutRepo.loadByType.mockResolvedValue({
       id: 1,
       type: 'any_type',
       value: 1000,
@@ -18,13 +18,13 @@ describe('LoadFinantialIncomeByUserId', () => {
   })
 
   beforeEach(() => {
-    sut = setupLoadFinantialIncomeByTypeRepository(bankAccoutRepo)
+    sut = setupLoadFinantialIncomeByType(bankAccoutRepo)
   })
 
   it('should call load with correct input', async () => {
     await sut({ type: 'any_type' })
-    expect(bankAccoutRepo.load).toHaveBeenCalledWith({ type: 'any_type' })
-    expect(bankAccoutRepo.load).toHaveBeenCalledTimes(1)
+    expect(bankAccoutRepo.loadByType).toHaveBeenCalledWith({ type: 'any_type' })
+    expect(bankAccoutRepo.loadByType).toHaveBeenCalledTimes(1)
   })
 
   it('should return a finantial income on sucess', async () => {
@@ -39,7 +39,7 @@ describe('LoadFinantialIncomeByUserId', () => {
   })
 
   it('should rethrow if finatila icome not found', async () => {
-    bankAccoutRepo.load.mockResolvedValueOnce(undefined)
+    bankAccoutRepo.loadByType.mockResolvedValueOnce(undefined)
     const promise = sut({ type: 'any_type' })
     await expect(promise).rejects.toThrow()
   })

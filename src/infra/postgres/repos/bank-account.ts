@@ -1,8 +1,8 @@
-import { AddFinantialIncomeRepository, LoadFinantialIncomeByUserIdRepository, UpdateFinantialIncomeRepository } from '@/domain/contracts/repos'
+import { AddFinantialIncomeRepository, LoadFinantialIncomeByTypeRepository, LoadFinantialIncomeByUserIdRepository, UpdateFinantialIncomeRepository } from '@/domain/contracts/repos'
 import { UpdateFinantialIncome } from '@/domain/use-cases'
 import { getRepository } from 'typeorm'
 import { BankAccount } from '../entities'
-export class PgBankAccountRepository implements AddFinantialIncomeRepository {
+export class PgBankAccountRepository implements AddFinantialIncomeRepository, LoadFinantialIncomeByUserIdRepository, LoadFinantialIncomeByUserIdRepository {
   async add ({ type, value, description, user_id }: AddFinantialIncomeRepository.Input): Promise<AddFinantialIncomeRepository.Output> {
     const pgBankAccountRepo = getRepository(BankAccount)
     const pgBankAccount = await pgBankAccountRepo.save({ type, value, description, user_id })
@@ -14,6 +14,16 @@ export class PgBankAccountRepository implements AddFinantialIncomeRepository {
     const pgBankAccount = await pgBankAccountRepo.findOne({
       where: {
         user_id: userId
+      }
+    })
+    return pgBankAccount !== undefined ? pgBankAccount : undefined
+  }
+
+  async loadByType ({ type }: LoadFinantialIncomeByTypeRepository.Input): Promise<LoadFinantialIncomeByTypeRepository.Output> {
+    const pgBankAccountRepo = getRepository(BankAccount)
+    const pgBankAccount = await pgBankAccountRepo.findOne({
+      where: {
+        type
       }
     })
     return pgBankAccount !== undefined ? pgBankAccount : undefined

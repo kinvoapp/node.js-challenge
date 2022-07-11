@@ -1,3 +1,5 @@
 export * from './singup'
 export * from './login'
 export * from './add-finatial-income'
+export * from './update-finatial-income'
+export * from './load-finatial-income-by-user-id'

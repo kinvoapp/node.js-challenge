@@ -15,7 +15,7 @@ export namespace LoadFinantialIncomeByTypeRepository {
 }
 
 export interface LoadFinantialIncomeByTypeRepository {
-  load: (param: LoadFinantialIncomeByTypeRepository.Input) => Promise<LoadFinantialIncomeByTypeRepository.Output>
+  loadByType: (param: LoadFinantialIncomeByTypeRepository.Input) => Promise<LoadFinantialIncomeByTypeRepository.Output>
 }
 
 export namespace LoadFinantialIncomeByUserIdRepository {

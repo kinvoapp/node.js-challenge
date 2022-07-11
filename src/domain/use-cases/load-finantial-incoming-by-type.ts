@@ -6,8 +6,8 @@ type Output = LoadFinantialIncomeByTypeRepository.Output
 export type LoadFinantialIncomeByType = (params: Input) => Promise<Output>
 type Setup = (bankAccoutRepo: LoadFinantialIncomeByTypeRepository) => LoadFinantialIncomeByType
 
-export const setupLoadFinantialIncomeByTypeRepository: Setup = (bankAccoutRepo) => async params => {
-  const resutl = await bankAccoutRepo.load({ type: params.type })
+export const setupLoadFinantialIncomeByType: Setup = (bankAccoutRepo) => async params => {
+  const resutl = await bankAccoutRepo.loadByType({ type: params.type })
   if (resutl !== undefined) {
     return resutl
   }
