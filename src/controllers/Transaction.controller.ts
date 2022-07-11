@@ -3,17 +3,17 @@ import {
   CreateTransactionDto,
   UpdateTransactionDto,
 } from "../dto/Transaction.dto";
-import { transactionHistoryRepository } from "../repositories/transactionHistory.repository";
+import { TransactionHistoryRepository } from "../repositories/transactionHistory.repository";
 
 export class TransactionsControllers {
   async createTransaction(req: Request, res: Response) {
     const { entry } = req.body as CreateTransactionDto;
 
-    const transaction = transactionHistoryRepository.create({
+    const transaction = TransactionHistoryRepository.create({
       entry,
     });
 
-    const transactionCreated = await transactionHistoryRepository.save(
+    const transactionCreated = await TransactionHistoryRepository.save(
       transaction
     );
 
@@ -23,7 +23,7 @@ export class TransactionsControllers {
   async updateTransaction(req: Request, res: Response) {
     const { entry, created_at } = req.body as UpdateTransactionDto;
 
-    const transactionToUpdate = await transactionHistoryRepository.findOneBy({
+    const transactionToUpdate = await TransactionHistoryRepository.findOneBy({
       id: Number(req.params.id),
     });
 
@@ -36,7 +36,7 @@ export class TransactionsControllers {
     transactionToUpdate.created_at =
       created_at || transactionToUpdate?.created_at;
 
-    const updateTransaction = await transactionHistoryRepository.save(
+    const updateTransaction = await TransactionHistoryRepository.save(
       transactionToUpdate
     );
 
@@ -44,7 +44,7 @@ export class TransactionsControllers {
   }
 
   async deleteTransaction(req: Request, res: Response) {
-    const transactionToDelete = await transactionHistoryRepository.findOneBy({
+    const transactionToDelete = await TransactionHistoryRepository.findOneBy({
       id: Number(req.params.id),
     });
 
@@ -52,7 +52,7 @@ export class TransactionsControllers {
       return res.status(404).json({ message: "Transaction was not found" });
     }
 
-    await transactionHistoryRepository.delete({
+    await TransactionHistoryRepository.delete({
       id: Number(req.params.id),
     });
 
@@ -62,20 +62,30 @@ export class TransactionsControllers {
   }
 
   async getAllTransaction(req: Request, res: Response) {
-    const transactions = await transactionHistoryRepository.find();
+    const transactions = await TransactionHistoryRepository.find();
 
     return res.status(200).json(transactions);
   }
 
   async getOneTransaction(req: Request, res: Response) {
-    const transaction = await transactionHistoryRepository.findOneBy({
+    const transaction = await TransactionHistoryRepository.findOneBy({
       id: Number(req.params.id),
     });
-
     if (!transaction) {
       return res.status(404).json({ message: "Transaction was not found" });
     }
 
     return res.status(200).json(transaction);
+  }
+
+  async getBalance(req: Request, res: Response) {
+    const transaction = await TransactionHistoryRepository.find();
+
+    const totalBalance = transaction.reduce(
+      (before, after) => before + after.entry,
+      0
+    );
+
+    return res.status(200).json({ totalBalance });
   }
 }

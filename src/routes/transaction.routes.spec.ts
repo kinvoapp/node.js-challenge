@@ -1,11 +1,15 @@
 import request from "supertest";
 import app from "../app";
 import { AppDataSource } from "../infra/database/typeorm.connection";
-import { transactionHistoryRepository } from "../repositories/transactionHistory.repository";
+import { TransactionHistoryRepository } from "../repositories/transactionHistory.repository";
 
 describe("Transaction Route", () => {
   beforeAll(async () => {
     await AppDataSource.initialize();
+  });
+
+  afterEach(async () => {
+    await TransactionHistoryRepository.clear();
   });
 
   describe("Create Transaction", () => {
@@ -91,11 +95,11 @@ describe("Transaction Route", () => {
     });
 
     it("should edit transaction", async () => {
-      const transaction = transactionHistoryRepository.create({
+      const transaction = TransactionHistoryRepository.create({
         entry: 150,
       });
 
-      await transactionHistoryRepository.save(transaction);
+      await TransactionHistoryRepository.save(transaction);
 
       const dto = {
         entry: 100,
@@ -126,15 +130,15 @@ describe("Transaction Route", () => {
     });
 
     it("should delete transaction", async () => {
-      const newTransaction = transactionHistoryRepository.create({
+      const newTransaction = TransactionHistoryRepository.create({
         entry: 150,
       });
 
-      await transactionHistoryRepository.save(newTransaction);
+      await TransactionHistoryRepository.save(newTransaction);
 
       await request(app).delete(`/transactions/${newTransaction.id}`);
 
-      const transaction = await transactionHistoryRepository.findOneBy({
+      const transaction = await TransactionHistoryRepository.findOneBy({
         id: newTransaction.id,
       });
 
@@ -144,11 +148,11 @@ describe("Transaction Route", () => {
 
   describe("Get All Transaction", () => {
     it("should return transactions", async () => {
-      const newTransaction = transactionHistoryRepository.create({
+      const newTransaction = TransactionHistoryRepository.create({
         entry: 150,
       });
 
-      await transactionHistoryRepository.save(newTransaction);
+      await TransactionHistoryRepository.save(newTransaction);
 
       const response = await request(app).get("/transactions");
 
@@ -172,11 +176,11 @@ describe("Transaction Route", () => {
     });
 
     it("should return transaction", async () => {
-      const newTransaction = transactionHistoryRepository.create({
+      const newTransaction = TransactionHistoryRepository.create({
         entry: 150,
       });
 
-      await transactionHistoryRepository.save(newTransaction);
+      await TransactionHistoryRepository.save(newTransaction);
 
       const response = await request(app).get(
         `/transactions/${newTransaction.id}`
@@ -185,6 +189,28 @@ describe("Transaction Route", () => {
       expect(response.body.created_at).toBe(newTransaction.created_at);
       expect(response.body.entry).toBe(newTransaction.entry);
       expect(response.body.id).toBe(newTransaction.id);
+    });
+  });
+
+  describe("Balance", () => {
+    it("should return the total balance", async () => {
+      const transaction1 = TransactionHistoryRepository.create({
+        entry: 150,
+      });
+
+      await TransactionHistoryRepository.save(transaction1);
+
+      const transaction2 = TransactionHistoryRepository.create({
+        entry: -50,
+      });
+
+      await TransactionHistoryRepository.save(transaction2);
+
+      const response = await request(app).get(`/transactions/balance`);
+
+      expect(response.body.totalBalance).toBe(
+        transaction1.entry + transaction2.entry
+      );
     });
   });
 });

@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { TransactionsControllers } from "../controllers/Transaction.controller";
 import { TransactionsMiddlewares } from "../middlewares/Transaction.middleware";
+import { TransactionHistoryRepository } from "../repositories/transactionHistory.repository";
 
 const transactionRoutes = Router();
 
@@ -25,6 +26,8 @@ transactionRoutes.delete(
   transactionsMiddlewares.validateDeleteTransactionDTO,
   transactionsController.deleteTransaction
 );
+
+transactionRoutes.get("/balance", transactionsController.getBalance);
 
 transactionRoutes.get("/", transactionsController.getAllTransaction);
 
