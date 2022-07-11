@@ -1,0 +1,7 @@
+/api/node_modules
+/api/dist
+
+/web/node_modules
+
+/backup
+/files
