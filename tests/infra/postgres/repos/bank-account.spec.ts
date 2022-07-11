@@ -63,6 +63,20 @@ describe('PgBankAccountRepository', () => {
     })
   })
 
+  describe('loadALl', () => {
+    it('should return bank  account if exists', async () => {
+      await pgBancAccoutRepo.save({ type: 'any_type', value: 1000, description: 'any_des', user_id: user.id })
+      await pgBancAccoutRepo.save({ type: 'any_type', value: 1000, description: 'any_des', user_id: user.id })
+      const account = await sut.loadAll({ userId: user.id })
+      expect(account.length).toEqual(2)
+    })
+
+    it('should return  undefined if email does not exists', async () => {
+      const account = await sut.loadAll({ userId: user.id })
+      expect(account).toEqual([])
+    })
+  })
+
   describe('update', () => {
     it('should return bank  account if exists', async () => {
       await pgBancAccoutRepo.save({ type: 'any_type', value: 1000, description: 'any_des', user_id: user.id })

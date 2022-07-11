@@ -1,5 +1,6 @@
 export * from './add-finantial-incomes'
 export * from './controller'
+export * from './load-finantial-income'
 export * from './login'
 export * from './singup'
 export * from './update-finantial-incomes'

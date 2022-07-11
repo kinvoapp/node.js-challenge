@@ -1,4 +1,5 @@
 export * from './add-finantial-income'
+export * from './load-finantial-incoming'
 export * from './load-finantial-incoming-by-type'
 export * from './load-finantial-incoming-by-user-id'
 export * from './login'

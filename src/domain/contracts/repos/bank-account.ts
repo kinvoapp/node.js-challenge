@@ -8,6 +8,15 @@ export interface AddFinantialIncomeRepository {
   add: (param: AddFinantialIncomeRepository.Input) => Promise<AddFinantialIncomeRepository.Output>
 }
 
+export namespace LoadFinantialIcomingsRepository {
+  export type Output = any
+  export type Input = { userId: number }
+
+}
+
+export interface LoadFinantialIcomingsRepository {
+  loadAll: (params: LoadFinantialIcomingsRepository.Input) => Promise<LoadFinantialIncomeByTypeRepository.Output>
+}
 export namespace LoadFinantialIncomeByTypeRepository {
   export type Input = { type: string }
   export type Output = undefined | { id: number, type: string, value: number, description: string, user_id: number }

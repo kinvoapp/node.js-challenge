@@ -1,4 +1,4 @@
-import { AddFinantialIncomeRepository, LoadFinantialIncomeByTypeRepository, LoadFinantialIncomeByUserIdRepository, UpdateFinantialIncomeRepository } from '@/domain/contracts/repos'
+import { AddFinantialIncomeRepository, LoadFinantialIcomingsRepository, LoadFinantialIncomeByTypeRepository, LoadFinantialIncomeByUserIdRepository, UpdateFinantialIncomeRepository } from '@/domain/contracts/repos'
 import { UpdateFinantialIncome } from '@/domain/use-cases'
 import { getRepository } from 'typeorm'
 import { BankAccount } from '../entities'
@@ -27,6 +27,12 @@ export class PgBankAccountRepository implements AddFinantialIncomeRepository, Lo
       }
     })
     return pgBankAccount !== undefined ? pgBankAccount : undefined
+  }
+
+  async loadAll ({ userId }: LoadFinantialIcomingsRepository.Input): Promise<LoadFinantialIcomingsRepository.Output> {
+    const pgBankAccountRepo = getRepository(BankAccount)
+    const pgBankAccount = await pgBankAccountRepo.find()
+    return pgBankAccount.length > 0 ? pgBankAccount : []
   }
 
   async update ({ id, type, value, description }: UpdateFinantialIncomeRepository.Input): Promise<UpdateFinantialIncomeRepository.Output> {
