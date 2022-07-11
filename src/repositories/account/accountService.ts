@@ -1,3 +1,4 @@
+import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environments/environmentVariable';
 import { ICreateAccountDTO } from '../../infra/IAccountRepository';
 import { AccountModel } from '../../infra/implementations/mysql/models/Account';
@@ -32,5 +33,33 @@ export class AccountService {
 
     const account = await this.accountModel.findByCpf(cpf!);
     return account;
+  }
+
+  async login({ password, cpf }: Omit<ICreateAccountDTO, 'name'>) {
+    await this.accountModel.findByCpf(cpf!).then((response) => {
+      if (!response?.cpf) {
+        throw new Error('Conta não encontrada.');
+      } else if (response.password !== password) {
+        throw new Error('CPF ou Password inválido.');
+      } else {
+        const { id, cpf, name } = response!;
+        return {
+          token: jwt.sign({ id, cpf, name }, this._jwtSecret, {
+            expiresIn: '20m',
+            algorithm: 'HS256',
+          }),
+        };
+      }
+    });
+  }
+
+  verifyToken(token: string) {
+    try {
+      const decoded = jwt.verify(token, this._jwtSecret);
+
+      return decoded;
+    } catch (err) {
+      throw new Error('Token inválido.');
+    }
   }
 }
