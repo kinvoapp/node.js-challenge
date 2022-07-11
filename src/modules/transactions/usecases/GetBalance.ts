@@ -4,7 +4,7 @@ export class GetBalance {
   constructor(private transactionsRepo: TransactionsRepository) {}
 
   async execute() {
-    const transactions = await this.transactionsRepo.show()
+    const transactions = await this.transactionsRepo.retrieve()
     const balance = transactions.reduce((total, transaction) => {
       if (transaction.props.type === 'Deposit') {
         return (total += Number(transaction.props.value))

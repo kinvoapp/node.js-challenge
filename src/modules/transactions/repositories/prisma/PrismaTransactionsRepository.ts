@@ -18,6 +18,19 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     await prisma.transaction.delete({ where: { id } })
   }
 
+  async retrieve(): Promise<Transaction[]> {
+    const res = await prisma.transaction.findMany()
+    const transactions = res.map(transaction =>
+      Transaction.create({
+        id: transaction.id,
+        value: transaction.value,
+        type: transaction.type === 'Deposit' ? TransactionType.Deposit : TransactionType.Withdraw,
+        description: transaction.description || ''
+      })
+    )
+    return transactions
+  }
+
   async show(page: number): Promise<Transaction[]> {
     const res = await prisma.transaction.findMany({
       skip: page <= 1 ? 0 : (page - 1) * 5,
