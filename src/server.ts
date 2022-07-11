@@ -2,7 +2,7 @@ import { app } from "./app";
 import Database from "./config/database";
 
 
-const PORT = 1000;
+const PORT = 3000;
 
 const server = app.listen(PORT, async() => {
   const database = new Database();
