@@ -1,13 +1,21 @@
 const knex = require('../bancodedados/conexao');
 const schemaMovimentacoes = require('../validacoes/schemaMovimentacoes');
+const jwt = require('jsonwebtoken');
 
 const criarMovimentacao = async (req, res) => {
     const { descricao, tipo, valor, data } = req.body;
+    const { id } = jwt.verify(token, process.env.SENHA_JWT);
 
     try {
         await schemaMovimentacoes.schemaCriarMovimentacao.validate(req.body);
 
-        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data }).where({ usuario_id: id });
+        const perfilUsuario = await knex('usuarios').where({ id: usuario_id }).first();
+
+        if (!perfilUsuario) {
+            return res.status(404).json('Usuário não encontrado.');
+        }
+
+        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data, usuario_id });
 
         if (!novaMovimentacao) {
             return res.status(400).json('Não foi possível criar a movimentação.');
@@ -55,7 +63,7 @@ const atualizarMovimentacao = async (req, res) => {
 
         await schemaMovimentacoes.schemaAtualizarMovimentacao.validate(req.body);
 
-        const movimentacaoAtualizada = await knex('movimentacoes').update({ descricao, tipo, valor, data }).where({ id });
+        const movimentacaoAtualizada = await knex('movimentacoes').update({ descricao, tipo, valor, data, usuario_id }).where({ id });
 
         if (!movimentacaoAtualizada) {
             return res.status(400).json('Não foi possível atualizar a movimentação!');
