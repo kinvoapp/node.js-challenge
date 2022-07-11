@@ -15,15 +15,15 @@ services:
     volumes:
       - ./data/:/var/lib/mysql
 
-  # api:
-  #   build: .
-  #   container_name: mini_bank_api
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./backend:/usr/src/app
+  api:
+    build: .
+    container_name: mini_bank_api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/usr/src/app
 
-  #   depends_on:
-  #     - db
-  #   command: yarn start:api
-  #   restart: always
+    depends_on:
+      - db
+    command: yarn start:api
+    restart: always

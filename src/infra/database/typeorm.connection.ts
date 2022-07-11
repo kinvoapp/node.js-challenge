@@ -12,7 +12,7 @@ const jestOptions: DataSourceOptions = {
 
 const devOptions: DataSourceOptions = {
   type: "mysql",
-  host: "localhost",
+  host: "db",
   port: 3306,
   password: "123",
   username: "root",

@@ -147,7 +147,7 @@ describe("Transaction Route", () => {
   });
 
   describe("Get All Transaction", () => {
-    it("should return transactions", async () => {
+    it("should return all transactions", async () => {
       const newTransaction = TransactionHistoryRepository.create({
         entry: 150,
       });

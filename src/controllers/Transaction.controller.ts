@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { Between, FindManyOptions, LessThan, MoreThan } from "typeorm";
+
 import {
   CreateTransactionDto,
   UpdateTransactionDto,
@@ -7,11 +9,16 @@ import { TransactionHistoryRepository } from "../repositories/transactionHistory
 
 export class TransactionsControllers {
   async createTransaction(req: Request, res: Response) {
-    const { entry } = req.body as CreateTransactionDto;
+    const { entry, created_at } = req.body as CreateTransactionDto;
 
-    const transaction = TransactionHistoryRepository.create({
+    let transactionObject: CreateTransactionDto = {
       entry,
-    });
+    };
+    if (created_at) {
+      transactionObject["created_at"] = created_at;
+    }
+
+    const transaction = TransactionHistoryRepository.create(transactionObject);
 
     const transactionCreated = await TransactionHistoryRepository.save(
       transaction
@@ -62,7 +69,34 @@ export class TransactionsControllers {
   }
 
   async getAllTransaction(req: Request, res: Response) {
-    const transactions = await TransactionHistoryRepository.find();
+    const { initalDate, finalDate, page } = req.query as {
+      initalDate: string;
+      finalDate: string;
+      page: string;
+    };
+
+    let options: FindManyOptions = {};
+
+    if (page) {
+      const resultsNumber = 5;
+      options["take"] = resultsNumber;
+      options["skip"] = (Number(page) - 1) * resultsNumber;
+    }
+
+    if (initalDate && finalDate) {
+      if (new Date(initalDate) > new Date(finalDate)) {
+        return res.status(400).json({
+          message: "Inital Date is greater than the final Date",
+        });
+      }
+      options["where"] = { created_at: Between(initalDate, finalDate) };
+    } else if (initalDate) {
+      options["where"] = { created_at: MoreThan(initalDate) };
+    } else if (finalDate) {
+      options["where"] = { created_at: LessThan(finalDate) };
+    }
+
+    const transactions = await TransactionHistoryRepository.find(options);
 
     return res.status(200).json(transactions);
   }
