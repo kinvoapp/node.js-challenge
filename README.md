@@ -6,9 +6,7 @@
   <img alt="typescript logo" src="https://img.shields.io/badge/-TypeScript-grey?style=flat-square&logo=typescript">
   <img alt="node logo" src="https://img.shields.io/badge/-Nodejs-grey?style=flat-square&logo=Node.js">
   <img alt="postgresql logo" src="https://img.shields.io/badge/-PostgreSQL-grey?style=flat-square&logo=postgresql">    
-  <img alt="prisma logo" src="https://img.shields.io/badge/-Prisma-grey?style=flat-square&logo=prisma">  
-   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen"> 
- 
+  <img alt="prisma logo" src="https://img.shields.io/badge/-Prisma-grey?style=flat-square&logo=prisma">   
 </p>
 
 ## Sobre o projeto
@@ -62,8 +60,24 @@ Segue abaixo todas as funcionalidades listadas para o projeto e as que foram imp
   - [x] Cadastro de usuário;
   - [x] Login;
   - [x] Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- [ ] Dockerizar a aplicação;
+- [x] Dockerizar a aplicação;
 - [ ] Boas práticas de POO (Exemplos: SOLID, Design Patterns, 
+
+---
+
+### Swagger
+
+Para facilitar o acesso as rotas do projeto, fiz o deploy no Heroku e também implementei o [Swagger](https://kinvo-challenge.herokuapp.com/api-docs/).
+
+<img alt="swagger page" src="./images/swaggermain.png">
+
+Ter atenção que para acessar as rotas das transações, é necessário autenticar e pegar o token de acesso para inserir no botão de autorizar que fica no topo da página.
+
+<img alt="swagger page" src="./images/swaggertoken.png">
+
+*Também fiz as requisições pelo [Insomnia](./Insomnia_2022-07-10.har)
+
+---
 
 ### Pré-requisitos
 
@@ -102,48 +116,21 @@ $ npm run dev
 
 ```
 
-Outros scripts estão disponíveis caso possua o [Docker](https://www.docker.com/) instalado e queira rodar os testes:
-
-Criando banco ostgres no docker e conectando ao prisma:
-
+Outros scripts estão disponíveis caso possua o [Docker](https://www.docker.com/) instalado e queira rodar também os testes:
 
 ```bash
 
-# configurar o .env.test para utilizar com o Docker
-DATABASE_URL="postgresql://prisma:user:password@host:port/database"
+# Criar a build
+$ docker-compose build
 
-# Ex: DATABASE_URL="postgresql://prisma:prisma@localhost:5433/tests"
+# Rodar o container
+$ docker-compose up
 
-# Criar o container
-$ docker-compose up -d
-
-# Conferir o container e pegar o CONTAINER ID
-$ docker ps
-
-# Rodar e logar no banco de dados criado
-$ docker exec -it container_id psql -U user database
-
-# Gerar as tabelas no container psql
-$ npm run migrate:postgres
-
-# Ex docker exec -it 1322e42d833f psql -U prisma test
+# O servidor inciará na porta:3001 http://localhost:3001/api-docs/
 
 ```
 Rodando os scripts de teste com automatização do docker:
 
-```bash
-
-# Criar o banco de dados no docker
-$ npm run docker:up
-
-# Destruir o container
-$ npm run docker:down
-
-# Rodar os testes unitários e de integração
-$ npm run test
-
-```
-Rodando os s
 
 ## Tecnologias
 
@@ -175,7 +162,3 @@ Rodando os s
 [![Gmail Badge](https://img.shields.io/badge/-rafabarros.com@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:rafabarros.com@gmail.com)](mailto:rafabarros.com@gmail.com)
 
 ---
-
-## Licença
-
-Este projeto está sobe a licença [MIT](./LICENSE).
