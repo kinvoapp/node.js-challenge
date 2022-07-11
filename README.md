@@ -128,21 +128,17 @@ Done in 1s.
 
 For other scripts commands, see the `package.json` file of this project.
 
-## Deploy
-
-See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/Hello%20Word).
-
 ## Using the application
 
 To create HTTP requests use some API client to perform your tests and debugs like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/).
 
 This application has the following endpoints:
 
-**/:msg**:
+**/hello/:msg**:
 
-- **GET**: `/:msg` - Initial route for message display via parameter.
+- **GET**: `hello/:msg` - Initial route for message display via parameter.
 
-  - example: [http://localhost:8080/Hello%20Word](http://localhost:8080/Hello%20Word)
+  - endpoint: [http://localhost:8080/hello/Hello%20Word](http://localhost:8080/hello/Hello%20Word)
 
   - return:
 
@@ -154,11 +150,11 @@ This application has the following endpoints:
 
 **/movement**:
 
-- **POST**: `/create` - Creation of movement (income and expenses);.
+- **POST**: `/create` - Creation of movement (income and expenses).
 
-  - example: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
+  - endpoint: [http://localhost:8080/movement/create](http://localhost:8080/movement/create)
 
-  - return:
+  - Request:
 
   ```json
   {
@@ -168,8 +164,138 @@ This application has the following endpoints:
 	  "date": "2022-04-18"
   }
   ```
+
+  - Response:
+
+  ```json
+  {
+    "id": "62c9e5ab59468436b7e40ab0",
+    "type": "expense",
+    "value": 1000,
+    "category": "personal",
+    "date": "2022-07-12"
+  }
+  ```
   
-  - Validation: this route validates that the fields are valid.
+  - Validation: validates that the fields are valid.
+
+- **GET**: `/` - Display all movements (income and expenses).
+
+  - endpoint: [http://localhost:8080/movement/](http://localhost:8080/movement/)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    },
+    // ... more movements
+  ]
+  ```
+
+- **GET**: `/?from=0&to=1` - Display all movements (income and expenses) with pagination.
+
+  - endpoint: [http://localhost:8080/movement/?from=0&to=1](http://localhost:8080/movement/?from=0&to=1)
+
+  - response:
+
+  ```jsonc
+  [
+    {
+      "id": "62c9cf218adf8b69bbee4484",
+      "type": "expense",
+      "value": 1000,
+      "category": "studies",
+      "date": "2022-07-12"
+    }
+  ]
+  ```
+
+- **GET**: `/:id` - Display only one movement.
+
+  - endpoint: [http://localhost:8080/movement/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1000,
+    "category": "studies",
+    "date": "2022-07-12"
+   }
+  ```
+
+  - Validation: validates if the movement exists.
+
+- **GET**: `/balance` - Balance display.
+
+  - endpoint: [http://localhost:8080/movement/balance](http://localhost:8080/movement/balance)
+
+  - response:
+
+  ```jsonc
+  {
+	  "expenses": 2200,
+	  "incomes": 0,
+	  "balance": -2200
+  }
+  ```
+
+  - Validation: validates if the movement exists.
+  
+- **PUT**: `/update/:id` - Movement update.
+
+  - endpoint: [http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/update/62c9cf218adf8b69bbee4484)
+
+  - request:
+
+  ```jsonc
+  {
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - response:
+
+  ```jsonc
+  {
+	  "id": "62c9cf218adf8b69bbee4484",
+    "type": "expense",
+    "value": 1200,
+    "category": "studies",
+    "date": "2022-04-18"
+  }
+  ```
+
+  - Validation: validates if the movement exists and if the fields are valid.
+
+- **DELETE**: `/delete/:id` - Deletion of movement.
+
+  - endpoint: [http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484](http://localhost:8080/movement/delete/62c9cf218adf8b69bbee4484)
+
+  - response:
+
+  ```jsonc
+  {
+    "message": "movement removed."
+  }
+  ```
+
+  - Validation: validates if the movement exists.
+
+## Deploy
+
+See this application being deployed by [Heroku](https://nodejs-kinvo-jeferson-luckas.herokuapp.com/hello/Hello%20Word).
 
 ## Stacks
 

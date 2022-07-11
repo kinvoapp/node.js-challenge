@@ -10,5 +10,10 @@ import MovementControllers from '@controllers/movement.controllers'
 const router = express.Router()
 
 router.post('/create', MovementControllers.createMovement)
+router.get('/', MovementControllers.getMovements)
+router.get('/balance', MovementControllers.getBalance)
+router.get('/:id', MovementControllers.getMovement)
+router.put('/update/:id', MovementControllers.updateMovement)
+router.delete('/delete/:id', MovementControllers.deleteMovement)
 
 export default router
