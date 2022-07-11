@@ -105,9 +105,9 @@ const excluirMovimentacao = async (req, res) => {
 
 const exibirSaldo = async (req, res) => {
     try {
-        const despesasUsuarios = await knex('movimentacoes').where({ tipo: 'despesa' }).sum(valor);
+        const despesasUsuarios = await knex('movimentacoes').where({ tipo: 'despesa' }).sum('valor');
 
-        const receitasUsuarios = await knex('movimentacoes').where({ tipo: 'receita' }).sum(valor);
+        const receitasUsuarios = await knex('movimentacoes').where({ tipo: 'receita' }).sum('valor');
 
         const saldo = receitasUsuarios - despesasUsuarios;
 
