@@ -46,10 +46,29 @@ export class TransactionsMiddlewares {
         message: "Entry field should be number!",
       });
     }
-
-    if (typeof Number(req.params.id) !== "number") {
+    if (
+      isNaN(Number(req.params.id)) ||
+      typeof Number(req.params.id) !== "number"
+    ) {
       return res.status(400).json({
-        message: "Id param field should be number!",
+        message: "Id param should be number!",
+      });
+    }
+
+    next();
+  }
+
+  validateDeleteTransactionDTO(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    if (
+      isNaN(Number(req.params.id)) ||
+      typeof Number(req.params.id) !== "number"
+    ) {
+      return res.status(400).json({
+        message: "Id param should be number!",
       });
     }
 

@@ -20,4 +20,10 @@ transactionRoutes.put(
   transactionsController.updateTransaction
 );
 
+transactionRoutes.delete(
+  "/:id",
+  transactionsMiddlewares.validateDeleteTransactionDTO,
+  transactionsController.deleteTransaction
+);
+
 export default transactionRoutes;

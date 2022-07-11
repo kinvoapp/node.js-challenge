@@ -41,7 +41,7 @@ describe("Transaction Route", () => {
     });
   });
 
-  fdescribe("Update Transaction", () => {
+  describe("Update Transaction", () => {
     it("should return a error if DTO was bad format", async () => {
       const dto = {};
 
@@ -68,7 +68,7 @@ describe("Transaction Route", () => {
 
     it("should return a error if id param is not a number", async () => {
       const dto = {
-        entry: "string",
+        entry: 123,
       };
 
       const response = await request(app)
@@ -76,7 +76,7 @@ describe("Transaction Route", () => {
         .send(dto);
 
       expect(response.status).toBe(400);
-      expect(response.body.message).toBe("Entry field should be number!");
+      expect(response.body.message).toBe("Id param should be number!");
     });
 
     it("should return a error if Transaction was not found", async () => {
@@ -94,7 +94,7 @@ describe("Transaction Route", () => {
       const transaction = transactionHistoryRepository.create({
         entry: 150,
       });
-      console.log("transaction", transaction);
+
       await transactionHistoryRepository.save(transaction);
 
       const dto = {
@@ -105,8 +105,40 @@ describe("Transaction Route", () => {
         .put(`/transactions/${transaction.id}`)
         .send(dto);
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
       expect(response.body.entry).toBe(100);
+    });
+  });
+
+  fdescribe("Delete Transaction", () => {
+    it("should return a error if id param is not a number", async () => {
+      const response = await request(app).delete("/transactions/not-a-number");
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe("Id param should be number!");
+    });
+
+    it("should return a error if Transaction was not found", async () => {
+      const response = await request(app).delete("/transactions/0");
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe("Transaction was not found");
+    });
+
+    it("should delete transaction", async () => {
+      const newTransaction = transactionHistoryRepository.create({
+        entry: 150,
+      });
+
+      await transactionHistoryRepository.save(newTransaction);
+
+      await request(app).delete(`/transactions/${newTransaction.id}`);
+
+      const transaction = await transactionHistoryRepository.findOneBy({
+        id: newTransaction.id,
+      });
+
+      expect(transaction).toBeNull();
     });
   });
 });

@@ -40,6 +40,24 @@ export class TransactionsControllers {
       transactionToUpdate
     );
 
-    return res.send(updateTransaction);
+    return res.status(201).send(updateTransaction);
+  }
+
+  async deleteTransaction(req: Request, res: Response) {
+    const transactionToDelete = await transactionHistoryRepository.findOneBy({
+      id: Number(req.params.id),
+    });
+
+    if (!transactionToDelete) {
+      return res.status(404).json({ message: "Transaction was not found" });
+    }
+
+    await transactionHistoryRepository.delete({
+      id: Number(req.params.id),
+    });
+
+    return res.status(204).json({
+      ok: true,
+    });
   }
 }
