@@ -18,7 +18,7 @@ const criarMovimentacao = async (req, res) => {
             return res.status(404).json('Usuário não encontrado.');
         }
 
-        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data, id: usuario_id });
+        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data, usuario_id: id });
 
         if (!novaMovimentacao) {
             return res.status(400).json('Não foi possível criar a movimentação.');
