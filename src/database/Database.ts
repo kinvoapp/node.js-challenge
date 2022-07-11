@@ -11,4 +11,12 @@ export class Database {
       console.log(`Erro ao tentar se conectar com o Banco de Dados: ${err}`);
     });
   }
+
+  public static disconnect() {
+    mongoose.disconnect().then(() => {
+      console.log('Conexão com o Banco de Dados encerrada com sucesso!');
+    }).catch((err) => {
+      console.log(`Erro ao tentar encerrar conexão com o Banco de Dados: ${err}`);
+    })
+  }
 }

@@ -1,9 +1,9 @@
 import express from 'express';
 import { Database } from './database/Database';
 import movementController from './routes/controllers/movementController';
+import authController from './routes/controllers/authController';
 
 export class App {
-  private PORT = process.env.PORT || 3000;
   private express: express.Application;
 
   constructor() {
@@ -11,7 +11,6 @@ export class App {
     this.database();
     this.middleware();
     this.routes();
-    this.listen();
   }
 
   public getApp(): express.Application {
@@ -29,9 +28,6 @@ export class App {
 
   private routes(): void {
     this.express.use('/api/movement', movementController);
+    this.express.use('/api/auth', authController);
   }
-
-  private listen(): void {
-    this.express.listen(this.PORT, () => console.log('Servidor rodando na porta 3000...'));
-  } 
 }

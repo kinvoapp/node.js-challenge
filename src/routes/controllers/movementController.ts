@@ -1,7 +1,9 @@
-import { Request, Response, Router } from 'express';
+import { Response, Router } from 'express';
 import httpStatus from 'http-status';
+import { ICustomRequest } from '../../interfaces/ICustomRequest';
 import { MovementService } from '../../services/MovementService';
 import { controllerPagination } from '../../utils/helper';
+import authenticate from '../middlewares/authenticate';
 import { validation } from '../middlewares/validation';
 import { movementSchema } from '../schemas/movementSchema';
 import { getAllFilter } from './filters/movementControllerFilter';
@@ -9,8 +11,9 @@ import { getAllFilter } from './filters/movementControllerFilter';
 const router = Router();
 
 router.post('/',
+  authenticate,
   validation(movementSchema.create),
-  async (req: Request, res: Response) => {
+  async (req: ICustomRequest, res: Response) => {
     let response = null;
 
     try {
@@ -22,8 +25,9 @@ router.post('/',
     return res.status(httpStatus.OK).json(response);
   });
 
-router.get('/', 
-  async (req: Request, res: Response) => {
+router.get('/',
+  authenticate,
+  async (req: ICustomRequest, res: Response) => {
     let response = null;
 
     try {
@@ -41,7 +45,8 @@ router.get('/',
   });
 
 router.get('/balance',
-  async (req: Request, res: Response) => {
+  authenticate,
+  async (req: ICustomRequest, res: Response) => {
     let response = null;
 
     try {
@@ -55,8 +60,9 @@ router.get('/balance',
 
 
 router.put('/:id',
+  authenticate,
   validation(movementSchema.updateById),
-  async (req: Request, res: Response) => {
+  async (req: ICustomRequest, res: Response) => {
     let response = null;
 
     try {
@@ -69,8 +75,9 @@ router.put('/:id',
   });
 
 router.delete('/:id',
+  authenticate,
   validation(movementSchema.deleteById),
-  async (req: Request, res: Response) => {
+  async (req: ICustomRequest, res: Response) => {
     let response = null;
 
     try {

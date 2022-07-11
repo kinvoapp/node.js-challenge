@@ -1,11 +1,11 @@
 export interface IMovement {
-  _id?: string;
+  _id?: any;
   id?: string;
   name: string;
   description?: string;
   formOfPayment?: number;
   type: number;
   value: any;
-  date?: Date;
+  date?: any;
   deletedAt?: Date | null;
 }
