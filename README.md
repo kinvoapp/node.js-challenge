@@ -16,6 +16,10 @@ ou
 npm install
 ```
 
+```
+Ajustar o mongoose.connect dentro de src/database/index.ts
+```
+
 Depois de devidamente instaladas, basta executar:
 
 ```
