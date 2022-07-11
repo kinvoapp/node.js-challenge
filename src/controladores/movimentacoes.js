@@ -7,7 +7,7 @@ const criarMovimentacao = async (req, res) => {
     try {
         await schemaMovimentacoes.schemaCriarMovimentacao.validate(req.body);
 
-        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data });
+        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data }).where({ usuario_id: id });
 
         if (!novaMovimentacao) {
             return res.status(400).json('Não foi possível criar a movimentação.');
@@ -25,7 +25,7 @@ const listarMovimentacoes = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const movimentacoes = await knex('movimentacoes').where({ id_usuario: id }).first();
+        const movimentacoes = await knex('movimentacoes').where({ usuario_id: id }).first();
 
         if (!movimentacoes) {
             return res.status(404).json('Não há movimentações cadastradas');
