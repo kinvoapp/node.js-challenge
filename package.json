@@ -1,8 +1,8 @@
 {
   "name": "personal-finances-app",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API REST desenvolvida para teste técnico da empresa Kinvo",
+  "author": "Aluisio Pereira da Cruz Júnior",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
