@@ -12,13 +12,13 @@ const criarMovimentacao = async (req, res) => {
     try {
         await schemaMovimentacoes.schemaCriarMovimentacao.validate(req.body);
 
-        const perfilUsuario = await knex('usuarios').where({ usuario_id: id }).first();
+        const perfilUsuario = await knex('usuarios').where({ id }).first();
 
         if (!perfilUsuario) {
             return res.status(404).json('Usuário não encontrado.');
         }
 
-        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data, usuario_id });
+        const novaMovimentacao = await knex('movimentacoes').insert({ descricao, tipo, valor, data, id: usuario_id });
 
         if (!novaMovimentacao) {
             return res.status(400).json('Não foi possível criar a movimentação.');
