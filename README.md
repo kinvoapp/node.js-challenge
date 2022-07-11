@@ -83,7 +83,7 @@ $ npm run test
 
 ## CI/CD
 
-Aproveitando a iniciativa de utilizar o deploy na plataforma do Heroku, também foram utilizados os conceitos de CI/CD, através do GitHub Actions, sempre que for feito um push ou pull-request para a branch master, adotando boas práticas de desenvolvimento e automação da implantação da nossa aplicação.
+Aproveitando a iniciativa de utilizar o deploy na plataforma do Heroku, execução do switch de testes, também foram utilizados os conceitos de CI/CD, através do GitHub Actions, sempre que for feito um push ou pull-request para a branch master, adotando boas práticas de desenvolvimento e automação da implantação da nossa aplicação.
 
 O workflow completo pode ser encontrado em: 
 
