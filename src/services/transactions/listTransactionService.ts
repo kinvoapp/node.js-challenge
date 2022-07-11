@@ -6,7 +6,6 @@ export const getTransactions = async (user_id: string, page: string) => {
 
     const pagination = 5
     const initialPage = Number(page) === 1 ? 0 : (Number(page) - 1) * pagination
-    console.log(user_id)
     return await prisma.transactions.findMany({
         skip: initialPage,
         take: pagination,
