@@ -1,4 +1,5 @@
 import revenueController from "./revenueController";
 import expenseController from "./expenseController";
+import balanceController from "./balanceController";
 
-export default { revenueController, expenseController };
+export default { balanceController, revenueController, expenseController };

@@ -9,7 +9,9 @@ Instalar as dependencias do projeto.
 ```
 yarn
 ```
+
 ou
+
 ```
 npm install
 ```
@@ -24,40 +26,84 @@ yarn start
 
 ## Saldo
 
-#### Retorna o saldo total
+#### Retorna o saldo total (revenues - expenses)
 
 ```
-  GET /transactions/amount
+  GET /balance
 ```
 
-## Transações
+## Depositos
 
-#### Cria uma nova Transação
-
-```
-  POST /transactions
-```
-
-#### Retorna todas as Transações
+#### Cria um novo Deposito
 
 ```
-  GET /transactions
+  POST /revenue
 ```
 
-#### Retorna Transações por data.
+#### Retorna todos os depóstios
 
 ```
-  GET /transactions/:beginDate/:endDate
+  GET /revenue
 ```
 
-#### Atualiza Transação
+## Retorna a soma de todos os depóstios
 
 ```
-  PATCH /transactions/:id
+  GET /revenue/amount
 ```
 
-#### Exclui uma Transação
+#### Retorna Depositos por data.
 
 ```
-  DELETE /transactions/:id
+  GET /revenue/:beginDate/:endDat
+```
+
+#### Atualiza Deposito
+
+```
+  PATCH /revenue/:id
+```
+
+#### Exclui uma Deposito
+
+```
+  DELETE /revenue/:id
+```
+
+## Despesas
+
+#### Cria uma nova Despesa
+
+```
+  POST /expense
+```
+
+#### Retorna todas as Despesas
+
+```
+  GET /revenue
+```
+
+## Retorna a soma de todas as Despesas
+
+```
+  GET /expense/amount
+```
+
+#### Retorna Depsesas por data.
+
+```
+  GET /expense/:beginDate/:endDat
+```
+
+#### Atualiza Despesa
+
+```
+  PATCH /expense/:id
+```
+
+#### Exclui uma Despesa
+
+```
+  DELETE /expense/:id
 ```

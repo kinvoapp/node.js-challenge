@@ -21,6 +21,7 @@ router
   .get("/expense/amount", controller.expenseController.getAmount)
   .post("/expense", controller.expenseController.createExpense)
   .patch("/expense/:id", controller.expenseController.updateExpense)
-  .delete("/expense/:id", controller.expenseController.deleteExpense);
+  .delete("/expense/:id", controller.expenseController.deleteExpense)
 
+  .get("/balance", controller.balanceController.getBalanceAmount);
 export default router;

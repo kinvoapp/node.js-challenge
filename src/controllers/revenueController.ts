@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   saveData,
-  getData,
+  getDataByDate,
   getAllData,
   updateData,
   deleteData,
@@ -22,7 +22,7 @@ const RevenueController = {
   },
 
   async getRevenueByDate(req: Request, res: Response, next: NextFunction) {
-    getData
+    getDataByDate
       .getDataRevenue(req)
       .then((data) => {
         return res.status(200).json(data);

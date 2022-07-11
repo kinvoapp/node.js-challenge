@@ -8,7 +8,12 @@ const amountExpense = () => {
   return Data.expense.find();
 };
 
+const balanceAmount = () => {
+  return Data.expense.find();
+};
+
 export default {
   amountRevenue,
   amountExpense,
+  balanceAmount,
 };
