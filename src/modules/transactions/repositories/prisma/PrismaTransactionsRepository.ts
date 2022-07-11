@@ -18,8 +18,12 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     await prisma.transaction.delete({ where: { id } })
   }
 
-  async show(): Promise<Transaction[]> {
-    const res = await prisma.transaction.findMany()
+  async show(page: number): Promise<Transaction[]> {
+    const res = await prisma.transaction.findMany({
+      skip: page <= 1 ? 0 : (page - 1) * 5,
+      take: 5,
+      orderBy: { updated_at: 'asc' }
+    })
     const transactions = res.map(transaction =>
       Transaction.create({
         id: transaction.id,
@@ -31,11 +35,14 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     return transactions
   }
 
-  async showWithDate(initialDate: string, finalDate: string): Promise<Transaction[]> {
+  async showWithDate(initialDate: string, finalDate: string, page: number): Promise<Transaction[]> {
     const res = await prisma.transaction.findMany({
       where: {
         updated_at: { gte: new Date(initialDate), lte: new Date(finalDate + 'T23:59:59.000Z') }
-      }
+      },
+      skip: page <= 1 ? 0 : (page - 1) * 5,
+      take: 5,
+      orderBy: { updated_at: 'asc' }
     })
     const transactions = res.map(transaction =>
       Transaction.create({

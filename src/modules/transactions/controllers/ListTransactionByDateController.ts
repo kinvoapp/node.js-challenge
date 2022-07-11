@@ -6,10 +6,14 @@ export class ListTransactionByDateController {
 
   async handle(req: Request, res: Response) {
     const { initialDate, finalDate } = req.params
-    const transactions = await this.listTransactionByDate.execute({
-      initialDate,
-      finalDate
-    } as ListByDateProps)
+    const { page = 1 } = req.query
+    const transactions = await this.listTransactionByDate.execute(
+      {
+        initialDate,
+        finalDate
+      } as ListByDateProps,
+      Number(page)
+    )
     return res.status(200).json(transactions)
   }
 }

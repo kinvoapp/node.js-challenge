@@ -8,8 +8,8 @@ export type ListByDateProps = {
 export class ListTransactionByDate {
   constructor(private transactionsRepo: TransactionsRepository) {}
 
-  async execute({ initialDate, finalDate }: ListByDateProps) {
-    const response = await this.transactionsRepo.showWithDate(initialDate, finalDate)
+  async execute({ initialDate, finalDate }: ListByDateProps, page: number) {
+    const response = await this.transactionsRepo.showWithDate(initialDate, finalDate, page)
     const transactions = response.map(transaction => transaction.props)
     return transactions
   }
