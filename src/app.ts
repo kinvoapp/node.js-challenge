@@ -1,14 +1,16 @@
 import express from 'express';
-import { router as accountRoutes } from './routes/account.routes';
+import { routerAccount } from './routes/account.routes';
+import { transactionRouter } from './routes/transactions.routes';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (request, response) => {
+app.get('', (request, response) => {
   response.json({ message: 'Rota teste!' });
 });
 
-app.use('/', accountRoutes);
+app.use('/account', routerAccount);
+app.use('/transaction', transactionRouter);
 
 export { app };

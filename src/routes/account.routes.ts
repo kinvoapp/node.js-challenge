@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import {
+  getBalance,
   loginAccountController,
   newAccountController,
 } from '../repositories/account/accountController';
 
-const router = Router();
+const routerAccount = Router();
 
-router.post('/account', newAccountController);
-router.post('/login', loginAccountController);
+routerAccount.post('/', newAccountController);
+routerAccount.post('/login', loginAccountController);
+routerAccount.get('/balance', getBalance);
 
-export { router };
+export { routerAccount };
