@@ -42,9 +42,9 @@ async function getBalance(
   next: NextFunction
 ) {
   try {
-    const { cpf } = request.body;
+    const { id } = request.params;
 
-    const balance = await accountService.getBalance(cpf);
+    const balance = await accountService.getBalance(+id);
 
     return response.status(200).json(balance);
   } catch (error) {
@@ -52,4 +52,4 @@ async function getBalance(
   }
 }
 
-export { newAccountController, loginAccountController };
+export { newAccountController, loginAccountController, getBalance };

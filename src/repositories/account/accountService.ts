@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environments/environmentVariable';
 import { ICreateAccountDTO } from '../../infra/IAccountRepository';
 import { AccountModel } from '../../infra/implementations/mysql/models/Account';
-import { registerSchema } from './rules';
+import { registerSchema } from './accountRules';
 
 require('dotenv').config();
 
@@ -74,8 +74,10 @@ export class AccountService {
     }
   }
 
-  async getBalance(cpf: string) {
-    const accountBalance = await this.accountModel.getBalance(cpf);
-    return accountBalance;
+  async getBalance(id: number) {
+    const accountBalance = await this.accountModel.findAccountById(id);
+    const { amount, name, cpf } = accountBalance!;
+
+    return { nome: name, documento: cpf, saldo: amount };
   }
 }
