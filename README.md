@@ -93,6 +93,6 @@ O token retornado do login deve ser encaminhado na header da requisição.
 
 ## Insomnia
 
-Uma cópia da collection que utilizei para testes se encontra na raiz do projeto, em formato json com o nome `collection_finances`.
+Uma cópia da collection que utilizei para testes se encontra na raiz do projeto, em formato json com o nome `collection`.
 
 > > Feito com carinho por [felipelouzeiro <3](https://www.linkedin.com/in/felipelouzeiro/).
