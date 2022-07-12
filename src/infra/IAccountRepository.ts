@@ -1,0 +1,16 @@
+import { Account } from '../entities/Account';
+
+export interface ICreateAccountDTO {
+  name?: string;
+  cpf?: string;
+  password?: string;
+  amount?: number;
+}
+
+export interface IAccountRepository {
+  findByCpf(cpf: string): Promise<Account | null>;
+  create(account: ICreateAccountDTO): Promise<void>;
+  getBalance(cpf: string): Promise<number>;
+  updateBalance(amount: number, id: number): Promise<void>;
+  findAccountById(id: number): Promise<Account | null>;
+}

@@ -1,74 +1,98 @@
-> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
+Este projeto é uma API REST que simula o gerenciamento de finanças.
 
+## Ferramentas utilizadas
 
-# Kinvo - Desafio Back-end
+- Node.js
+- Typescript
+- Banco de Dados: MySQL
+- Express.js
+- JWT
 
-## Instruções
+## Para testar em uma máquina
 
-- Utilize Typescript com Node;
-- Desenvolva uma API REST ou GraphQL;
-- Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
-- Crie um arquivo README com instruções para executar seu projeto;
-- Crie a collection do Insomnia ou Postman, salve com o nome "collection".
+- Clone e acesse o diretório do projeto, instale as dependências com o comando `npm install`.
+- Renomeie o arquivo `.env.example` para `.env` e preencha as informações com as suas credenciais MYSQL;
+- Restaure o banco de dados executando a query do arquivo dbSchema que se encontra na raiz do projeto. Verifique se foi criado o banco com a tabela vazia 'accounts' e 'transactions'.
+- Para executar a conectar a API execute no seu terminal o comando `npm start`.
 
-## Contexto
+## Estrutura da API
 
-Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu desenvolver um aplicativo para lhe ajudar nessa missão. Após um estudo de caso ele mapeou as seguintes funcionalidades:
+A API foi estruturada no padrão REST e possui sua organização bem definida com entities, models, services, middlewares e controllers, em que:
 
-- Criação da movimentação (receitas e despesas);
-- Atualização da movimentação;
-- Exclusão da movimentação;
-- Listagem de movimentações;
-- Exibição do saldo.
+- Entidades: definem um contrato para a padronização das tabelas e modelos que interagem com o banco de dados;
+- Controllers: lidam com as requisições, retornando a resposta esperada;
+- Service: valida as informações enviadas na requisição;
+- Models: acessam o banco de dados;
+- Middlewares: verifica o token.
 
-## Requisitos
+## Endpoints da API
 
-### Desenvolvedor Júnior
+Alguns endpoints necessitam de autenticação além do conteúdo do body necessário o envio do JWT (JSON Web Token) no campo `authorization` pelo header.
 
-- Filtro na listagem de movimentações por data (data inicial e data final);
-- Paginação na listagem de movimentações.
+Em caso de erro ou envio de informações inválidas, será retornado uma mensagem explicativa junto com seu respectivo status HTTP.
 
-### Desenvolvedor Pleno
+#### `POST /account` - cria uma nova conta;
 
-- Todos os requisitos do Júnior;
-- API Rest semântica (se escolheu desenvolver uma API Rest);
-- Arquitetura minimamente escalável;
-- Cobertura mínima de testes automatizados.
+Deverá ser enviado no body da requisição um objeto JSON no seguinte formato:
 
-### Desenvolvedor Sênior
+```json
+{
+  "cpf": "15789468948",
+  "name": "Nome Sobrenome"
+  "password": "senhaMuitoDifícil"
+}
+```
 
-- Todos os requisitos do Pleno;
-- Autenticação:
-  - Cadastro de usuário;
-  - Login;
-  - Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- Dockerizar a aplicação;
-- Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
+#### `POST /account/login` - autentica o usuário gerando um token JWT;
 
-### Diferenciais
+As informações devem ser enviadas no body da requisição no formato:
 
-- Cache;
-- Segurança da aplicação;
-- Deploy.
+```json
+{
+  "cpf": "48466486868",
+  "password": "senhaMuitoDifícil"
+}
+```
 
-## Dicas
+<hr>
 
-- Se optar por uma API REST, tenha cuidado ao definir as rotas e verbos HTTP: faça uso de boas práticas;
-- Crie uma aplicação flexível, ou seja, que seja fácil incluir novas funcionalidades;
-- Clean Code: o código deve ser fácil de entender;
-- Atente-se a boas práticas de versionamento.
+#### `POST /transactions` - deposita um valor para uma conta;
 
-## Processo de submissão
+As informações devem ser enviadas no body da requisição no formato:
+O token retornado do login deve ser encaminhado na header da requisição:
 
-1. Faça o fork deste repositório;
-2. Faça seu projeto neste fork;
-3. Suba as alterações para o seu fork;
-4. Submeta uma PR para este repositório.
+```json
+{
+  "value": 300,
+  "description": "Primeiro salário.",
+  "type": "debit" ou "credit",
+  "accountId": 1,
+}
+```
 
-## Observações:
+<hr>
 
-* O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
-* Apesar da listagem de requisitos mínimos acima, caso não tenha tido tempo suficiente ou tenha se esbarrado em alguma dificuldade, entregue o desafio ainda que incompleto e conte-nos na descrição do pull request quais foram as suas maiores dificuldades. Não se preocupe, avaliaremos ainda assim! :)
-* Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
+#### `DELETE /transactions/id` - deleta o registro da transação;
 
-### Boa sorte! 🍀
+O token retornado do login deve ser encaminhado na header da requisição:
+
+#### `PUT /transactions/id` - atualiza a descrição do registro da transação;
+
+As informações devem ser enviadas no body da requisição no formato:
+O token retornado do login deve ser encaminhado na header da requisição:
+
+```json
+{
+  "description": "Primeiro salário."
+}
+```
+
+#### `GET /transactions` - atualiza a descrição do registro da transação;
+
+O token retornado do login deve ser encaminhado na header da requisição.
+
+## Insomnia
+
+Uma cópia da collection que utilizei para testes se encontra na raiz do projeto, em formato json com o nome `collection`.
+
+> > Feito com carinho por [felipelouzeiro <3](https://www.linkedin.com/in/felipelouzeiro/).
