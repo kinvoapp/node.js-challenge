@@ -1,5 +1,7 @@
 {
+  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
+    "strictNullChecks": true,
     "rootDirs": ["src"],
     "outDir": "dist",
     "lib": ["es2020"],
@@ -7,6 +9,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": "src/",
+    "paths": {
+      "@/*": ["./*"]
+    }
   }
 }
