@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx --watch src/index.ts"
+    "dev": "tsx --watch src/index.ts",
+    "db:update": "prisma db push && prisma generate",
+    "db:migration": "prisma migrate dev"
   },
   "keywords": [],
   "author": "",
