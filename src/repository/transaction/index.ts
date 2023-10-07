@@ -4,8 +4,8 @@ import updateTransaction from "./update-transaction";
 import deleteTransaction from "./delete-transaction";
 
 export const transactionRepository = {
-  createTransaction,
-  findTransaction,
-  updateTransaction,
-  deleteTransaction,
+  create: createTransaction,
+  find: findTransaction,
+  update: updateTransaction,
+  delete: deleteTransaction,
 };
