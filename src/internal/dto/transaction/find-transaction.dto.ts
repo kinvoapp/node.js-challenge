@@ -1,4 +1,4 @@
 export type FindTransactionDto = {
-  initialDate?: Date;
-  finalDate?: Date;
+  initialDate?: string;
+  finalDate?: string;
 };

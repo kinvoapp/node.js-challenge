@@ -8,8 +8,8 @@ export default async function findTransaction({
   const transactions = await prismaClient.transaction.findMany({
     where: {
       created_at: {
-        gte: initialDate,
-        lte: finalDate,
+        gte: initialDate ? new Date(initialDate) : undefined,
+        lte: finalDate ? new Date(finalDate) : undefined,
       },
     },
   });
