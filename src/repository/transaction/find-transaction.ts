@@ -4,7 +4,7 @@ import { FindTransactionDto } from "@/internal/dto/transaction";
 export default async function findTransaction({
   initialDate,
   finalDate,
-}: FindTransactionDto) {
+}: FindTransactionDto = {}) {
   const transactions = await prismaClient.transaction.findMany({
     where: {
       created_at: {

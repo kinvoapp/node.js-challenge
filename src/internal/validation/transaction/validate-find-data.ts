@@ -1,6 +1,6 @@
 import { FindTransactionDto } from "@/internal/dto/transaction";
 
-export function findData(data: FindTransactionDto): boolean {
+export function findData(data: FindTransactionDto = {}): boolean {
   let isValid = true;
 
   if (data.initialDate) {
