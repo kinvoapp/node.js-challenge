@@ -1,0 +1,27 @@
+type Transaction {
+  id: ID!
+  amount: Float!
+  type: TransactionType!
+  created_at: String!
+  updated_at: String
+}
+
+enum TransactionType {
+  IN
+  OUT
+}
+
+input FindTransactionData {
+  initialDate: String
+  finalDate: String
+}
+
+input CreateTransactionData {
+  amount: Float!
+  type: TransactionType!
+}
+
+input UpdateTransactionData {
+  amount: Float
+  type: TransactionType
+}
