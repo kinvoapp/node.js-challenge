@@ -13,6 +13,7 @@ describe("transaction find data", () => {
 
     expect(isValid).toBe(false);
   });
+
   it("should return true for valid data", () => {
     const validData: FindTransactionDto = {
       initialDate: "2000-08-22",
