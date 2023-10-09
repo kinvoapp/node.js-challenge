@@ -1,6 +1,6 @@
 import type { FindTransactionDto } from "@/internal/dto/transaction";
 import { describe, expect, it } from "@jest/globals";
-import { findData } from "./validate-find-data";
+import { findData } from "../validate-find-data";
 
 describe("transaction find data", () => {
   it("should return false for invalid data", () => {
