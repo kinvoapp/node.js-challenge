@@ -1,0 +1,13 @@
+#import Transaction, FindTransactionData, CreateTransactionData, UpdateTransactionData from "transaction.gql"
+
+scalar Void
+
+type Query {
+  transactions(data: FindTransactionData): [Transaction]!
+}
+
+type Mutation {
+  newTransaction(data: CreateTransactionData): Transaction
+  updateTransaction(id: String, data: UpdateTransactionData): Void
+  deleteTransaction(id: String): Void
+}

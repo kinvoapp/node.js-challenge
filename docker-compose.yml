@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  dev-db:
+    image: postgres:alpine
+    container_name: kinvo_db
+    ports:
+      - "1234:5432"
+    environment:
+      - POSTGRES_USER=kinvo
+      - POSTGRES_PASSWORD=desafio
+      - POSTGRES_DB=cash-flow
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
