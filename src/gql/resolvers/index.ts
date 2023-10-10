@@ -5,10 +5,8 @@ import {
 } from "@/internal/dto/transaction";
 import transactionService from "@/internal/service/transaction";
 import { transactionRepository } from "@/repository/transaction";
-import Void from "../custom-types/void";
 
 const resolvers = {
-  Void: Void,
   TransactionType: {
     IN: "IN",
     OUT: "OUT",
@@ -26,12 +24,10 @@ const resolvers = {
       _: any,
       { id, data }: { id: string; data: UpdateTransactionDto },
     ) => {
-      transactionService.update(transactionRepository, id, data);
-      return Void;
+      return transactionService.update(transactionRepository, id, data);
     },
     deleteTransaction: (_: any, { id }: { id: string }) => {
-      transactionService.delete(transactionRepository, id);
-      return Void;
+      return transactionService.delete(transactionRepository, id);
     },
   },
 };

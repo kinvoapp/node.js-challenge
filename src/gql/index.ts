@@ -11,5 +11,8 @@ export default async function createApolloServer() {
 
   return new ApolloServer({
     schema,
+    formatError(formattedError, _error) {
+      return formattedError;
+    },
   });
 }

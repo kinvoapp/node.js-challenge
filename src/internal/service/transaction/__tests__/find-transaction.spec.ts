@@ -1,18 +1,19 @@
 import findTransaction from "../find-transaction";
 import { describe, expect, it } from "@jest/globals";
 import transactionRepositoryMock from "./mock/transaction-repository-mock";
+import { GraphQLError } from "graphql";
 
 describe("find transaction service", () => {
   it("should throw an error for invalid initial date", () => {
     expect(
       findTransaction(transactionRepositoryMock, { initialDate: "invalid" }),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should throw an error for invalid final date", () => {
     expect(
       findTransaction(transactionRepositoryMock, { finalDate: "invalid" }),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should return a empty array with no search params", () => {

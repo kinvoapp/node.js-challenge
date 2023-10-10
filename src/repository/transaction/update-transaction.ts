@@ -5,7 +5,7 @@ export default async function updateTransaction(
   id: string,
   data: UpdateTransactionDto,
 ) {
-  await prismaClient.transaction.update({
+  return await prismaClient.transaction.update({
     data,
     where: {
       id,

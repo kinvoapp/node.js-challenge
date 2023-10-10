@@ -3,6 +3,7 @@ import createTransaction from "../create-transaction";
 import { describe, expect, it } from "@jest/globals";
 import { transaction } from "@prisma/client";
 import transactionRepositoryMock from "./mock/transaction-repository-mock";
+import { GraphQLError } from "graphql";
 
 describe("create transaction service", () => {
   it("should throw an error for invalid data", () => {
@@ -13,7 +14,7 @@ describe("create transaction service", () => {
         // @ts-ignore
         type: "ad",
       }),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should return the transaction for valid data", () => {

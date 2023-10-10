@@ -1,19 +1,22 @@
 import { describe, expect, it } from "@jest/globals";
-import transactionRepositoryMock from "./mock/transaction-repository-mock";
+import transactionRepositoryMock, {
+  transactionMock,
+} from "./mock/transaction-repository-mock";
 import deleteTransaction from "../delete-transaction";
 import { randomUUID } from "crypto";
+import { GraphQLError } from "graphql";
 
 describe("update transaction service", () => {
   it("should throw an error for a invalid uuid", () => {
     expect(
       deleteTransaction(transactionRepositoryMock, "invalid uuid"),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should throw an error for a id that doesn't exists in db", () => {
     expect(
       deleteTransaction(transactionRepositoryMock, randomUUID()),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should return nothing when it receives valid data", () => {
@@ -22,6 +25,6 @@ describe("update transaction service", () => {
         transactionRepositoryMock,
         "292f3665-46fd-4060-ba5d-2ec9c990aa0c",
       ),
-    ).resolves.toBeUndefined();
+    ).resolves.toStrictEqual(transactionMock);
   });
 });

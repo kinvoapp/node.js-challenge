@@ -1,7 +1,7 @@
 import { TransactionRepository } from "@/factory/repository/transaction";
 import { FindTransactionDto } from "@/internal/dto/transaction";
+import InvalidDataError from "@/internal/error/invalid-data";
 import { validateTransaction } from "@/internal/validation/transaction";
-import { GraphQLError } from "graphql";
 
 export default async function findTransaction(
   repository: TransactionRepository,
@@ -9,13 +9,7 @@ export default async function findTransaction(
 ) {
   if (data.initialDate || data.finalDate) {
     const isValid = validateTransaction.findData(data);
-    if (!isValid)
-      throw new GraphQLError("invalid data provided", {
-        extensions: {
-          code: "Bad Request".toUpperCase(),
-          http: { status: 400 },
-        },
-      });
+    if (!isValid) return new InvalidDataError();
   }
 
   const transactions = await repository.find(data);

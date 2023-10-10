@@ -1,7 +1,10 @@
 import { describe, expect, it } from "@jest/globals";
 import updateTransaction from "../update-transaction";
-import transactionRepositoryMock from "./mock/transaction-repository-mock";
+import transactionRepositoryMock, {
+  transactionMock,
+} from "./mock/transaction-repository-mock";
 import { randomUUID } from "crypto";
+import { GraphQLError } from "graphql";
 
 describe("update transaction service", () => {
   it("should throw an error for a invalid id", () => {
@@ -10,7 +13,7 @@ describe("update transaction service", () => {
         amount: 200,
         type: "OUT",
       }),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should throw an error for invalid data", () => {
@@ -25,7 +28,7 @@ describe("update transaction service", () => {
           type: "invalid",
         },
       ),
-    ).rejects.toThrowError();
+    ).resolves.toBeInstanceOf(GraphQLError);
   });
 
   it("should return nothing when it receives valid data", () => {
@@ -38,6 +41,6 @@ describe("update transaction service", () => {
           type: "IN",
         },
       ),
-    ).resolves.toBeUndefined();
+    ).resolves.toStrictEqual(transactionMock);
   });
 });

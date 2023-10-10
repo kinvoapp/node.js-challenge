@@ -1,5 +1,14 @@
 import transactionRepositoryFactory from "@/factory/repository/transaction";
+import { transaction } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
+
+export const transactionMock: transaction = {
+  id: "292f3665-46fd-4060-ba5d-2ec9c990aa0c",
+  amount: new Decimal(100),
+  type: "IN",
+  created_at: new Date(1),
+  updated_at: new Date(1),
+};
 
 const transactionRepositoryMock = transactionRepositoryFactory({
   async create(data) {
@@ -16,17 +25,15 @@ const transactionRepositoryMock = transactionRepositoryFactory({
   },
   async findOne(id) {
     return id === "292f3665-46fd-4060-ba5d-2ec9c990aa0c"
-      ? {
-          id: "292f3665-46fd-4060-ba5d-2ec9c990aa0c",
-          amount: new Decimal(100),
-          type: "IN",
-          created_at: new Date(1),
-          updated_at: new Date(1),
-        }
+      ? transactionMock
       : null;
   },
-  async update(_id, _data) {},
-  async delete(_id) {},
+  async update(_id, _data) {
+    return transactionMock;
+  },
+  async delete(_id) {
+    return transactionMock;
+  },
 });
 
 export default transactionRepositoryMock;

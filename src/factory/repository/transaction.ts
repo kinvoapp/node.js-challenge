@@ -9,8 +9,8 @@ export interface TransactionRepository {
   create: (data: CreateTransactionDto) => Promise<transaction>;
   find: (data?: FindTransactionDto) => Promise<transaction[]>;
   findOne: (id: string) => Promise<transaction | null>;
-  update: (id: string, data: UpdateTransactionDto) => Promise<void>;
-  delete: (id: string) => Promise<void>;
+  update: (id: string, data: UpdateTransactionDto) => Promise<transaction>;
+  delete: (id: string) => Promise<transaction>;
 }
 
 export default function transactionRepositoryFactory(
