@@ -1,7 +1,7 @@
-#import Transaction, FindTransactionData, CreateTransactionData, UpdateTransactionData from "transaction.gql"
+#import Transaction, FindTransactionData, CreateTransactionData, UpdateTransactionData, TransactionResult from "transaction.gql"
 
 type Query {
-  transactions(data: FindTransactionData): [Transaction]!
+  transactions(data: FindTransactionData): TransactionResult
 }
 
 type Mutation {

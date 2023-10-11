@@ -23,6 +23,9 @@ const transactionRepositoryMock = transactionRepositoryFactory({
   async find(_data) {
     return [];
   },
+  async findCount(_data) {
+    return 0;
+  },
   async findOne(id) {
     return id === "292f3665-46fd-4060-ba5d-2ec9c990aa0c"
       ? transactionMock

@@ -1,0 +1,10 @@
+interface PaginationResult {
+  count: Int!
+  previous: Pagination
+  next: Pagination
+}
+
+type Pagination {
+  limit: Int!
+  offset: Int!
+}

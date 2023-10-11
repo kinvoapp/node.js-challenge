@@ -12,8 +12,17 @@ const resolvers = {
     OUT: "OUT",
   },
   Query: {
-    transactions: (_: any, { data }: { data: FindTransactionDto }) => {
-      return transactionService.find(transactionRepository, data);
+    transactions: (_: any, { data = {} }: { data: FindTransactionDto }) => {
+      let limit = 20;
+      let offset = 0;
+      offset = data?.offset ?? offset;
+      limit = data?.limit ?? limit;
+
+      return transactionService.find(transactionRepository, {
+        ...data,
+        limit,
+        offset,
+      });
     },
   },
   Mutation: {

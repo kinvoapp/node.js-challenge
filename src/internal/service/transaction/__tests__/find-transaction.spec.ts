@@ -17,20 +17,33 @@ describe("find transaction service", () => {
   });
 
   it("should return a empty array with no search params", () => {
-    expect(findTransaction(transactionRepositoryMock)).resolves.toStrictEqual(
-      [],
-    );
+    expect(findTransaction(transactionRepositoryMock)).resolves.toStrictEqual({
+      count: 0,
+      items: [],
+      next: null,
+      previous: null,
+    });
   });
 
   it("should return a empty array with valid initial date", () => {
     expect(
       findTransaction(transactionRepositoryMock, { initialDate: "2000-01-01" }),
-    ).resolves.toStrictEqual([]);
+    ).resolves.toStrictEqual({
+      count: 0,
+      items: [],
+      next: null,
+      previous: null,
+    });
   });
 
   it("should return a empty array with valid final date", () => {
     expect(
       findTransaction(transactionRepositoryMock, { finalDate: "2000-01-01" }),
-    ).resolves.toStrictEqual([]);
+    ).resolves.toStrictEqual({
+      count: 0,
+      items: [],
+      next: null,
+      previous: null,
+    });
   });
 });
