@@ -28,6 +28,7 @@ enum transactionType {
 model user {
   id          String        @id() @default(uuid()) @db.Uuid()
   name        String
+  email       String        @unique
   password    String
   created_at  DateTime      @default(now()) @db.Timestamptz()
   updated_at  DateTime      @updatedAt @db.Timestamptz()
