@@ -7,4 +7,5 @@ export const transactionsMock = Array<transaction>(30).fill({
   type: "OUT",
   created_at: new Date(),
   updated_at: new Date(),
+  userId: "c6a26ac0-4fc1-4fbb-8de4-835b21e59e00",
 });
