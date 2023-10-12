@@ -1,5 +1,5 @@
 export interface UpdateUserPassDto {
-  email: string;
+  oldPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 }
