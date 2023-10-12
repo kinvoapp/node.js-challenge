@@ -24,11 +24,13 @@ describe("create transaction service", () => {
       type: "IN",
       created_at: new Date(1),
       updated_at: new Date(1),
+      userId: "c6a26ac0-4fc1-4fbb-8de4-835b21e59e00",
     };
     expect(
       createTransaction(transactionRepositoryMock, {
         amount: 100,
         type: "IN",
+        userId: "c6a26ac0-4fc1-4fbb-8de4-835b21e59e00",
       }),
     ).resolves.toStrictEqual(result);
   });

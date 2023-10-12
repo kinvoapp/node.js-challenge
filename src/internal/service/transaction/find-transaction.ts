@@ -1,6 +1,6 @@
-import { TransactionRepository } from "@/factory/repository/transaction";
 import { FindTransactionDto } from "@/internal/dto/transaction";
 import InvalidDataError from "@/internal/error/invalid-data";
+import { TransactionRepository } from "@/internal/interface/repository/transaction";
 import { validateTransaction } from "@/internal/validation/transaction";
 import createPaginationResponse from "@/utils/pagination/pagination";
 import { transaction } from "@prisma/client";

@@ -8,6 +8,7 @@ export const transactionMock: transaction = {
   type: "IN",
   created_at: new Date(1),
   updated_at: new Date(1),
+  userId: "c6a26ac0-4fc1-4fbb-8de4-835b21e59e00",
 };
 
 const transactionRepositoryMock = transactionRepositoryFactory({
@@ -18,6 +19,7 @@ const transactionRepositoryMock = transactionRepositoryFactory({
       type: data.type,
       created_at: new Date(1),
       updated_at: new Date(1),
+      userId: "c6a26ac0-4fc1-4fbb-8de4-835b21e59e00",
     };
   },
   async find(_data) {
