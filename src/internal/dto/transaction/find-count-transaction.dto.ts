@@ -1,4 +1,3 @@
-import { FindTransactionDto } from "./find-transaction.dto";
+import {FindTransactionDto} from './find-transaction.dto'
 
-export interface FindCountDto
-  extends Pick<FindTransactionDto, "finalDate" | "initialDate"> {}
+export interface FindCountDto extends Pick<FindTransactionDto, 'finalDate' | 'initialDate'> {}

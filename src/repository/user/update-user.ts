@@ -1,5 +1,5 @@
-import prismaClient from "@/external/prisma";
-import { UpdateUserDto } from "@/internal/dto/user";
+import prismaClient from '@/external/prisma'
+import {UpdateUserDto} from '@/internal/dto/user'
 
 export default async function updateUser(id: string, data: UpdateUserDto) {
   return await prismaClient.user.update({
@@ -11,5 +11,5 @@ export default async function updateUser(id: string, data: UpdateUserDto) {
       name: data.name,
       password: data.password,
     },
-  });
+  })
 }

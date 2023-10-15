@@ -1,7 +1,7 @@
-import { TransactionRepository } from "@/internal/interface/repository/transaction";
+import {TransactionRepository} from '@/internal/interface/repository/transaction'
 
 export default function transactionRepositoryFactory(
-  repositoryMethods: TransactionRepository,
+  repositoryMethods: TransactionRepository
 ): TransactionRepository {
   return {
     create: repositoryMethods.create,
@@ -10,5 +10,5 @@ export default function transactionRepositoryFactory(
     findOne: repositoryMethods.findOne,
     update: repositoryMethods.update,
     delete: repositoryMethods.delete,
-  };
+  }
 }

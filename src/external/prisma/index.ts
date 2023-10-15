@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import {PrismaClient} from '@prisma/client'
 
-const prismaClient = new PrismaClient();
-prismaClient.$connect();
+const prismaClient = new PrismaClient()
+prismaClient.$connect()
 
-export default prismaClient;
+export default prismaClient

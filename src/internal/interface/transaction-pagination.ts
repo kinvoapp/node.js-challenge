@@ -1,8 +1,8 @@
-import { Pagination } from "./pagination";
+import {Pagination} from './pagination'
 
 export interface PaginationResponse<T> {
-  count: number;
-  next: Pagination | null;
-  previous: Pagination | null;
-  items: T[];
+  count: number
+  next: Pagination | null
+  previous: Pagination | null
+  items: T[]
 }

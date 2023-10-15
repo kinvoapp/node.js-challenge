@@ -1,49 +1,48 @@
-import findTransaction from "../find-transaction";
-import { describe, expect, it } from "@jest/globals";
-import transactionRepositoryMock from "./mock/transaction-repository-mock";
-import { GraphQLError } from "graphql";
+import findTransaction from '../find-transaction'
+import {describe, expect, it} from '@jest/globals'
+import transactionRepositoryMock from './mock/transaction-repository-mock'
 
-describe("find transaction service", () => {
-  it("should throw an error for invalid initial date", () => {
+describe('find transaction service', () => {
+  it('should throw an error for invalid initial date', () => {
     expect(
-      findTransaction(transactionRepositoryMock, { initialDate: "invalid" }),
-    ).resolves.toBeInstanceOf(GraphQLError);
-  });
+      findTransaction(transactionRepositoryMock, {initialDate: 'invalid'})
+    ).rejects.toThrowError()
+  })
 
-  it("should throw an error for invalid final date", () => {
+  it('should throw an error for invalid final date', () => {
     expect(
-      findTransaction(transactionRepositoryMock, { finalDate: "invalid" }),
-    ).resolves.toBeInstanceOf(GraphQLError);
-  });
+      findTransaction(transactionRepositoryMock, {finalDate: 'invalid'})
+    ).rejects.toThrowError()
+  })
 
-  it("should return a empty array with no search params", () => {
+  it('should return a empty array with no search params', () => {
     expect(findTransaction(transactionRepositoryMock)).resolves.toStrictEqual({
       count: 0,
       items: [],
       next: null,
       previous: null,
-    });
-  });
+    })
+  })
 
-  it("should return a empty array with valid initial date", () => {
+  it('should return a empty array with valid initial date', () => {
     expect(
-      findTransaction(transactionRepositoryMock, { initialDate: "2000-01-01" }),
+      findTransaction(transactionRepositoryMock, {initialDate: '2000-01-01'})
     ).resolves.toStrictEqual({
       count: 0,
       items: [],
       next: null,
       previous: null,
-    });
-  });
+    })
+  })
 
-  it("should return a empty array with valid final date", () => {
+  it('should return a empty array with valid final date', () => {
     expect(
-      findTransaction(transactionRepositoryMock, { finalDate: "2000-01-01" }),
+      findTransaction(transactionRepositoryMock, {finalDate: '2000-01-01'})
     ).resolves.toStrictEqual({
       count: 0,
       items: [],
       next: null,
       previous: null,
-    });
-  });
-});
+    })
+  })
+})

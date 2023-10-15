@@ -1,8 +1,8 @@
-import prismaClient from "@/external/prisma";
-import { CreateUserDto } from "@/internal/dto/user";
+import prismaClient from '@/external/prisma'
+import {CreateUserDto} from '@/internal/dto/user'
 
-export default async function createUser(data: CreateUserDto) {
+export default async function createUser(data: Omit<CreateUserDto, 'confirmPassword'>) {
   return await prismaClient.user.create({
     data,
-  });
+  })
 }

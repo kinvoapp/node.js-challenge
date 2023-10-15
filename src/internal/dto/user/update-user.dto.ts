@@ -1,4 +1,3 @@
-import { CreateUserDto } from "./create-user.dto";
+import {CreateUserDto} from './create-user.dto'
 
-export interface UpdateUserDto
-  extends Partial<Omit<CreateUserDto, "confirmPassword">> {}
+export interface UpdateUserDto extends Partial<Omit<CreateUserDto, 'confirmPassword'>> {}

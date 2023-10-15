@@ -1,4 +1,4 @@
-export interface FindOneUser {
-  email?: string;
-  id?: string;
+export interface FindOneUserDto {
+  email?: string
+  id?: string
 }

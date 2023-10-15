@@ -1,15 +1,15 @@
-import { CreateTransactionDto } from "@/internal/dto/transaction";
+import {CreateTransactionDto} from '@/internal/dto/transaction'
 
 export function createData(data: CreateTransactionDto): boolean {
-  let isValid = true;
+  let isValid = true
 
-  const isNumber = typeof data.amount === "number";
-  isValid &&= isNumber;
-  const isGreaterThanZero = data.amount > 0;
-  isValid &&= isGreaterThanZero;
+  const isNumber = typeof data.amount === 'number'
+  isValid &&= isNumber
+  const isGreaterThanZero = data.amount > 0
+  isValid &&= isGreaterThanZero
 
-  const isOfType = data.type === "IN" || data.type === "OUT";
-  isValid &&= isOfType;
+  const isOfType = data.type === 'IN' || data.type === 'OUT'
+  isValid &&= isOfType
 
-  return isValid;
+  return isValid
 }

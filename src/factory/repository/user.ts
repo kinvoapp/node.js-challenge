@@ -1,8 +1,6 @@
-import { UserRepository } from "@/internal/interface/repository/user";
+import {UserRepository} from '@/internal/interface/repository/user'
 
-export default function userRepositoryFactory(
-  repositoryMethods: UserRepository,
-): UserRepository {
+export default function userRepositoryFactory(repositoryMethods: UserRepository): UserRepository {
   return {
     create: repositoryMethods.create,
     find: repositoryMethods.find,
@@ -10,5 +8,6 @@ export default function userRepositoryFactory(
     findOne: repositoryMethods.findOne,
     update: repositoryMethods.update,
     delete: repositoryMethods.delete,
-  };
+    balance: repositoryMethods.balance,
+  }
 }

@@ -1,0 +1,24 @@
+#import Transaction from "transaction.gql"
+#import PaginationResult, Pagination from "pagination.gql"
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  created_at: String!
+  updated_at: String
+  balance: Float!
+  transactions: [Transaction]!
+}
+
+input FindUserData {
+  offset: Int
+  limit: Int
+}
+
+type UserResult implements PaginationResult {
+  count: Int!
+  previous: Pagination
+  next: Pagination
+  items: [User]!
+}

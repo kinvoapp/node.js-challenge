@@ -1,16 +1,12 @@
-import {
-  CreateUserDto,
-  FindOneUser,
-  FindUserDto,
-  UpdateUserDto,
-} from "@/internal/dto/user";
-import { user } from "@prisma/client";
+import {CreateUserDto, FindOneUserDto, FindUserDto, UpdateUserDto} from '@/internal/dto/user'
+import {user} from '@prisma/client'
 
 export interface UserRepository {
-  create: (data: CreateUserDto) => Promise<user>;
-  find: (data?: FindUserDto) => Promise<user[]>;
-  findCount: () => Promise<number>;
-  findOne: (data: FindOneUser) => Promise<user | null>;
-  update: (id: string, data: UpdateUserDto) => Promise<user>;
-  delete: (id: string) => Promise<user>;
+  create: (data: Omit<CreateUserDto, 'confirmPassword'>) => Promise<user>
+  find: (data?: FindUserDto) => Promise<user[]>
+  findCount: () => Promise<number>
+  findOne: (data: FindOneUserDto) => Promise<user | null>
+  update: (id: string, data: UpdateUserDto) => Promise<user>
+  delete: (id: string) => Promise<user>
+  balance: (id: string) => Promise<number>
 }

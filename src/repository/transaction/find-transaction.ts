@@ -1,9 +1,10 @@
-import prismaClient from "@/external/prisma";
-import { FindTransactionDto } from "@/internal/dto/transaction";
+import prismaClient from '@/external/prisma'
+import {FindTransactionDto} from '@/internal/dto/transaction'
 
 export default async function findTransaction({
   initialDate,
   finalDate,
+  userId,
   offset,
   limit,
 }: FindTransactionDto = {}) {
@@ -15,7 +16,8 @@ export default async function findTransaction({
         gte: initialDate ? new Date(initialDate) : undefined,
         lte: finalDate ? new Date(finalDate) : undefined,
       },
+      userId,
     },
-  });
-  return transactions;
+  })
+  return transactions
 }

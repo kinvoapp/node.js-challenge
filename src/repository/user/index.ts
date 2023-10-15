@@ -1,10 +1,11 @@
-import userRepositoryFactory from "@/factory/repository/user";
-import findUser from "./find-user";
-import createUser from "./create-user";
-import deleteUser from "./delete-user";
-import updateUser from "./update-user";
-import findOneUser from "./find-one-user";
-import findUserCount from "./find-count-user";
+import userRepositoryFactory from '@/factory/repository/user'
+import findUser from './find-user'
+import createUser from './create-user'
+import deleteUser from './delete-user'
+import updateUser from './update-user'
+import findOneUser from './find-one-user'
+import findUserCount from './find-count-user'
+import balanceUser from './balance-user'
 
 export const userRepository = userRepositoryFactory({
   find: findUser,
@@ -13,4 +14,5 @@ export const userRepository = userRepositoryFactory({
   create: createUser,
   delete: deleteUser,
   update: updateUser,
-});
+  balance: balanceUser,
+})
