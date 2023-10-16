@@ -3,5 +3,5 @@ export interface FindTransactionDto {
   limit?: number
   initialDate?: string
   finalDate?: string
-  userId?: string
+  userId: string
 }

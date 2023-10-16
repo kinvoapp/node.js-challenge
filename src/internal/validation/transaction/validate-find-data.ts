@@ -1,8 +1,10 @@
-import {FindTransactionDto} from '@/internal/dto/transaction'
+import { FindTransactionDto } from '@/internal/dto/transaction'
+import regex from '@/utils/regex'
 
 export function findData(data: FindTransactionDto): boolean {
   let isValid = true
 
+  isValid &&= regex.UUID.test(data.userId)
   if (data.initialDate) {
     isValid &&= data.initialDate !== ''
     const date = new Date(data.initialDate)
