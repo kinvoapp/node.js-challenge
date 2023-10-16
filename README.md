@@ -5,8 +5,10 @@
 ## Instruções
 
 - Utilize Typescript com Node;
-- Desenvolva uma API REST ou GraphQL;
+- Desenvolva uma API REST ou GraphQL
+  > Desenvolvi uma API GraphQL;
 - Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
+  > utilizei express com apollo server e banco de dados postgresql
 - Crie um arquivo README com instruções para executar seu projeto;
 - Crie a collection do Insomnia ou Postman, salve com o nome "collection".
 
@@ -26,31 +28,32 @@ funcionalidades:
 
 ### Desenvolvedor Júnior
 
-- Filtro na listagem de movimentações por data (data inicial e data final);
-- Paginação na listagem de movimentações.
+- [x] Filtro na listagem de movimentações por data (data inicial e data final);
+- [x] Paginação na listagem de movimentações.
 
 ### Desenvolvedor Pleno
 
-- Todos os requisitos do Júnior;
-- API Rest semântica (se escolheu desenvolver uma API Rest);
-- Arquitetura minimamente escalável;
-- Cobertura mínima de testes automatizados.
+- [x] Todos os requisitos do Júnior;
+- [x] API Rest semântica (se escolheu desenvolver uma API Rest);
+- [ ] Arquitetura minimamente escalável;
+- [x] Cobertura mínima de testes automatizados.
 
 ### Desenvolvedor Sênior
 
-- Todos os requisitos do Pleno;
-- Autenticação:
-  - Cadastro de usuário;
-  - Login;
-  - Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- Dockerizar a aplicação;
-- Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
+- [ ] Todos os requisitos do Pleno;
+- [ ] Autenticação:
+  - [ ] Cadastro de usuário;
+  - [ ] Login;
+  - [ ] Necessidade do usuário estar autenticado para a realização das atividades citadas no
+        contexto.
+- [x] Dockerizar a aplicação;
+- [ ] Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
 
 ### Diferenciais
 
-- Cache;
-- Segurança da aplicação;
-- Deploy.
+- [ ] Cache;
+- [ ] Segurança da aplicação;
+- [ ] Deploy.
 
 ## Dicas
 
