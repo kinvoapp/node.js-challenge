@@ -1,6 +1,6 @@
 #import Transaction, FindTransactionData, CreateTransactionData, UpdateTransactionData, TransactionResult from "transaction.gql"
 
-#import User, FindUserData, UserResult from "user.gql"
+#import User, FindUserData, UserResult, CreateUserData from "user.gql"
 
 type Query {
   transactions(data: FindTransactionData): TransactionResult
@@ -11,4 +11,5 @@ type Mutation {
   newTransaction(data: CreateTransactionData): Transaction
   updateTransaction(id: String, data: UpdateTransactionData): Transaction
   deleteTransaction(id: String): Transaction
+  newUser(data: CreateUserData): User
 }

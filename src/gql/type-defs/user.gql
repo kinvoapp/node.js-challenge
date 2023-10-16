@@ -16,6 +16,13 @@ input FindUserData {
   limit: Int
 }
 
+input CreateUserData {
+  name: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
 type UserResult implements PaginationResult {
   count: Int!
   previous: Pagination

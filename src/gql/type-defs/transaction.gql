@@ -7,6 +7,7 @@ type Transaction {
   type: TransactionType!
   created_at: String!
   updated_at: String
+  userId: String!
   user: User!
 }
 
@@ -26,6 +27,7 @@ input FindTransactionData {
 input CreateTransactionData {
   amount: Float!
   type: TransactionType!
+  userId: String!
 }
 
 input UpdateTransactionData {
