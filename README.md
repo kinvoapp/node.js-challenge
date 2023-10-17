@@ -11,6 +11,9 @@
   > utilizei express com apollo server e banco de dados postgresql
 - Crie um arquivo README com instruções para executar seu projeto;
 - Crie a collection do Insomnia ou Postman, salve com o nome "collection".
+  - [auth](https://gold-trinity-287909.postman.co/workspace/kinvo-challenge~41289a9d-b2a7-460b-8c4f-b2b1d67cc158/collection/652e2982529f07d5d9fcfc74?action=share&creator=11204020&active-environment=11204020-4f42a95a-4d00-49ee-9da9-244cc0fa800a)
+  - [transactions](https://gold-trinity-287909.postman.co/workspace/kinvo-challenge~41289a9d-b2a7-460b-8c4f-b2b1d67cc158/collection/6521c7b8cae43373c3e16f94?action=share&creator=11204020&active-environment=11204020-4f42a95a-4d00-49ee-9da9-244cc0fa800a)
+  - [users](https://gold-trinity-287909.postman.co/workspace/kinvo-challenge~41289a9d-b2a7-460b-8c4f-b2b1d67cc158/collection/65285d836150314c8cd17623?action=share&creator=11204020&active-environment=11204020-4f42a95a-4d00-49ee-9da9-244cc0fa800a)
 
 ## Contexto
 
