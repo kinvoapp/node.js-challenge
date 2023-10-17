@@ -4,6 +4,7 @@ import {
   UpdateTransactionDto,
 } from '@/internal/dto/transaction'
 import { CreateUserDto, FindUserDto } from '@/internal/dto/user'
+import { authServise } from '@/internal/service/auth'
 import transactionService from '@/internal/service/transaction'
 import { userService } from '@/internal/service/user'
 import { transactionRepository } from '@/repository/transaction'
@@ -30,7 +31,7 @@ const resolvers = {
     },
   },
   Query: {
-    transactions: (_: any, { data = {} }: { data: FindTransactionDto }) => {
+    transactions: (_: any, { data }: { data: FindTransactionDto }) => {
       let limit = 20
       let offset = 0
       offset = data?.offset ?? offset
@@ -67,6 +68,9 @@ const resolvers = {
     },
     newUser: (_: any, { data }: { data: CreateUserDto }) => {
       return userService.createUser(userRepository, data)
+    },
+    login: (_: any, { email, password }: { email: string; password: string }) => {
+      return authServise.login(email, password)
     },
   },
 }

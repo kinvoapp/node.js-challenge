@@ -41,3 +41,13 @@ type TransactionResult implements PaginationResult {
   next: Pagination
   items: [Transaction]!
 }
+
+type Query {
+  transactions(data: FindTransactionData): TransactionResult!
+}
+
+type Mutation {
+  newTransaction(data: CreateTransactionData): Transaction!
+  updateTransaction(id: String, data: UpdateTransactionData): Transaction!
+  deleteTransaction(id: String): Transaction!
+}

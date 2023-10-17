@@ -29,3 +29,11 @@ type UserResult implements PaginationResult {
   next: Pagination
   items: [User]!
 }
+
+type Query {
+  users(data: FindUserData): UserResult!
+}
+
+type Mutation {
+  newUser(data: CreateUserData): User!
+}
