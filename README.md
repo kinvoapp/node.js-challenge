@@ -41,10 +41,10 @@ funcionalidades:
 ### Desenvolvedor Sênior
 
 - [ ] Todos os requisitos do Pleno;
-- [ ] Autenticação:
-  - [ ] Cadastro de usuário;
-  - [ ] Login;
-  - [ ] Necessidade do usuário estar autenticado para a realização das atividades citadas no
+- [x] Autenticação:
+  - [x] Cadastro de usuário;
+  - [x] Login;
+  - [x] Necessidade do usuário estar autenticado para a realização das atividades citadas no
         contexto.
 - [x] Dockerizar a aplicação;
 - [ ] Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
