@@ -28,7 +28,6 @@ async function main() {
       context: async ({ req }) => {
         // @ts-ignore
         const user = req.auth || null
-        console.log(user)
 
         return { user }
       },
