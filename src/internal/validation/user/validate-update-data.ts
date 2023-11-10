@@ -1,4 +1,4 @@
-import {UpdateUserDto} from '@/internal/dto/user'
+import { UpdateUserDto } from '@/internal/dto/user'
 import regex from '@/utils/regex'
 
 export default function updateData(id: string, data: UpdateUserDto) {

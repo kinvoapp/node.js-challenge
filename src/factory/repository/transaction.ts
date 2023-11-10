@@ -1,4 +1,4 @@
-import {TransactionRepository} from '@/internal/interface/repository/transaction'
+import { TransactionRepository } from '@/internal/interface/repository/transaction'
 
 export default function transactionRepositoryFactory(
   repositoryMethods: TransactionRepository

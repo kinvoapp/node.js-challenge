@@ -1,6 +1,6 @@
 import transactionRepositoryFactory from '@/factory/repository/transaction'
-import {transaction} from '@prisma/client'
-import {Decimal} from '@prisma/client/runtime/library'
+import { transaction } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 
 export const transactionMock: transaction = {
   id: '292f3665-46fd-4060-ba5d-2ec9c990aa0c',

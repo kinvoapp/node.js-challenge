@@ -1,4 +1,4 @@
-import {CreateUserDto} from '@/internal/dto/user'
+import { CreateUserDto } from '@/internal/dto/user'
 import regex from '@/utils/regex'
 
 export default function createData(data: CreateUserDto) {

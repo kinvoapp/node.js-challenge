@@ -1,6 +1,6 @@
-import {describe, expect, it} from '@jest/globals'
-import {updateData} from '../validate-update-data'
-import {UpdateTransactionDto} from '@/internal/dto/transaction'
+import { describe, expect, it } from '@jest/globals'
+import { updateData } from '../validate-update-data'
+import { UpdateTransactionDto } from '@/internal/dto/transaction'
 
 describe('transaction update data', () => {
   it('should return false for invalid data', () => {

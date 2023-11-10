@@ -1,6 +1,6 @@
 import InvalidDataError from '@/internal/error/invalid-data'
-import {TransactionRepository} from '@/internal/interface/repository/transaction'
-import {validateTransaction} from '@/internal/validation/transaction'
+import { TransactionRepository } from '@/internal/interface/repository/transaction'
+import { validateTransaction } from '@/internal/validation/transaction'
 
 export default async function deleteTransaction(repository: TransactionRepository, id: string) {
   const isValid = validateTransaction.deleteData(id)

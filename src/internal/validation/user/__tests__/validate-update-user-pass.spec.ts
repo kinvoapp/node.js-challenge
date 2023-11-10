@@ -1,4 +1,4 @@
-import {describe, expect, it} from '@jest/globals'
+import { describe, expect, it } from '@jest/globals'
 import updatePass from '../validate-update-user-pass'
 
 describe('validate update user password', () => {

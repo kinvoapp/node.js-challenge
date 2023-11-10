@@ -4,7 +4,7 @@ import {
   FindTransactionDto,
   UpdateTransactionDto,
 } from '@/internal/dto/transaction'
-import {transaction} from '@prisma/client'
+import { transaction } from '@prisma/client'
 
 export interface TransactionRepository {
   create: (data: CreateTransactionDto) => Promise<transaction>

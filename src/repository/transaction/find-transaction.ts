@@ -1,5 +1,5 @@
 import prismaClient from '@/external/prisma'
-import {FindTransactionDto} from '@/internal/dto/transaction'
+import { FindTransactionDto } from '@/internal/dto/transaction'
 
 export default async function findTransaction({
   initialDate,

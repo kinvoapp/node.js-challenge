@@ -1,5 +1,5 @@
-import {FindUserDto} from '@/internal/dto/user'
-import {UserRepository} from '@/internal/interface/repository/user'
+import { FindUserDto } from '@/internal/dto/user'
+import { UserRepository } from '@/internal/interface/repository/user'
 import createPaginationResponse from '@/utils/pagination/pagination'
 
 export default async function findUser(repository: UserRepository, data: FindUserDto) {

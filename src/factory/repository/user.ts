@@ -1,4 +1,4 @@
-import {UserRepository} from '@/internal/interface/repository/user'
+import { UserRepository } from '@/internal/interface/repository/user'
 
 export default function userRepositoryFactory(repositoryMethods: UserRepository): UserRepository {
   return {

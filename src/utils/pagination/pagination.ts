@@ -1,5 +1,5 @@
-import {Pagination} from '@/internal/interface/pagination'
-import {PaginationResponse} from '@/internal/interface/transaction-pagination'
+import { Pagination } from '@/internal/interface/pagination'
+import { PaginationResponse } from '@/internal/interface/transaction-pagination'
 
 interface CreatePaginationResponse<T> extends Pagination {
   count: number

@@ -1,5 +1,5 @@
-import {describe, expect, it} from '@jest/globals'
-import {deleteData} from '../validate-delete-data'
+import { describe, expect, it } from '@jest/globals'
+import { deleteData } from '../validate-delete-data'
 
 describe('transaction delete data', () => {
   it('should return false for invalid data', () => {

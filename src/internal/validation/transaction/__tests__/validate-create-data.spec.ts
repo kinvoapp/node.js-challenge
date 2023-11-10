@@ -1,6 +1,6 @@
-import {describe, expect, it} from '@jest/globals'
-import {CreateTransactionDto} from '@/internal/dto/transaction'
-import {createData} from '../validate-create-data'
+import { describe, expect, it } from '@jest/globals'
+import { CreateTransactionDto } from '@/internal/dto/transaction'
+import { createData } from '../validate-create-data'
 
 describe('transaction create data', () => {
   it('should return false for invalid data', () => {

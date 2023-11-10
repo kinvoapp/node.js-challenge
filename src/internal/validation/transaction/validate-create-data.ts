@@ -1,4 +1,4 @@
-import {CreateTransactionDto} from '@/internal/dto/transaction'
+import { CreateTransactionDto } from '@/internal/dto/transaction'
 
 export function createData(data: CreateTransactionDto): boolean {
   let isValid = true

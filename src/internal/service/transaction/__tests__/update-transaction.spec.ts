@@ -1,8 +1,8 @@
-import {describe, expect, it} from '@jest/globals'
+import { describe, expect, it } from '@jest/globals'
 import updateTransaction from '../update-transaction'
-import transactionRepositoryMock, {transactionMock} from './mock/transaction-repository-mock'
-import {randomUUID} from 'crypto'
-import {GraphQLError} from 'graphql'
+import transactionRepositoryMock, { transactionMock } from './mock/transaction-repository-mock'
+import { randomUUID } from 'crypto'
+import { GraphQLError } from 'graphql'
 
 describe('update transaction service', () => {
   it('should throw an error for a invalid id', () => {

@@ -1,7 +1,7 @@
-import {Decimal} from '@prisma/client/runtime/library'
+import { Decimal } from '@prisma/client/runtime/library'
 import createTransaction from '../create-transaction'
-import {describe, expect, it} from '@jest/globals'
-import {transaction} from '@prisma/client'
+import { describe, expect, it } from '@jest/globals'
+import { transaction } from '@prisma/client'
 import transactionRepositoryMock from './mock/transaction-repository-mock'
 
 describe('create transaction service', () => {

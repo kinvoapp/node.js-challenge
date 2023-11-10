@@ -1,5 +1,5 @@
-import {CreateUserDto, FindOneUserDto, FindUserDto, UpdateUserDto} from '@/internal/dto/user'
-import {user} from '@prisma/client'
+import { CreateUserDto, FindOneUserDto, FindUserDto, UpdateUserDto } from '@/internal/dto/user'
+import { user } from '@prisma/client'
 
 export interface UserRepository {
   create: (data: Omit<CreateUserDto, 'confirmPassword'>) => Promise<user>

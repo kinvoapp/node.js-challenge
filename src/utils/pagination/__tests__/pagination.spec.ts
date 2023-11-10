@@ -1,6 +1,6 @@
-import {describe, expect, it} from '@jest/globals'
+import { describe, expect, it } from '@jest/globals'
 import createPaginationResponse from '../pagination'
-import {transactionsMock} from './mock/data'
+import { transactionsMock } from './mock/data'
 
 describe('create pagination response', () => {
   it('should return next property different than null', () => {

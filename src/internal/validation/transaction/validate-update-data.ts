@@ -1,4 +1,4 @@
-import {UpdateTransactionDto} from '@/internal/dto/transaction'
+import { UpdateTransactionDto } from '@/internal/dto/transaction'
 import regex from '@/utils/regex'
 
 export function updateData(id: string, data: UpdateTransactionDto): boolean {
