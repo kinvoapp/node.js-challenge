@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "module": "node",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "strictNullChecks": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "allowJs": false,
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es6", "es2020", "es2021"],
+    "esModuleInterop": true,
+    "types": ["node"],
+    "baseUrl": "src/",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/__tests__/", "**/*.spec.ts"]
+}

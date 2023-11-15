@@ -1,0 +1,53 @@
+#import PaginationResult, Pagination from "pagination.gql"
+#import User from "user.gql"
+
+type Transaction {
+  id: ID!
+  amount: Float!
+  type: TransactionType!
+  created_at: String!
+  updated_at: String
+  userId: String!
+  user: User!
+}
+
+enum TransactionType {
+  IN
+  OUT
+}
+
+input FindTransactionData {
+  offset: Int
+  limit: Int
+  initialDate: String
+  finalDate: String
+  userId: String
+}
+
+input CreateTransactionData {
+  amount: Float!
+  type: TransactionType!
+  userId: String!
+}
+
+input UpdateTransactionData {
+  amount: Float
+  type: TransactionType
+}
+
+type TransactionResult implements PaginationResult {
+  count: Int!
+  previous: Pagination
+  next: Pagination
+  items: [Transaction]!
+}
+
+type Query {
+  transactions(data: FindTransactionData): TransactionResult!
+}
+
+type Mutation {
+  newTransaction(data: CreateTransactionData): Transaction!
+  updateTransaction(id: String, data: UpdateTransactionData): Transaction!
+  deleteTransaction(id: String): Transaction!
+}
