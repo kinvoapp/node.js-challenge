@@ -5,7 +5,6 @@
 
 ## Instruções
 
-- Utilize Typescript com Node;
 - Desenvolva uma API REST ou GraphQL;
 - Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
 - Crie um arquivo README com instruções para executar seu projeto;
