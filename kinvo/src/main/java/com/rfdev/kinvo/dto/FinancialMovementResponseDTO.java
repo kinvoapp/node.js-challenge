@@ -17,6 +17,6 @@ public class FinancialMovementResponseDTO extends FinancialMovementRequestDTO im
     this.setFinancialMovementId(entity.getFinancialMovementId());
     this.setTypeOfMovement(entity.getTypeOfMovement());
     this.setTransactionValue(entity.getTransactionValue());
-    this.setCreatedAt(LocalDateTime.now());
+    this.setCreatedAt(entity.getCreatedAt());
   }
 }
