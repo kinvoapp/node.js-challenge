@@ -27,7 +27,7 @@ public class FinancialMovement implements Serializable {
   private BigDecimal transactionValue;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "client_id")
+  @JoinColumn(name = "clientId")
   private Client client;
 
   private LocalDateTime createdAt;

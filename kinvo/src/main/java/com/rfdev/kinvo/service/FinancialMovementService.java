@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class FinancialMovementService {
@@ -60,5 +62,13 @@ public class FinancialMovementService {
     entity.setTransactionValue(request.getTransactionValue());
     entity.setCreatedAt(LocalDateTime.now());
     return entity;
+  }
+
+  public List<FinancialMovementResponseDTO> findByClientId(Long clientId) {
+    List<FinancialMovement> financialMovements = financialMovementRepository.findByClientClientId(clientId);
+    if (financialMovements.isEmpty()) throw new ResourceNotFoundException("Client not Found");
+    return financialMovements.stream()
+      .map(FinancialMovementResponseDTO::new)
+      .collect(Collectors.toList());
   }
 }
